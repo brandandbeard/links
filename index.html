@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🔬 Simulation Link Generator | Mega QUIZ</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+    :root{
+        --bg:#06060f; --card:rgba(20,20,46,0.55);
+        --gold:#f0c040; --purple:#a855f7; --cyan:#06b6d4; --green:#34A853; --red:#f43f5e;
+        --text:#e8e8f0; --muted:rgba(255,255,255,0.45); --border:rgba(240,192,64,0.15);
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+        font-family:'Noto Serif Bengali',sans-serif; background:var(--bg); color:var(--text);
+        min-height:100vh; overflow-x:hidden; line-height:1.7;
+        background-image:
+            radial-gradient(ellipse at 15% 10%, rgba(240,192,64,0.07) 0%, transparent 50%),
+            radial-gradient(ellipse at 85% 85%, rgba(168,85,247,0.08) 0%, transparent 50%),
+            radial-gradient(ellipse at 50% 50%, rgba(6,182,212,0.04) 0%, transparent 70%);
+        background-attachment:fixed;
+    }
+    .stars{position:fixed;inset:0;z-index:0;pointer-events:none}
+    .star{position:absolute;background:#fff;border-radius:50%;animation:twk var(--d) ease-in-out infinite;animation-delay:var(--dl)}
+    @keyframes twk{0%,100%{opacity:.15}50%{opacity:.9}}
+
+    .wrap{position:relative;z-index:1;max-width:1120px;margin:0 auto;padding:28px 20px 60px}
+
+    .top{display:flex;align-items:center;gap:14px;margin-bottom:8px;flex-wrap:wrap}
+    .logo{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;
+        font-size:1.6rem;background:linear-gradient(135deg,rgba(240,192,64,.18),rgba(240,192,64,.05));
+        border:1px solid rgba(240,192,64,.25);box-shadow:0 0 26px rgba(240,192,64,.12)}
+    .brand{font-family:'Space Grotesk',sans-serif;font-size:.62rem;letter-spacing:.22em;color:var(--muted);text-transform:uppercase;font-weight:600}
+    h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.5rem,4vw,2.2rem);font-weight:700;
+        background:linear-gradient(120deg,#fff 10%,var(--gold) 55%,var(--purple));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+    .sub{color:var(--muted);font-size:.95rem;margin-bottom:22px}
+
+    /* setup bar */
+    .setup{display:flex;align-items:center;gap:18px;flex-wrap:wrap;background:rgba(52,168,83,.06);
+        border:1px solid rgba(52,168,83,.25);border-radius:14px;padding:14px 20px;margin-bottom:22px}
+    .setup .lock{font-size:1.3rem}
+    .setup .fld{display:flex;flex-direction:column;gap:3px}
+    .setup .fld span{font-family:'Space Grotesk',sans-serif;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+    .setup .fld b{font-family:'JetBrains Mono',monospace;font-size:.95rem;color:#a7e8bd}
+    .setup .ok{margin-left:auto;font-family:'Space Grotesk',sans-serif;font-size:.72rem;color:var(--green);font-weight:600;
+        display:flex;align-items:center;gap:6px}
+    .setup .edit{background:none;border:none;color:var(--muted);font-size:.7rem;cursor:pointer;text-decoration:underline;font-family:'Space Grotesk',sans-serif}
+
+    .grid{display:grid;grid-template-columns:1fr 1.2fr;gap:22px}
+    @media(max-width:880px){.grid{grid-template-columns:1fr}}
+
+    .card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:22px 24px;
+        backdrop-filter:blur(10px);box-shadow:0 6px 30px rgba(0,0,0,.35);transition:border-color .3s}
+    .card:hover{border-color:rgba(240,192,64,.28)}
+    .card + .card{margin-top:22px}
+    .card h2{font-family:'Space Grotesk',sans-serif;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;
+        color:var(--gold);font-weight:700;display:flex;align-items:center;gap:9px;margin-bottom:16px}
+    .card h2 .n{width:22px;height:22px;border-radius:7px;display:inline-flex;align-items:center;justify-content:center;
+        background:linear-gradient(135deg,var(--gold),#f59e0b);color:#06060f;font-size:.72rem;font-weight:700}
+    .card.purple h2{color:var(--purple)} .card.purple h2 .n{background:linear-gradient(135deg,#7c3aed,var(--purple));color:#fff}
+    .card.cyan h2{color:var(--cyan)} .card.cyan h2 .n{background:linear-gradient(135deg,#0891b2,var(--cyan));color:#fff}
+    .card.hist h2{color:var(--green)} .card.hist h2 .n{background:linear-gradient(135deg,#15803d,var(--green));color:#fff}
+
+    label{display:block;font-family:'Space Grotesk',sans-serif;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;
+        color:var(--muted);font-weight:600;margin:14px 0 6px}
+    label:first-of-type{margin-top:0}
+    input,select{width:100%;padding:11px 14px;border-radius:11px;background:rgba(255,255,255,.04);
+        border:1px solid rgba(255,255,255,.1);color:var(--text);font-size:.95rem;font-family:'Space Grotesk',sans-serif;
+        outline:none;transition:all .25s}
+    input:focus,select:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(240,192,64,.12);background:rgba(255,255,255,.06)}
+    input::placeholder{color:rgba(255,255,255,.25)}
+    select{cursor:pointer}
+    select option{background:#14142e;color:#fff}
+    .row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .hint{font-size:.72rem;color:var(--muted);margin-top:5px;font-family:'Space Grotesk',sans-serif}
+
+    .clearbtn{margin-top:16px;width:100%;padding:10px;border-radius:11px;border:1px dashed rgba(255,255,255,.2);
+        background:transparent;color:var(--muted);font-family:'Space Grotesk',sans-serif;font-size:.78rem;font-weight:600;
+        cursor:pointer;transition:all .25s}
+    .clearbtn:hover{border-color:var(--red);color:var(--red);background:rgba(244,63,94,.06)}
+
+    /* big link hero */
+    .herolink{background:linear-gradient(135deg,rgba(168,85,247,.1),rgba(6,182,212,.06));
+        border:1px solid rgba(168,85,247,.3);border-radius:14px;padding:16px 18px;margin-bottom:18px;transition:all .3s}
+    .herolink.flash{box-shadow:0 0 0 3px rgba(168,85,247,.2)}
+    .herolink .lbl{font-family:'Space Grotesk',sans-serif;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--purple);font-weight:700;margin-bottom:8px}
+    .herolink .url{font-family:'JetBrains Mono',monospace;font-size:.9rem;color:#e9d5ff;word-break:break-all;line-height:1.6;margin-bottom:12px}
+    .herolink .btns{display:flex;gap:10px;flex-wrap:wrap}
+    .btn{padding:9px 18px;border-radius:10px;font-family:'Space Grotesk',sans-serif;font-size:.78rem;font-weight:700;
+        cursor:pointer;transition:all .25s;border:1px solid;display:inline-flex;align-items:center;gap:7px}
+    .btn.copy{background:linear-gradient(135deg,#7c3aed,var(--purple));border-color:var(--purple);color:#fff}
+    .btn.copy:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(168,85,247,.35)}
+    .btn.copy.done{background:var(--green);border-color:var(--green)}
+    .btn.open{background:rgba(6,182,212,.1);border-color:rgba(6,182,212,.4);color:var(--cyan)}
+    .btn.open:hover{background:rgba(6,182,212,.2);transform:translateY(-2px)}
+    .btn.save{background:rgba(52,168,83,.1);border-color:rgba(52,168,83,.4);color:var(--green)}
+    .btn.save:hover{background:rgba(52,168,83,.2);transform:translateY(-2px)}
+    .btn.save.done{background:var(--green);color:#fff}
+    .btn:disabled{opacity:.4;cursor:not-allowed;transform:none!important;box-shadow:none!important}
+
+    .out{margin-bottom:16px}
+    .out-label{font-family:'Space Grotesk',sans-serif;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;
+        color:var(--muted);font-weight:600;margin-bottom:7px}
+    .out-box{display:flex;align-items:center;gap:10px;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.1);
+        border-radius:12px;padding:11px 14px}
+    .out-box code{font-family:'JetBrains Mono',monospace;font-size:.82rem;color:#ffd97a;flex:1;word-break:break-all;line-height:1.5}
+    .mini{flex-shrink:0;padding:6px 12px;border-radius:8px;border:1px solid rgba(240,192,64,.35);
+        background:rgba(240,192,64,.1);color:var(--gold);font-family:'Space Grotesk',sans-serif;font-size:.7rem;
+        font-weight:700;cursor:pointer;transition:all .25s}
+    .mini:hover{background:rgba(240,192,64,.22)}
+    .mini.done{background:var(--green);border-color:var(--green);color:#fff}
+
+    .tree{font-family:'JetBrains Mono',monospace;font-size:.8rem;line-height:1.95;background:rgba(0,0,0,.35);
+        border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:16px 18px;overflow-x:auto}
+    .tree .dim{color:rgba(255,255,255,.35)}
+    .tree .folder{color:#9ecbff}
+    .tree .target{color:#ffd97a;font-weight:600;background:rgba(240,192,64,.12);padding:1px 8px;border-radius:6px;
+        display:inline-block;animation:glowp 2s ease infinite}
+    @keyframes glowp{0%,100%{box-shadow:0 0 0 0 rgba(240,192,64,.25)}50%{box-shadow:0 0 14px 2px rgba(240,192,64,.25)}}
+
+    .sheetbox{background:rgba(52,168,83,.08);border:1px solid rgba(52,168,83,.3);border-radius:12px;padding:14px 16px}
+    .sheetbox .cols{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .sheetbox .col h4{font-family:'Space Grotesk',sans-serif;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:6px}
+    .sheetbox .col div{font-family:'JetBrains Mono',monospace;font-size:.76rem;color:#a7e8bd;word-break:break-all;
+        background:rgba(0,0,0,.3);border-radius:8px;padding:8px 10px;min-height:38px}
+
+    /* history */
+    .hist-list{display:flex;flex-direction:column;gap:10px;max-height:340px;overflow-y:auto}
+    .hist-item{display:flex;align-items:center;gap:12px;background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.08);
+        border-radius:11px;padding:11px 14px;transition:all .25s}
+    .hist-item:hover{border-color:rgba(52,168,83,.4);background:rgba(52,168,83,.05)}
+    .hist-info{flex:1;min-width:0}
+    .hist-name{font-weight:700;font-size:.9rem;color:var(--text);margin-bottom:2px}
+    .hist-link{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--muted);word-break:break-all}
+    .hist-btn{flex-shrink:0;width:34px;height:34px;border-radius:9px;border:1px solid rgba(255,255,255,.12);
+        background:rgba(255,255,255,.04);cursor:pointer;font-size:.9rem;transition:all .25s;display:flex;align-items:center;justify-content:center}
+    .hist-btn.cp:hover{background:rgba(52,168,83,.2);border-color:var(--green)}
+    .hist-btn.del:hover{background:rgba(244,63,94,.2);border-color:var(--red)}
+    .hist-empty{color:var(--muted);font-style:italic;text-align:center;padding:20px;font-size:.88rem}
+    .hist-count{margin-left:auto;font-family:'Space Grotesk',sans-serif;font-size:.66rem;color:var(--green);
+        background:rgba(52,168,83,.12);padding:2px 10px;border-radius:20px;border:1px solid rgba(52,168,83,.25)}
+
+    .steps{counter-reset:st;list-style:none}
+    .steps li{counter-increment:st;display:flex;gap:13px;padding:10px 0;border-bottom:1px dashed rgba(255,255,255,.08);font-size:.92rem}
+    .steps li:last-child{border:none}
+    .steps li::before{content:counter(st);flex-shrink:0;width:26px;height:26px;border-radius:8px;display:flex;align-items:center;
+        justify-content:center;background:linear-gradient(135deg,#7c3aed,var(--purple));color:#fff;
+        font-family:'Space Grotesk',sans-serif;font-size:.78rem;font-weight:700;margin-top:2px}
+    .steps b{color:var(--gold)}
+    .empty{color:rgba(255,255,255,.3);font-style:italic}
+</style>
+</head>
+<body>
+<div class="stars" id="stars"></div>
+<div class="wrap">
+
+    <div class="top">
+        <div class="logo">🔬</div>
+        <div>
+            <div class="brand">Mega QUIZ • by Arif Hussain</div>
+            <h1>Simulation Link Generator</h1>
+        </div>
+    </div>
+    <p class="sub">Class আর Subject বেছে নাও, বাকিটা এটা নিজেই করবে! সব মনে রাখে, তাই বারবার লিখতে হবে না। ✨</p>
+
+    <!-- ── fixed setup ── -->
+    <div class="setup">
+        <span class="lock">🔒</span>
+        <div class="fld"><span>GitHub Username</span><b id="unameShow">brandandbeard</b></div>
+        <div class="fld"><span>Repo</span><b id="repoShow">links</b></div>
+        <div class="ok">✓ সব ঠিক আছে <button class="edit" onclick="editSetup()">বদলাতে চাই?</button></div>
+    </div>
+
+    <div class="grid">
+        <!-- ── LEFT ── -->
+        <div>
+            <div class="card purple">
+                <h2><span class="n">1</span> Simulation-এর তথ্য</h2>
+
+                <label>Class</label>
+                <select id="cls">
+                    <option value="">— বেছে নাও —</option>
+                    <option value="5">Class 5</option>
+                    <option value="6">Class 6</option>
+                    <option value="7">Class 7</option>
+                    <option value="8">Class 8</option>
+                    <option value="9">Class 9</option>
+                    <option value="10">Class 10</option>
+                    <option value="11sc">Class 11 (Science)</option>
+                    <option value="12sc">Class 12 (Science)</option>
+                    <option value="11arts">Class 11 (Arts)</option>
+                    <option value="12arts">Class 12 (Arts)</option>
+                </select>
+
+                <label>Subject</label>
+                <select id="subj">
+                    <option value="">— বেছে নাও —</option>
+                    <option value="lsc">lsc — Life Science</option>
+                    <option value="psc">psc — Physical Science</option>
+                    <option value="chem">chem — Chemistry</option>
+                    <option value="phy">phy — Physics</option>
+                    <option value="math">math — Mathematics</option>
+                    <option value="geo">geo — Geography</option>
+                </select>
+
+                <label>Chapter (folder-এর নাম)</label>
+                <input type="text" id="chname" placeholder="যেমন: light">
+
+                <label>File-এর নাম</label>
+                <input type="text" id="fname" placeholder="যেমন: snell">
+                <div class="hint">📝 সব English-এ — .html নিজে লেগে যাবে!</div>
+
+                <label>Simulation-এর নাম (বাংলা) — sheet-এর জন্য</label>
+                <input type="text" id="bnname" placeholder="যেমন: স্নেলের সূত্র">
+
+                <button class="clearbtn" onclick="clearForm()">🧹 নতুন simulation-এর জন্য খালি করো</button>
+            </div>
+
+            <div class="card">
+                <h2><span class="n">2</span> এরপর যা করবে</h2>
+                <ol class="steps">
+                    <li>GitHub-এ repo খুলে <b>📁 folder path</b>-এ file upload করো</li>
+                    <li><b>↗ Open</b> চেপে link চলছে কিনা দেখো</li>
+                    <li>চললে <b>📋 Copy</b> করে sheet-এ paste করো</li>
+                    <li><b>💾 History তে রাখো</b> চাপলে link জমা থাকবে</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- ── RIGHT ── -->
+        <div>
+            <div class="card cyan">
+                <h2><span class="n">3</span> তোমার Link তৈরি!</h2>
+
+                <div class="herolink" id="heroBox">
+                    <div class="lbl">🔗 Simulation Link</div>
+                    <div class="url" id="linkOut"><span class="empty">Class আর Subject বেছে নাও...</span></div>
+                    <div class="btns">
+                        <button class="btn copy" id="copyBtn" onclick="copyLink(this)" disabled>📋 Copy Link</button>
+                        <button class="btn open" id="openBtn" onclick="openLink()" disabled>↗ Open</button>
+                        <button class="btn save" id="saveBtn" onclick="saveHistory(this)" disabled>💾 History তে রাখো</button>
+                    </div>
+                </div>
+
+                <div class="out">
+                    <div class="out-label">📁 GitHub-এ কোন folder-এ রাখবে</div>
+                    <div class="out-box">
+                        <code id="pathOut"><span class="empty">—</span></code>
+                        <button class="mini" onclick="copyText('pathOut',this)">Copy</button>
+                    </div>
+                </div>
+
+                <div class="out">
+                    <div class="out-label">🌳 File টা ঠিক এখানে বসবে</div>
+                    <div class="tree" id="treeOut"><span class="dim">📦 links</span><br><span class="dim">└── ...</span></div>
+                </div>
+
+                <div class="out" style="margin-bottom:0">
+                    <div class="out-label">📋 Sheet-এ যা লিখবে</div>
+                    <div class="sheetbox">
+                        <div class="cols">
+                            <div class="col"><h4>Stimulation</h4><div id="sheetSim"><span class="empty">—</span></div></div>
+                            <div class="col"><h4>StimulationName</h4><div id="sheetName"><span class="empty">—</span></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card hist">
+                <h2><span class="n">4</span> তোমার সব Link <span class="hist-count" id="histCount">0 টা</span></h2>
+                <div class="hist-list" id="histList">
+                    <div class="hist-empty">এখনো কিছু save করোনি — link বানিয়ে 💾 চাপো!</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // stars
+    (function(){const c=document.getElementById('stars');for(let i=0;i<70;i++){const s=document.createElement('div');s.className='star';const z=Math.random()*2+1;s.style.cssText='left:'+Math.random()*100+'%;top:'+Math.random()*100+'%;width:'+z+'px;height:'+z+'px;--d:'+(Math.random()*3+2)+'s;--dl:'+(Math.random()*5)+'s';c.appendChild(s)}})();
+
+    const $=id=>document.getElementById(id);
+
+    // ── fixed setup (defaults + editable) ──
+    let UNAME=localStorage.getItem('lg_uname')||'brandandbeard';
+    let REPO=localStorage.getItem('lg_repo')||'links';
+    function showSetup(){$('unameShow').textContent=UNAME;$('repoShow').textContent=REPO}
+    function editSetup(){
+        const u=prompt('GitHub Username:',UNAME);
+        if(u===null)return;
+        const r=prompt('Repo name:',REPO);
+        if(r===null)return;
+        UNAME=u.trim()||UNAME; REPO=r.trim()||REPO;
+        localStorage.setItem('lg_uname',UNAME);
+        localStorage.setItem('lg_repo',REPO);
+        showSetup(); build();
+    }
+    showSetup();
+
+    // ── restore all saved fields ──
+    $('cls').value=localStorage.getItem('lg_cls')||'';
+    $('subj').value=localStorage.getItem('lg_subj')||'';
+    $('chname').value=localStorage.getItem('lg_chname')||'';
+    $('fname').value=localStorage.getItem('lg_fname')||'';
+    $('bnname').value=localStorage.getItem('lg_bnname')||'';
+
+    // ── save everything as they type ──
+    function clean(s){return (s||'').trim().toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/g,'')}
+    const fields={cls:'lg_cls',subj:'lg_subj',chname:'lg_chname',fname:'lg_fname',bnname:'lg_bnname'};
+    Object.keys(fields).forEach(id=>{
+        const ev=(id==='cls'||id==='subj')?'change':'input';
+        $(id).addEventListener(ev,()=>{localStorage.setItem(fields[id],$(id).value);build()});
+    });
+
+    let CUR_LINK='', CUR_NAME='';
+
+    function build(){
+        const cls=$('cls').value;
+        const subj=$('subj').value;
+        const chname=clean($('chname').value);
+        let fname=clean($('fname').value);
+        const bn=$('bnname').value.trim();
+
+        if(fname&&!fname.endsWith('.html'))fname=fname+'.html';
+
+        const ready=cls&&subj;
+
+        // path
+        let path=cls+'/'+subj+'/';
+        if(chname)path+=chname+'/';
+        $('pathOut').innerHTML=ready?path:'<span class="empty">Class আর Subject বেছে নাও...</span>';
+
+        // link
+        let link='';
+        if(ready){
+            link='https://'+UNAME+'.github.io/'+REPO+'/'+path;
+            if(fname&&fname!=='.html')link+=fname;
+        }
+        CUR_LINK=link; CUR_NAME=bn;
+
+        $('linkOut').innerHTML=link?link:'<span class="empty">Class আর Subject বেছে নাও...</span>';
+        $('copyBtn').disabled=!link;
+        $('openBtn').disabled=!link;
+        $('saveBtn').disabled=!link;
+
+        // tree
+        let t='<span class="dim">📦</span> <span class="folder">'+REPO+'</span> <span class="dim">(তোমার repo)</span><br>';
+        t+='<span class="dim">└── 📂</span> <span class="folder">'+(cls||'?')+'</span><br>';
+        t+='<span class="dim">&nbsp;&nbsp;&nbsp;&nbsp;└── 📂</span> <span class="folder">'+(subj||'?')+'</span><br>';
+        if(chname){
+            t+='<span class="dim">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── 📂</span> <span class="folder">'+chname+'</span><br>';
+            t+='<span class="dim">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└──</span> <span class="target">📄 '+(fname&&fname!=='.html'?fname:'file.html')+' ← এখানে!</span>';
+        }else{
+            t+='<span class="dim">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└──</span> <span class="target">📄 '+(fname&&fname!=='.html'?fname:'file.html')+' ← এখানে!</span>';
+        }
+        $('treeOut').innerHTML=t;
+
+        // sheet
+        $('sheetSim').innerHTML=link?link:'<span class="empty">—</span>';
+        $('sheetName').innerHTML=bn?bn:'<span class="empty">—</span>';
+
+        if(link){const h=$('heroBox');h.classList.add('flash');setTimeout(()=>h.classList.remove('flash'),450)}
+    }
+
+    function copyLink(btn){
+        if(!CUR_LINK)return;
+        navigator.clipboard.writeText(CUR_LINK).then(()=>{
+            btn.textContent='✓ Copied!';btn.classList.add('done');
+            setTimeout(()=>{btn.textContent='📋 Copy Link';btn.classList.remove('done')},1500);
+        });
+    }
+    function copyText(id,btn){
+        const txt=$(id).innerText;
+        if(!txt||txt.includes('নাও'))return;
+        navigator.clipboard.writeText(txt).then(()=>{
+            btn.textContent='✓';btn.classList.add('done');
+            setTimeout(()=>{btn.textContent='Copy';btn.classList.remove('done')},1500);
+        });
+    }
+    function openLink(){if(CUR_LINK)window.open(CUR_LINK,'_blank')}
+
+    function clearForm(){
+        ['chname','fname','bnname'].forEach(id=>{$(id).value='';localStorage.setItem(fields[id],'')});
+        build();
+    }
+
+    // ── history ──
+    function getHist(){try{return JSON.parse(localStorage.getItem('lg_history')||'[]')}catch(e){return[]}}
+    function setHist(h){localStorage.setItem('lg_history',JSON.stringify(h))}
+
+    function saveHistory(btn){
+        if(!CUR_LINK)return;
+        let h=getHist();
+        if(h.some(x=>x.link===CUR_LINK)){
+            btn.textContent='✓ আগে থেকেই আছে';btn.classList.add('done');
+            setTimeout(()=>{btn.textContent='💾 History তে রাখো';btn.classList.remove('done')},1500);
+            return;
+        }
+        h.unshift({link:CUR_LINK,name:CUR_NAME||'(নাম নেই)',time:Date.now()});
+        if(h.length>40)h=h.slice(0,40);
+        setHist(h);
+        renderHist();
+        btn.textContent='✓ জমা হয়েছে!';btn.classList.add('done');
+        setTimeout(()=>{btn.textContent='💾 History তে রাখো';btn.classList.remove('done')},1500);
+    }
+    function delHist(link){setHist(getHist().filter(x=>x.link!==link));renderHist()}
+    function cpHist(link,btn){
+        navigator.clipboard.writeText(link).then(()=>{
+            const old=btn.textContent;btn.textContent='✓';
+            setTimeout(()=>btn.textContent=old,1200);
+        });
+    }
+    function renderHist(){
+        const h=getHist();
+        $('histCount').textContent=h.length+' টা';
+        const list=$('histList');
+        if(!h.length){list.innerHTML='<div class="hist-empty">এখনো কিছু save করোনি — link বানিয়ে 💾 চাপো!</div>';return}
+        list.innerHTML=h.map(x=>
+            '<div class="hist-item">'+
+            '<div class="hist-info"><div class="hist-name">'+x.name.replace(/</g,'&lt;')+'</div><div class="hist-link">'+x.link+'</div></div>'+
+            '<button class="hist-btn cp" title="Copy" onclick="cpHist(\''+x.link+'\',this)">📋</button>'+
+            '<button class="hist-btn del" title="Delete" onclick="delHist(\''+x.link+'\')">🗑</button>'+
+            '</div>'
+        ).join('');
+    }
+
+    build();
+    renderHist();
+</script>
+</body>
+</html>
