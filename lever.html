@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>লিভার ল্যাব — ইন্টারঅ্যাক্টিভ সিমুলেশন</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@600;700;800&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#232733; --paper:#f7f3ea; --card:#fffdf8; --line:#e8dfcb;
+  --green:#0f9d63; --greenS:#e2f6ec; --red:#e5484d; --redS:#fdebec; --amber:#e8930c; --amberS:#fdf1da;
+  --c1:#7c3aed; --c1S:#f1eafe; --c2:#0d9488; --c2S:#e0f5f2; --c3:#ea580c; --c3S:#ffeadd;
+  --shadow:0 12px 34px rgba(60,50,20,.10);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{font-family:'Hind Siliguri',sans-serif;color:var(--ink);background:var(--paper);
+  background-image:radial-gradient(#e6ddc6 1.1px,transparent 1.1px);background-size:24px 24px;}
+h1,h2,h3,.disp{font-family:'Baloo Da 2','Hind Siliguri',sans-serif}
+svg{display:block} svg text{font-family:'Hind Siliguri',sans-serif}
+.screen{display:none;max-width:1140px;margin:0 auto;padding:18px clamp(14px,4vw,36px) 90px}
+.screen.active{display:block;animation:fadeUp .5s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes pop{from{opacity:0;transform:scale(.92) translateY(10px)}to{opacity:1;transform:none}}
+@keyframes wig{0%,100%{transform:rotate(0)}25%{transform:rotate(-6deg)}75%{transform:rotate(6deg)}}
+
+/* topbar */
+.topbar{display:flex;align-items:center;gap:12px;padding:10px 0 22px}
+.logo{width:46px;height:46px;border-radius:14px;background:var(--ink);display:grid;place-items:center;box-shadow:0 4px 0 rgba(0,0,0,.25)}
+.logo svg{width:28px;height:28px}
+.brand b{font-family:'Baloo Da 2';font-size:1.35rem;line-height:1;display:block}
+.brand span{font-size:.78rem;color:#8a8271;font-weight:600}
+.topbar .spacer{flex:1}
+.chip{font-size:.8rem;font-weight:700;padding:6px 12px;border-radius:999px;background:#fff;border:1.5px solid var(--line)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:26px;align-items:center;margin-bottom:34px}
+.hero h1{font-size:clamp(2.1rem,5vw,3.3rem);line-height:1.12;font-weight:800}
+.hero h1 em{font-style:normal;color:var(--c1);background:linear-gradient(transparent 62%,#ffe08a 62%);padding:0 4px;border-radius:4px}
+.hero p{margin:14px 0 20px;font-size:1.06rem;color:#5c5646;max-width:46ch}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:'Baloo Da 2';font-weight:700;font-size:1.05rem;
+  padding:12px 22px;border-radius:16px;border:none;cursor:pointer;background:var(--ink);color:#fff;
+  box-shadow:0 5px 0 rgba(0,0,0,.28);transition:transform .12s, box-shadow .12s}
+.btn:active{transform:translateY(4px);box-shadow:0 1px 0 rgba(0,0,0,.28)}
+.btn.acc{background:var(--c1)}
+.heroArt{background:var(--card);border:2px solid var(--line);border-radius:26px;box-shadow:var(--shadow);padding:10px;position:relative;overflow:hidden}
+.heroArt .tag{position:absolute;font-weight:700;font-size:.8rem;padding:5px 11px;border-radius:999px;border:1.5px solid;animation:pop .6s both}
+@keyframes heroTilt{0%,18%{transform:rotate(-5deg)}55%,78%{transform:rotate(6deg)}100%{transform:rotate(-5deg)}}
+@keyframes heroBook{0%,18%{transform:translateY(0)}55%,78%{transform:translateY(-9px)}100%{transform:translateY(0)}}
+@keyframes heroPull{0%,18%{transform:translateY(0)}55%,78%{transform:translateY(10px)}100%{transform:translateY(0)}}
+.heroBeam{animation:heroTilt 4.2s ease-in-out infinite;transform-origin:196px 236px}
+.heroBook{animation:heroBook 4.2s ease-in-out infinite}
+.heroHand{animation:heroPull 4.2s ease-in-out infinite}
+
+/* cards */
+.card{background:var(--card);border:2px solid var(--line);border-radius:22px;box-shadow:var(--shadow);padding:22px}
+.card h3{font-size:1.25rem;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.card h3 .dot{width:12px;height:12px;border-radius:50%;flex:none}
+.parts{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:18px}
+.part{border-radius:20px;padding:18px;border:2px solid;animation:pop .55s both}
+.part b{font-family:'Baloo Da 2';font-size:1.2rem;display:block;margin-bottom:4px}
+.part p{font-size:.92rem;color:#5c5646}
+.part .ic{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;margin-bottom:10px;font-size:1.4rem}
+.defRow{display:grid;grid-template-columns:1.2fr .8fr;gap:16px;margin-bottom:40px}
+.steps{counter-reset:st;list-style:none}
+.steps li{counter-increment:st;position:relative;padding:0 0 14px 44px;font-size:.98rem;color:#5c5646}
+.steps li::before{content:counter(st,bengali);position:absolute;left:0;top:0;width:30px;height:30px;border-radius:50%;
+  background:var(--amberS);border:2px solid var(--amber);color:#9a6206;font-weight:700;display:grid;place-items:center;font-family:'Baloo Da 2'}
+
+/* selector */
+.selHead{text-align:center;margin-bottom:22px}
+.selHead h2{font-size:clamp(1.6rem,3.6vw,2.3rem);font-weight:800}
+.selHead p{color:#8a8271;font-weight:600}
+.selGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.selCard{border-radius:24px;border:2.5px solid;background:#fff;cursor:pointer;padding:18px;text-align:left;
+  transition:transform .18s, box-shadow .18s;animation:pop .6s both;font-family:inherit}
+.selCard:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(60,50,20,.16)}
+.selCard .num{font-family:'Baloo Da 2';font-size:.85rem;font-weight:700;padding:4px 12px;border-radius:999px;display:inline-block;margin-bottom:8px}
+.selCard h3{font-size:1.3rem;margin-bottom:2px}
+.selCard .tag2{font-size:.86rem;font-weight:700;color:#8a8271}
+.selCard .go{margin-top:10px;font-family:'Baloo Da 2';font-weight:700;font-size:1rem}
+
+/* class view */
+.cvTop{display:flex;align-items:center;gap:14px;margin-bottom:18px;flex-wrap:wrap}
+.back{border:2px solid var(--line);background:#fff;border-radius:14px;padding:9px 16px;font-weight:700;cursor:pointer;font-family:'Baloo Da 2';font-size:1rem;box-shadow:0 3px 0 rgba(0,0,0,.12)}
+.back:active{transform:translateY(2px)}
+.cvTitle h2{font-size:clamp(1.5rem,3.5vw,2.2rem);font-weight:800;line-height:1.1}
+.cvTitle span{font-weight:700;font-size:.9rem;padding:4px 12px;border-radius:999px}
+.labCard{margin-bottom:18px}
+.labHint{font-size:.88rem;font-weight:600;color:#8a8271;background:#faf6ec;border:1.5px dashed var(--line);border-radius:12px;padding:8px 12px;display:inline-block;margin-bottom:8px}
+#labSvg{width:100%;height:auto;touch-action:none;border-radius:16px;background:linear-gradient(#fdfbf4,#f6efdd);border:1.5px solid var(--line)}
+.labCtl{display:grid;grid-template-columns:1.1fr 1.6fr;gap:18px;margin-top:16px;align-items:start}
+.sliderBox label{font-weight:700;font-family:'Baloo Da 2';font-size:1.05rem}
+.sliderBox .val{font-family:'Baloo Da 2';font-weight:800;font-size:1.3rem}
+input[type=range]{width:100%;height:12px;border-radius:99px;appearance:none;background:linear-gradient(90deg,var(--green) var(--fill,50%),#e4dcc8 var(--fill,50%));outline:none;margin:14px 0 6px;cursor:pointer}
+input[type=range]::-webkit-slider-thumb{appearance:none;width:30px;height:30px;border-radius:50%;background:var(--green);border:4px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.3);cursor:grab}
+input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;background:var(--green);border:4px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.3)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.stat{background:#faf6ec;border:1.5px solid var(--line);border-radius:14px;padding:10px 8px;text-align:center}
+.stat b{font-family:'Baloo Da 2';font-size:1.25rem;display:block;line-height:1.1}
+.stat span{font-size:.75rem;font-weight:700;color:#8a8271}
+.statusChip{grid-column:1/-1;text-align:center;border-radius:14px;padding:10px;font-weight:700;font-size:.98rem;border:2px solid;transition:.3s}
+.legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px;font-size:.85rem;font-weight:700}
+.legend i{width:12px;height:12px;border-radius:50%;display:inline-block;margin-right:5px}
+.twoCol{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px}
+.fund li{list-style:none;position:relative;padding:0 0 12px 30px;color:#4c4739;font-size:.98rem}
+.fund li::before{content:'✔';position:absolute;left:0;top:1px;width:21px;height:21px;border-radius:7px;font-size:.75rem;display:grid;place-items:center;color:#fff}
+.posRow{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.posRow span{font-weight:700;font-size:.88rem;padding:6px 14px;border-radius:999px;border:2px solid}
+@keyframes schTilt{0%,100%{transform:rotate(-3.5deg)}50%{transform:rotate(3.5deg)}}
+.schBeam{animation:schTilt 3s ease-in-out infinite}
+
+/* examples */
+.exHead{display:flex;align-items:baseline;gap:12px;margin:26px 0 14px}
+.exHead h3{font-size:1.5rem;font-weight:800}
+.exHead span{color:#8a8271;font-weight:600;font-size:.9rem}
+.exGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(158px,1fr));gap:14px}
+.exCard{border:2px solid var(--line);background:#fff;border-radius:18px;padding:16px 12px;cursor:pointer;text-align:center;
+  transition:transform .15s, box-shadow .15s, border-color .15s;animation:pop .5s both;font-family:inherit}
+.exCard:hover{transform:translateY(-5px);box-shadow:0 14px 30px rgba(60,50,20,.14)}
+.exCard:hover .exIc svg{animation:wig .5s ease}
+.exIc{width:64px;height:64px;margin:0 auto 10px;border-radius:18px;display:grid;place-items:center}
+.exIc svg{width:44px;height:44px}
+.exCard b{font-size:.95rem;line-height:1.35;display:block}
+.exCard small{color:#8a8271;font-weight:600;font-size:.75rem}
+
+/* modal */
+#modal{position:fixed;inset:0;background:rgba(30,25,12,.5);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:18px;z-index:50}
+#modal.open{display:flex}
+.mCard{background:var(--card);border-radius:26px;max-width:560px;width:100%;max-height:92vh;overflow:auto;padding:24px;animation:pop .35s both;border:2.5px solid}
+.mTop{display:flex;gap:14px;align-items:center;margin-bottom:14px}
+.mIc{width:70px;height:70px;border-radius:20px;display:grid;place-items:center;flex:none}
+.mIc svg{width:48px;height:48px}
+.mTop h3{font-size:1.4rem;line-height:1.15}
+.mClose{margin-left:auto;border:none;background:#f1ead9;border-radius:12px;width:38px;height:38px;font-size:1.1rem;cursor:pointer;font-weight:700}
+.mRow{display:flex;gap:10px;align-items:flex-start;padding:9px 12px;border-radius:13px;margin-bottom:8px;font-size:.95rem}
+.mRow i{width:13px;height:13px;border-radius:50%;margin-top:5px;flex:none}
+.mRow b{font-family:'Baloo Da 2'}
+.mFun{border:2px dashed;border-radius:14px;padding:10px 14px;font-weight:600;font-size:.92rem;margin-top:12px}
+
+footer{margin-top:60px;text-align:center;color:#a49a83;font-weight:600;font-size:.85rem}
+@media(max-width:860px){
+  .hero,.defRow,.twoCol,.labCtl{grid-template-columns:1fr}
+  .parts,.selGrid{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<!-- ================= HOME ================= -->
+<section id="home" class="screen active">
+  <div class="topbar">
+    <div class="logo"><svg viewBox="0 0 64 64" fill="none" stroke="#ffd34d" stroke-width="5" stroke-linecap="round"><path d="M8 40L56 26"/><path d="M32 33l-8 18h16z" fill="#ffd34d" stroke="none"/><circle cx="12" cy="36" r="5" fill="#ffd34d" stroke="none"/><path d="M52 20v12"/><path d="M47 27l5 6 5-6"/></svg></div>
+    <div class="brand"><b>লিভার ল্যাব</b><span>সরল যন্ত্রের ইন্টারঅ্যাক্টিভ সিমুলেশন</span></div>
+    <div class="spacer"></div>
+    <div class="chip">🔬 হাতে-কলমে বিজ্ঞান</div>
+  </div>
+
+  <div class="hero">
+    <div>
+      <h1>অল্প বলে <em>বড় কাজ</em> —<br>এটাই লিভারের জাদু!</h1>
+      <p>একটি শক্ত দণ্ড একটি স্থির বিন্দুকে কেন্দ্র করে অবাধে ঘুরতে পারলে তাকে বলে <b>লিভার</b>। চলো, নিজের হাতে পরীক্ষা করে শিখে নিই — বল, বাধা আর আলম্বের খেলা!</p>
+      <button class="btn acc" onclick="document.getElementById('selector').scrollIntoView({behavior:'smooth'})">শ্রেণি বেছে নাও ↓</button>
+    </div>
+    <div class="heroArt">
+      <span class="tag" style="left:8%;top:7%;color:var(--red);border-color:var(--red);background:var(--redS)">বাধা (বই)</span>
+      <span class="tag" style="right:7%;top:7%;color:var(--green);border-color:var(--green);background:var(--greenS)">বল (টান)</span>
+      <span class="tag" style="left:34%;bottom:6%;color:var(--amber);border-color:var(--amber);background:var(--amberS)">আলম্ব (আঙুল)</span>
+      <svg viewBox="0 0 520 330">
+        <line x1="30" y1="292" x2="490" y2="292" stroke="#d8cdb2" stroke-width="5" stroke-linecap="round"/>
+        <g class="heroBook">
+          <rect x="60" y="212" width="110" height="26" rx="5" fill="#e5484d"/>
+          <rect x="66" y="190" width="98" height="24" rx="5" fill="#f0766f"/>
+          <path d="M78 200h60M78 224h70" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+        </g>
+        <g class="heroBeam">
+          <rect x="70" y="230" width="380" height="12" rx="6" fill="#8b5e3c"/>
+          <rect x="70" y="230" width="380" height="5" rx="2.5" fill="#a97a52"/>
+        </g>
+        <path d="M196 244l-20 48h40z" fill="#f6b73c"/>
+        <rect x="186" y="252" width="20" height="44" rx="10" fill="#f2c199"/>
+        <g class="heroHand">
+          <rect x="408" y="180" width="22" height="52" rx="11" fill="#f2c199"/>
+          <path d="M419 246v22" stroke="#0f9d63" stroke-width="6" stroke-linecap="round"/>
+          <path d="M409 260l10 12 10-12" fill="none" stroke="#0f9d63" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <div class="parts">
+    <div class="part" style="border-color:var(--green);background:var(--greenS);animation-delay:.05s">
+      <div class="ic" style="background:#fff">💪</div><b style="color:var(--green)">বল</b>
+      <p>লিভারের উপর যে টান বা চাপ প্রয়োগ করা হয়, তাকে বলে বল।</p>
+    </div>
+    <div class="part" style="border-color:var(--red);background:var(--redS);animation-delay:.15s">
+      <div class="ic" style="background:#fff">📦</div><b style="color:var(--red)">বাধা</b>
+      <p>লিভার দিয়ে যে ভার বা বস্তুটাকে সরাতে হয়, তাকে বলে বাধা।</p>
+    </div>
+    <div class="part" style="border-color:var(--amber);background:var(--amberS);animation-delay:.25s">
+      <div class="ic" style="background:#fff">📍</div><b style="color:#b26e05">আলম্ব</b>
+      <p>যে স্থির বিন্দুকে কেন্দ্র করে দণ্ডটি অবাধে ঘুরতে পারে, তাকে বলে আলম্ব।</p>
+    </div>
+  </div>
+
+  <div class="defRow">
+    <div class="card">
+      <h3><span class="dot" style="background:var(--c1)"></span>লিভার কাকে বলে?</h3>
+      <p style="color:#4c4739;font-size:1.02rem">একটি শক্ত সোজা বা বাঁকানো দণ্ড একটি স্থির বিন্দুকে কেন্দ্র করে ওই বিন্দুর চারদিকে অবাধে ঘুরতে পারলে, ওই দণ্ডটিকে বলে <b>লিভার</b>। এটি একপ্রকার সরল যন্ত্র। বল, বাধা ও আলম্ব — এই তিনটির অবস্থান ভেদে লিভার <b>তিন শ্রেণির</b> হয়।</p>
+    </div>
+    <div class="card">
+      <h3><span class="dot" style="background:var(--amber)"></span>ঘরে পরীক্ষা করো</h3>
+      <ol class="steps">
+        <li>একটি বই-এর তলায় পেন ঢুকিয়ে রাখো।</li>
+        <li>বাঁ হাতের আঙুল দিয়ে পেনের মাঝে আলম্ব বানাও।</li>
+        <li>ডান হাতের আঙুল দিয়ে পেনটা নিজের দিকে টানো — বই সরে গেল!</li>
+        <li>আলম্বটাকে সরিয়ে দেখো — কখন টানতে কষ্ট, কখন সহজ!</li>
+      </ol>
+    </div>
+  </div>
+
+  <div id="selector">
+    <div class="selHead"><h2>কোন শ্রেণির লিভার নিয়ে খেলবে?</h2><p>একটি বেছে নাও — শুধু সেই লিভারের সব কিছু খুলে যাবে তোমার সামনে</p></div>
+    <div class="selGrid" id="selGrid"></div>
+  </div>
+
+  <footer>লিভার ল্যাব • হাতে-কলমে বিজ্ঞান শেখার সিমুলেশন</footer>
+</section>
+
+<!-- ================= CLASS VIEW ================= -->
+<section id="classView" class="screen">
+  <div class="cvTop">
+    <button class="back" onclick="goHome()">← ফিরে যাই</button>
+    <div class="cvTitle"><h2 id="cvName"></h2></div>
+    <div class="spacer" style="flex:1"></div>
+    <span id="cvTag" class="chip"></span>
+  </div>
+
+  <div class="card labCard">
+    <h3><span class="dot" id="labDot"></span>লিভার ল্যাব — নিজে করে দেখো</h3>
+    <div class="labHint" id="labHint"></div>
+    <svg id="labSvg" viewBox="0 0 800 400"></svg>
+    <div class="labCtl">
+      <div class="sliderBox">
+        <label>প্রয়োগ করা বল 💪</label>
+        <div class="val" id="effVal" style="color:var(--green)"></div>
+        <input type="range" id="effRange" min="0" max="100" value="50">
+        <div class="legend">
+          <span><i style="background:var(--green)"></i>বল</span>
+          <span><i style="background:var(--red)"></i>বাধা</span>
+          <span><i style="background:var(--amber)"></i>আলম্ব</span>
+        </div>
+      </div>
+      <div class="stats">
+        <div class="stat"><b id="stArmE" style="color:var(--green)"></b><span>বল-বাহু (সেমি)</span></div>
+        <div class="stat"><b id="stArmL" style="color:var(--red)"></b><span>বাধা-বাহু (সেমি)</span></div>
+        <div class="stat"><b id="stMA" style="color:var(--c1)"></b><span>যান্ত্রিক সুবিধা</span></div>
+        <div class="stat"><b id="stReq" style="color:var(--red)"></b><span>প্রয়োজনীয় বল (নিউটন)</span></div>
+        <div class="statusChip" id="statusChip"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="twoCol">
+    <div class="card"><h3><span class="dot" id="fundDot"></span>মূল কথা (ফান্ডামেন্টালস)</h3><ul class="fund" id="fundList"></ul></div>
+    <div class="card"><h3><span class="dot" id="strDot"></span>গঠন ও অবস্থান</h3><div id="strBox"></div></div>
+  </div>
+
+  <div class="exHead"><h3>🧰 ১০টি উদাহরণ</h3><span>যেকোনোটিতে ট্যাপ করে ভেতরের লিভারটা দেখো</span></div>
+  <div class="exGrid" id="exGrid"></div>
+</section>
+
+<!-- ================= MODAL ================= -->
+<div id="modal"><div class="mCard" id="mCard"></div></div>
+
+<script>
+/* ---------- helpers ---------- */
+const $=s=>document.querySelector(s);
+const bn=n=>String(n).replace(/\d/g,d=>'০১২৩৪৫৬৭৮৯'[d]);
+const bnf=(n,d=2)=>bn((Math.round(n*100)/100).toFixed(d).replace(/\.?0+$/,''));
+
+/* ---------- icons ---------- */
+const IC={
+balance:'<path d="M32 12v34"/><circle cx="32" cy="10" r="2.5"/><path d="M14 16h36"/><path d="M14 16l-6 12m6-12l6 12"/><path d="M8 28q6 8 12 0"/><path d="M50 16l-6 12m6-12l6 12"/><path d="M44 28q6 8 12 0"/><path d="M22 50h20"/><path d="M32 46v4"/>',
+tongs:'<path d="M24 10q14 16 4 42"/><path d="M40 10q-14 16-4 42"/><circle cx="32" cy="26" r="3"/>',
+nailpull:'<path d="M12 42q0-10 10-11l26-4q6-1 6-7"/><path d="M18 34v14"/><path d="M14 48h8"/>',
+scissors:'<path d="M16 12l30 32"/><path d="M48 12L18 44"/><circle cx="32" cy="28" r="3"/><circle cx="14" cy="50" r="6"/><circle cx="50" cy="50" r="6"/>',
+seesaw:'<path d="M8 36h48"/><path d="M32 36l-8 16h16z"/><circle cx="12" cy="30" r="4"/><circle cx="52" cy="30" r="4"/>',
+pliers:'<path d="M26 10l4 12"/><path d="M38 10l-4 12"/><circle cx="32" cy="26" r="3"/><path d="M30 30q-8 10-12 22"/><path d="M34 30q8 10 12 22"/>',
+crowbar:'<path d="M12 52q-4-10 6-12L46 18q6-3 8 2"/><path d="M12 52l-4-2"/>',
+balance2:'<circle cx="32" cy="8" r="3"/><path d="M14 16h36"/><path d="M14 16v8m36-8v8"/><path d="M8 24q6 8 12 0"/><path d="M44 24q6 8 12 0"/><path d="M32 16v22"/><path d="M24 38q8 10 16 0"/>',
+hammerclaw:'<path d="M24 14h20v10H24z"/><path d="M24 14q-10 2-12 12"/><path d="M16 30v14"/><path d="M12 44h8"/><path d="M34 24l4 28"/>',
+papercut:'<path d="M10 50h44"/><circle cx="14" cy="46" r="3"/><path d="M14 46L50 20"/><circle cx="52" cy="18" r="3"/><path d="M24 50v-6h18v6"/>',
+jati:'<circle cx="12" cy="32" r="3"/><path d="M12 29q22-10 42-2"/><path d="M12 35q22 10 42 2"/><circle cx="32" cy="32" r="5"/>',
+oar:'<path d="M14 10l24 26"/><path d="M38 36q14 4 12 16q-12 0-16-10z"/>',
+opener:'<path d="M10 22h30q10 0 10 8"/><path d="M14 22v6"/><path d="M22 36h24v8H22z"/><path d="M22 36l4-4 4 4 4-4 4 4 4-4 4 4"/>',
+wheelbarrow:'<circle cx="16" cy="48" r="6"/><path d="M16 42l-4-12h36l-10 14"/><path d="M48 30l10-4"/><path d="M40 44v8"/>',
+door:'<path d="M18 10h28v44H18z"/><circle cx="40" cy="32" r="2.5"/><circle cx="18" cy="18" r="1.6"/><circle cx="18" cy="46" r="1.6"/><path d="M46 54q10-22 0-44" stroke-dasharray="4 5"/>',
+nutcracker:'<circle cx="12" cy="32" r="3"/><path d="M12 29L54 22"/><path d="M12 35L54 42"/><circle cx="30" cy="32" r="5"/>',
+lemon:'<circle cx="12" cy="32" r="3"/><path d="M12 29q20-9 40-3"/><path d="M12 35q20 9 40 3"/><circle cx="30" cy="32" r="6"/><path d="M30 26q2-4 5-4"/>',
+opener2:'<path d="M12 18h34"/><path d="M16 18v8"/><path d="M26 34h20v12H26z"/><path d="M26 34l5-5 5 5 5-5 5 5"/>',
+crowbar2:'<path d="M10 48L52 20"/><path d="M10 48l-2 6"/><circle cx="26" cy="42" r="6"/><path d="M52 22v-10"/><path d="M48 16l4-4 4 4"/>',
+tiptoe:'<path d="M8 54h48"/><path d="M20 54q10-2 14-10l6-16"/><path d="M34 44q8 4 12-2"/><path d="M40 28V10"/><path d="M48 42v-9"/><path d="M44 37l4-4 4 4"/>',
+arm:'<circle cx="14" cy="14" r="4"/><path d="M14 18l8 16"/><path d="M22 34l22-4"/><circle cx="46" cy="30" r="3"/><path d="M46 24v-6"/><circle cx="46" cy="13" r="4"/><path d="M27 31q4-9 11-9"/>',
+jaw:'<path d="M18 12q22-4 26 12v6l-8 2 8 6q-4 12-16 10t-12-14z"/><circle cx="24" cy="34" r="2.5"/><path d="M36 32h6"/>',
+chimta:'<path d="M26 12q-6 20 2 40"/><path d="M38 12q6 20-2 40"/><path d="M26 12q6-4 12 0"/>',
+rod:'<path d="M12 52q20-8 32-34"/><path d="M44 18v20"/><path d="M44 42q6-4 10 0q-4 6-10 0z"/><path d="M54 42l6-4v8z"/>',
+broom:'<path d="M38 8L30 32"/><path d="M30 32l-10 20"/><path d="M30 32l-4 22"/><path d="M30 32l2 22"/><path d="M30 32l8 20"/><path d="M22 40h14"/>',
+cricket:'<path d="M30 24l10 4-8 26-10-4z"/><path d="M35 26l6-14"/><circle cx="52" cy="46" r="5"/>',
+racket:'<ellipse cx="40" cy="18" rx="12" ry="13"/><path d="M40 8v20M30 18h20M33 11l14 14M47 11L33 25"/><path d="M36 30l-8 22"/>',
+hammer3:'<path d="M22 12l22 6-3 10-22-6z"/><path d="M32 28l-6 24"/><path d="M12 16q-6 12 0 24" stroke-dasharray="4 5"/>',
+tweezers:'<path d="M28 10q-2 20-8 38"/><path d="M36 10q2 20 8 38"/><path d="M28 10h8"/>',
+shovel:'<path d="M40 8l-8 24"/><path d="M32 32l-10 10q4 12 16 8l4-14z"/><circle cx="20" cy="52" r="1.5"/><circle cx="28" cy="56" r="1.5"/>'
+};
+const icon=(id,c)=>`<svg viewBox="0 0 64 64" fill="none" stroke="${c}" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round">${IC[id]}</svg>`;
+
+/* ---------- data ---------- */
+const CLS={
+1:{name:'প্রথম শ্রেণির লিভার',tag:'আলম্ব মাঝখানে',color:'#7c3aed',soft:'#f1eafe',load:60,
+ order:['বাধা','আলম্ব','বল'],dir:'down',drag:'fulcrum',
+ layout:{load:.06,fulcrum:.5,effort:.94},range:[.22,.78],
+ rule:'বাধা ও বলের মাঝামাঝি জায়গায় থাকে আলম্ব।',
+ fund:['আলম্ব থাকে বাধা ও বলের মাঝামাঝি জায়গায় — বল ও বাধা দুই প্রান্তে।','বল আর বাধা দুই-ই সাধারণত নিচের দিকে কাজ করে।','আলম্বকে বাধার কাছে আনলে প্রয়োজনীয় বল কমে — যান্ত্রিক সুবিধা বাড়ে।','যান্ত্রিক সুবিধা ১-এর বেশি, সমান বা কম — তিন রকমই হতে পারে।'],
+ hint:'🟠 কমলা গোলকটি (আলম্ব) টেনে সরিয়ে দেখো — বলের কাছে আনলে কষ্ট, বাধার কাছে আনলে সহজ!',
+ ex:[
+  {n:'দাঁড়িপাল্লা (তুলাযন্ত্র)',i:'balance',f:'মাঝের কব্জা-বিন্দু',l:'এক পাল্লার মাপার জিনিস',e:'অন্য পাল্লার বাটের চাপ',u:'দুই পাল্লা সমান হলে দাঁড়ি থাকে সোজা!'},
+  {n:'সাঁড়াশি',i:'tongs',f:'মাঝের জোড়-বিন্দু',l:'যে বস্তু ধরা হয়',e:'দুই হাতলের উপর চাপ',u:'গরম জিনিস ধরার দারুণ কায়দা!'},
+  {n:'পেরেক তোলার যন্ত্র',i:'nailpull',f:'যে বিন্দুতে যন্ত্রটি ঠেকে',l:'পেরেকের আটকে থাকা',e:'হাতের টান',u:'অল্প টানেই পেরেক উপড়ে আসে!'},
+  {n:'কাঁচি',i:'scissors',f:'মাঝের স্ক্রুটি',l:'কাগজ বা কাপড়ের বাধা',e:'হাতলের উপর চাপ',u:'লম্বা হাতল মানে কম জোর!'},
+  {n:'সি-স (দোলনা)',i:'seesaw',f:'মাঝের খুঁটিটি',l:'এক প্রান্তের সঙ্গীর ওজন',e:'অন্য প্রান্তে তোমার চাপ',u:'ওজন মিললে দুলতে থাকে সারাক্ষণ!'},
+  {n:'প্লায়ার্স',i:'pliers',f:'মাঝের কব্জা',l:'ধরা তার বা জিনিস',e:'হাতের চাপ',u:'কব্জাটাই এখানে স্থির বিন্দু।'},
+  {n:'শাবল (ক্রোবার)',i:'crowbar',f:'যে বিন্দুতে শাবল ঠেকে',l:'ভারী পাথর বা মাটি',e:'হাতের চাপ বা টান',u:'লম্বা শাবল মানে সহজ কাজ!'},
+  {n:'সাধারণ তুলাযন্ত্র',i:'balance2',f:'মাঝের সূঁচ বা কব্জা',l:'মাপার জিনিস',e:'বাটগুলির ওজন',u:'সোনার দোকানে আজও এরই কদর!'},
+  {n:'হাতুড়ির পেছনে পেরেক তোলা',i:'hammerclaw',f:'হাতুড়ির মাথা যেখানে ঠেকে',l:'পেরেকের আটকে থাকা',e:'হাতলের উপর চাপ',u:'হাতুড়িও কখনো কখনো লিভার!'},
+  {n:'কাগজ কাটার ব্লেড লিভার',i:'papercut',f:'ব্লেডের কব্জা',l:'কাগজের বাধা',e:'হাতলের চাপ',u:'সোজা কাটের পেছনে লিভারের কারসাজি।'}]},
+2:{name:'দ্বিতীয় শ্রেণির লিভার',tag:'বাধা মাঝখানে',color:'#0d9488',soft:'#e0f5f2',load:60,
+ order:['আলম্ব','বাধা','বল'],dir:'up',drag:'load',
+ layout:{fulcrum:.06,load:.5,effort:.94},range:[.22,.78],
+ rule:'আলম্ব ও বলের মাঝামাঝি জায়গায় থাকে বাধা।',
+ fund:['আলম্ব থাকে দণ্ডের এক প্রান্তে।','বাধা থাকে আলম্ব ও বলের মাঝামাঝি জায়গায়।','বল-বাহু সবসময় বাধা-বাহুর চেয়ে লম্বা — যান্ত্রিক সুবিধা সবসময় ১-এর বেশি।','কম বলে বেশি ভার তোলা যায় — এটাই এই লিভারের শক্তি!'],
+ hint:'🔴 লাল বাক্সটি (বাধা) টেনে আলম্বের কাছে বা দূরে সরিয়ে দেখো কী হয়!',
+ ex:[
+  {n:'সুপারি কাটা জাঁতি',i:'jati',f:'এক প্রান্তের কব্জা',l:'মাঝখানে রাখা সুপারি',e:'অন্য প্রান্তে হাতের চাপ',u:'এতে দুটি দ্বিতীয় শ্রেণির লিভার একসাথে কাজ করে!'},
+  {n:'নৌকার দাঁড়',i:'oar',f:'জলে ডোবা ফলক',l:'নৌকার কিনারার বাধা',e:'হাতের টান',u:'জলই এখানে আলম্ব!'},
+  {n:'ছিপি খোলার চাবি',i:'opener',f:'প্রান্তের ঠেকানো বিন্দু',l:'ছিপির আটকে থাকা',e:'হাতলের উপর বল',u:'টুপ করে খুলে যায়!'},
+  {n:'এক চাকার ঠেলাগাড়ি',i:'wheelbarrow',f:'চাকাটি',l:'মাঝের বোঝা',e:'হাতলের উপর টান',u:'ভারী বোঝাও হালকা লাগে!'},
+  {n:'দরজা (কব্জায় ঘোরা)',i:'door',f:'কব্জা',l:'দরজার ভর (মাঝে)',e:'হাতলের প্রান্তে বল',u:'হাতল তাই থাকে দূরের প্রান্তে!'},
+  {n:'বাদাম ভাঙার যন্ত্র',i:'nutcracker',f:'প্রান্তের কব্জা',l:'মাঝে রাখা বাদাম',e:'হাতের চাপ',u:'চাপ যত, বাদাম ভাঙে তত!'},
+  {n:'লেবু চিপার',i:'lemon',f:'প্রান্তের কব্জা',l:'মাঝের লেবু',e:'হাতলের চাপ',u:'টক রস বের করা সহজ!'},
+  {n:'বোতল ওপেনার',i:'opener2',f:'প্রান্তের ঠেকানো বিন্দু',l:'ছিপি',e:'হাতের টান',u:'ছিপি খোলার দুই নাম — একই কায়দা!'},
+  {n:'শাবল (ভার তোলার ভঙ্গি)',i:'crowbar2',f:'এক প্রান্তে ঠেকানো ডগা',l:'মাঝামাঝি ভার',e:'অন্য প্রান্তে উপরের দিকে বল',u:'এক যন্ত্র, দুই শ্রেণি!'},
+  {n:'পায়ের পাতায় ভর দিয়ে দাঁড়ানো',i:'tiptoe',f:'পায়ের আঙুলের ডগা',l:'শরীরের ওজন (মাঝে)',e:'গোড়ালির পেশির টান',u:'প্রত্যেক পা ফেলার সময় লিভার!'}]},
+3:{name:'তৃতীয় শ্রেণির লিভার',tag:'বল মাঝখানে',color:'#ea580c',soft:'#ffeadd',load:30,
+ order:['আলম্ব','বল','বাধা'],dir:'up',drag:'effort',
+ layout:{fulcrum:.06,effort:.45,load:.94},range:[.2,.75],
+ rule:'আলম্ব ও বাধার মাঝামাঝি জায়গায় থাকে বল।',
+ fund:['আলম্ব থাকে দণ্ডের এক প্রান্তে।','বল থাকে আলম্ব ও বাধার মাঝামাঝি জায়গায়।','বল-বাহু সবসময় ছোট — তাই বাধার চেয়ে বেশি বল প্রয়োগ করতে হয়।','লাভ বল নয় — লাভ গতি: অল্প সরানোয় বাধা অনেক দূর সরে যায়!'],
+ hint:'🟢 সবুজ গোলকটি (বল) টেনে দেখো — বল সবসময় আলম্ব ও বাধার মাঝে থাকে!',
+ ex:[
+  {n:'মানুষের হাত (কনুই সন্ধি)',i:'arm',f:'কনুই',l:'হাতের বোঝা',e:'বাইসেপ পেশির টান',u:'বেশি বল লাগে, কিন্তু গতির দারুণ সুবিধা!'},
+  {n:'মুখের চোয়াল (চিবানো)',i:'jaw',f:'চোয়ালের কব্জা-সন্ধি',l:'খাবারের বাধা',e:'চোয়ালের পেশির বল',u:'চিবোনোর সময়ও লিভার চলে!'},
+  {n:'চিমটা (টংস)',i:'chimta',f:'জোড়া প্রান্ত',l:'ধরা জিনিস',e:'মাঝে আঙুলের চাপ',u:'দুটি তৃতীয় শ্রেণির লিভার জোড়া!'},
+  {n:'মাছ ধরার ছিপ',i:'rod',f:'এক প্রান্তে ধরা হাত',l:'মাছের টান (ডগায়)',e:'অন্য হাতের বল',u:'ছোট টানে ছিপের ডগা অনেক দূর সরে!'},
+  {n:'ঝাঁটা (পরিষ্কারের সময়)',i:'broom',f:'উপরের হাত',l:'মাটির বাধা (ডগায়)',e:'মাঝের হাতের বল',u:'ঝাড়ু দেওয়া মানে লিভার চালানো!'},
+  {n:'ক্রিকেট ব্যাট (সুইং)',i:'cricket',f:'এক হাত (উপরে)',l:'বলের ধাক্কা',e:'অন্য হাতের বল',u:'ছক্কার পেছনেও লিভার!'},
+  {n:'টেনিস র্যাকেট',i:'racket',f:'কব্জি / এক হাত',l:'বলের ধাক্কা',e:'অন্য হাতের বল',u:'দ্রুত সুইং-এর রহস্য এখানেই।'},
+  {n:'হাতুড়ি (হাতের গতি)',i:'hammer3',f:'কনুই / কব্জি',l:'পেরেকের বাধা',e:'পেশির বল',u:'গতির জন্য বেশি বল সই!'},
+  {n:'টুইজার (প্লাকার)',i:'tweezers',f:'জোড়া প্রান্ত',l:'ধরা ছোট বস্তু',e:'আঙুলের চাপ (মাঝে)',u:'সূক্ষ্ম কাজের সেরা সাথী।'},
+  {n:'বেলচা (মাটি তোলা)',i:'shovel',f:'এক হাত (প্রান্ত)',l:'মাটির বোঝা',e:'অন্য হাতের টান',u:'মাঝের হাতটাই আসল কাজের!'}]}
+};
+
+/* ---------- schematic ---------- */
+function schematic(c,anim){
+ const P={1:{l:.12,f:.5,e:.88},2:{f:.08,l:.5,e:.92},3:{f:.08,e:.45,l:.92}}[c];
+ const X=p=>24+p*272, BY=76, col=CLS[c].color;
+ const down=CLS[c].dir==='down';
+ const eff=down
+  ?`<line x1="${X(P.e)}" y1="${BY-58}" x2="${X(P.e)}" y2="${BY-16}" stroke="var(--green)" stroke-width="5" stroke-linecap="round"/><path d="M${X(P.e)-8} ${BY-20}l8 10 8-10" fill="none" stroke="var(--green)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>`
+  :`<line x1="${X(P.e)}" y1="${BY-16}" x2="${X(P.e)}" y2="${BY-58}" stroke="var(--green)" stroke-width="5" stroke-linecap="round"/><path d="M${X(P.e)-8} ${BY-54}l8-10 8 10" fill="none" stroke="var(--green)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>`;
+ return `<svg viewBox="0 0 320 132" style="width:100%">
+  <g class="${anim?'schBeam':''}" style="transform-origin:${X(P.f)}px ${BY}px">
+    <rect x="16" y="${BY-5}" width="288" height="10" rx="5" fill="#8b5e3c"/>
+    <rect x="${X(P.l)-13}" y="${BY-31}" width="26" height="26" rx="6" fill="var(--redS)" stroke="var(--red)" stroke-width="3"/>
+    ${eff}
+  </g>
+  <path d="M${X(P.f)} ${BY+6}l-14 26h28z" fill="var(--amber)"/>
+  <text x="${X(P.l)}" y="124" text-anchor="middle" font-size="14" font-weight="700" fill="var(--red)">বাধা</text>
+  <text x="${X(P.f)}" y="124" text-anchor="middle" font-size="14" font-weight="700" fill="var(--amber)">আলম্ব</text>
+  <text x="${X(P.e)}" y="124" text-anchor="middle" font-size="14" font-weight="700" fill="var(--green)">বল</text>
+ </svg>`;
+}
+
+/* ---------- home selector ---------- */
+$('#selGrid').innerHTML=[1,2,3].map((c,i)=>{const d=CLS[c];return `
+ <button class="selCard" style="border-color:${d.color};background:linear-gradient(#fff, ${d.soft});animation-delay:${i*.12}s" onclick="openClass(${c})">
+   <span class="num" style="background:${d.color};color:#fff">শ্রেণি ${bn(c)}</span>
+   <h3>${d.name.replace(' লিভার','')}</h3>
+   <div class="tag2">${d.tag} • ${d.rule}</div>
+   <div style="margin:8px 0 2px">${schematic(c,false)}</div>
+   <div class="go" style="color:${d.color}">দেখি ও খেলি →</div>
+ </button>`}).join('');
+
+/* ---------- lab ---------- */
+const X0=110,X1=690,BY=290,GY=352,LOADN=c=>CLS[c].load;
+const px=p=>X0+p*(X1-X0);
+let state=null,raf=null;
+
+function buildLab(c){
+ const d=CLS[c];
+ state={c,E:50,layout:{...d.layout},angle:0,lifted:false,dragging:false};
+ const svg=$('#labSvg');
+ svg.innerHTML=`
+  <defs><marker id="mG" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0 0L7 3.5L0 7z" fill="var(--green)"/></marker></defs>
+  <line x1="50" y1="${GY}" x2="750" y2="${GY}" stroke="#d8cdb2" stroke-width="5" stroke-linecap="round"/>
+  <g id="fulG"></g>
+  <g id="beamG">
+    <rect x="${X0}" y="${BY-8}" width="${X1-X0}" height="16" rx="8" fill="#8b5e3c"/>
+    <rect x="${X0}" y="${BY-8}" width="${X1-X0}" height="6" rx="3" fill="#a97a52"/>
+    <g id="loadG"></g>
+    <g id="effG"></g>
+  </g>
+  <g id="knobG" style="cursor:grab"><circle id="knobC" r="15" fill="#fff" stroke="${d.color}" stroke-width="3" stroke-dasharray="5 4"/><text id="knobT" text-anchor="middle" dy="5" font-size="14" font-weight="800" fill="${d.color}">↔</text></g>
+  <g id="stars"></g>`;
+ svg.onpointerdown=e=>{ if(e.target.id==='knobC'||e.target.id==='knobT'){state.dragging=true;svg.setPointerCapture(e.pointerId);} };
+ svg.onpointermove=e=>{ if(!state.dragging)return;
+   const pt=new DOMPoint(e.clientX,e.clientY).matrixTransform(svg.getScreenCTM().inverse());
+   let p=Math.min(Math.max((pt.x-X0)/(X1-X0),d.range[0]),d.range[1]);
+   state.layout[d.drag]=p; update(); };
+ svg.onpointerup=svg.onpointercancel=()=>state.dragging=false;
+ $('#effRange').oninput=e=>{state.E=+e.target.value;update();};
+ cancelAnimationFrame(raf); tick();
+ update();
+}
+
+function metrics(){
+ const L=state.layout,dE=Math.abs(L.effort-L.fulcrum),dL=Math.abs(L.load-L.fulcrum);
+ return {dE,dL,req:LOADN(state.c)*dL/dE,ma:dE/dL};
+}
+
+function update(){
+ const c=state.c,d=CLS[c],L=state.layout,m=metrics();
+ const lifted=state.E>=m.req;
+ /* geometry */
+ const fx=px(L.fulcrum),lx=px(L.load),ex=px(L.effort);
+ $('#fulG').innerHTML=`<path d="M${fx} ${BY+8}l-26 ${GY-BY-8}h52z" fill="var(--amber)"/><text x="${fx}" y="${GY+26}" text-anchor="middle" font-size="17" font-weight="800" fill="var(--amber)">আলম্ব</text>`;
+ $('#loadG').setAttribute('transform',`translate(${lx} 0)`);
+ $('#loadG').innerHTML=`
+   <rect x="-30" y="${BY-54}" width="60" height="46" rx="9" fill="var(--redS)" stroke="var(--red)" stroke-width="3.5"/>
+   <circle cx="-10" cy="${BY-36}" r="3.4" fill="var(--red)"/><circle cx="10" cy="${BY-36}" r="3.4" fill="var(--red)"/>
+   <path d="M-9 ${BY-25}q9 7 18 0" fill="none" stroke="var(--red)" stroke-width="3" stroke-linecap="round"/>
+   <text x="0" y="${BY-64}" text-anchor="middle" font-size="17" font-weight="800" fill="var(--red)">বাধা ${bn(LOADN(c))} নিউটন</text>`;
+ const len=22+state.E*.32;
+ $('#effG').setAttribute('transform',`translate(${ex} 0)`);
+ $('#effG').innerHTML= d.dir==='down'
+  ?`<line x1="0" y1="${-14-len}" x2="0" y2="-14" stroke="var(--green)" stroke-width="7" stroke-linecap="round" marker-end="url(#mG)"/>
+    <text x="0" y="${-24-len}" text-anchor="middle" font-size="24">🖐️</text>
+    <text x="14" y="${-14-len/2}" font-size="17" font-weight="800" fill="var(--green)">বল</text>`
+  :`<line x1="0" y1="${14+len}" x2="0" y2="14" stroke="var(--green)" stroke-width="7" stroke-linecap="round" marker-end="url(#mG)"/>
+    <text x="0" y="${34+len}" text-anchor="middle" font-size="24">🖐️</text>
+    <text x="14" y="${14+len/2}" font-size="17" font-weight="800" fill="var(--green)">বল</text>`;
+ const kp={fulcrum:[fx,BY+10],load:[lx,BY-31],effort:[ex,BY+ (d.dir==='down'?-20:20)]}[d.drag];
+ $('#knobG').setAttribute('transform',`translate(${kp[0]} ${kp[1]})`);
+ /* readouts */
+ $('#effVal').textContent=bn(state.E)+' নিউটন';
+ $('#effRange').style.setProperty('--fill',state.E+'%');
+ $('#stArmE').textContent=bn(Math.round(m.dE*100));
+ $('#stArmL').textContent=bn(Math.round(m.dL*100));
+ $('#stMA').textContent=bnf(m.ma);
+ $('#stReq').textContent=bn(Math.round(m.req));
+ const chip=$('#statusChip');
+ let msg,col;
+ if(lifted){msg='🎉 বাধা উঠে গেল! প্রয়োগ করা বল ≥ প্রয়োজনীয় বল।';col='var(--green)';}
+ else if(m.req>100){msg= c===1?'😅 খুব কষ্ট! আলম্বটাকে বাধার দিকে সরিয়ে দেখো।': c===3?'😅 এখানে বেশি বল লাগেই — বদলে পাই গতি! আলম্বের কাছে বল আনলে আরও কষ্ট।':'😅 বল বাড়িয়ে দেখো!';col='var(--red)';}
+ else {msg='💪 বল আরও বাড়াও — বাধা এখনও নামিয়ে রেখেছে মাথা।';col='var(--amber)';}
+ chip.textContent=msg; chip.style.borderColor=col; chip.style.color=col; chip.style.background='#fff';
+ if(lifted!==state.lifted&&lifted)spawnStars(lx,BY-60);
+ state.lifted=lifted; state.target= c===1? (lifted?7:-6) : (lifted?-7:6);
+}
+
+function tick(){
+ const a=state.angle+( (state.target||0)-state.angle)*.12;
+ state.angle=a;
+ const fx=px(state.layout.fulcrum);
+ $('#beamG').setAttribute('transform',`rotate(${a} ${fx} ${BY})`);
+ raf=requestAnimationFrame(tick);
+}
+function spawnStars(x,y){
+ const g=$('#stars');
+ for(let i=0;i<7;i++){
+  const t=document.createElementNS('http://www.w3.org/2000/svg','text');
+  t.textContent=['✦','★','✳'][i%3]; t.setAttribute('x',x);t.setAttribute('y',y);
+  t.setAttribute('font-size',14+Math.random()*12); t.setAttribute('fill',['#f5a524','#0f9d63','#7c3aed'][i%3]);
+  const dx=(Math.random()-.5)*140, dy=-40-Math.random()*90;
+  t.style.transition='transform .9s ease-out, opacity .9s';g.appendChild(t);
+  requestAnimationFrame(()=>{t.style.transform=`translate(${dx}px ${dy}px)`;t.style.opacity='0';});
+  setTimeout(()=>t.remove(),950);
+ }
+}
+
+/* ---------- class view ---------- */
+function openClass(c){
+ const d=CLS[c];
+ $('#cvName').textContent=d.name;
+ const tag=$('#cvTag');tag.textContent=d.tag;tag.style.background=d.soft;tag.style.color=d.color;tag.style.borderColor=d.color;
+ ['labDot','fundDot','strDot'].forEach(id=>$('#'+id).style.background=d.color);
+ $('#labHint').textContent=d.hint;
+ $('#fundList').innerHTML=d.fund.map(f=>`<li style="--x:${d.color}"><span></span>${f}</li>`).join('')
+   .replace(/<span><\/span>/g,'');
+ $('#fundList').querySelectorAll('li').forEach(li=>{li.style.paddingLeft='30px';});
+ $('#fundList').innerHTML=d.fund.map(f=>`<li><style></style>${f}</li>`).join('');
+ $('#fundList').querySelectorAll('li').forEach((li,i)=>{
+   li.insertAdjacentHTML('afterbegin',`<i style="position:absolute;left:0;top:1px;width:21px;height:21px;border-radius:7px;background:${d.color};color:#fff;font-size:.72rem;display:grid;place-items:center">${bn(i+1)}</i>`);
+ });
+ $('#strBox').innerHTML=schematic(c,true)+`
+   <div class="posRow">${d.order.map((o,i)=>{
+     const col=o==='বল'?'var(--green)':o==='বাধা'?'var(--red)':'var(--amber)';
+     return `<span style="border-color:${col};color:${col};background:#fff">${o}</span>${i<2?'<span style="border:none;color:#b3a88f">—</span>':''}`;}).join('')}
+   </div>
+   <p style="margin-top:12px;color:#5c5646;font-weight:600">📖 ${d.rule}</p>`;
+ $('#exGrid').innerHTML=d.ex.map((x,i)=>`
+   <button class="exCard" style="animation-delay:${i*.06}s" onclick="openModal(${c},${i})">
+     <div class="exIc" style="background:${d.soft};color:${d.color}">${icon(x.i,d.color)}</div>
+     <b>${x.n}</b><small>উদাহরণ ${bn(i+1)}</small>
+   </button>`).join('');
+ buildLab(c);
+ $('#home').classList.remove('active');$('#classView').classList.add('active');
+ window.scrollTo({top:0});
+}
+function goHome(){cancelAnimationFrame(raf);$('#classView').classList.remove('active');$('#home').classList.add('active');document.getElementById('selector').scrollIntoView();}
+
+/* ---------- modal ---------- */
+function openModal(c,i){
+ const d=CLS[c],x=d.ex[i];
+ const row=(col,bg,b,t)=>`<div class="mRow" style="background:${bg}"><i style="background:${col}"></i><div><b style="color:${col}">${b}:</b> ${t}</div></div>`;
+ $('#mCard').style.borderColor=d.color;
+ $('#mCard').innerHTML=`
+  <div class="mTop">
+    <div class="mIc" style="background:${d.soft}">${icon(x.i,d.color)}</div>
+    <div><h3>${x.n}</h3><span class="chip" style="background:${d.soft};color:${d.color};border-color:${d.color}">${d.name}</span></div>
+    <button class="mClose" onclick="closeModal()">✕</button>
+  </div>
+  ${schematic(c,true)}
+  <div style="height:12px"></div>
+  ${row('var(--amber)','#fdf1da','আলম্ব',x.f)}
+  ${row('var(--red)','#fdebec','বাধা',x.l)}
+  ${row('var(--green)','#e2f6ec','বল',x.e)}
+  <div class="mFun" style="border-color:${d.color};color:${d.color}">💡 ${x.u}</div>`;
+ $('#modal').classList.add('open');
+}
+function closeModal(){$('#modal').classList.remove('open');}
+$('#modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+</script>
+</body>
+</html>
