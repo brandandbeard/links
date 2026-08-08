@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📋 JSON to Excel - প্রশ্ন বিন্যাসকারী টুল</title>
+
+    <!-- SheetJS Library for Excel generation -->
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js">
+    </script>
+
+    <style>
+        :root {
+            --bg: #f5f0e8;
+            --card-bg: #ffffff;
+            --primary: #1a7a5c;
+            --primary-hover: #145f47;
+            --accent: #e8833a;
+            --accent-hover: #c96e2e;
+            --text: #2d2d2d;
+            --text-light: #5c5c5c;
+            --border: #e0d8cc;
+            --shadow: 0 4px 24px rgba(0, 0, 0, 0.07);
+            --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.12);
+            --radius: 16px;
+            --radius-sm: 10px;
+            --font-bn: 'Hind Siliguri', 'Noto Sans Bengali', 'Siyam Rupali', 'SolaimanLipi', 'Kalpurush', sans-serif;
+            --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', 'Monaco', monospace;
+            --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-bn);
+            background: linear-gradient(160deg, #f7f3eb 0%, #efe8db 30%, #f0ece1 60%, #f8f4ec 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: var(--text);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background:
+                radial-gradient(ellipse at 15% 20%, rgba(26, 122, 92, 0.04) 0%, transparent 55%),
+                radial-gradient(ellipse at 80% 70%, rgba(232, 131, 58, 0.04) 0%, transparent 55%),
+                radial-gradient(ellipse at 50% 50%, rgba(180, 160, 120, 0.03) 0%, transparent 70%);
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 1000px;
+            background: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+            padding: 40px 36px 32px;
+            border: 1px solid var(--border);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        .header .icon-circle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            font-size: 34px;
+            margin-bottom: 14px;
+            box-shadow: 0 4px 14px rgba(26, 122, 92, 0.15);
+        }
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1a5c3a;
+            letter-spacing: -0.3px;
+            margin: 0;
+            line-height: 1.3;
+        }
+        .header .subtitle {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            margin-top: 4px;
+            font-weight: 400;
+        }
+
+        .badge-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        .badge {
+            display: inline-block;
+            font-size: 0.78rem;
+            font-weight: 500;
+            padding: 5px 12px;
+            border-radius: 20px;
+            background: #f0f4f1;
+            color: #3d6b4f;
+            border: 1px solid #d4e4d6;
+            white-space: nowrap;
+        }
+
+        .input-section {
+            margin-bottom: 22px;
+        }
+        .input-section label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+            color: #3d3d3d;
+        }
+        .input-section label .label-icon {
+            margin-right: 4px;
+        }
+        textarea {
+            width: 100%;
+            height: 340px;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 16px 18px;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            line-height: 1.55;
+            resize: vertical;
+            transition: var(--transition);
+            background: #fdfdfb;
+            color: #333;
+            outline: none;
+        }
+        textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(26, 122, 92, 0.07);
+            background: #fff;
+        }
+        textarea::placeholder {
+            color: #b0a99c;
+            font-family: var(--font-bn);
+            font-size: 0.9rem;
+        }
+
+        .btn-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 26px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            border: none;
+            transition: var(--transition);
+            font-family: var(--font-bn);
+            letter-spacing: 0.1px;
+            white-space: nowrap;
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(26, 122, 92, 0.25);
+        }
+        .btn-primary:hover {
+            background: var(--primary-hover);
+            box-shadow: 0 6px 22px rgba(26, 122, 92, 0.35);
+            transform: translateY(-1px);
+        }
+        .btn-primary:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 10px rgba(26, 122, 92, 0.2);
+        }
+        .btn-outline {
+            background: #fff;
+            color: var(--text);
+            border: 2px solid #d5cdbd;
+        }
+        .btn-outline:hover {
+            border-color: #b0a590;
+            background: #fafaf7;
+        }
+        .btn-sm {
+            padding: 8px 16px;
+            font-size: 0.82rem;
+            border-radius: 30px;
+        }
+        .btn-accent {
+            background: var(--accent);
+            color: #fff;
+            box-shadow: 0 4px 14px rgba(232, 131, 58, 0.2);
+        }
+        .btn-accent:hover {
+            background: var(--accent-hover);
+            box-shadow: 0 6px 20px rgba(232, 131, 58, 0.3);
+            transform: translateY(-1px);
+        }
+        .btn:disabled {
+            opacity: 0.55;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .summary-card {
+            background: #f9faf7;
+            border: 1px solid #e6e0d4;
+            border-radius: var(--radius-sm);
+            padding: 18px 22px;
+            margin-bottom: 10px;
+            display: none;
+            animation: fadeSlideIn 0.4s ease;
+        }
+        .summary-card.visible {
+            display: block;
+        }
+        .summary-card h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin: 0 0 10px;
+            color: #3d5a3f;
+        }
+        .summary-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px 30px;
+        }
+        .summary-item {
+            font-size: 0.88rem;
+            color: #4a4a4a;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .summary-item .dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            display: inline-block;
+            flex-shrink: 0;
+        }
+        .dot.green {
+            background: #4caf84;
+        }
+        .dot.blue {
+            background: #5b9bd5;
+        }
+        .dot.orange {
+            background: #f0a04b;
+        }
+        .dot.purple {
+            background: #9b7ec4;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(120px);
+            background: #2d2d2d;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            z-index: 999;
+            transition: transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.2);
+            pointer-events: none;
+            font-family: var(--font-bn);
+        }
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+        .toast.success {
+            background: #1a7a5c;
+        }
+        .toast.error {
+            background: #c0392b;
+        }
+
+        @keyframes fadeSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 24px 16px 20px;
+                border-radius: 14px;
+            }
+            .header h1 {
+                font-size: 1.35rem;
+            }
+            textarea {
+                height: 240px;
+                font-size: 0.78rem;
+                padding: 12px;
+            }
+            .btn {
+                padding: 10px 18px;
+                font-size: 0.85rem;
+            }
+            .btn-row {
+                gap: 8px;
+            }
+            .summary-grid {
+                flex-direction: column;
+                gap: 6px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="icon-circle">📋</div>
+            <h1>JSON → Excel প্রশ্ন বিন্যাসকারী</h1>
+            <p class="subtitle">আপনার JSON ডেটা পেস্ট করুন এবং সুন্দর Excel ফাইল ডাউনলোড করুন</p>
+            <div class="badge-row">
+                <span class="badge">📝 প্রশ্ন</span>
+                <span class="badge">📋 অপশন (A-D)</span>
+                <span class="badge">✅ সঠিক উত্তর</span>
+                <span class="badge">📚 বিষয় ও অধ্যায়</span>
+                <span class="badge">📊 টাইপ</span>
+            </div>
+        </div>
+
+        <!-- Input -->
+        <div class="input-section">
+            <label for="jsonInput">
+                <span class="label-icon">📥</span> নিচে আপনার JSON ডেটা পেস্ট করুন:
+            </label>
+            <textarea
+            id="jsonInput"
+            placeholder='এখানে আপনার JSON ফাইল-এর সম্পূর্ণ কন্টেন্ট পেস্ট করুন... (যেমন: { "__subjectGroups__": [...], "__subjects__": [...], "sci_ch9": [...] })'
+        ></textarea>
+    </div>
+
+    <!-- Buttons -->
+    <div class="btn-row">
+        <button class="btn btn-primary" id="btnGenerate" onclick="generateExcel()">
+            ⚡ Excel তৈরি ও ডাউনলোড
+        </button>
+        <button class="btn btn-outline btn-sm" onclick="clearAll()">
+            🗑️ ক্লিয়ার
+        </button>
+        <button class="btn btn-outline btn-sm" id="btnLoadSample" onclick="loadSample()">
+            📦 স্যাম্পল ডেটা লোড
+        </button>
+    </div>
+
+    <!-- Summary -->
+    <div class="summary-card" id="summaryCard">
+        <h3>📊 ডেটা সারসংক্ষেপ</h3>
+        <div class="summary-grid" id="summaryContent"></div>
+    </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+    (function() {
+        if (typeof XLSX === 'undefined') {
+            showToast('⚠️ Excel লাইব্রেরি লোড হয়নি। ইন্টারনেট সংযোগ চেক করুন।', 'error', 5000);
+            document.getElementById('btnGenerate').disabled = true;
+        }
+    })();
+
+    /**
+     * Main function: Parse JSON and generate Excel with new column format.
+     */
+    function generateExcel() {
+        const jsonText = document.getElementById('jsonInput').value.trim();
+        const summaryCard = document.getElementById('summaryCard');
+        const summaryContent = document.getElementById('summaryContent');
+
+        summaryCard.classList.remove('visible');
+
+        if (!jsonText) {
+            showToast('⚠️ দয়া করে প্রথমে JSON ডেটা পেস্ট করুন।', 'error');
+            return;
+        }
+
+        // Parse JSON
+        let data;
+        try {
+            data = JSON.parse(jsonText);
+        } catch (e) {
+            showToast('❌ JSON পার্স করতে সমস্যা হয়েছে। সঠিক JSON ফরম্যাট চেক করুন।', 'error', 4000);
+            console.error('JSON Parse Error:', e);
+            return;
+        }
+
+        if (typeof data !== 'object' || data === null || Array.isArray(data)) {
+            showToast('❌ JSON একটি অবজেক্ট (Object) হতে হবে, অ্যারে (Array) নয়।', 'error', 4000);
+            return;
+        }
+
+        // Build lookup maps
+        const groupMap = {};
+        if (Array.isArray(data.__subjectGroups__)) {
+            data.__subjectGroups__.forEach(g => {
+                if (g.key) groupMap[g.key] = g.name || g.key;
+            });
+        }
+
+        const subjectMap = {};
+        if (Array.isArray(data.__subjects__)) {
+            data.__subjects__.forEach(s => {
+                if (s.key) {
+                    subjectMap[s.key] = {
+                        name: s.name || s.key,
+                        group: s.group || '',
+                        num: s.num !== undefined ? s.num : '',
+                    };
+                }
+            });
+        }
+
+        // Collect all question arrays
+        const excludeKeys = ['__subjectGroups__', '__subjects__'];
+        const allRows = [];
+        const subjectStats = {};
+
+        for (const key in data) {
+            if (excludeKeys.includes(key)) continue;
+            if (!Object.prototype.hasOwnProperty.call(data, key)) continue;
+
+            const value = data[key];
+            if (!Array.isArray(value) || value.length === 0) continue;
+
+            const firstItem = value[0];
+            if (!firstItem || typeof firstItem !== 'object') continue;
+            if (!firstItem.hasOwnProperty('q') || !firstItem.hasOwnProperty('o')) continue;
+
+            const subjectInfo = subjectMap[key] || { name: key, group: '', num: '' };
+            const subjectGroupName = groupMap[subjectInfo.group] || subjectInfo.group || '';
+            const chapterName = subjectInfo.name; // e.g. "সাধারণ যন্ত্রসমূহ"
+
+            subjectStats[key] = value.length;
+
+            value.forEach((q) => {
+                const options = Array.isArray(q.o) ? q.o : [];
+                const answerIdx = q.a !== undefined && q.a !== null ? q.a : '';
+                const answerText = (answerIdx !== '' && options[answerIdx] !== undefined) ?
+                    options[answerIdx] :
+                    '';
+
+                allRows.push({
+                    subjectGroup: subjectGroupName,
+                    chapter: chapterName,
+                    question: cleanText(q.q || ''),
+                    optA: cleanText(options[0] || ''),
+                    optB: cleanText(options[1] || ''),
+                    optC: cleanText(options[2] || ''),
+                    optD: cleanText(options[3] || ''),
+                    correct: answerText,
+                    explanation: cleanText(q.note || ''),
+                    difficulty: q.difficulty || '',
+                });
+            });
+        }
+
+        if (allRows.length === 0) {
+            showToast('⚠️ কোনো প্রশ্ন পাওয়া যায়নি। JSON স্ট্রাকচার চেক করুন।', 'error', 4000);
+            return;
+        }
+
+        // Show summary
+        showSummary(summaryCard, summaryContent, allRows, subjectStats, subjectMap);
+
+        // Build Excel headers according to requested format
+        const headers = [
+            'Subject Group',
+            'Chapter',
+            'Question',
+            'Option A',
+            'Option B',
+            'Option C',
+            'Option D',
+            'Correct',
+            'Explanation',
+            'Difficulty',
+        ];
+
+        const excelData = [headers];
+        allRows.forEach(row => {
+            excelData.push([
+                row.subjectGroup,
+                row.chapter,
+                row.question,
+                row.optA,
+                row.optB,
+                row.optC,
+                row.optD,
+                row.correct,
+                row.explanation,
+                row.difficulty,
+            ]);
+        });
+
+        // Create workbook
+        const wb = XLSX.utils.book_new();
+        const ws = XLSX.utils.aoa_to_sheet(excelData);
+
+        // Set column widths
+        ws['!cols'] = [
+            { wch: 28 }, // Subject Group
+            { wch: 26 }, // Chapter
+            { wch: 58 }, // Question
+            { wch: 28 }, // Option A
+            { wch: 28 }, // Option B
+            { wch: 28 }, // Option C
+            { wch: 28 }, // Option D
+            { wch: 32 }, // Correct
+            { wch: 48 }, // Explanation
+            { wch: 16 }, // Difficulty
+        ];
+
+        // Auto-filter on header row
+        ws['!autofilter'] = { ref: XLSX.utils.encode_range({ s: { r: 0, c: 0 }, e: { r: 0, c: headers
+                    .length - 1 } }) };
+
+        XLSX.utils.book_append_sheet(wb, ws, 'প্রশ্নোত্তর');
+
+        // --- FILENAME GENERATION ---
+        // Use first subject's group and chapter for a meaningful name
+        let filename = 'প্রশ্নোত্তর_বিন্যাস';
+        if (allRows.length > 0) {
+            const firstRow = allRows[0];
+            const groupPart = sanitizeFilename(firstRow.subjectGroup || '');
+            const chapterPart = sanitizeFilename(firstRow.chapter || '');
+            if (groupPart && chapterPart) {
+                filename = 'প্রশ্নোত্তর_' + groupPart + '_' + chapterPart;
+            } else if (chapterPart) {
+                filename = 'প্রশ্নোত্তর_' + chapterPart;
+            }
+            // Add date for uniqueness
+            const now = new Date();
+            const dateStr = now.getFullYear() + '-' +
+                String(now.getMonth() + 1).padStart(2, '0') + '-' +
+                String(now.getDate()).padStart(2, '0');
+            filename += '_' + dateStr;
+        }
+        filename += '.xlsx';
+
+        // Download
+        try {
+            XLSX.writeFile(wb, filename, {
+                bookType: 'xlsx',
+                type: 'binary',
+                bookSST: false,
+            });
+            showToast('✅ সফল! ' + allRows.length + 'টি প্রশ্নের Excel ফাইল ডাউনলোড হয়েছে।', 'success', 3500);
+        } catch (e) {
+            console.error('Excel Write Error:', e);
+            showToast('❌ Excel ফাইল তৈরি করতে সমস্যা হয়েছে।', 'error', 4000);
+        }
+    }
+
+    /**
+     * Remove emojis and special characters for filename safety.
+     */
+    function sanitizeFilename(str) {
+        if (!str) return '';
+        // Remove emojis and special characters, keep Bengali letters, English, numbers, spaces
+        let cleaned = str.replace(/[^\u0980-\u09FFa-zA-Z0-9\s\-_]/g, '');
+        cleaned = cleaned.replace(/\s+/g, '_').replace(/_+/g, '_').trim();
+        return cleaned || 'chapter';
+    }
+
+    /**
+     * Clean text - remove excessive whitespace
+     */
+    function cleanText(str) {
+        if (typeof str !== 'string') return str;
+        return str.replace(/\s+/g, ' ').trim();
+    }
+
+    /**
+     * Show summary of parsed data
+     */
+    function showSummary(card, content, allRows, subjectStats, subjectMap) {
+        const totalQuestions = allRows.length;
+        const totalSubjects = Object.keys(subjectStats).length;
+        const difficulties = {};
+        allRows.forEach(r => {
+            const d = r.difficulty || 'unknown';
+            difficulties[d] = (difficulties[d] || 0) + 1;
+        });
+
+        let html = '';
+        html +=
+            `<div class="summary-item"><span class="dot green"></span> <strong>মোট প্রশ্ন:</strong> ${totalQuestions} টি</div>`;
+        html +=
+            `<div class="summary-item"><span class="dot blue"></span> <strong>মোট বিষয়:</strong> ${totalSubjects} টি</div>`;
+
+        for (const [key, count] of Object.entries(subjectStats)) {
+            const subj = subjectMap[key] || { name: key };
+            html +=
+                `<div class="summary-item"><span class="dot orange"></span> <strong>${subj.name}:</strong> ${count} টি প্রশ্ন</div>`;
+        }
+
+        const diffLabels = { easy: 'সহজ', medium: 'মাঝারি', hard: 'কঠিন' };
+        for (const [d, count] of Object.entries(difficulties)) {
+            const label = diffLabels[d] || d;
+            html +=
+                `<div class="summary-item"><span class="dot purple"></span> <strong>${label}:</strong> ${count} টি</div>`;
+        }
+
+        content.innerHTML = html;
+        card.classList.add('visible');
+    }
+
+    function clearAll() {
+        document.getElementById('jsonInput').value = '';
+        document.getElementById('summaryCard').classList.remove('visible');
+        document.getElementById('summaryContent').innerHTML = '';
+        showToast('🗑️ সব ক্লিয়ার করা হয়েছে।', '', 2000);
+    }
+
+    function loadSample() {
+        const sample = {
+            "__subjectGroups__": [{
+                "key": "science",
+                "name": "🌿 পরিবেশ ও বিজ্ঞান",
+                "className": "gk"
+            }, {
+                "key": "history",
+                "name": "📜 ইতিহাস",
+                "className": "reasoning"
+            }, {
+                "key": "geography",
+                "name": "🌍 ভূগোল",
+                "className": "english"
+            }],
+            "__subjects__": [{
+                "key": "sci_ch9",
+                "group": "science",
+                "name": "সাধারণ যন্ত্রসমূহ",
+                "num": 9
+            }],
+            "sci_ch9": [{
+                "q": "যে যন্ত্রে এক জায়গায় বল প্রয়োগ করলে অন্য জায়গায় কাজ সম্পন্ন হয়, তাকে কী বলে?",
+                "o": ["জটিল যন্ত্র", "সরল যন্ত্র", "লিভার", "কপিকল"],
+                "a": 1,
+                "note": "যে যন্ত্রে বল প্রয়োগ করা হয় এক জায়গায় এবং কাজ হয় অন্য জায়গায়, তাকে সরল যন্ত্র বলে।",
+                "difficulty": "medium"
+            }, {
+                "q": "দুই বা তার বেশি সরল যন্ত্রের সমন্বয়ে যে যন্ত্র তৈরি হয়, তাকে কী বলা হয়?",
+                "o": ["জটিল যন্ত্র", "সরল যন্ত্র", "নততল", "চক্র ও অক্ষদণ্ড"],
+                "a": 0,
+                "note": "দুই বা তার বেশি সরল যন্ত্র নিয়ে যে যন্ত্র উৎপন্ন হয়, তাকে জটিল যন্ত্র বলে।",
+                "difficulty": "medium"
+            }, {
+                "q": "নীচের কোনটি একটি জটিল যন্ত্রের সঠিক উদাহরণ?",
+                "o": ["সাঁড়াশি", "ক্রু ড্রাইভার", "সেলাই মেশিন", "শাবল"],
+                "a": 2,
+                "note": "কম্পিউটার, সেলাই মেশিন, সাইকেল ইত্যাদি হলো জটিল যন্ত্র।",
+                "difficulty": "medium"
+            }, {
+                "q": "একটি আদর্শ বা কাল্পনিক যন্ত্রের কর্মদক্ষতা (Efficiency) কত হওয়া সম্ভব?",
+                "o": ["৫০ শতাংশ", "৭৫ শতাংশ", "৯০ শতাংশ", "১০০ শতাংশ"],
+                "a": 3,
+                "note": "একটি আদর্শ যন্ত্রের কর্মদক্ষতা সবসময় ১০০ শতাংশ হয়ে থাকে।",
+                "difficulty": "medium"
+            }, {
+                "q": "লিভারের স্থির ঘূর্ণন বিন্দুটিকে বৈজ্ঞানিক ভাষায় কী বলা হয়?",
+                "o": ["বল বিন্দু", "বাধা বিন্দু", "আলম্ব", "যান্ত্রিক সুবিধা"],
+                "a": 2,
+                "note": "লিভারের স্থির বিন্দুকে আলম্ব (Fulcrum) বলে।",
+                "difficulty": "easy"
+            }]
+        };
+
+        document.getElementById('jsonInput').value = JSON.stringify(sample, null, 2);
+        document.getElementById('summaryCard').classList.remove('visible');
+        showToast('📦 স্যাম্পল ডেটা লোড হয়েছে! এখন "Excel তৈরি" বাটনে ক্লিক করুন।', '', 3500);
+    }
+
+    function showToast(message, type = '', duration = 3000) {
+        const toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.className = 'toast ' + type + ' show';
+        if (toast._timeout) clearTimeout(toast._timeout);
+        toast._timeout = setTimeout(() => {
+            toast.classList.remove('show');
+        }, duration);
+    }
+</script>
+</body>
+</html>
