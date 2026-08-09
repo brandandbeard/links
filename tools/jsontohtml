@@ -356,7 +356,7 @@
             <div class="badge-row">
                 <span class="badge">📝 প্রশ্ন</span>
                 <span class="badge">📋 অপশন (A-D)</span>
-                <span class="badge">✅ সঠিক উত্তর</span>
+                <span class="badge">✅ সঠিক উত্তর (0-3)</span>
                 <span class="badge">📚 বিষয় ও অধ্যায়</span>
                 <span class="badge">📊 টাইপ</span>
             </div>
@@ -405,7 +405,7 @@
     })();
 
     /**
-     * Main function: Parse JSON and generate Excel with new column format.
+     * Main function: Parse JSON and generate Excel with answer index in Correct column.
      */
     function generateExcel() {
         const jsonText = document.getElementById('jsonInput').value.trim();
@@ -473,16 +473,14 @@
 
             const subjectInfo = subjectMap[key] || { name: key, group: '', num: '' };
             const subjectGroupName = groupMap[subjectInfo.group] || subjectInfo.group || '';
-            const chapterName = subjectInfo.name; // e.g. "সাধারণ যন্ত্রসমূহ"
+            const chapterName = subjectInfo.name;
 
             subjectStats[key] = value.length;
 
             value.forEach((q) => {
                 const options = Array.isArray(q.o) ? q.o : [];
+                // Extract the answer index (0-3) — this is what we want in the "Correct" column
                 const answerIdx = q.a !== undefined && q.a !== null ? q.a : '';
-                const answerText = (answerIdx !== '' && options[answerIdx] !== undefined) ?
-                    options[answerIdx] :
-                    '';
 
                 allRows.push({
                     subjectGroup: subjectGroupName,
@@ -492,7 +490,7 @@
                     optB: cleanText(options[1] || ''),
                     optC: cleanText(options[2] || ''),
                     optD: cleanText(options[3] || ''),
-                    correct: answerText,
+                    correct: answerIdx, // This will be 0,1,2,3 (or empty if a is null)
                     explanation: cleanText(q.note || ''),
                     difficulty: q.difficulty || '',
                 });
@@ -516,7 +514,7 @@
             'Option B',
             'Option C',
             'Option D',
-            'Correct',
+            'Correct',      // This column now contains the numeric index (0-3)
             'Explanation',
             'Difficulty',
         ];
@@ -531,7 +529,7 @@
                 row.optB,
                 row.optC,
                 row.optD,
-                row.correct,
+                row.correct,        // answer index
                 row.explanation,
                 row.difficulty,
             ]);
@@ -550,7 +548,7 @@
             { wch: 28 }, // Option B
             { wch: 28 }, // Option C
             { wch: 28 }, // Option D
-            { wch: 32 }, // Correct
+            { wch: 12 }, // Correct (narrower now)
             { wch: 48 }, // Explanation
             { wch: 16 }, // Difficulty
         ];
@@ -562,7 +560,6 @@
         XLSX.utils.book_append_sheet(wb, ws, 'প্রশ্নোত্তর');
 
         // --- FILENAME GENERATION ---
-        // Use first subject's group and chapter for a meaningful name
         let filename = 'প্রশ্নোত্তর_বিন্যাস';
         if (allRows.length > 0) {
             const firstRow = allRows[0];
@@ -573,7 +570,6 @@
             } else if (chapterPart) {
                 filename = 'প্রশ্নোত্তর_' + chapterPart;
             }
-            // Add date for uniqueness
             const now = new Date();
             const dateStr = now.getFullYear() + '-' +
                 String(now.getMonth() + 1).padStart(2, '0') + '-' +
@@ -601,7 +597,6 @@
      */
     function sanitizeFilename(str) {
         if (!str) return '';
-        // Remove emojis and special characters, keep Bengali letters, English, numbers, spaces
         let cleaned = str.replace(/[^\u0980-\u09FFa-zA-Z0-9\s\-_]/g, '');
         cleaned = cleaned.replace(/\s+/g, '_').replace(/_+/g, '_').trim();
         return cleaned || 'chapter';
