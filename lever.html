@@ -2,7 +2,7 @@
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
 <title>লিভার ল্যাব — ইন্টারঅ্যাক্টিভ সিমুলেশন</title>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@600;700;800&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -86,9 +86,13 @@ svg{display:block} svg text{font-family:'Hind Siliguri',sans-serif}
 .labCtl{display:grid;grid-template-columns:1.1fr 1.6fr;gap:18px;margin-top:16px;align-items:start}
 .sliderBox label{font-weight:700;font-family:'Baloo Da 2';font-size:1.05rem}
 .sliderBox .val{font-family:'Baloo Da 2';font-weight:800;font-size:1.3rem}
-input[type=range]{width:100%;height:12px;border-radius:99px;appearance:none;background:linear-gradient(90deg,var(--green) var(--fill,50%),#e4dcc8 var(--fill,50%));outline:none;margin:14px 0 6px;cursor:pointer}
-input[type=range]::-webkit-slider-thumb{appearance:none;width:30px;height:30px;border-radius:50%;background:var(--green);border:4px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.3);cursor:grab}
-input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;background:var(--green);border:4px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.3)}
+input[type=range]{width:100%;height:14px;border-radius:99px;appearance:none;background:linear-gradient(90deg,var(--green) var(--fill,50%),#e4dcc8 var(--fill,50%));outline:none;margin:16px 0 10px;cursor:pointer;-webkit-appearance:none;touch-action:manipulation}
+input[type=range]::-webkit-slider-thumb{appearance:none;-webkit-appearance:none;width:32px;height:32px;border-radius:50%;background:var(--green);border:4px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.3);cursor:grab;margin-top:-9px}
+input[type=range]::-moz-range-thumb{width:28px;height:28px;border-radius:50%;background:var(--green);border:4px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.3)}
+
+/* ===== LAB SVG mobile fix ===== */
+#labSvg{width:100%;height:auto;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;border-radius:16px;background:linear-gradient(#fdfbf4,#f6efdd);border:1.5px solid var(--line)}
+#labSvg *{touch-action:none}
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
 .stat{background:#faf6ec;border:1.5px solid var(--line);border-radius:14px;padding:10px 8px;text-align:center}
 .stat b{font-family:'Baloo Da 2';font-size:1.25rem;display:block;line-height:1.1}
@@ -136,6 +140,40 @@ footer{margin-top:60px;text-align:center;color:#a49a83;font-weight:600;font-size
   .hero,.defRow,.twoCol,.labCtl{grid-template-columns:1fr}
   .parts,.selGrid{grid-template-columns:1fr}
   .stats{grid-template-columns:repeat(2,1fr)}
+  /* ===== MOBILE FIX ===== */
+  .heroArt svg{min-height:220px}
+  #labSvg{min-height:280px}
+  .exCard{padding:10px 8px 12px}
+  .exArt svg{min-height:140px}
+  .stat{padding:8px 6px}
+  .stat b{font-size:1.05rem}
+  .stat span{font-size:.7rem}
+  .sliderBox .val{font-size:1.1rem}
+  .cvTitle h2{font-size:1.5rem}
+  .chip{font-size:.72rem;padding:5px 9px}
+  .back{padding:8px 13px;font-size:.92rem}
+  .mCard{padding:18px;border-radius:22px}
+  .mTop{gap:10px}
+  .mTop h3{font-size:1.2rem}
+  .mArt svg{min-height:180px}
+  .mRow{font-size:.9rem;padding:8px 10px}
+  .labHint{font-size:.82rem}
+  .btn{padding:11px 18px;font-size:.98rem}
+  .hero h1{font-size:2rem}
+  .hero p{font-size:.98rem}
+}
+@media(max-width:520px){
+  .screen{padding:12px 12px 70px}
+  .exGrid{grid-template-columns:repeat(2,1fr);gap:10px}
+  .selGrid{grid-template-columns:1fr;gap:14px}
+  .parts{grid-template-columns:1fr}
+  .hero{gap:18px}
+  .brand b{font-size:1.15rem}
+  .brand span{font-size:.7rem}
+  .logo{width:40px;height:40px}
+  .stat b{font-size:.95rem}
+  input[type=range]::-webkit-slider-thumb{width:34px;height:34px;border-width:5px}
+  input[type=range]::-moz-range-thumb{width:28px;height:28px;border-width:5px}
 }
 </style>
 </head>
@@ -627,7 +665,7 @@ let state=null,raf=null;
 
 function buildLab(c){
  const d=CLS[c];
- state={c,E:50,layout:{...d.layout},angle:0,lifted:false,dragging:false};
+ state={c,E:50,layout:{...d.layout},angle:0,lifted:false,dragging:false,pid:null};
  const svg=$('#labSvg');
  svg.innerHTML=`
   <defs><marker id="mG" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0 0L7 3.5L0 7z" fill="var(--green)"/></marker></defs>
@@ -639,14 +677,62 @@ function buildLab(c){
     <g id="loadG"></g>
     <g id="effG"></g>
   </g>
-  <g id="knobG" style="cursor:grab"><circle id="knobC" r="15" fill="#fff" stroke="${d.color}" stroke-width="3" stroke-dasharray="5 4"/><text id="knobT" text-anchor="middle" dy="5" font-size="14" font-weight="800" fill="${d.color}">↔</text></g>
+  <g id="knobG" style="cursor:grab;touch-action:none"><circle id="knobC" r="18" fill="#fff" stroke="${d.color}" stroke-width="3.5" stroke-dasharray="5 4"/><text id="knobT" text-anchor="middle" dy="5" font-size="16" font-weight="800" fill="${d.color}">↔</text></g>
   <g id="stars"></g>`;
- svg.onpointerdown=e=>{ if(e.target.id==='knobC'||e.target.id==='knobT'){state.dragging=true;svg.setPointerCapture(e.pointerId);} };
- svg.onpointermove=e=>{ if(!state.dragging)return;
-   const pt=new DOMPoint(e.clientX,e.clientY).matrixTransform(svg.getScreenCTM().inverse());
-   let p=Math.min(Math.max((pt.x-X0)/(X1-X0),d.range[0]),d.range[1]);
-   state.layout[d.drag]=p; update(); };
- svg.onpointerup=svg.onpointercancel=()=>state.dragging=false;
+
+ /* ===== Universal pointer handler (works on touch + mouse) ===== */
+ function getPos(e){
+   const pt=new DOMPoint(e.clientX,e.clientY);
+   const ctm=svg.getScreenCTM();
+   if(!ctm)return null;
+   return pt.matrixTransform(ctm.inverse());
+ }
+ function onStart(e){
+   const t=e.target;
+   if(t.id==='knobC'||t.id==='knobT'){
+     state.dragging=true; state.pid=e.pointerId;
+     try{svg.setPointerCapture(e.pointerId);}catch(_){}
+     e.preventDefault();
+   }
+ }
+ function onMove(e){
+   if(!state.dragging)return;
+   const p=getPos(e);
+   if(!p)return;
+   let v=Math.min(Math.max((p.x-X0)/(X1-X0),d.range[0]),d.range[1]);
+   state.layout[d.drag]=v; update();
+   e.preventDefault();
+ }
+ function onEnd(e){
+   if(state.dragging && state.pid===e.pointerId){
+     state.dragging=false; state.pid=null;
+     try{svg.releasePointerCapture(e.pointerId);}catch(_){}
+   }
+ }
+ svg.addEventListener('pointerdown',onStart,{passive:false});
+ svg.addEventListener('pointermove',onMove,{passive:false});
+ svg.addEventListener('pointerup',onEnd,{passive:false});
+ svg.addEventListener('pointercancel',onEnd,{passive:false});
+ svg.addEventListener('pointerleave',onEnd,{passive:false});
+
+ /* ===== Touch fallback for older iOS ===== */
+ svg.addEventListener('touchstart',e=>{
+   if(e.touches[0]&&(e.target.id==='knobC'||e.target.id==='knobT')){
+     state.dragging=true; e.preventDefault();
+   }
+ },{passive:false});
+ svg.addEventListener('touchmove',e=>{
+   if(!state.dragging)return;
+   const t=e.touches[0]; if(!t)return;
+   const p=getPos(t); if(!p)return;
+   let v=Math.min(Math.max((p.x-X0)/(X1-X0),d.range[0]),d.range[1]);
+   state.layout[d.drag]=v; update();
+   e.preventDefault();
+ },{passive:false});
+ svg.addEventListener('touchend',()=>state.dragging=false,{passive:false});
+ svg.addEventListener('touchcancel',()=>state.dragging=false,{passive:false});
+
+ /* ===== Slider ===== */
  $('#effRange').oninput=e=>{state.E=+e.target.value;update();};
  cancelAnimationFrame(raf); tick();
  update();
@@ -752,7 +838,7 @@ function openModal(c,i){
     <button class="mClose" onclick="closeModal()">✕</button>
   </div>
   <div class="mArt">${art(x.i,true)}</div>
-  <div class="mLegend">🟠 আলম্ব • 🔴 বাধা • 🟢 বল — ছবিতে বিন্দু ও লেবেল দিয়ে চিহ্নিত করা আছে</div>
+  <div class="mLegend">🟠 আলম্ব • 🔴 বাধা • 🟢 বল</div>
   ${schematic(c,true)}
   <div style="height:12px"></div>
   ${row('var(--amber)','#fdf1da','আলম্ব',x.f)}
@@ -760,8 +846,12 @@ function openModal(c,i){
   ${row('var(--green)','#e2f6ec','বল',x.e)}
   <div class="mFun" style="border-color:${d.color};color:${d.color}">💡 ${x.u}</div>`;
  $('#modal').classList.add('open');
+ document.body.style.overflow='hidden'; /* mobile scroll lock */
 }
-function closeModal(){$('#modal').classList.remove('open');}
+function closeModal(){
+ $('#modal').classList.remove('open');
+ document.body.style.overflow='';
+}
 $('#modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
 </script>
