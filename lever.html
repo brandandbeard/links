@@ -24,7 +24,6 @@ svg{display:block} svg text{font-family:'Hind Siliguri',sans-serif}
 @keyframes pop{from{opacity:0;transform:scale(.92) translateY(10px)}to{opacity:1;transform:none}}
 @keyframes wig{0%,100%{transform:rotate(0)}25%{transform:rotate(-6deg)}75%{transform:rotate(6deg)}}
 
-/* topbar */
 .topbar{display:flex;align-items:center;gap:12px;padding:10px 0 22px}
 .logo{width:46px;height:46px;border-radius:14px;background:var(--ink);display:grid;place-items:center;box-shadow:0 4px 0 rgba(0,0,0,.25)}
 .logo svg{width:28px;height:28px}
@@ -33,7 +32,6 @@ svg{display:block} svg text{font-family:'Hind Siliguri',sans-serif}
 .topbar .spacer{flex:1}
 .chip{font-size:.8rem;font-weight:700;padding:6px 12px;border-radius:999px;background:#fff;border:1.5px solid var(--line)}
 
-/* hero */
 .hero{display:grid;grid-template-columns:1.05fr .95fr;gap:26px;align-items:center;margin-bottom:34px}
 .hero h1{font-size:clamp(2.1rem,5vw,3.3rem);line-height:1.12;font-weight:800}
 .hero h1 em{font-style:normal;color:var(--c1);background:linear-gradient(transparent 62%,#ffe08a 62%);padding:0 4px;border-radius:4px}
@@ -52,7 +50,6 @@ svg{display:block} svg text{font-family:'Hind Siliguri',sans-serif}
 .heroBook{animation:heroBook 4.2s ease-in-out infinite}
 .heroHand{animation:heroPull 4.2s ease-in-out infinite}
 
-/* cards */
 .card{background:var(--card);border:2px solid var(--line);border-radius:22px;box-shadow:var(--shadow);padding:22px}
 .card h3{font-size:1.25rem;margin-bottom:12px;display:flex;align-items:center;gap:10px}
 .card h3 .dot{width:12px;height:12px;border-radius:50%;flex:none}
@@ -60,14 +57,13 @@ svg{display:block} svg text{font-family:'Hind Siliguri',sans-serif}
 .part{border-radius:20px;padding:18px;border:2px solid;animation:pop .55s both}
 .part b{font-family:'Baloo Da 2';font-size:1.2rem;display:block;margin-bottom:4px}
 .part p{font-size:.92rem;color:#5c5646}
-.part .ic{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;margin-bottom:10px;font-size:1.4rem}
+.part .ic{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;margin-bottom:10px;font-size:1.4rem;background:#fff}
 .defRow{display:grid;grid-template-columns:1.2fr .8fr;gap:16px;margin-bottom:40px}
 .steps{counter-reset:st;list-style:none}
 .steps li{counter-increment:st;position:relative;padding:0 0 14px 44px;font-size:.98rem;color:#5c5646}
 .steps li::before{content:counter(st,bengali);position:absolute;left:0;top:0;width:30px;height:30px;border-radius:50%;
   background:var(--amberS);border:2px solid var(--amber);color:#9a6206;font-weight:700;display:grid;place-items:center;font-family:'Baloo Da 2'}
 
-/* selector */
 .selHead{text-align:center;margin-bottom:22px}
 .selHead h2{font-size:clamp(1.6rem,3.6vw,2.3rem);font-weight:800}
 .selHead p{color:#8a8271;font-weight:600}
@@ -80,12 +76,10 @@ svg{display:block} svg text{font-family:'Hind Siliguri',sans-serif}
 .selCard .tag2{font-size:.86rem;font-weight:700;color:#8a8271}
 .selCard .go{margin-top:10px;font-family:'Baloo Da 2';font-weight:700;font-size:1rem}
 
-/* class view */
 .cvTop{display:flex;align-items:center;gap:14px;margin-bottom:18px;flex-wrap:wrap}
 .back{border:2px solid var(--line);background:#fff;border-radius:14px;padding:9px 16px;font-weight:700;cursor:pointer;font-family:'Baloo Da 2';font-size:1rem;box-shadow:0 3px 0 rgba(0,0,0,.12)}
 .back:active{transform:translateY(2px)}
 .cvTitle h2{font-size:clamp(1.5rem,3.5vw,2.2rem);font-weight:800;line-height:1.1}
-.cvTitle span{font-weight:700;font-size:.9rem;padding:4px 12px;border-radius:999px}
 .labCard{margin-bottom:18px}
 .labHint{font-size:.88rem;font-weight:600;color:#8a8271;background:#faf6ec;border:1.5px dashed var(--line);border-radius:12px;padding:8px 12px;display:inline-block;margin-bottom:8px}
 #labSvg{width:100%;height:auto;touch-action:none;border-radius:16px;background:linear-gradient(#fdfbf4,#f6efdd);border:1.5px solid var(--line)}
@@ -103,36 +97,35 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;bac
 .legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px;font-size:.85rem;font-weight:700}
 .legend i{width:12px;height:12px;border-radius:50%;display:inline-block;margin-right:5px}
 .twoCol{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px}
-.fund li{list-style:none;position:relative;padding:0 0 12px 30px;color:#4c4739;font-size:.98rem}
-.fund li::before{content:'✔';position:absolute;left:0;top:1px;width:21px;height:21px;border-radius:7px;font-size:.75rem;display:grid;place-items:center;color:#fff}
+.fund li{list-style:none;position:relative;padding:0 0 12px 32px;color:#4c4739;font-size:.98rem}
+.fund li i{position:absolute;left:0;top:1px;width:22px;height:22px;border-radius:7px;font-style:normal;font-size:.75rem;display:grid;place-items:center;color:#fff;font-weight:700}
 .posRow{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
 .posRow span{font-weight:700;font-size:.88rem;padding:6px 14px;border-radius:999px;border:2px solid}
 @keyframes schTilt{0%,100%{transform:rotate(-3.5deg)}50%{transform:rotate(3.5deg)}}
 .schBeam{animation:schTilt 3s ease-in-out infinite}
 
-/* examples */
 .exHead{display:flex;align-items:baseline;gap:12px;margin:26px 0 14px}
 .exHead h3{font-size:1.5rem;font-weight:800}
 .exHead span{color:#8a8271;font-weight:600;font-size:.9rem}
-.exGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(158px,1fr));gap:14px}
-.exCard{border:2px solid var(--line);background:#fff;border-radius:18px;padding:16px 12px;cursor:pointer;text-align:center;
+.exGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:14px}
+.exCard{border:2px solid var(--line);background:#fff;border-radius:18px;padding:12px 10px 14px;cursor:pointer;text-align:center;
   transition:transform .15s, box-shadow .15s, border-color .15s;animation:pop .5s both;font-family:inherit}
 .exCard:hover{transform:translateY(-5px);box-shadow:0 14px 30px rgba(60,50,20,.14)}
-.exCard:hover .exIc svg{animation:wig .5s ease}
-.exIc{width:64px;height:64px;margin:0 auto 10px;border-radius:18px;display:grid;place-items:center}
-.exIc svg{width:44px;height:44px}
+.exArt{border-radius:14px;overflow:hidden;border:1.5px solid var(--line);background:linear-gradient(#fdfbf4,#f4ecd9);margin-bottom:8px}
+.exArt svg{width:100%;height:auto}
 .exCard b{font-size:.95rem;line-height:1.35;display:block}
 .exCard small{color:#8a8271;font-weight:600;font-size:.75rem}
 
-/* modal */
 #modal{position:fixed;inset:0;background:rgba(30,25,12,.5);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:18px;z-index:50}
 #modal.open{display:flex}
-.mCard{background:var(--card);border-radius:26px;max-width:560px;width:100%;max-height:92vh;overflow:auto;padding:24px;animation:pop .35s both;border:2.5px solid}
+.mCard{background:var(--card);border-radius:26px;max-width:640px;width:100%;max-height:92vh;overflow:auto;padding:24px;animation:pop .35s both;border:2.5px solid}
 .mTop{display:flex;gap:14px;align-items:center;margin-bottom:14px}
-.mIc{width:70px;height:70px;border-radius:20px;display:grid;place-items:center;flex:none}
-.mIc svg{width:48px;height:48px}
+.mNum{width:56px;height:56px;border-radius:16px;display:grid;place-items:center;flex:none;font-family:'Baloo Da 2';font-weight:800;font-size:1.5rem}
 .mTop h3{font-size:1.4rem;line-height:1.15}
 .mClose{margin-left:auto;border:none;background:#f1ead9;border-radius:12px;width:38px;height:38px;font-size:1.1rem;cursor:pointer;font-weight:700}
+.mArt{border-radius:16px;overflow:hidden;border:2px solid var(--line);background:linear-gradient(#fdfbf4,#f4ecd9);margin-bottom:10px}
+.mArt svg{width:100%;height:auto}
+.mLegend{text-align:center;font-size:.85rem;font-weight:700;color:#8a8271;margin-bottom:12px}
 .mRow{display:flex;gap:10px;align-items:flex-start;padding:9px 12px;border-radius:13px;margin-bottom:8px;font-size:.95rem}
 .mRow i{width:13px;height:13px;border-radius:50%;margin-top:5px;flex:none}
 .mRow b{font-family:'Baloo Da 2'}
@@ -191,15 +184,15 @@ footer{margin-top:60px;text-align:center;color:#a49a83;font-weight:600;font-size
 
   <div class="parts">
     <div class="part" style="border-color:var(--green);background:var(--greenS);animation-delay:.05s">
-      <div class="ic" style="background:#fff">💪</div><b style="color:var(--green)">বল</b>
+      <div class="ic">💪</div><b style="color:var(--green)">বল</b>
       <p>লিভারের উপর যে টান বা চাপ প্রয়োগ করা হয়, তাকে বলে বল।</p>
     </div>
     <div class="part" style="border-color:var(--red);background:var(--redS);animation-delay:.15s">
-      <div class="ic" style="background:#fff">📦</div><b style="color:var(--red)">বাধা</b>
+      <div class="ic">📦</div><b style="color:var(--red)">বাধা</b>
       <p>লিভার দিয়ে যে ভার বা বস্তুটাকে সরাতে হয়, তাকে বলে বাধা।</p>
     </div>
     <div class="part" style="border-color:var(--amber);background:var(--amberS);animation-delay:.25s">
-      <div class="ic" style="background:#fff">📍</div><b style="color:#b26e05">আলম্ব</b>
+      <div class="ic">📍</div><b style="color:#b26e05">আলম্ব</b>
       <p>যে স্থির বিন্দুকে কেন্দ্র করে দণ্ডটি অবাধে ঘুরতে পারে, তাকে বলে আলম্ব।</p>
     </div>
   </div>
@@ -267,7 +260,7 @@ footer{margin-top:60px;text-align:center;color:#a49a83;font-weight:600;font-size
     <div class="card"><h3><span class="dot" id="strDot"></span>গঠন ও অবস্থান</h3><div id="strBox"></div></div>
   </div>
 
-  <div class="exHead"><h3>🧰 ১০টি উদাহরণ</h3><span>যেকোনোটিতে ট্যাপ করে ভেতরের লিভারটা দেখো</span></div>
+  <div class="exHead"><h3>🧰 ১০টি উদাহরণ</h3><span>যেকোনোটিতে ট্যাপ করো — বাস্তব ছবিতে আলম্ব-বাধা-বল চিহ্নিত অবস্থায় দেখাবে</span></div>
   <div class="exGrid" id="exGrid"></div>
 </section>
 
@@ -280,40 +273,266 @@ const $=s=>document.querySelector(s);
 const bn=n=>String(n).replace(/\d/g,d=>'০১২৩৪৫৬৭৮৯'[d]);
 const bnf=(n,d=2)=>bn((Math.round(n*100)/100).toFixed(d).replace(/\.?0+$/,''));
 
-/* ---------- icons ---------- */
-const IC={
-balance:'<path d="M32 12v34"/><circle cx="32" cy="10" r="2.5"/><path d="M14 16h36"/><path d="M14 16l-6 12m6-12l6 12"/><path d="M8 28q6 8 12 0"/><path d="M50 16l-6 12m6-12l6 12"/><path d="M44 28q6 8 12 0"/><path d="M22 50h20"/><path d="M32 46v4"/>',
-tongs:'<path d="M24 10q14 16 4 42"/><path d="M40 10q-14 16-4 42"/><circle cx="32" cy="26" r="3"/>',
-nailpull:'<path d="M12 42q0-10 10-11l26-4q6-1 6-7"/><path d="M18 34v14"/><path d="M14 48h8"/>',
-scissors:'<path d="M16 12l30 32"/><path d="M48 12L18 44"/><circle cx="32" cy="28" r="3"/><circle cx="14" cy="50" r="6"/><circle cx="50" cy="50" r="6"/>',
-seesaw:'<path d="M8 36h48"/><path d="M32 36l-8 16h16z"/><circle cx="12" cy="30" r="4"/><circle cx="52" cy="30" r="4"/>',
-pliers:'<path d="M26 10l4 12"/><path d="M38 10l-4 12"/><circle cx="32" cy="26" r="3"/><path d="M30 30q-8 10-12 22"/><path d="M34 30q8 10 12 22"/>',
-crowbar:'<path d="M12 52q-4-10 6-12L46 18q6-3 8 2"/><path d="M12 52l-4-2"/>',
-balance2:'<circle cx="32" cy="8" r="3"/><path d="M14 16h36"/><path d="M14 16v8m36-8v8"/><path d="M8 24q6 8 12 0"/><path d="M44 24q6 8 12 0"/><path d="M32 16v22"/><path d="M24 38q8 10 16 0"/>',
-hammerclaw:'<path d="M24 14h20v10H24z"/><path d="M24 14q-10 2-12 12"/><path d="M16 30v14"/><path d="M12 44h8"/><path d="M34 24l4 28"/>',
-papercut:'<path d="M10 50h44"/><circle cx="14" cy="46" r="3"/><path d="M14 46L50 20"/><circle cx="52" cy="18" r="3"/><path d="M24 50v-6h18v6"/>',
-jati:'<circle cx="12" cy="32" r="3"/><path d="M12 29q22-10 42-2"/><path d="M12 35q22 10 42 2"/><circle cx="32" cy="32" r="5"/>',
-oar:'<path d="M14 10l24 26"/><path d="M38 36q14 4 12 16q-12 0-16-10z"/>',
-opener:'<path d="M10 22h30q10 0 10 8"/><path d="M14 22v6"/><path d="M22 36h24v8H22z"/><path d="M22 36l4-4 4 4 4-4 4 4 4-4 4 4"/>',
-wheelbarrow:'<circle cx="16" cy="48" r="6"/><path d="M16 42l-4-12h36l-10 14"/><path d="M48 30l10-4"/><path d="M40 44v8"/>',
-door:'<path d="M18 10h28v44H18z"/><circle cx="40" cy="32" r="2.5"/><circle cx="18" cy="18" r="1.6"/><circle cx="18" cy="46" r="1.6"/><path d="M46 54q10-22 0-44" stroke-dasharray="4 5"/>',
-nutcracker:'<circle cx="12" cy="32" r="3"/><path d="M12 29L54 22"/><path d="M12 35L54 42"/><circle cx="30" cy="32" r="5"/>',
-lemon:'<circle cx="12" cy="32" r="3"/><path d="M12 29q20-9 40-3"/><path d="M12 35q20 9 40 3"/><circle cx="30" cy="32" r="6"/><path d="M30 26q2-4 5-4"/>',
-opener2:'<path d="M12 18h34"/><path d="M16 18v8"/><path d="M26 34h20v12H26z"/><path d="M26 34l5-5 5 5 5-5 5 5"/>',
-crowbar2:'<path d="M10 48L52 20"/><path d="M10 48l-2 6"/><circle cx="26" cy="42" r="6"/><path d="M52 22v-10"/><path d="M48 16l4-4 4 4"/>',
-tiptoe:'<path d="M8 54h48"/><path d="M20 54q10-2 14-10l6-16"/><path d="M34 44q8 4 12-2"/><path d="M40 28V10"/><path d="M48 42v-9"/><path d="M44 37l4-4 4 4"/>',
-arm:'<circle cx="14" cy="14" r="4"/><path d="M14 18l8 16"/><path d="M22 34l22-4"/><circle cx="46" cy="30" r="3"/><path d="M46 24v-6"/><circle cx="46" cy="13" r="4"/><path d="M27 31q4-9 11-9"/>',
-jaw:'<path d="M18 12q22-4 26 12v6l-8 2 8 6q-4 12-16 10t-12-14z"/><circle cx="24" cy="34" r="2.5"/><path d="M36 32h6"/>',
-chimta:'<path d="M26 12q-6 20 2 40"/><path d="M38 12q6 20-2 40"/><path d="M26 12q6-4 12 0"/>',
-rod:'<path d="M12 52q20-8 32-34"/><path d="M44 18v20"/><path d="M44 42q6-4 10 0q-4 6-10 0z"/><path d="M54 42l6-4v8z"/>',
-broom:'<path d="M38 8L30 32"/><path d="M30 32l-10 20"/><path d="M30 32l-4 22"/><path d="M30 32l2 22"/><path d="M30 32l8 20"/><path d="M22 40h14"/>',
-cricket:'<path d="M30 24l10 4-8 26-10-4z"/><path d="M35 26l6-14"/><circle cx="52" cy="46" r="5"/>',
-racket:'<ellipse cx="40" cy="18" rx="12" ry="13"/><path d="M40 8v20M30 18h20M33 11l14 14M47 11L33 25"/><path d="M36 30l-8 22"/>',
-hammer3:'<path d="M22 12l22 6-3 10-22-6z"/><path d="M32 28l-6 24"/><path d="M12 16q-6 12 0 24" stroke-dasharray="4 5"/>',
-tweezers:'<path d="M28 10q-2 20-8 38"/><path d="M36 10q2 20 8 38"/><path d="M28 10h8"/>',
-shovel:'<path d="M40 8l-8 24"/><path d="M32 32l-10 10q4 12 16 8l4-14z"/><circle cx="20" cy="52" r="1.5"/><circle cx="28" cy="56" r="1.5"/>'
+/* ---------- realistic art: shared gradients ---------- */
+function defsP(p){return `
+<linearGradient id="${p}bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fdfbf4"/><stop offset="1" stop-color="#f3ecd9"/></linearGradient>
+<linearGradient id="${p}w" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b98a5a"/><stop offset="1" stop-color="#8a5a2b"/></linearGradient>
+<linearGradient id="${p}wl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e9d3a8"/><stop offset="1" stop-color="#c9a169"/></linearGradient>
+<linearGradient id="${p}m" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#eceef2"/><stop offset="1" stop-color="#9a9aa8"/></linearGradient>
+<linearGradient id="${p}mk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6a6a78"/><stop offset="1" stop-color="#33333e"/></linearGradient>
+<linearGradient id="${p}br" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f2c14e"/><stop offset="1" stop-color="#a06a1c"/></linearGradient>
+<linearGradient id="${p}r" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f0766f"/><stop offset="1" stop-color="#d33a3f"/></linearGradient>
+<linearGradient id="${p}g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#35c07f"/><stop offset="1" stop-color="#0d8a54"/></linearGradient>
+<linearGradient id="${p}b" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7cc7ee"/><stop offset="1" stop-color="#2a7fb0"/></linearGradient>
+<linearGradient id="${p}y" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd34d"/><stop offset="1" stop-color="#e0a30c"/></linearGradient>
+<linearGradient id="${p}o" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffb35c"/><stop offset="1" stop-color="#e07a10"/></linearGradient>
+<linearGradient id="${p}s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f6c8a0"/><stop offset="1" stop-color="#e0a377"/></linearGradient>`;}
+
+/* ---------- 30 realistic illustrations + pointer points (f=আলম্ব,l=বাধা,e=বল) ---------- */
+const ART={
+/* ===== শ্রেণি ১ ===== */
+balance:{p:{f:[160,50,216,26],l:[70,104,64,160],e:[250,104,254,160]},s:`
+<rect width="320" height="200" fill="url(#__P__bg)"/><ellipse cx="160" cy="186" rx="120" ry="8" fill="rgba(90,70,30,.10)"/>
+<circle cx="160" cy="20" r="6" fill="none" stroke="url(#__P__br)" stroke-width="4"/>
+<rect x="156" y="24" width="8" height="24" rx="3" fill="url(#__P__br)"/>
+<rect x="58" y="46" width="204" height="8" rx="4" fill="url(#__P__br)"/>
+<circle cx="160" cy="50" r="5" fill="#7a4d15"/><path d="M160 54v14l-5 8h10z" fill="url(#__P__br)"/>
+<path d="M70 54l-24 52M70 54v52M70 54l24 52M250 54l-24 52M250 54v52M250 54l24 52" stroke="#8a6a3a" stroke-width="2.5" fill="none"/>
+<path d="M38 106q32 30 64 0z" fill="url(#__P__br)"/><path d="M218 106q32 30 64 0z" fill="url(#__P__br)"/>
+<circle cx="64" cy="99" r="6" fill="#8a5a2b"/><circle cx="76" cy="98" r="6" fill="#96662f"/><circle cx="70" cy="93" r="6" fill="#8a5a2b"/>
+<rect x="240" y="92" width="10" height="12" rx="2" fill="#5b5b66"/><rect x="252" y="90" width="12" height="14" rx="2" fill="#4a4a55"/><rect x="246" y="84" width="9" height="10" rx="2" fill="#6b6b76"/>`},
+tongs:{p:{f:[168,97,168,36],l:[82,98,58,154],e:[250,97,254,154]},s:`
+<rect width="320" height="200" fill="url(#__P__bg)"/><ellipse cx="160" cy="186" rx="110" ry="7" fill="rgba(90,70,30,.10)"/>
+<circle cx="82" cy="98" r="13" fill="url(#__P__o)"/><circle cx="82" cy="98" r="6" fill="#ffd34d"/>
+<path d="M252 66q-40 4-84 24q-40 18-74 4" stroke="url(#__P__mk)" stroke-width="9" fill="none" stroke-linecap="round"/>
+<path d="M252 128q-40-4-84-24q-40-18-74-4" stroke="url(#__P__mk)" stroke-width="9" fill="none" stroke-linecap="round"/>
+<circle cx="168" cy="97" r="6" fill="#2f2f38"/>
+<path d="M252 66q12 5 12 15M252 128q12-5 12-15" stroke="#2f2f38" stroke-width="9" fill="none" stroke-linecap="round"/>`},
+nailpull:{p:{f:[186,140,238,178],l:[152,110,86,90],e:[238,74,258,44]},s:`
+<rect width="320" height="200" fill="url(#__P__bg)"/>
+<rect x="36" y="140" width="248" height="26" rx="6" fill="url(#__P__w)"/>
+<path d="M48 149h224M48 157h224" stroke="rgba(0,0,0,.15)" stroke-width="2"/>
+<rect x="148" y="104" width="9" height="40" rx="3" fill="url(#__P__m)"/><rect x="144" y="98" width="17" height="8" rx="3" fill="url(#__P__mk)"/>
+<path d="M152 100q-14 6-10 22q3 14 20 18" stroke="url(#__P__mk)" stroke-width="9" fill="none" stroke-linecap="round"/>
+<circle cx="186" cy="140" r="7" fill="#2f2f38"/>
+<path d="M158 100q22-16 44-24M162 106q26-8 52-14" stroke="url(#__P__r)" stroke-width="9" fill="none" stroke-linecap="round"/>`},
+scissors:{p:{f:[160,100,160,40],l:[86,100,58,148],e:[214,100,252,148]},s:`
+<rect width="320" height="200" fill="url(#__P__bg)"/>
+<rect x="66" y="86" width="36" height="28" rx="3" fill="#fff" stroke="#d8cdb2" stroke-width="2" transform="rotate(-4 84 100)"/>
+<path d="M160 100L92 62l-6 10 70 32z" fill="url(#__P__m)"/><path d="M160 100L92 138l-6-10 70-32z" fill="url(#__P__m)"/>
+<circle cx="160" cy="100" r="6" fill="#2f2f38"/>
+<path d="M160 100q30-18 48-24M160 100q30 18 48 24" stroke="url(#__P__r)" stroke-width="10" fill="none" stroke-linecap="round"/>
+<circle cx="214" cy="72" r="11" fill="none" stroke="url(#__P__r)" stroke-width="8"/><circle cx="214" cy="128" r="11" fill="none" stroke="url(#__P__r)" stroke-width="8"/>`},
+seesaw:{p:{f:[160,120,160,180],l:[66,96,62,44],e:[252,104,252,52]},s:`
+<rect width="320" height="200" fill="url(#__P__bg)"/><ellipse cx="160" cy="186" rx="130" ry="8" fill="rgba(90,70,30,.10)"/>
+<path d="M160 118l-26 54h52z" fill="url(#__P__y)"/>
+<g transform="rotate(-5 160 112)"><rect x="40" y="106" width="240" height="11" rx="5" fill="url(#__P__w)"/></g>
+<circle cx="66" cy="84" r="10" fill="url(#__P__s)"/><path d="M56 94q10-8 20 0v16h-20z" fill="url(#__P__r)"/>
+<circle cx="252" cy="96" r="10" fill="url(#__P__s)"/><path d="M242 106q10-8 20 0v16h-20z" fill="url(#__P__g)"/>`},
+pliers:{p:{f:[160,86,216,86],l:[159,32,102,30],e:[186,142,240,158]},s:`
+<rect width="320" height="200" fill="url(#__P__bg)"/><ellipse cx="160" cy="186" rx="90" ry="7" fill="rgba(90,70,30,.10)"/>
+<rect x="155" y="22" width="7" height="22" rx="3" fill="url(#__P__m)"/>
+<path d="M150 46q-12 12-4 26q6 10 14 12" stroke="url(#__P__mk)" stroke-width="8" fill="none" stroke-linecap="round"/>
+<path d="M167 46q12 12 4 26q-6 10-14 12" stroke="url(#__P__mk)" stroke-width="8" fill="none" stroke-linecap="round"/>
+<circle cx="160" cy="86" r="6" fill="#2f2f38"/>
+<path d="M154 92q-16 30-20 56" stroke="url(#__P__r)" stroke-width="11" fill="none" stroke-linecap="round"/>
+<path d="M166 92q16 30 20 56" stroke="url(#__P__r)" stroke-width="11" fill="none" stroke-linecap="round"/>`},
+crowbar:{p:{f:[122,150,152,182],l:[80,130,58,84],e:[254,100,256,48]},s:`
+<rect width="320" height="200" fill="url(#__P__bg)"/><ellipse cx="160" cy="184" rx="130" ry="8" fill="rgba(90,70,30,.10)"/>
+<path d="M42 152q26-44 60-40q28 4 22 36q-40 8-82 4z" fill="url(#__P__m)"/>
+<ellipse cx="122" cy="152" rx="14" ry="9" fill="#9a9aa5"/>
+<path d="M80 136q22 14 46 10l128-44" stroke="url(#__P__mk)" stroke-width="9" fill="none" stroke-linecap="round"/>
+<line x1="254" y1="76" x2="254" y2="98" stroke="#0f9d63" stroke-width="6" stroke-linecap="round"/>
+<path d="M244 90l10 12 10-12" fill="none" stroke="#0f9d63" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>`},
+balance2:{p:{f:[160,55,216,30],l:[76,118,66,166],e:[244,118,252,166]},s:`
+<rect width="320" height="200" fill="url(#__P__bg)"/><ellipse cx="160" cy="186" rx="110" ry="8" fill="rgba(90,70,30,.10)"/>
+<rect x="118" y="160" width="84" height="14" rx="6" fill="url(#__P__w)"/>
+<rect x="156" y="56" width="8" height="106" rx="3" fill="url(#__P__br)"/>
+<rect x="66" y="52" width="188" height="7" rx="3.5" fill="url(#__P__br)"/><circle cx="160" cy="55" r="5" fill="#7a4d15"/>
+<path d="M76 59l-22 56M76 59v56M76 59l22 56M244 59l-22 56M244 59v56M244 59l22 56" stroke="#8a6a3a" stroke-width="2.5" fill="none"/>
+<path d="M46 115q30 28 60 0z" fill="url(#__P__br)"/><path d="M214 115q30 28 60 0z" fill="url(#__P__br)"/>
+<circle cx="70" cy="108" r="6" fill="#8a5a2b"/><circle cx="82" cy="107" r="6" fill="#96662f"/>
+<rect x="236" y="101" width="10" height="12" rx="2" fill="#5b5b66"/><rect x="248" y="99" width="12" height="14" rx="2" fill="#4a4a55"/>`},
+hammerclaw:{p:{f:[146,140,198,178],l:[110,112,74,84],e:[242,72,256,36]},s:`
+<rect width="320" height="200" fill="url(#__P__bg)"/>
+<rect x="36" y="140" width="248" height="26" rx="6" fill="url(#__P__w)"/>
+<path d="M48 149h224M48 157h224" stroke="rgba(0,0,0,.15)" stroke-width="2"/>
+<rect x="106" y="108" width="8" height="36" rx="3" fill="url(#__P__m)"/><rect x="102" y="102" width="16" height="7" rx="3" fill="url(#__P__mk)"/>
+<path d="M118 106q-12 2-12 12q0 8 8 10" stroke="url(#__P__mk)" stroke-width="7" fill="none" stroke-linecap="round"/>
+<path d="M116 108h28q10 0 12 10l2 10h-46q-6-12 4-20z" fill="url(#__P__mk)"/>
+<path d="M152 122l92-52" stroke="url(#__P__w)" stroke-width="12" stroke-linecap="round"/>`},
+papercut:{p:{f:[66,140,66,180],l:[130,132,152,178],e:[256,82,258,44]},s:`
+<rect width="320" height="200" fill="url(#__P__bg)"/>
+<rect x="46" y="140" width="228" height="16" rx="5" fill="url(#__P__wl)"/>
+<rect x="86" y="128" width="92" height="12" rx="2" fill="#fff" stroke="#e0d7c2" stroke-width="2"/>
+<circle cx="66" cy="140" r="7" fill="#2f2f38"/>
+<path d="M66 140L246 84" stroke="url(#__P__m)" stroke-width="7" stroke-linecap="round"/>
+<path d="M246 84l16-6" stroke="url(#__P__r)" stroke-width="12" stroke-linecap="round"/>`},
+/* ===== শ্রেণি ২ ===== */
+jati:{p:{f:[58,100,58,50],l:[140,100,140,154],e:[252,100,252,50]},s:`
+<rect width="320" height="200" fill="url(#__P__bg)"/><ellipse cx="160" cy="186" rx="110" ry="7" fill="rgba(90,70,30,.10)"/>
+<circle cx="58" cy="100" r="8" fill="url(#__P__mk)"/>
+<path d="M58 96q100-20 190-10" stroke="url(#__P__m)" stroke-width="8" fill="none" stroke-linecap="round"/>
+<path d="M58 104q100 20 190 10" stroke="url(#__P__m)" stroke-width="8" fill="none" stroke-linecap="round"/>
+<path d="M248 86l14-2M248 114l14 2" stroke="url(#__P__r)" stroke-width="10" stroke-linecap="round"/>
+<circle cx="140" cy="100" r="11" fill="url(#__P__o)"/><path d="M133 96q7-6 14 0" stroke="#8a4a10" stroke-width="2" fill="none"/>`},
+oar:{p:{f:[90,160,56,132],l:[198,122,170,58],e:[244,96,264,50]},s:`
+<rect width="320" height="200" fill="url(#__P__bg)"/>
+<path d="M16 150q16-10 32 0t32 0 32 0 32 0 32 0 32 0 32 0 32 0 32 0v44H16z" fill="url(#__P__b)"/>
+<path d="M192 116q64 16 116 4v60H192z" fill="url(#__P__w)"/>
+<circle cx="252" cy="70" r="11" fill="url(#__P__s)"/><path d="M240 82q12-8 24 0v26h-24z" fill="url(#__P__g)"/>
+<path d="M240 94L96 156" stroke="url(#__P__w)" stroke-width="7" stroke-linecap="round"/>
+<ellipse cx="90" cy="162" rx="13" ry="19" fill="url(#__P__wl)" transform="rotate(30 90 162)"/>`},
+opener:{p:{f:[128,80,84,50],l:[152,90,220,122],e:[242,54,252,26]},s:`
+<rect width="320" height="200" fill="url(#__P__bg)"/>
+<rect x="118" y="92" width="44" height="78" rx="10" fill="url(#__P__g)"/>
+<rect x="124" y="78" width="32" height="16" rx="4" fill="url(#__P__m)"/>
+<path d="M128 82v10M136 82v10M144 82v10M152 82v10" stroke="rgba(0,0,0,.2)" stroke-width="2"/>
+<path d="M128 80L246 52" stroke="url(#__P__r)" stroke-width="9" stroke-linecap="round"/>
+<path d="M150 84l4 10" stroke="url(#__P__mk)" stroke-width="6" stroke-linecap="round"/>
+<circle cx="246" cy="52" r="8" fill="url(#__P__s)"/>`},
+wheelbarrow:{p:{f:[70,148,58,108],l:[150,92,150,42],e:[262,96,258,50]},s:`
+<rect width="320" height="200" fill="url(#__P__bg)"/><ellipse cx="160" cy="186" rx="120" ry="8" fill="rgba(90,70,30,.10)"/>
+<circle cx="70" cy="148" r="18" fill="#2f2f38"/><circle cx="70" cy="148" r="7" fill="#9a9aa5"/>
+<path d="M96 96q32-26 64-14q28 10 52 14z" fill="url(#__P__w)"/>
+<path d="M88 96h128l-22 46H110z" fill="url(#__P__r)"/>
+<path d="M216 102l52-8" stroke="url(#__P__mk)" stroke-width="8" stroke-linecap="round"/>
+<path d="M110 142l-24 24M196 142l10 26" stroke="url(#__P__mk)" stroke-width="6" stroke-linecap="round"/>
+<circle cx="264" cy="94" r="8" fill="url(#__P__s)"/>
+<line x1="276" y1="86" x2="276" y2="66" stroke="#0f9d63" stroke-width="5" stroke-linecap="round"/><path d="M268 74l8-10 8 10" fill="none" stroke="#0f9d63" stroke-width="5" stroke-linecap="round"/>`},
+door:{p:{f:[104,100,58,44],l:[164,102,164,180],e:[214,104,254,58]},s:`
+<rect width="320" height="200" fill="url(#__P__bg)"/>
+<rect x="86" y="26" width="16" height="152" fill="url(#__P__wl)"/>
+<rect x="102" y="34" width="124" height="144" rx="4" fill="url(#__P__w)"/>
+<rect x="116" y="48" width="96" height="50" rx="4" fill="none" stroke="rgba(0,0,0,.18)" stroke-width="3"/>
+<rect x="116" y="110" width="96" height="52" rx="4" fill="none" stroke="rgba(0,0,0,.18)" stroke-width="3"/>
+<rect x="100" y="52" width="8" height="16" rx="2" fill="url(#__P__m)"/><rect x="100" y="140" width="8" height="16" rx="2" fill="url(#__P__m)"/>
+<circle cx="214" cy="104" r="6" fill="url(#__P__br)"/><circle cx="228" cy="104" r="8" fill="url(#__P__s)"/>`},
+nutcracker:{p:{f:[58,100,58,50],l:[140,100,140,154],e:[252,100,252,50]},s:`
+<rect width="320" height="200" fill="url(#__P__bg)"/><ellipse cx="160" cy="186" rx="110" ry="7" fill="rgba(90,70,30,.10)"/>
+<circle cx="58" cy="100" r="8" fill="url(#__P__mk)"/>
+<path d="M58 96q100-18 190-8" stroke="url(#__P__w)" stroke-width="9" fill="none" stroke-linecap="round"/>
+<path d="M58 104q100 18 190 8" stroke="url(#__P__w)" stroke-width="9" fill="none" stroke-linecap="round"/>
+<circle cx="140" cy="100" r="10" fill="#7a4a1d"/><path d="M136 94q4-4 8 0" stroke="#5a3413" stroke-width="2" fill="none"/>`},
+lemon:{p:{f:[58,100,58,50],l:[140,100,140,154],e:[252,100,252,50]},s:`
+<rect width="320" height="200" fill="url(#__P__bg)"/><ellipse cx="160" cy="186" rx="110" ry="7" fill="rgba(90,70,30,.10)"/>
+<circle cx="58" cy="100" r="8" fill="url(#__P__mk)"/>
+<path d="M58 96q100-18 190-8" stroke="url(#__P__m)" stroke-width="8" fill="none" stroke-linecap="round"/>
+<path d="M58 104q100 18 190 8" stroke="url(#__P__m)" stroke-width="8" fill="none" stroke-linecap="round"/>
+<path d="M248 88l14-3M248 112l14 3" stroke="url(#__P__y)" stroke-width="10" stroke-linecap="round"/>
+<ellipse cx="140" cy="100" rx="13" ry="10" fill="url(#__P__y)"/><path d="M132 96q8-5 16 0" stroke="#c99a08" stroke-width="2" fill="none"/>`},
+opener2:{p:{f:[128,80,84,50],l:[152,90,220,122],e:[242,54,252,26]},s:`
+<rect width="320" height="200" fill="url(#__P__bg)"/>
+<rect x="118" y="92" width="44" height="78" rx="10" fill="url(#__P__w)"/>
+<rect x="124" y="78" width="32" height="16" rx="4" fill="url(#__P__br)"/>
+<path d="M128 82v10M136 82v10M144 82v10M152 82v10" stroke="rgba(0,0,0,.25)" stroke-width="2"/>
+<path d="M128 80L246 52" stroke="url(#__P__mk)" stroke-width="9" stroke-linecap="round"/>
+<path d="M150 84l4 10" stroke="url(#__P__mk)" stroke-width="6" stroke-linecap="round"/>
+<circle cx="246" cy="52" r="8" fill="url(#__P__s)"/>`},
+crowbar2:{p:{f:[70,162,58,120],l:[144,100,144,50],e:[252,94,258,44]},s:`
+<rect width="320" height="200" fill="url(#__P__bg)"/>
+<rect x="30" y="166" width="260" height="7" rx="3.5" fill="#d8cdb2"/>
+<rect x="112" y="94" width="64" height="50" rx="6" fill="url(#__P__w)"/>
+<path d="M112 110h64M112 126h64M144 94v50" stroke="rgba(0,0,0,.18)" stroke-width="2.5"/>
+<path d="M70 162L256 92" stroke="url(#__P__mk)" stroke-width="8" stroke-linecap="round"/>
+<circle cx="254" cy="90" r="8" fill="url(#__P__s)"/>
+<line x1="270" y1="82" x2="270" y2="62" stroke="#0f9d63" stroke-width="5" stroke-linecap="round"/><path d="M262 70l8-10 8 10" fill="none" stroke="#0f9d63" stroke-width="5" stroke-linecap="round"/>`},
+tiptoe:{p:{f:[108,168,80,140],l:[190,124,240,96],e:[206,150,254,170]},s:`
+<rect width="320" height="200" fill="url(#__P__bg)"/>
+<rect x="36" y="170" width="248" height="6" rx="3" fill="#d8cdb2"/>
+<path d="M100 170q44-4 60-22l12-14q6-7 15-7v43z" fill="url(#__P__s)"/>
+<path d="M172 128h30v-78h-30z" fill="url(#__P__s)"/>
+<path d="M170 56q16-12 34 0v12h-34z" fill="url(#__P__r)"/>
+<line x1="190" y1="94" x2="190" y2="118" stroke="#2a7fb0" stroke-width="5" stroke-linecap="round"/><path d="M182 110l8 10 8-10" fill="none" stroke="#2a7fb0" stroke-width="5" stroke-linecap="round"/>
+<line x1="206" y1="168" x2="206" y2="146" stroke="#d33a3f" stroke-width="5" stroke-linecap="round"/><path d="M198 154l8-10 8 10" fill="none" stroke="#d33a3f" stroke-width="5" stroke-linecap="round"/>`},
+/* ===== শ্রেণি ৩ ===== */
+arm:{p:{f:[100,118,64,152],e:[122,104,152,62],l:[228,116,256,76]},s:`
+<rect width="320" height="200" fill="url(#__P__bg)"/><ellipse cx="160" cy="186" rx="110" ry="7" fill="rgba(90,70,30,.10)"/>
+<path d="M84 44q22-6 30 12l-8 20q-16 4-24-8z" fill="url(#__P__r)"/>
+<path d="M92 62q-4 34 8 56" stroke="url(#__P__s)" stroke-width="17" fill="none" stroke-linecap="round"/>
+<path d="M100 118q58 12 116 4" stroke="url(#__P__s)" stroke-width="15" fill="none" stroke-linecap="round"/>
+<circle cx="228" cy="118" r="15" fill="url(#__P__r)"/><path d="M222 110q6-4 12 0" stroke="#fff" stroke-width="3" fill="none"/>
+<path d="M112 92q10 2 12 14" stroke="#d33a3f" stroke-width="6" fill="none" stroke-linecap="round"/>
+<line x1="122" y1="104" x2="122" y2="86" stroke="#0f9d63" stroke-width="5" stroke-linecap="round"/><path d="M114 94l8-10 8 10" fill="none" stroke="#0f9d63" stroke-width="5" stroke-linecap="round"/>`},
+jaw:{p:{f:[122,96,80,56],e:[134,120,92,158],l:[198,110,242,142]},s:`
+<rect width="320" height="200" fill="url(#__P__bg)"/>
+<path d="M118 58q44-26 76 0q18 15 16 38l-4 18q-2 9-11 9h-77z" fill="url(#__P__s)"/>
+<circle cx="196" cy="84" r="3.5" fill="#2f2f38"/><path d="M186 66q10-6 18 0" stroke="#2f2f38" stroke-width="3" fill="none"/>
+<path d="M122 96q34 24 80 16l-3 12q-42 10-77-8z" fill="#e7b48c"/>
+<circle cx="198" cy="110" r="8" fill="url(#__P__r)"/><path d="M196 100q3-5 7-5" stroke="#0d8a54" stroke-width="3" fill="none"/>
+<path d="M132 106q6 10 2 20" stroke="#d33a3f" stroke-width="5" fill="none" stroke-linecap="round"/>`},
+chimta:{p:{f:[160,46,108,40],e:[184,100,234,96],l:[160,152,212,166]},s:`
+<rect width="320" height="200" fill="url(#__P__bg)"/>
+<path d="M160 46q-26 52-14 104" stroke="url(#__P__m)" stroke-width="8" fill="none" stroke-linecap="round"/>
+<path d="M160 46q26 52 14 104" stroke="url(#__P__m)" stroke-width="8" fill="none" stroke-linecap="round"/>
+<path d="M152 44q8-8 16 0" stroke="url(#__P__m)" stroke-width="8" fill="none" stroke-linecap="round"/>
+<circle cx="160" cy="152" r="9" fill="url(#__P__o)"/>
+<path d="M128 96h14M192 96h-14" stroke="#0f9d63" stroke-width="5" stroke-linecap="round"/>
+<path d="M136 88l8 8-8 8M184 88l-8 8 8 8" fill="none" stroke="#0f9d63" stroke-width="5" stroke-linecap="round"/>`},
+rod:{p:{f:[88,148,56,120],e:[124,136,142,174],l:[258,100,258,54]},s:`
+<rect width="320" height="200" fill="url(#__P__bg)"/>
+<path d="M84 150Q160 120 246 62" stroke="url(#__P__w)" stroke-width="6" fill="none" stroke-linecap="round"/>
+<path d="M246 62q10 30 14 54" stroke="#9aa5b1" stroke-width="2" fill="none"/>
+<path d="M260 116q16 6 13 20q-15 2-19-10z" fill="url(#__P__o)"/><path d="M272 128l8-4v10z" fill="url(#__P__o)"/>
+<circle cx="88" cy="148" r="8" fill="url(#__P__s)"/><circle cx="124" cy="136" r="8" fill="url(#__P__s)"/>`},
+broom:{p:{f:[146,40,198,36],e:[130,88,82,84],l:[112,166,172,170]},s:`
+<rect width="320" height="200" fill="url(#__P__bg)"/>
+<path d="M146 36L116 132" stroke="url(#__P__w)" stroke-width="7" stroke-linecap="round"/>
+<path d="M116 132l-22 44M116 132l-8 46M116 132l6 46M116 132l20 42" stroke="url(#__P__y)" stroke-width="5" stroke-linecap="round"/>
+<path d="M102 148h28" stroke="url(#__P__r)" stroke-width="6" stroke-linecap="round"/>
+<circle cx="146" cy="40" r="8" fill="url(#__P__s)"/><circle cx="130" cy="88" r="8" fill="url(#__P__s)"/>
+<circle cx="96" cy="180" r="2.5" fill="#b3a88f"/><circle cx="130" cy="184" r="2.5" fill="#b3a88f"/><circle cx="146" cy="180" r="2.5" fill="#b3a88f"/>`},
+cricket:{p:{f:[128,42,84,36],e:[136,60,196,52],l:[206,120,248,152]},s:`
+<rect width="320" height="200" fill="url(#__P__bg)"/><ellipse cx="160" cy="186" rx="100" ry="7" fill="rgba(90,70,30,.10)"/>
+<path d="M128 40l10 26" stroke="url(#__P__w)" stroke-width="8" stroke-linecap="round"/>
+<path d="M138 66l26 74" stroke="url(#__P__wl)" stroke-width="16" stroke-linecap="round"/>
+<circle cx="128" cy="42" r="8" fill="url(#__P__s)"/><circle cx="136" cy="60" r="8" fill="url(#__P__s)"/>
+<circle cx="206" cy="120" r="9" fill="url(#__P__r)"/><path d="M202 116q4-3 8 0" stroke="#fff" stroke-width="2" fill="none"/>`},
+racket:{p:{f:[126,144,84,162],e:[138,132,96,108],l:[238,44,264,86]},s:`
+<rect width="320" height="200" fill="url(#__P__bg)"/>
+<ellipse cx="204" cy="62" rx="34" ry="38" fill="none" stroke="url(#__P__r)" stroke-width="8"/>
+<path d="M182 44h44M180 62h48M182 80h44M192 30v64M204 26v72M216 30v64" stroke="rgba(0,0,0,.15)" stroke-width="2"/>
+<path d="M182 92L132 140" stroke="url(#__P__r)" stroke-width="9" stroke-linecap="round"/>
+<circle cx="138" cy="132" r="8" fill="url(#__P__s)"/><circle cx="126" cy="144" r="8" fill="url(#__P__s)"/>
+<circle cx="238" cy="44" r="9" fill="url(#__P__y)"/>`},
+hammer3:{p:{f:[238,118,258,84],e:[200,94,196,50],l:[88,132,62,96]},s:`
+<rect width="320" height="200" fill="url(#__P__bg)"/><ellipse cx="160" cy="186" rx="110" ry="7" fill="rgba(90,70,30,.10)"/>
+<rect x="58" y="150" width="74" height="18" rx="4" fill="url(#__P__w)"/>
+<rect x="84" y="126" width="7" height="28" rx="3" fill="url(#__P__m)"/>
+<path d="M94 116h32v18H94z" fill="url(#__P__mk)"/>
+<path d="M126 126l70-30" stroke="url(#__P__w)" stroke-width="10" stroke-linecap="round"/>
+<circle cx="200" cy="94" r="9" fill="url(#__P__s)"/>
+<path d="M200 94q22 8 34 22" stroke="url(#__P__s)" stroke-width="12" fill="none" stroke-linecap="round"/>
+<circle cx="238" cy="118" r="9" fill="url(#__P__r)"/>`},
+tweezers:{p:{f:[160,44,108,40],e:[178,96,230,92],l:[160,150,212,164]},s:`
+<rect width="320" height="200" fill="url(#__P__bg)"/>
+<path d="M156 44q-16 52-10 100" stroke="url(#__P__m)" stroke-width="6" fill="none" stroke-linecap="round"/>
+<path d="M164 44q16 52 10 100" stroke="url(#__P__m)" stroke-width="6" fill="none" stroke-linecap="round"/>
+<path d="M150 42q10-8 20 0" stroke="url(#__P__m)" stroke-width="6" fill="none" stroke-linecap="round"/>
+<circle cx="160" cy="150" r="7" fill="url(#__P__g)"/>
+<path d="M132 92h12M188 92h-12" stroke="#0f9d63" stroke-width="4.5" stroke-linecap="round"/>`},
+shovel:{p:{f:[94,52,58,40],e:[122,96,74,106],l:[158,142,212,166]},s:`
+<rect width="320" height="200" fill="url(#__P__bg)"/><ellipse cx="160" cy="186" rx="100" ry="7" fill="rgba(90,70,30,.10)"/>
+<path d="M92 48L142 128" stroke="url(#__P__w)" stroke-width="7" stroke-linecap="round"/>
+<path d="M142 128l10 16q16 10 26-2l-8-22z" fill="url(#__P__m)"/>
+<path d="M148 138q12 10 24 2l-4-10q-10 6-16 0z" fill="url(#__P__w)"/>
+<circle cx="94" cy="52" r="8" fill="url(#__P__s)"/><circle cx="122" cy="96" r="8" fill="url(#__P__s)"/>`}
 };
-const icon=(id,c)=>`<svg viewBox="0 0 64 64" fill="none" stroke="${c}" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round">${IC[id]}</svg>`;
+
+/* ---------- callout labels / dots ---------- */
+function callouts(pts){
+ const M=[['f','আলম্ব','#e8930c','#fdf1da'],['l','বাধা','#e5484d','#fdebec'],['e','বল','#0f9d63','#e2f6ec']];
+ return M.map(([k,t,c,bg])=>{const [x,y,lx,ly]=pts[k];
+  const w=t==='আলম্ব'?56:t==='বাধা'?50:40;
+  return `<line x1="${x}" y1="${y}" x2="${lx}" y2="${ly}" stroke="${c}" stroke-width="2" stroke-dasharray="3 3"/>
+  <circle cx="${x}" cy="${y}" r="5.5" fill="${c}" stroke="#fff" stroke-width="2.5"/>
+  <rect x="${lx-w/2}" y="${ly-13}" width="${w}" height="26" rx="13" fill="${bg}" stroke="${c}" stroke-width="2"/>
+  <text x="${lx}" y="${ly+5}" text-anchor="middle" font-size="13" font-weight="800" fill="${c}">${t}</text>`;}).join('');
+}
+function dotsOnly(pts){return ['f','l','e'].map(k=>{const c=k==='f'?'#e8930c':k==='l'?'#e5484d':'#0f9d63';const [x,y]=pts[k];
+ return `<circle cx="${x}" cy="${y}" r="5" fill="${c}" stroke="#fff" stroke-width="2"/>`;}).join('');}
+function art(id,labels){const a=ART[id];
+ return `<svg viewBox="0 0 320 200">${defsP(id)}${a.s.replaceAll('__P__',id)}${labels?callouts(a.p):dotsOnly(a.p)}</svg>`;}
 
 /* ---------- data ---------- */
 const CLS={
@@ -370,10 +589,10 @@ const CLS={
   {n:'বেলচা (মাটি তোলা)',i:'shovel',f:'এক হাত (প্রান্ত)',l:'মাটির বোঝা',e:'অন্য হাতের টান',u:'মাঝের হাতটাই আসল কাজের!'}]}
 };
 
-/* ---------- schematic ---------- */
+/* ---------- schematic (bar view) ---------- */
 function schematic(c,anim){
  const P={1:{l:.12,f:.5,e:.88},2:{f:.08,l:.5,e:.92},3:{f:.08,e:.45,l:.92}}[c];
- const X=p=>24+p*272, BY=76, col=CLS[c].color;
+ const X=p=>24+p*272, BY=76;
  const down=CLS[c].dir==='down';
  const eff=down
   ?`<line x1="${X(P.e)}" y1="${BY-58}" x2="${X(P.e)}" y2="${BY-16}" stroke="var(--green)" stroke-width="5" stroke-linecap="round"/><path d="M${X(P.e)-8} ${BY-20}l8 10 8-10" fill="none" stroke="var(--green)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>`
@@ -441,7 +660,6 @@ function metrics(){
 function update(){
  const c=state.c,d=CLS[c],L=state.layout,m=metrics();
  const lifted=state.E>=m.req;
- /* geometry */
  const fx=px(L.fulcrum),lx=px(L.load),ex=px(L.effort);
  $('#fulG').innerHTML=`<path d="M${fx} ${BY+8}l-26 ${GY-BY-8}h52z" fill="var(--amber)"/><text x="${fx}" y="${GY+26}" text-anchor="middle" font-size="17" font-weight="800" fill="var(--amber)">আলম্ব</text>`;
  $('#loadG').setAttribute('transform',`translate(${lx} 0)`);
@@ -459,9 +677,8 @@ function update(){
   :`<line x1="0" y1="${14+len}" x2="0" y2="14" stroke="var(--green)" stroke-width="7" stroke-linecap="round" marker-end="url(#mG)"/>
     <text x="0" y="${34+len}" text-anchor="middle" font-size="24">🖐️</text>
     <text x="14" y="${14+len/2}" font-size="17" font-weight="800" fill="var(--green)">বল</text>`;
- const kp={fulcrum:[fx,BY+10],load:[lx,BY-31],effort:[ex,BY+ (d.dir==='down'?-20:20)]}[d.drag];
+ const kp={fulcrum:[fx,BY+10],load:[lx,BY-31],effort:[ex,BY+(d.dir==='down'?-20:20)]}[d.drag];
  $('#knobG').setAttribute('transform',`translate(${kp[0]} ${kp[1]})`);
- /* readouts */
  $('#effVal').textContent=bn(state.E)+' নিউটন';
  $('#effRange').style.setProperty('--fill',state.E+'%');
  $('#stArmE').textContent=bn(Math.round(m.dE*100));
@@ -479,7 +696,7 @@ function update(){
 }
 
 function tick(){
- const a=state.angle+( (state.target||0)-state.angle)*.12;
+ const a=state.angle+((state.target||0)-state.angle)*.12;
  state.angle=a;
  const fx=px(state.layout.fulcrum);
  $('#beamG').setAttribute('transform',`rotate(${a} ${fx} ${BY})`);
@@ -505,13 +722,7 @@ function openClass(c){
  const tag=$('#cvTag');tag.textContent=d.tag;tag.style.background=d.soft;tag.style.color=d.color;tag.style.borderColor=d.color;
  ['labDot','fundDot','strDot'].forEach(id=>$('#'+id).style.background=d.color);
  $('#labHint').textContent=d.hint;
- $('#fundList').innerHTML=d.fund.map(f=>`<li style="--x:${d.color}"><span></span>${f}</li>`).join('')
-   .replace(/<span><\/span>/g,'');
- $('#fundList').querySelectorAll('li').forEach(li=>{li.style.paddingLeft='30px';});
- $('#fundList').innerHTML=d.fund.map(f=>`<li><style></style>${f}</li>`).join('');
- $('#fundList').querySelectorAll('li').forEach((li,i)=>{
-   li.insertAdjacentHTML('afterbegin',`<i style="position:absolute;left:0;top:1px;width:21px;height:21px;border-radius:7px;background:${d.color};color:#fff;font-size:.72rem;display:grid;place-items:center">${bn(i+1)}</i>`);
- });
+ $('#fundList').innerHTML=d.fund.map((f,i)=>`<li><i style="background:${d.color}">${bn(i+1)}</i>${f}</li>`).join('');
  $('#strBox').innerHTML=schematic(c,true)+`
    <div class="posRow">${d.order.map((o,i)=>{
      const col=o==='বল'?'var(--green)':o==='বাধা'?'var(--red)':'var(--amber)';
@@ -520,8 +731,8 @@ function openClass(c){
    <p style="margin-top:12px;color:#5c5646;font-weight:600">📖 ${d.rule}</p>`;
  $('#exGrid').innerHTML=d.ex.map((x,i)=>`
    <button class="exCard" style="animation-delay:${i*.06}s" onclick="openModal(${c},${i})">
-     <div class="exIc" style="background:${d.soft};color:${d.color}">${icon(x.i,d.color)}</div>
-     <b>${x.n}</b><small>উদাহরণ ${bn(i+1)}</small>
+     <div class="exArt">${art(x.i,false)}</div>
+     <b>${x.n}</b><small>উদাহরণ ${bn(i+1)} • ট্যাপ করে লেবেল দেখো</small>
    </button>`).join('');
  buildLab(c);
  $('#home').classList.remove('active');$('#classView').classList.add('active');
@@ -536,10 +747,12 @@ function openModal(c,i){
  $('#mCard').style.borderColor=d.color;
  $('#mCard').innerHTML=`
   <div class="mTop">
-    <div class="mIc" style="background:${d.soft}">${icon(x.i,d.color)}</div>
+    <div class="mNum" style="background:${d.soft};color:${d.color}">${bn(i+1)}</div>
     <div><h3>${x.n}</h3><span class="chip" style="background:${d.soft};color:${d.color};border-color:${d.color}">${d.name}</span></div>
     <button class="mClose" onclick="closeModal()">✕</button>
   </div>
+  <div class="mArt">${art(x.i,true)}</div>
+  <div class="mLegend">🟠 আলম্ব • 🔴 বাধা • 🟢 বল — ছবিতে বিন্দু ও লেবেল দিয়ে চিহ্নিত করা আছে</div>
   ${schematic(c,true)}
   <div style="height:12px"></div>
   ${row('var(--amber)','#fdf1da','আলম্ব',x.f)}
