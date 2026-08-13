@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>পাতন ভার্চুয়াল ল্যাব | Distillation Simulation</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@600;700&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b1220;--panel:#101a2e;--panel2:#0d1626;--line:#233252;--txt:#eaf2ff;--mut:#9db3d4;--acc:#59c2ff;--acc2:#ffb454;--ok:#5dffa8}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:radial-gradient(1100px 600px at 75% -10%,#17284e 0%,var(--bg) 60%);color:var(--txt);font-family:'Hind Siliguri',sans-serif;min-height:100vh;padding-bottom:40px}
+header{padding:26px 4vw 10px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+h1{font-family:'Baloo Da 2';font-size:clamp(24px,3.4vw,40px);line-height:1.15}
+h1 span{color:var(--acc)}
+.badge{font-size:12px;letter-spacing:.6px;background:#152442;border:1px solid var(--line);color:var(--mut);padding:6px 12px;border-radius:999px}
+.tabs{display:flex;gap:10px;padding:14px 4vw;flex-wrap:wrap}
+.tab{cursor:pointer;border:1px solid var(--line);background:var(--panel);color:var(--mut);padding:10px 18px;border-radius:14px;font-weight:600;font-size:15px;transition:.25s}
+.tab:hover{color:var(--txt);transform:translateY(-1px)}
+.tab.on{background:linear-gradient(135deg,#123a63,#0e2a4a);color:#fff;border-color:var(--acc);box-shadow:0 0 0 3px rgba(89,194,255,.15),0 8px 24px rgba(0,0,0,.4)}
+.module{display:none;padding:0 4vw}
+.module.on{display:block;animation:fade .45s}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+.grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(280px,1fr);gap:18px}
+@media(max-width:1000px){.grid{grid-template-columns:1fr}}
+.stage{background:linear-gradient(180deg,#0e1930,#0b1424);border:1px solid var(--line);border-radius:20px;padding:10px;box-shadow:inset 0 0 60px rgba(20,50,110,.25),0 14px 40px rgba(0,0,0,.45)}
+.stage svg{width:100%;height:auto;display:block}
+.panel{display:flex;flex-direction:column;gap:14px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:16px}
+.card h3{font-family:'Baloo Da 2';color:var(--acc);font-size:17px;margin-bottom:8px}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+select,button{font-family:inherit;font-size:14px;color:var(--txt);background:#152442;border:1px solid var(--line);border-radius:12px;padding:9px 12px;cursor:pointer}
+button.primary{background:linear-gradient(135deg,var(--acc),#2f8fe0);border:none;font-weight:700;color:#04121f}
+button.warn{background:#3a2410;border-color:#7a4a1a;color:var(--acc2)}
+input[type=range]{flex:1;accent-color:var(--acc2);height:26px}
+.read{display:flex;gap:12px;align-items:baseline}
+.temp{font-size:34px;font-weight:700;color:var(--acc2);font-variant-numeric:tabular-nums}
+.temp small{font-size:15px;color:var(--mut)}
+.status{min-height:52px;background:var(--panel2);border-left:3px solid var(--acc);border-radius:10px;padding:10px 12px;font-size:14.5px;color:#d7e6ff;line-height:1.55}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{display:flex;gap:7px;align-items:center;background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:5px 12px;font-size:13px}
+.dot{width:11px;height:11px;border-radius:50%}
+canvas{width:100%;height:150px;background:var(--panel2);border-radius:12px;border:1px solid var(--line)}
+details{border:1px solid var(--line);border-radius:14px;background:var(--panel);margin-top:14px;overflow:hidden}
+summary{cursor:pointer;padding:13px 16px;font-weight:700;color:var(--acc);list-style:none;display:flex;justify-content:space-between;align-items:center}
+summary::after{content:'▾';transition:.3s}
+details[open] summary::after{transform:rotate(180deg)}
+.th{padding:4px 16px 16px;color:#cfe0f7;font-size:14.5px;line-height:1.8}
+.th b{color:var(--acc2)}
+ul{padding-left:20px}
+.flow{stroke-dasharray:7 11;animation:fl 1.1s linear infinite}
+@keyframes fl{to{stroke-dashoffset:-18}}
+.flick{animation:flick .18s infinite alternate;transform-box:fill-box;transform-origin:50% 100%}
+@keyframes flick{from{transform:scaleY(1)}to{transform:scaleY(1.14) scaleX(.94)}}
+.lbl{font-size:12.5px;fill:#8fa8cc;font-family:'Hind Siliguri'}
+.lbl2{font-size:12px;fill:#6d86ab;font-family:'Hind Siliguri'}
+footer{padding:30px 4vw;color:var(--mut);font-size:13px;text-align:center}
+</style>
+</head>
+<body>
+<header>
+  <div><h1>⚗️ পাতন <span>ভার্চুয়াল ল্যাব</span> — Distillation &amp; Separation Simulator</h1>
+  <div style="color:var(--mut);font-size:14px">বাস্তবসম্মত old‑model ল্যাব সেটআপ • লাইভ থার্মোমিটার • বাষ্প‑ঘনীভবন অ্যানিমেশন • T‑টাইম গ্রাফ</div></div>
+  <div class="badge">মাধ্যমিক রসায়ন (শ্রেণি ৯‑১০) সিলেবাস উপযোগী</div>
+</header>
+
+<nav class="tabs">
+  <button class="tab on" data-m="m1">১ • পাতন (Distillation)</button>
+  <button class="tab" data-m="m2">২ • আংশিক পাতন (Fractional)</button>
+  <button class="tab" data-m="m3">৩ • বিভাজক ফানেল (Separatory Funnel)</button>
+</nav>
+
+<!-- ================= MODULE 1 : SIMPLE DISTILLATION ================= -->
+<section class="module on" id="m1"><div class="grid">
+  <div><div class="stage" id="s-stage"></div><div class="card" style="margin-top:14px"><h3>📈 তাপমাত্রা‑সময় গ্রাফ (লাইভ)</h3><canvas id="s-graph"></canvas></div></div>
+  <div class="panel">
+    <div class="card"><h3>🎛️ নিয়ন্ত্রণ</h3>
+      <div class="row"><select id="s-sel"></select></div>
+      <div class="row" style="margin-top:10px"><span style="font-size:13px;color:var(--mut)">🔥 তাপ</span><input type="range" id="s-heat" min="0" max="100" value="0"><span id="s-hv" style="width:38px;color:var(--acc2)">0%</span></div>
+      <div class="row" style="margin-top:10px"><button class="primary" id="s-start">▶ শুরু / বিরতি</button><button class="warn" id="s-reset">⟲ রিসেট</button></div>
+      <div class="read" style="margin-top:12px"><div class="temp"><span id="s-temp">25</span><small> °C</small></div>
+        <div class="chips"><div class="chip"><span class="dot" id="s-dl"></span>পাতিত দ্রব: <b id="s-coll">0</b> mL</div><div class="chip">অবশিষ্ট: <b id="s-res">200</b> mL</div></div></div>
+      <div class="status" id="s-status" style="margin-top:10px">প্রেসিট বেছে নিয়ে ▶ চাপুন, তারপর তাপ বাড়ান।</div>
+    </div>
+    <div class="card"><h3>📖 পাতন কী?</h3><div class="th">
+      <b>সংজ্ঞা:</b> কোনো তরল মিশ্রণ/দ্রবণকে ফুটিয়ে বাষ্প করে, সেই বাষ্পকে আবার ঘনীভূত করে বিশুদ্ধ তরল পৃথক করার পদ্ধতিই <b>পাতন</b>।<br>
+      <b>শর্ত:</b> (i) দ্রবটি উদ্বায়ী ও অদ্রব/অউদ্বায়ী হতে হবে, (ii) স্ফুটনাঙ্কের ব্যবধান যথেষ্ট হতে হবে।<br>
+      <b>ধাপ:</b> তাপ → বাষ্পীভবন → কনডেনসারে ঘনীভবন → পাতিত দ্রব সংগ্রহ।
+    </div></div>
+    <details><summary>📚 উদাহরণ ও নোট</summary><div class="th"><ul>
+      <li><b>চিনির জল / লোনার জল</b> → বিশুদ্ধ জল (১০০°C); ফ্লাস্কে চিনি।</li>
+      <li><b>CuSO₄·5H₂O দ্রবণ</b> → বিশুদ্ধ জল; অবশিষ্ট কপার সালফেট কেলাস।</li>
+      <li><b>অবিশুদ্ধ ক্লোরোফর্ম</b> → ৬১°C‑এ বাষ্প হয়ে বিশুদ্ধ ক্লোরোফর্ম।</li>
+      <li><b>আইওডিন</b> → বেগুনি বাষ্প → ঝলমলে কেলাস। <i>নোট: আইওডিন পৃথকীকরণে সাধারণত <b>ঊর্ধ্বপাতন</b> ব্যবহৃত হয়; মূলনীতি একই — বাষ্পীভবন → ঘনীভবন।</i></li>
+      <li>পাতিত জল (distilled water) প্রস্তুতি, মদ্যসার শুদ্ধিকরণ।</li>
+    </ul></div></details>
+  </div>
+</div></section>
+
+<!-- ================= MODULE 2 : FRACTIONAL ================= -->
+<section class="module" id="m2"><div class="grid">
+  <div><div class="stage" id="f-stage"></div><div class="card" style="margin-top:14px"><h3>📈 T‑টাইম গ্রাফ (প্লাটো = পৃথকীকরণ)</h3><canvas id="f-graph"></canvas></div></div>
+  <div class="panel">
+    <div class="card"><h3>🎛️ নিয়ন্ত্রণ</h3>
+      <div class="row"><select id="f-sel"></select></div>
+      <div class="row" style="margin-top:10px"><span style="font-size:13px;color:var(--mut)">🔥 তাপ</span><input type="range" id="f-heat" min="0" max="100" value="0"><span id="f-hv" style="width:38px;color:var(--acc2)">0%</span></div>
+      <div class="row" style="margin-top:10px"><button class="primary" id="f-start">▶ শুরু / বিরতি</button><button class="warn" id="f-reset">⟲ রিসেট</button></div>
+      <div class="read" style="margin-top:12px"><div class="temp"><span id="f-temp">25</span><small> °C</small></div><div class="chips" id="f-chips"></div></div>
+      <div class="status" id="f-status" style="margin-top:10px">ল্যাবে ফ্র্যাকশনেটিং কলাম; শিল্পে উচ্চ স্তম্ভ — প্রিসেট বদলালেই সেটআপ বদলাবে।</div>
+    </div>
+    <div class="card"><h3>📖 আংশিক পাতন কী?</h3><div class="th">
+      যে পাতন প্রক্রিয়ায় দুই বা ততোধিক তরলের মিশ্রণ থেকে <b>স্ফুটনাঙ্কের ক্রমানুসারে</b> উপাদান পৃথক করা হয়, তাকে <b>আংশিক পাতন</b> বলে। স্ফুটনাঙ্কের ব্যবধান ~২০‑৩০°C‑এর কম হলে এটি লাগে; <b>ফ্র্যাকশনেটিং কলাম</b> বারবার ঘনীভবন‑বাষ্পীভবন ঘটায়।
+    </div></div>
+    <details><summary>📚 উদাহরণ</summary><div class="th"><ul>
+      <li><b>অ্যাসিটোন (৫৬°C) + মিথাইল অ্যালকোহল (৬৫°C)</b> — ল্যাব সেটআপে পৃথক।</li>
+      <li><b>আলকাতরা →</b> বেঞ্জিন (৮০°C), টলুইন (১১১°C), ফিনল (১৮২°C), ন্যাফথালিন (২১৮°C), পিচ।</li>
+      <li><b>পেট্রোলিয়াম →</b> পেট্রোল (৪০‑১২০°C), কেরোসিন (১৫০‑২৫০°C), ডিজেল (২৫০‑৩২০°C), লুব্রিকেটিং তেল, বিটুমেন।</li>
+      <li><b>তরল বায়ু →</b> নাইট্রোজেন (−১৯৬°C), আর্গন (−১৮৬°C), অক্সিজেন (−১৮৩°C)।</li>
+    </ul></div></details>
+  </div>
+</div></section>
+
+<!-- ================= MODULE 3 : SEPARATORY FUNNEL ================= -->
+<section class="module" id="m3"><div class="grid">
+  <div><div class="stage" id="x-stage"></div></div>
+  <div class="panel">
+    <div class="card"><h3>🎛️ নিয়ন্ত্রণ</h3>
+      <div class="row"><select id="x-sel"></select></div>
+      <div class="row" style="margin-top:10px"><button class="primary" id="x-open">🔻 স্টপকক খোলো/বন্ধ</button><button id="x-pour">🫗 উপরের স্তর ঢালো</button><button class="warn" id="x-reset">⟲</button></div>
+      <div class="chips" style="margin-top:12px" id="x-chips"></div>
+      <div class="status" id="x-status" style="margin-top:10px">অমিশ্রণীয় তরল ঢালা হয়েছে — ঘনত্ব অনুযায়ী দুই স্তর দেখুন।</div>
+    </div>
+    <div class="card"><h3>📖 বিভাজক ফানেল (Separatory Funnel)</h3><div class="th">
+      পরস্পর <b>অমিশ্রণীয়</b> ও ঘনত্বের পার্থক্যযুক্ত দুই তরলকে ফানেলে নিলে স্থির অবস্থায় দুটি স্তর তৈরি হয় — <b>ভারী তরল নিচে</b>। স্টপকক খুলে নিচের স্তর আলাদা বিকারে সংগ্রহ করা হয়; উপরের স্তর উপর থেকে ঢালা হয়।
+    </div></div>
+    <details><summary>📚 উদাহরণ (স্তরসহ)</summary><div class="th"><ul>
+      <li><b>জল + পারদ</b> — পারদ (১৩.৬ g/cc) নিচে, জল উপরে।</li>
+      <li><b>পেট্রোল + জল</b> — পেট্রোল (০.৭ g/cc) উপরে, জল নিচে।</li>
+      <li><b>ক্লোরোফর্ম + জল</b> — ক্লোরোফর্ম (১.৪৮ g/cc) নিচে, জল উপরে।</li>
+    </ul></div></details>
+  </div>
+</div></section>
+
+<footer>ভার্চুয়াল কেমিস্ট্রি ল্যাব • পাতন • আংশিক পাতন • বিভাজক ফানেল — ইন্টার‌্যাক্টিভ সিমুলেশন</footer>
+
+<script>
+const $=id=>document.getElementById(id);
+const lerp=(a,b,t)=>a+(b-a)*t;
+function hex2rgb(h){h=h.replace('#','');return[parseInt(h.substr(0,2),16),parseInt(h.substr(2,2),16),parseInt(h.substr(4,2),16)]}
+function mix(c1,c2,t){const a=hex2rgb(c1),b=hex2rgb(c2);return `rgb(${a.map((v,i)=>Math.round(lerp(v,b[i],t))).join(',')})`}
+
+/* ---------- tabs ---------- */
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  document.querySelectorAll('.module').forEach(m=>m.classList.remove('on'));
+  b.classList.add('on');$(b.dataset.m).classList.add('on');
+});
+
+/* =========================================================
+   DISTILLATION SVG BUILDER (old-model real lab setup)
+========================================================= */
+function distSVG(p,col){
+ const armY=col?262:318, neckTop=col?250:300, tTop=col?196:232, bulbY=col?268:322;
+ let beads='';
+ if(col){for(let y=272;y<414;y+=16)for(let x=279;x<=291;x+=12)beads+=`<circle cx="${x}" cy="${y}" r="4" fill="rgba(200,225,255,.28)" stroke="rgba(220,240,255,.4)" stroke-width=".6"/>`;}
+ return `<svg viewBox="0 0 960 640">
+ <defs>
+  <radialGradient id="${p}-fg" cx="50%" cy="80%" r="80%"><stop offset="0%" stop-color="#fff6c8"/><stop offset="35%" stop-color="#ffc23d"/><stop offset="75%" stop-color="#ff7a1a"/><stop offset="100%" stop-color="rgba(255,90,20,0)"/></radialGradient>
+  <clipPath id="${p}-cf"><circle cx="285" cy="485" r="67"/></clipPath>
+  <clipPath id="${p}-cr"><path d="M642,598 L668,507 L704,507 L730,598 Z"/></clipPath>
+ </defs>
+ <rect x="0" y="600" width="960" height="40" fill="#0a1322"/>
+ <rect x="0" y="598" width="960" height="4" fill="#1c2b47"/>
+ <!-- stands -->
+ <rect x="146" y="592" width="130" height="9" rx="3" fill="#2a3a5c"/><rect x="206" y="246" width="7" height="350" fill="#33456b"/>
+ <rect x="213" y="${armY-6}" width="64" height="7" rx="3" fill="#3d5178"/>
+ <rect x="470" y="592" width="120" height="9" rx="3" fill="#2a3a5c"/><rect x="522" y="300" width="7" height="296" fill="#33456b"/>
+ <rect x="529" y="414" width="46" height="7" rx="3" fill="#3d5178"/>
+ <!-- burner -->
+ <rect x="266" y="576" width="38" height="22" rx="5" fill="#22304e"/><rect x="280" y="568" width="10" height="10" fill="#31426a"/>
+ <g id="${p}-flameW"><path class="flick" id="${p}-flame" d="M285,572 C268,548 274,536 285,522 C296,536 302,548 285,572 Z" fill="url(#${p}-fg)"/></g>
+ <rect x="225" y="556" width="120" height="5" rx="2" fill="#3a4c74"/>
+ <path d="M235,561 L225,598 M345,561 L355,598" stroke="#31426a" stroke-width="6"/>
+ <!-- flask liquid + residue -->
+ <g clip-path="url(#${p}-cf)">
+   <rect id="${p}-fliq" x="216" y="470" width="138" height="90" fill="#e8c987" opacity=".88"/>
+   <rect id="${p}-res" x="216" y="540" width="138" height="14" fill="#ffffff" opacity="0"/>
+   <g id="${p}-bub"></g>
+ </g>
+ <circle cx="285" cy="485" r="70" fill="rgba(205,232,255,.10)" stroke="#cfe4ff" stroke-opacity=".85" stroke-width="3"/>
+ <path d="M240,455 A62,62 0 0 1 262,428" stroke="rgba(255,255,255,.5)" stroke-width="4" fill="none" stroke-linecap="round"/>
+ <g id="${p}-vap"></g>
+ <!-- neck / column -->
+ ${col?`<rect x="271" y="250" width="28" height="172" rx="8" fill="rgba(205,232,255,.10)" stroke="#cfe4ff" stroke-opacity=".8" stroke-width="2.5"/>${beads}
+ <text class="lbl2" x="238" y="340" transform="rotate(-90 238 340)" text-anchor="middle">ফ্র্যাকশনেটিং কলাম</text>`
+ :`<rect x="273" y="${neckTop}" width="24" height="${425-neckTop}" fill="rgba(205,232,255,.10)" stroke="#cfe4ff" stroke-opacity=".8" stroke-width="2.5"/>`}
+ <line x1="297" y1="${armY}" x2="395" y2="368" stroke="#cfe4ff" stroke-opacity=".8" stroke-width="12" stroke-linecap="round"/>
+ <!-- thermometer -->
+ <rect x="281" y="${tTop}" width="8" height="${bulbY-tTop}" rx="3" fill="rgba(230,244,255,.15)" stroke="#dcecff" stroke-opacity=".7" stroke-width="1.4"/>
+ <rect id="${p}-merc" x="283.6" y="${bulbY}" width="2.8" height="4" fill="#ff5d5d"/>
+ <circle cx="285" cy="${bulbY+3}" r="5" fill="#ff5d5d"/>
+ <text class="lbl2" x="296" y="${tTop+8}">থার্মোমিটার</text>
+ <!-- condenser -->
+ <line x1="395" y1="368" x2="640" y2="478" stroke="#cfe4ff" stroke-opacity=".8" stroke-width="9" stroke-linecap="round"/>
+ <line x1="447" y1="392" x2="593" y2="457" stroke="rgba(120,200,255,.28)" stroke-width="30" stroke-linecap="round"/>
+ <line class="flow" x1="447" y1="392" x2="593" y2="457" stroke="#6fd3ff" stroke-width="3.4" opacity=".8"/>
+ <line x1="593" y1="457" x2="614" y2="484" stroke="#6fd3ff" stroke-width="7" stroke-linecap="round"/>
+ <line x1="447" y1="392" x2="426" y2="365" stroke="#6fd3ff" stroke-width="7" stroke-linecap="round"/>
+ <text class="lbl2" x="470" y="430">জলীয় শীতক (কনডেনসার) → ঠান্ডা জল</text>
+ <path d="M640,478 Q662,492 666,506" stroke="#cfe4ff" stroke-opacity=".8" stroke-width="8" fill="none" stroke-linecap="round"/>
+ <!-- receiver -->
+ <g clip-path="url(#${p}-cr)"><rect id="${p}-rliq" x="636" y="598" width="100" height="0" fill="#bfe3ff" opacity=".9"/></g>
+ <path d="M642,598 L668,507 L704,507 L730,598 Z" fill="rgba(205,232,255,.08)" stroke="#cfe4ff" stroke-opacity=".85" stroke-width="3"/>
+ <text class="lbl" x="686" y="616" text-anchor="middle">পাতিত দ্রব (গ্রাহক ফ্লাস্ক)</text>
+ <text class="lbl" x="285" y="622" text-anchor="middle">পাতন ফ্লাস্ক</text>
+ <text class="lbl2" x="285" y="636" text-anchor="middle">বার্নার + ত্রিপাদ + গজ</text>
+</svg>`;
+}
+
+/* =========================================================
+   DISTILLATION SIM (simple + fractional lab)
+========================================================= */
+class DistSim{
+ constructor(p,col,stage,presetList,graphId,ui){
+  this.p=p;this.col=col;this.stage=stage;this.list=presetList;this.ui=ui;
+  stage.innerHTML=distSVG(p,col);
+  this.R={flame:$(p+'-flame'),fw:$(p+'-flameW'),fliq:$(p+'-fliq'),res:$(p+'-res'),bub:$(p+'-bub'),vap:$(p+'-vap'),merc:$(p+'-merc'),rliq:$(p+'-rliq')};
+  this.graph=$(graphId);this.gctx=this.graph.getContext('2d');
+  this.setPreset(presetList[0]);
+ }
+ setPreset(pr){
+  this.pr=pr;
+  this.st={running:false,t:0,T:25,ci:0,phase:'idle',vol:pr.comps.map(c=>c.vol),coll:pr.comps.map(()=>0),parts:[],bubs:[],samples:[]};
+  this.R.res.setAttribute('fill',pr.resColor||'#fff');
+  if(this.ui.chips){this.ui.chips.innerHTML=pr.comps.map((c,i)=>`<div class="chip"><span class="dot" style="background:${c.color}"></span>${c.name} (${c.bp}°C): <b id="${this.p}-c${i}">0</b> mL</div>`).join('');}
+  this.status('প্রস্তুত। ▶ চেপে তাপ দিন।');
+  this.render();this.drawGraph();
+ }
+ status(t){$(this.p+'-status').textContent=t}
+ reset(){this.setPreset(this.pr)}
+ toggle(){this.st.running=!this.st.running;this.status(this.st.running?'সিমুলেশন চলছে…':'বিরতি।')}
+ update(dt){
+  const s=this.st,pr=this.pr,heat=+$(this.p+'-heat').value;
+  $(this.p+'-hv').textContent=heat+'%';
+  if(!s.running)return;
+  s.t+=dt;
+  const comp=pr.comps[s.ci];
+  if(heat<=1){s.T+=(25-s.T)*Math.min(1,dt*.5);if(s.phase==='boil')s.phase='idle';}
+  else if(!comp||s.vol[s.ci]<=0){/*done*/ if(s.phase!=='done'){s.phase='done';this.status('✅ পাতন সম্পূর্ণ! '+ (pr.doneNote||''));} s.T+=(Math.min(comp?comp.bp+40:140, 25+heat*1.5)-s.T)*dt*.4;}
+  else if(s.phase!=='boil'){
+    s.T+=((25+heat*1.7)-s.T)*Math.min(1,dt*.9);
+    this.status(`🔥 তাপ দেওয়া হচ্ছে — T = ${s.T.toFixed(0)}°C … ${comp.name}-এর স্ফুটনাঙ্ক ${comp.bp}°C`);
+    if(s.T>=comp.bp){s.T=comp.bp;s.phase='boil';}
+  } else {
+    s.T=comp.bp+Math.sin(s.t*5)*.4;
+    const r=heat*.14*dt; const q=Math.min(r,s.vol[s.ci]);
+    s.vol[s.ci]-=q; s.coll[s.ci]+=q;
+    this.status(`💨 ${comp.name} ফুটছে (${comp.bp}°C প্লাটো) — বাষ্প কনডেনসারে ঘনীভূত হয়ে পাতিত দ্রব জমা হচ্ছে।`);
+    if(Math.random()<heat/28)this.spawnBubble();
+    if(Math.random()<heat/22)s.parts.push({seg:0,u:0,c:comp.color,d:pr.comps.length>1});
+    if(s.vol[s.ci]<=0){s.ci++;s.phase='heat';}
+  }
+  s.samples.push([s.t,s.T]); if(s.samples.length>900)s.samples.shift();
+  this.physics(dt,heat);
+ }
+ pts(){return this.col?[[285,468],[285,268],[340,300],[395,368],[520,425],[640,478],[664,510],[668,566]]
+                      :[[285,468],[285,326],[340,344],[395,368],[520,425],[640,478],[664,510],[668,566]];}
+ physics(dt,heat){
+  const s=this.st,P=this.pts();
+  s.parts.forEach(pt=>{pt.u+=dt*(1.1+heat/60);});
+  s.parts=s.parts.filter(pt=>pt.u<P.length-1);
+  s.bubs.forEach(b=>{b.y-=dt*(30+b.v);});
+  s.bubs=s.bubs.filter(b=>b.y>b.top);
+ }
+ spawnBubble(){const s=this.st,dep=(s.vol.reduce((a,b)=>a+b,0))/ (this.pr.comps.reduce((a,c)=>a+c.vol,0)) *110;
+  const top=553-dep; s.bubs.push({x:245+Math.random()*80,y:545,top:top+4,v:Math.random()*30,r:1.5+Math.random()*2.5});}
+ render(){
+  const s=this.st,pr=this.pr,R=this.R;
+  const cap=pr.comps.reduce((a,c)=>a+c.vol,0), tot=s.vol.reduce((a,b)=>a+b,0), ctot=s.coll.reduce((a,b)=>a+b,0);
+  const dep=tot/cap*110;
+  R.fliq.setAttribute('y',553-dep);R.fliq.setAttribute('height',Math.max(0,dep));
+  let lc=pr.comps[0].color; if(pr.comps.length>1){const a=s.vol[0],b=s.vol[1];lc=mix(pr.comps[1].color,pr.comps[0].color, (a/(a+b+0.001)));}
+  R.fliq.setAttribute('fill',lc);
+  R.res.setAttribute('opacity', pr.residue&&tot<cap*.06? .95:0);
+  const rf=Math.min(1,ctot/cap); R.rliq.setAttribute('y',598-rf*90);R.rliq.setAttribute('height',rf*90);
+  R.rliq.setAttribute('fill', pr.comps[Math.min(s.ci,pr.comps.length-1)].dist||pr.comps[0].color);
+  // flame
+  const heat=+$(this.p+'-heat').value, sc=s.running?heat/100:0;
+  R.fw.setAttribute('transform',`translate(0 ${(1-sc)*22}) scale(1 ${0.15+sc})`);R.fw.setAttribute('transform-origin','285 574');R.fw.style.opacity=sc>0?1:0;
+  // thermometer
+  const maxT=pr.maxT||120, h=Math.max(3,(s.T-25)/(maxT-25)*( (this.col?268:322)-(this.col?200:236) ));
+  R.merc.setAttribute('y',(this.col?268:322)-h);R.merc.setAttribute('height',h);
+  $(this.p+'-temp').textContent=s.T.toFixed(0);
+  if(this.ui.coll)$(this.p+'-coll').textContent=ctot.toFixed(0);
+  if(this.ui.res)$(this.p+'-res').textContent=tot.toFixed(0);
+  pr.comps.forEach((c,i)=>{const e=$(this.p+'-c'+i);if(e)e.textContent=s.coll[i].toFixed(0);});
+  // bubbles
+  R.bub.innerHTML=s.bubs.map(b=>`<circle cx="${b.x}" cy="${b.y}" r="${b.r}" fill="rgba(255,255,255,.55)"/>`).join('');
+  // vapor/drops
+  const P=this.pts();
+  R.vap.innerHTML=s.parts.map(pt=>{const i=Math.floor(pt.u),f=pt.u-i,A=P[i],B=P[i+1];
+    const x=lerp(A[0],B[0],f),y=lerp(A[1],B[1],f);
+    return i>=4?`<circle cx="${x}" cy="${y}" r="2.6" fill="${this.pr.comps[0].dist||'#bfe3ff'}" opacity=".95"/>`
+               :`<circle cx="${x}" cy="${y}" r="${4.5-f*.4}" fill="${pt.c}" opacity=".5"/>`;}).join('');
+  this.drawGraph();
+ }
+ drawGraph(){
+  const c=this.graph,W=c.width=c.clientWidth,H=c.height=150,g=this.gctx;s=this.st;
+  g.clearRect(0,0,W,H);g.strokeStyle='#1d2c4a';g.lineWidth=1;
+  for(let i=1;i<5;i++){g.beginPath();g.moveTo(0,H*i/5);g.lineTo(W,H*i/5);g.stroke();}
+  const maxT=this.pr.maxT||120,minT=Math.min(0,...this.pr.comps.map(c=>c.bp))-20;
+  const tMax=Math.max(30,s.t);
+  this.pr.comps.forEach(cp=>{const y=H-(cp.bp-minT)/(maxT-minT)*H;g.setLineDash([5,5]);g.strokeStyle=cp.color;g.beginPath();g.moveTo(0,y);g.lineTo(W,y);g.stroke();g.setLineDash([]);g.fillStyle=cp.color;g.font='11px Hind Siliguri';g.fillText(cp.name+' '+cp.bp+'°C',6,y-4);});
+  if(s.samples.length>1){g.strokeStyle='#59c2ff';g.lineWidth=2;g.beginPath();
+   s.samples.forEach((pt,i)=>{const x=i/900*W,y=H-(pt[1]-minT)/(maxT-minT)*H;i?g.lineTo(x,y):g.moveTo(x,y);});g.stroke();}
+ }
+}
+
+/* ---------- presets ---------- */
+const SIMPLE=[
+ {comps:[{name:'জল (চিনির দ্রবণ)',bp:100,vol:200,color:'#e8c987',dist:'#bfe3ff'}],residue:1,resColor:'#fff8ee',maxT:130,doneNote:'ফ্লাস্কে অবশিষ্ট রইল চিনি (সাদা কঠিন)।'},
+ {comps:[{name:'জল (CuSO₄ দ্রবণ)',bp:100,vol:200,color:'#2f7fd6',dist:'#bfe3ff'}],residue:1,resColor:'#eaf2ff',maxT:130,doneNote:'অবশিষ্ট কপার সালফেট কেলাস।'},
+ {comps:[{name:'ক্লোরোফর্ম',bp:61,vol:200,color:'#bfe8dc',dist:'#d8f7ec'}],residue:1,resColor:'#9aa7b8',maxT:100,doneNote:'অবিশুদ্ধি থেকে বিশুদ্ধ ক্লোরোফর্ম আলাদা হল।'},
+ {comps:[{name:'আইওডিন বাষ্প',bp:184,vol:150,color:'#b26bff',dist:'#8a3fd6'}],residue:1,resColor:'#5b2b8a',maxT:220,doneNote:'বেগুনি বাষ্প ঘনীভূত → ঝলমলে আইওডিন কেলাস (ঊর্ধ্বপাতন-নীতি)।'}
+];
+const FRAC_LAB=[{comps:[{name:'অ্যাসিটোন',bp:56,vol:100,color:'#7fd8ff',dist:'#7fd8ff'},{name:'মিথাইল অ্যালকোহল',bp:65,vol:100,color:'#ffb3d1',dist:'#ffb3d1'}],maxT:90,doneNote:'দুটি উপাদান পৃথকভাবে সংগৃহীত!'}];
+const INDUS=[
+ {id:'pet',name:'পেট্রোলিয়াম শোধন',fr:[{n:'পেট্রোল',bp:'40–120°C',c:'#ffe08a'},{n:'কেরোসিন',bp:'150–250°C',c:'#ffb454'},{n:'ডিজেল',bp:'250–320°C',c:'#ff8a5c'},{n:'লুব্রিকেটিং তেল',bp:'320–400°C',c:'#c97bff'}],res:{n:'বিটুমেন',c:'#5b657a'},top:'পেট্রোলিয়াম গ্যাস (<40°C)'},
+ {id:'tar',name:'আলকাতরা',fr:[{n:'বেঞ্জিন',bp:'80°C',c:'#9fe8ff'},{n:'টলুইন',bp:'111°C',c:'#7fd8ff'},{n:'ফিনল',bp:'182°C',c:'#ffb3d1'},{n:'ন্যাফথালিন',bp:'218°C',c:'#c97bff'}],res:{n:'পিচ',c:'#3a3f4d'},top:'হালকা বাষ্প'},
+ {id:'air',name:'তরল বায়ু',fr:[{n:'নাইট্রোজেন',bp:'−196°C',c:'#8fd0ff'},{n:'আর্গন',bp:'−186°C',c:'#c97bff'},{n:'অক্সিজেন',bp:'−183°C',c:'#5dffa8'}],res:null,top:'গ্যাসীয় আউটলেট'}
+];
+
+/* ---------- module 1 wiring ---------- */
+const sSel=$('s-sel');
+const sNames=['চিনির জল → জল + চিনি','CuSO₄·5H₂O দ্রবণ → বিশুদ্ধ জল','অবিশুদ্ধ ক্লোরোফর্ম → বিশুদ্ধ ক্লোরোফর্ম','আইওডিন (বেগুনি বাষ্প)'];
+sSel.innerHTML=sNames.map((n,i)=>`<option value="${i}">${n}</option>`).join('');
+const S=new DistSim('s',false,$('s-stage'),SIMPLE,'s-graph',{coll:1,res:1});
+sSel.onchange=()=>S.setPreset(SIMPLE[+sSel.value]);
+$('s-start').onclick=()=>S.toggle();$('s-reset').onclick=()=>S.reset();
+
+/* ---------- module 2 wiring (lab + industrial) ---------- */
+const fSel=$('f-sel');
+fSel.innerHTML=`<option value="lab">ল্যাব: অ্যাসিটোন + মিথাইল অ্যালকোহল</option>`+INDUS.map((d,i)=>`<option value="i${i}">শিল্প: ${d.name}</option>`).join('');
+let F=null,IND=null;
+function buildFrac(){
+ const v=fSel.value;
+ if(v==='lab'){IND=null;$('f-stage').innerHTML=distSVG('f',true);
+   F=new DistSim('f',true,$('f-stage'),FRAC_LAB,'f-graph',{chips:$('f-chips')});
+   $('f-chips').innerHTML='';F.ui.chips=$('f-chips');F.setPreset(FRAC_LAB[0]);
+   $('f-start').onclick=()=>F.toggle();$('f-reset').onclick=()=>F.reset();
+ } else {F=null;IND=new IndSim(INDUS[+v.slice(1)]);}
+}
+fSel.onchange=buildFrac;
+
+/* ---------- industrial column ---------- */
+class IndSim{
+ constructor(d){this.d=d;this.st={running:false,t:0,vol:d.fr.map(()=>0),res:0,parts:[]};
+  this.build();$('f-start').onclick=()=>{this.st.running=!this.st.running};
+  $('f-reset').onclick=()=>{this.st={running:false,t:0,vol:d.fr.map(()=>0),res:0,parts:[]};this.render();};
+  $('f-chips').innerHTML=d.fr.map((f,i)=>`<div class="chip"><span class="dot" style="background:${f.c}"></span>${f.n}</div>`).join('')+(d.res?`<div class="chip"><span class="dot" style="background:${d.res.c}"></span>${d.res.n}</div>`:'');
+  this.status('▶ চেপে শিল্প-স্তম্ভ চালু করুন — বাষ্প উপরে উঠবে, উচ্চতা অনুযায়ী ভগ্নাংশ জমবে।');
+ }
+ status(t){$('f-status').textContent=t}
+ build(){const d=this.d,n=d.fr.length,top=130,sp=Math.floor(330/n);
+  let trays='';d.fr.forEach((f,i)=>{const y=top+i*sp;
+   trays+=`<line x1="550" y1="${y}" x2="688" y2="${y}" stroke="#3d5178" stroke-width="6"/>
+   <rect x="688" y="${y-20}" width="118" height="42" rx="8" fill="rgba(13,22,38,.9)" stroke="#233252"/>
+   <rect id="in-f${i}" x="691" y="${y+19}" width="112" height="0" fill="${f.c}" opacity=".85"/>
+   <text class="lbl" x="747" y="${y-26}" text-anchor="middle">${f.n} • ${f.bp}</text>
+   <circle id="in-g${i}" cx="492" cy="${y}" r="7" fill="${f.c}" opacity="0"/>
+   <line x1="430" y1="${y}" x2="550" y2="${y}" stroke="#22304e" stroke-width="3" stroke-dasharray="4 5"/>`;});
+  $('f-stage').innerHTML=`<svg viewBox="0 0 960 640">
+   <defs><linearGradient id="in-grad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#123a6b"/><stop offset="1" stop-color="#7a2b12"/></linearGradient></defs>
+   <rect x="0" y="600" width="960" height="40" fill="#0a1322"/>
+   <rect x="430" y="80" width="120" height="470" rx="16" fill="url(#in-grad)" opacity=".85" stroke="#3d5178" stroke-width="3"/>
+   <text class="lbl" x="490" y="66" text-anchor="middle" style="fill:#9fd4ff">🔝 ${d.top}</text>
+   <rect x="300" y="520" width="92" height="62" rx="8" fill="#22304e"/><text class="lbl2" x="346" y="600" text-anchor="middle">ফার্নেস (তাপ)</text>
+   <path class="flick" d="M346,516 C334,498 338,490 346,478 C354,490 358,498 346,516 Z" fill="#ffb454"/>
+   <line x1="392" y1="548" x2="430" y2="548" stroke="#3d5178" stroke-width="8"/>
+   ${trays}
+   ${d.res?`<line x1="430" y1="545" x2="330" y2="565" stroke="#3d5178" stroke-width="6"/>
+   <rect x="212" y="556" width="118" height="42" rx="8" fill="rgba(13,22,38,.9)" stroke="#233252"/>
+   <rect id="in-fr" x="215" y="595" width="112" height="0" fill="${d.res.c}" opacity=".9"/>
+   <text class="lbl" x="271" y="548" text-anchor="middle">${d.res.n} (অবশিষ্ট)</text>`:''}
+   <g id="in-vap"></g>
+   <text class="lbl2" x="418" y="100" transform="rotate(-90 418 100)">ঠান্ডা ↑</text>
+   <text class="lbl2" x="418" y="520" transform="rotate(-90 418 520)">তপ্ত ↓ ~350°C</text>
+  </svg>`;
+ }
+ update(dt){const s=this.st;if(!s.running)return;s.t+=dt;const heat=+$('f-heat').value;
+  $('f-hv').textContent=heat+'%';$('f-temp').textContent=Math.round(25+heat*3.2);
+  if(Math.random()<heat/14)s.parts.push({y:540,x:455+Math.random()*70,v:60+Math.random()*60});
+  s.parts.forEach(pt=>pt.y-=pt.v*dt);s.parts=s.parts.filter(pt=>pt.y>95);
+  this.d.fr.forEach((f,i)=>{if(s.vol[i]<100)s.vol[i]=Math.min(100,s.vol[i]+heat*.05*dt*(1.25-i*.15));});
+  if(this.d.res&&s.res<100)s.res=Math.min(100,s.res+heat*.045*dt);
+  this.status(`🏭 ${this.d.name}: বাষ্প স্তম্ভে উঠছে — যে ভগ্নাংশের স্ফুটনাঙ্ক-অঞ্চলে পৌঁছায়, সেই ট্রে-তে ঘনীভূত হয়ে আলাদা হচ্ছে।`);
+  this.render();
+ }
+ render(){const s=this.st;
+  this.d.fr.forEach((f,i)=>{const e=$('in-f'+i);if(e){e.setAttribute('height',s.vol[i]*.36);e.setAttribute('y',+e.getAttribute('y')*0+ (parseFloat(e.getAttribute('y')))); }
+   const el=$('in-f'+i);if(el){const y0=parseFloat(el.getAttribute('y'));} });
+  this.d.fr.forEach((f,i)=>{const el=$('in-f'+i);if(el){const h=s.vol[i]*.36;el.setAttribute('height',h);el.setAttribute('y', (i>=0? (130+i*Math.floor(330/this.d.fr.length))+19-h :0));}
+   const g=$('in-g'+i);if(g)g.setAttribute('opacity', s.running&&s.vol[i]<100? .8:0);});
+  if(this.d.res){const el=$('in-fr');if(el){const h=s.res*.36;el.setAttribute('height',h);el.setAttribute('y',595-h);}}
+  $('in-vap').innerHTML=s.parts.map(pt=>`<circle cx="${pt.x+Math.sin(pt.y/22)*8}" cy="${pt.y}" r="3" fill="rgba(200,230,255,.5)"/>`).join('');
+  const c=$('f-graph'),g=c.getContext('2d');c.width=c.clientWidth;c.height=150;g.clearRect(0,0,c.width,c.height);
+  g.font='12px Hind Siliguri';this.d.fr.forEach((f,i)=>{g.fillStyle=f.c;g.fillRect(14,18+i*26,10,10);g.fillStyle='#cfe0f7';g.fillText(`${f.n} — ${f.vol??''}${''}সংগ্রহ: ${s.vol[i].toFixed(0)}%`,32,27+i*26);});
+ }
+}
+
+/* ---------- module 2 init ---------- */
+buildFrac();
+setInterval(()=>{},0);
+function fracLoop(dt){if(F)F.update(dt);else if(IND)IND.update(dt);}
+
+/* =========================================================
+   MODULE 3 : SEPARATORY FUNNEL
+========================================================= */
+const SEP=[
+ {up:{n:'জল',c:'#9fd4ff',d:'1.0'},lo:{n:'পারদ',c:'#cfd6dd',d:'13.6'},note:'পারদ অনেক ভারী → নিচের স্তর।'},
+ {up:{n:'পেট্রোল',c:'#ffe08a',d:'0.7'},lo:{n:'জল',c:'#9fd4ff',d:'1.0'},note:'পেট্রোল হালকা → উপরের স্তর।'},
+ {up:{n:'জল',c:'#9fd4ff',d:'1.0'},lo:{n:'ক্লোরোফর্ম',c:'#d9ffe8',d:'1.48'},note:'ক্লোরোফর্ম ভারী → নিচের স্তর।'}
+];
+const xSel=$('x-sel');xSel.innerHTML=SEP.map((s,i)=>`<option value="${i}">${s.up.n} + ${s.lo.n}</option>`).join('');
+const X={open:false,up:.5,lo:.5,b1:0,b2:0,pour:false};
+function sepBuild(){$('x-stage').innerHTML=`<svg viewBox="0 0 700 640">
+ <defs><clipPath id="x-cf"><path d="M305,150 L395,150 C400,240 380,300 358,330 L358,368 L342,368 L342,330 C320,300 300,240 305,150 Z"/></clipPath></defs>
+ <rect x="0" y="600" width="700" height="40" fill="#0a1322"/>
+ <rect x="150" y="592" width="120" height="9" rx="3" fill="#2a3a5c"/><rect x="205" y="180" width="7" height="416" fill="#33456b"/>
+ <circle cx="350" cy="230" r="58" fill="none" stroke="#3d5178" stroke-width="7"/>
+ <rect x="212" y="226" width="82" height="7" fill="#3d5178"/>
+ <rect x="336" y="120" width="28" height="14" rx="4" fill="#7a4a1a"/>
+ <g clip-path="url(#x-cf)">
+   <rect id="x-up" x="295" y="150" width="110" height="90" fill="#9fd4ff" opacity=".9"/>
+   <rect id="x-lo" x="295" y="240" width="110" height="130" fill="#cfd6dd" opacity=".95"/>
+ </g>
+ <path d="M305,150 L395,150 C400,240 380,300 358,330 L358,368 L342,368 L342,330 C320,300 300,240 305,150 Z" fill="rgba(205,232,255,.07)" stroke="#cfe4ff" stroke-opacity=".85" stroke-width="3"/>
+ <rect x="330" y="368" width="40" height="12" rx="4" fill="#22304e"/>
+ <rect id="x-handle" x="368" y="371" width="26" height="6" rx="3" fill="#ff5d5d"/>
+ <path d="M342,380 L358,380 L354,404 L346,404 Z" fill="rgba(205,232,255,.15)" stroke="#cfe4ff" stroke-width="2"/>
+ <line id="x-stream" x1="350" y1="404" x2="350" y2="520" stroke="#cfd6dd" stroke-width="5" opacity="0"/>
+ <line id="x-pourline" x1="350" y1="150" x2="560" y2="470" stroke="#9fd4ff" stroke-width="5" opacity="0" stroke-dasharray="8 8"/>
+ <rect x="280" y="520" width="140" height="80" rx="8" fill="rgba(205,232,255,.07)" stroke="#cfe4ff" stroke-width="3"/>
+ <rect id="x-b1" x="283" y="600" width="134" height="0" fill="#cfd6dd" opacity=".95"/>
+ <rect x="490" y="520" width="140" height="80" rx="8" fill="rgba(205,232,255,.07)" stroke="#cfe4ff" stroke-width="3"/>
+ <rect id="x-b2" x="493" y="600" width="134" height="0" fill="#9fd4ff" opacity=".9"/>
+ <text class="lbl" x="350" y="618" text-anchor="middle">বিকার ১ (নিচের স্তর)</text>
+ <text class="lbl" x="560" y="618" text-anchor="middle">বিকার ২ (উপরের স্তর)</text>
+ <text class="lbl" id="x-lu" x="410" y="190">উপরে: জল</text>
+ <text class="lbl" id="x-ll" x="410" y="290">নিচে: পারদ</text>
+ <text class="lbl2" x="350" y="90" text-anchor="middle" style="font-size:14px;fill:#9fd4ff">বিভাজক ফানেল (Separatory Funnel)</text>
+</svg>`;}
+function sepChips(){const s=SEP[+xSel.value];$('x-chips').innerHTML=`<div class="chip"><span class="dot" style="background:${s.up.c}"></span>উপরে: ${s.up.n} (${s.up.d} g/cc)</div><div class="chip"><span class="dot" style="background:${s.lo.c}"></span>নিচে: ${s.lo.n} (${s.lo.d} g/cc)</div>`;
+ $('x-lu').textContent=`উপরে: ${s.up.n}`;$('x-ll').textContent=`নিচে: ${s.lo.n}`;}
+function sepSet(i){Object.assign(X,{open:false,up:.5,lo:.5,b1:0,b2:0,pour:false});sepBuild();sepChips();
+ const s=SEP[i];$('x-up').setAttribute('fill',s.up.c);$('x-lo').setAttribute('fill',s.lo.c);$('x-b1').setAttribute('fill',s.lo.c);$('x-b2').setAttribute('fill',s.up.c);$('x-stream').setAttribute('stroke',s.lo.c);$('x-pourline').setAttribute('stroke',s.up.c);
+ $('x-status').textContent='অমিশ্রণীয় মিশ্রণ স্থির — '+s.note;}
+sepSet(0);xSel.onchange=()=>sepSet(+xSel.value);
+$('x-open').onclick=()=>{X.open=!X.open;$('x-status').textContent=X.open?'স্টপকক খোলা — ভারী (নিচের) স্তর নামছে…':'স্টপকক বন্ধ।';};
+$('x-pour').onclick=()=>{if(X.lo<=0&&X.up>0){X.pour=true;$('x-status').textContent='উপরের স্তর বিকার ২-এ ঢালা হচ্ছে…';}};
+$('x-reset').onclick=()=>sepSet(+xSel.value);
+function sepUpdate(dt){
+ if(X.open&&X.lo>0){const q=Math.min(X.lo,dt*.22);X.lo-=q;X.b1+=q;}
+ if(X.pour&&X.up>0){const q=Math.min(X.up,dt*.3);X.up-=q;X.b2+=q;if(X.up<=0){X.pour=false;$('x-status').textContent='✅ দুটি স্তর সম্পূর্ণ পৃথক হল!';}}
+ const H=180,yU=150,uH=X.up*H,lH=X.lo*H;
+ $('x-up').setAttribute('y',yU);$('x-up').setAttribute('height',Math.max(0,uH));
+ $('x-lo').setAttribute('y',yU+uH);$('x-lo').setAttribute('height',Math.max(0,lH));
+ $('x-stream').setAttribute('opacity',X.open&&X.lo>0?.9:0);
+ $('x-pourline').setAttribute('opacity',X.pour?.9:0);
+ $('x-handle').setAttribute('transform',X.open?'rotate(90 368 374)':'');
+ $('x-b1').setAttribute('height',X.b1*70);$('x-b1').setAttribute('y',600-X.b1*70);
+ $('x-b2').setAttribute('height',X.b2*70);$('x-b2').setAttribute('y',600-X.b2*70);
+}
+
+/* ---------- master loop ---------- */
+let last=performance.now();
+function loop(now){const dt=Math.min(.05,(now-last)/1000);last=now;
+ S.update(dt);S.render();
+ fracLoop(dt);
+ sepUpdate(dt);
+ requestAnimationFrame(loop);}
+requestAnimationFrame(loop);
+</script>
+</body>
+</html>
