@@ -7,7 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <style>
-:root{--bg1:#0f0c29;--bg2:#302b63;--bg3:#24243e;--accent:#7c3aed;--accent2:#ec4899;--accent3:#06b6d4;--glass:rgba(255,255,255,.06);--glass-border:rgba(255,255,255,.12);--text:#f1f5f9;--muted:#94a3b8;--danger:#ef4444;--success:#10b981;--wa:#25D366;--ig-pink:#E1306C;--ig-orange:#F77737;--tg-blue:#229ED9}
+:root{--bg1:#0f0c29;--bg2:#302b63;--bg3:#24243e;--accent:#7c3aed;--accent2:#ec4899;--accent3:#06b6d4;--glass:rgba(255,255,255,.06);--glass-border:rgba(255,255,255,.12);--text:#f1f5f9;--muted:#94a3b8;--danger:#ef4444;--success:#10b981;--wa:#25D366;--ig-pink:#E1306C;--tg-blue:#229ED9}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;font-family:'Inter',sans-serif;color:var(--text);overflow-x:hidden;overscroll-behavior:none}
 body{background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));background-size:400% 400%;animation:bgShift 20s ease infinite;min-height:100vh}
@@ -18,7 +18,6 @@ body{background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));backgro
 .orb3{width:300px;height:300px;background:#06b6d4;top:40%;left:50%;animation:float 22s infinite}
 @keyframes float{0%,100%{transform:translate(0,0)}50%{transform:translate(60px,-40px)}}
 
-/* Login */
 .login-wrap{position:relative;z-index:1;min-height:100vh;display:grid;place-items:center;padding:20px}
 .login-card{background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--glass-border);border-radius:24px;padding:clamp(24px,5vw,40px);max-width:420px;width:100%;animation:pop .5s}
 .login-card h2{font-family:'Space Grotesk';font-size:clamp(22px,6vw,28px);margin-bottom:6px;text-align:center}
@@ -28,31 +27,29 @@ body{background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));backgro
 .login-tab{flex:1;padding:10px;border:none;background:transparent;color:var(--muted);cursor:pointer;font:600 13px 'Inter';border-radius:9px;transition:.2s}
 .login-tab.active{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff}
 
-/* Layout */
 .app{position:relative;z-index:1;display:grid;grid-template-columns:260px 1fr;min-height:100vh;display:none}
 .app.show{display:grid}
 
-/* Sidebar */
-.sidebar{background:rgba(15,12,41,.95);backdrop-filter:blur(20px);border-right:1px solid var(--glass-border);padding:28px 18px;display:flex;flex-direction:column;gap:8px;position:sticky;top:0;height:100vh}
+/* Sidebar - FIXED: no blur, sharp text */
+.sidebar{background:rgba(15,12,41,.98);border-right:1px solid var(--glass-border);padding:28px 18px;display:flex;flex-direction:column;gap:8px;position:sticky;top:0;height:100vh}
 .logo{display:flex;align-items:center;gap:10px;padding:8px 10px 22px;border-bottom:1px solid var(--glass-border);margin-bottom:18px}
 .logo-icon{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:grid;place-items:center;font-size:22px;box-shadow:0 8px 24px rgba(124,58,237,.4)}
-.logo h1{font-family:'Space Grotesk';font-size:20px;font-weight:700;letter-spacing:-.5px}
+.logo h1{font-family:'Space Grotesk';font-size:20px;font-weight:700;letter-spacing:-.5px;color:#fff}
 .logo h1 span{background:linear-gradient(135deg,var(--accent2),var(--accent3));-webkit-background-clip:text;background-clip:text;color:transparent}
-.nav-btn{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;background:transparent;border:none;color:var(--muted);font:500 14px 'Inter';cursor:pointer;transition:.25s;text-align:left;width:100%}
-.nav-btn:hover{background:var(--glass);color:var(--text)}
-.nav-btn.active{background:linear-gradient(135deg,rgba(124,58,237,.25),rgba(236,72,153,.15));color:var(--text);box-shadow:inset 0 0 0 1px var(--glass-border)}
+.nav-btn{display:flex;align-items:center;gap:12px;padding:13px 14px;border-radius:12px;background:transparent;border:none;color:#e2e8f0;font:600 14px 'Inter';cursor:pointer;transition:.2s;text-align:left;width:100%}
+.nav-btn:hover{background:rgba(255,255,255,.08);color:#fff}
+.nav-btn.active{background:linear-gradient(135deg,rgba(124,58,237,.35),rgba(236,72,153,.25));color:#fff;box-shadow:inset 0 0 0 1px var(--glass-border)}
 .nav-btn .ic{font-size:18px}
-.user-box{margin-top:auto;padding:12px;background:rgba(0,0,0,.3);border-radius:12px;border:1px solid var(--glass-border)}
-.user-box .mail{font-size:11px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-bottom:8px}
+.user-box{margin-top:auto;padding:12px;background:rgba(0,0,0,.4);border-radius:12px;border:1px solid var(--glass-border)}
+.user-box .lbl{font-size:10px;color:#cbd5e1;margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px}
+.user-box .mail{font-size:12px;color:#fff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-bottom:8px;font-weight:500}
 
-/* Main */
 .main{padding:clamp(16px,3vw,40px);padding-bottom:calc(clamp(16px,3vw,40px) + 90px);overflow-y:auto;min-height:100vh}
 .page-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:clamp(16px,3vw,28px);flex-wrap:wrap;gap:12px}
 .page-head h2{font-family:'Space Grotesk';font-size:clamp(22px,5.5vw,30px);font-weight:700;letter-spacing:-.5px}
 .page-head h2 span{background:linear-gradient(135deg,var(--accent2),var(--accent3));-webkit-background-clip:text;background-clip:text;color:transparent}
 .page-head p{color:var(--muted);font-size:clamp(11px,3vw,13px);margin-top:4px}
 
-/* Buttons */
 .btn{padding:clamp(9px,2.5vw,12px) clamp(14px,4vw,18px);border-radius:11px;border:none;cursor:pointer;font:600 clamp(11px,3vw,13px) 'Inter';transition:.2s;display:inline-flex;align-items:center;gap:8px;min-height:40px;justify-content:center;white-space:nowrap}
 .btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 6px 20px rgba(124,58,237,.4)}
 .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(124,58,237,.6)}
@@ -64,7 +61,6 @@ body{background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));backgro
 .btn-sm{padding:8px 12px;font-size:11px;border-radius:8px;min-height:34px}
 .btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
 
-/* Stats */
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:clamp(10px,2vw,16px);margin-bottom:clamp(16px,3vw,28px)}
 .stat{background:var(--glass);backdrop-filter:blur(14px);border:1px solid var(--glass-border);border-radius:18px;padding:clamp(14px,3vw,20px);position:relative;overflow:hidden;transition:.3s}
 .stat:hover{transform:translateY(-4px);border-color:rgba(255,255,255,.2)}
@@ -73,28 +69,23 @@ body{background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));backgro
 .stat .val{font-family:'Space Grotesk';font-size:clamp(22px,5.5vw,30px);font-weight:700;margin-top:8px}
 .stat .sub{font-size:clamp(10px,2.5vw,12px);color:var(--muted);margin-top:4px}
 
-/* Card */
 .card{background:var(--glass);backdrop-filter:blur(14px);border:1px solid var(--glass-border);border-radius:20px;padding:clamp(16px,3vw,24px);margin-bottom:clamp(14px,3vw,20px)}
 
-/* Forms */
 .form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:clamp(10px,2.5vw,14px)}
 .field label{display:block;font-size:clamp(10px,2.5vw,12px);color:var(--muted);margin-bottom:6px;font-weight:500;text-transform:uppercase;letter-spacing:.5px}
 .field input,.field select,.field textarea{width:100%;padding:clamp(10px,2.5vw,12px) 14px;border-radius:10px;background:rgba(0,0,0,.25);border:1px solid var(--glass-border);color:var(--text);font:400 clamp(13px,3.5vw,14px) 'Inter';transition:.2s;min-height:44px}
 .field input:focus,.field select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(124,58,237,.2)}
 
-/* Tables */
 .tbl-wrap{overflow-x:auto;border-radius:14px;margin:0 -4px;padding:0 4px}
 table{width:100%;border-collapse:collapse;font-size:clamp(11px,3vw,13px);min-width:600px}
 th{background:rgba(0,0,0,.3);padding:12px;text-align:left;font-weight:600;font-size:clamp(10px,2.5vw,11px);text-transform:uppercase;letter-spacing:1px;color:var(--muted);border-bottom:1px solid var(--glass-border)}
 td{padding:12px;border-bottom:1px solid rgba(255,255,255,.05);vertical-align:middle}
 tr:hover td{background:rgba(255,255,255,.03)}
 
-/* Photo */
 .photo{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:grid;place-items:center;font-weight:700;color:#fff;font-size:14px;flex-shrink:0}
 .photo.lg{width:70px;height:70px;font-size:24px}
 .photo img{width:100%;height:100%;border-radius:50%;object-fit:cover}
 
-/* Badges */
 .badge{padding:3px 10px;border-radius:20px;font-size:clamp(9px,2.5vw,11px);font-weight:600;display:inline-block}
 .badge-ok{background:rgba(16,185,129,.15);color:#6ee7b7;border:1px solid rgba(16,185,129,.3)}
 .badge-due{background:rgba(239,68,68,.18);color:#fca5a5;border:1px solid rgba(239,68,68,.4);animation:pulse 2s infinite}
@@ -102,12 +93,10 @@ tr:hover td{background:rgba(255,255,255,.03)}
 .badge-tuition{background:linear-gradient(135deg,rgba(124,58,237,.25),rgba(236,72,153,.25));color:#e9d5ff;border:1px solid rgba(236,72,153,.4)}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.7}}
 
-/* Due */
 .due-cell{display:flex;flex-direction:column;gap:4px}
 .due-formula{font-size:clamp(9px,2.3vw,11px);color:var(--muted);font-family:'Courier New',monospace;background:rgba(0,0,0,.25);padding:3px 7px;border-radius:6px;word-break:break-word}
 .due-total{font-weight:700;color:#fca5a5;font-size:clamp(13px,3.5vw,15px)}
 
-/* Action Row */
 .action-row{display:flex;gap:6px;flex-wrap:wrap}
 .icon-btn{width:38px;height:38px;border-radius:10px;border:none;cursor:pointer;display:grid;place-items:center;transition:.2s;text-decoration:none;flex-shrink:0}
 .icon-btn:hover{transform:translateY(-2px)}
@@ -119,7 +108,6 @@ tr:hover td{background:rgba(255,255,255,.03)}
 .icon-btn.edit{background:rgba(124,58,237,.15);color:#a78bfa}
 .icon-btn.del{background:rgba(239,68,68,.15);color:#fca5a5}
 
-/* Modals */
 .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);display:none;align-items:flex-end;justify-content:center;z-index:100;padding:0}
 .modal-bg.show{display:flex;animation:fade .2s}
 @keyframes fade{from{opacity:0}to{opacity:1}}
@@ -129,21 +117,18 @@ tr:hover td{background:rgba(255,255,255,.03)}
 .modal h3{font-family:'Space Grotesk';margin-bottom:18px;font-size:clamp(18px,4.5vw,22px)}
 .modal-close{float:right;background:none;border:none;color:var(--muted);font-size:28px;cursor:pointer;line-height:1}
 
-/* Class Grid */
 .class-select-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:clamp(10px,2.5vw,14px);margin-bottom:24px}
-.class-pick-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:16px;padding:clamp(14px,3vw,20px);cursor:pointer;transition:.25s;text-align:center}
+.class-pick-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:16px;padding:clamp(14px,3vw,20px);cursor:pointer;transition:.25s;text-align:center;position:relative}
 .class-pick-card:hover{transform:translateY(-3px);border-color:var(--accent)}
 .class-pick-card.selected{background:linear-gradient(135deg,rgba(124,58,237,.25),rgba(236,72,153,.15));border-color:var(--accent);box-shadow:0 8px 24px rgba(124,58,237,.3)}
 .class-pick-card .nm{font-family:'Space Grotesk';font-size:clamp(15px,4vw,18px);font-weight:700;margin-bottom:4px}
 .class-pick-card .info{font-size:clamp(10px,2.5vw,11px);color:var(--muted)}
 .class-pick-card .count{font-size:12px;color:#67e8f9;margin-top:6px}
 
-/* Tuition Banner */
 .tuition-day-banner{background:linear-gradient(135deg,rgba(124,58,237,.2),rgba(236,72,153,.2));border:1px solid rgba(236,72,153,.4);border-radius:14px;padding:clamp(12px,3vw,16px);margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
 .tuition-day-banner.off{background:rgba(0,0,0,.25);border:1px solid var(--glass-border)}
 .tuition-day-banner .txt{font-weight:600;display:flex;align-items:center;gap:10px;font-size:clamp(12px,3.2vw,14px)}
 
-/* Attendance Row */
 .stu-att-row{background:rgba(0,0,0,.2);border:1px solid var(--glass-border);border-radius:14px;padding:clamp(10px,2.5vw,14px);margin-bottom:10px;display:flex;align-items:center;gap:clamp(10px,2.5vw,14px);flex-wrap:wrap;transition:.2s}
 .stu-att-row:hover{border-color:var(--accent)}
 .stu-att-row .info{flex:1;min-width:140px;cursor:pointer}
@@ -157,7 +142,6 @@ tr:hover td{background:rgba(255,255,255,.03)}
 .att-btn.active.present{background:#10b981;color:#fff;box-shadow:0 0 0 2px rgba(16,185,129,.5)}
 .att-btn.active.absent{background:#ef4444;color:#fff;box-shadow:0 0 0 2px rgba(239,68,68,.5)}
 
-/* Profile */
 .profile-header{display:flex;gap:18px;align-items:center;margin-bottom:18px;padding-bottom:18px;border-bottom:1px solid var(--glass-border);flex-wrap:wrap}
 .profile-header .info{flex:1;min-width:140px}
 .profile-header .info h3{margin-bottom:4px;font-size:clamp(18px,4.5vw,22px)}
@@ -168,19 +152,16 @@ tr:hover td{background:rgba(255,255,255,.03)}
 .profile-pane{display:none}
 .profile-pane.active{display:block;animation:slideIn .3s}
 
-/* Info Grid */
 .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:clamp(8px,2vw,14px)}
 .info-item{background:rgba(0,0,0,.25);border-radius:10px;padding:clamp(10px,2.5vw,12px)}
 .info-item .lbl{font-size:clamp(9px,2.3vw,11px);color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
 .info-item .val{font-weight:600;font-size:clamp(12px,3.2vw,14px);word-break:break-word}
 
-/* Month Nav */
 .month-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;background:rgba(0,0,0,.25);border-radius:12px;padding:10px 14px;gap:8px}
 .month-nav button{background:rgba(255,255,255,.08);border:1px solid var(--glass-border);color:var(--text);padding:8px 12px;border-radius:8px;cursor:pointer;font-weight:600;min-width:40px;min-height:40px}
 .month-nav button:hover{background:rgba(255,255,255,.15)}
 .month-nav .mn-label{font-family:'Space Grotesk';font-size:clamp(13px,3.5vw,16px);font-weight:700}
 
-/* Calendar */
 .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:clamp(4px,1vw,6px)}
 .cal-head{font-size:clamp(9px,2.3vw,10px);color:var(--muted);text-align:center;font-weight:700;text-transform:uppercase;padding:6px 0}
 .cal-day{aspect-ratio:1;border-radius:8px;display:grid;place-items:center;background:rgba(255,255,255,.04);font-size:clamp(10px,2.8vw,12px);cursor:pointer;transition:.2s;border:1px solid transparent;position:relative}
@@ -192,50 +173,40 @@ tr:hover td{background:rgba(255,255,255,.03)}
 .cal-day.empty{visibility:hidden}
 .cal-day.future{opacity:.4;cursor:not-allowed}
 
-/* Pay Row */
 .pay-month-row{background:rgba(0,0,0,.25);border-radius:12px;padding:clamp(10px,2.5vw,14px);margin-bottom:8px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
 .pay-month-row .ym{font-weight:700;font-size:clamp(12px,3.2vw,14px);min-width:90px}
 .pay-month-row .amt{font-family:'Space Grotesk';font-weight:700;font-size:clamp(13px,3.5vw,15px)}
 
-/* Toggle */
 .toggle{position:relative;width:44px;height:24px;background:rgba(255,255,255,.1);border-radius:12px;cursor:pointer;transition:.2s;display:inline-block;flex-shrink:0}
 .toggle.on{background:linear-gradient(135deg,var(--accent),var(--accent2))}
 .toggle::after{content:'';position:absolute;width:18px;height:18px;background:#fff;border-radius:50%;top:3px;left:3px;transition:.2s}
 .toggle.on::after{left:23px}
 
-/* Search Bar */
 .search-bar{display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap}
 .search-bar input,.search-bar select{padding:clamp(10px,2.5vw,12px) 14px;border-radius:10px;background:rgba(0,0,0,.25);border:1px solid var(--glass-border);color:var(--text);font:400 clamp(12px,3.2vw,13px) 'Inter';min-height:44px;flex:1;min-width:120px}
 
-/* Pages */
 .page{display:none;animation:slideIn .4s}
 .page.active{display:block}
 @keyframes slideIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 
-/* Empty */
 .empty-state{text-align:center;padding:clamp(30px,8vw,60px) 20px;color:var(--muted)}
 .empty-state .big{font-size:clamp(40px,12vw,60px);margin-bottom:14px;opacity:.3}
 
-/* Toast */
 .toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);padding:12px 20px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;font-weight:500;font-size:13px;z-index:200;box-shadow:0 10px 30px rgba(0,0,0,.3);animation:toastIn .3s;display:none;max-width:90%;text-align:center}
 .toast.show{display:block}
 @keyframes toastIn{from{transform:translate(-50%,20px);opacity:0}to{transform:translate(-50%,0);opacity:1}}
 
-/* Class Card */
 .class-card{background:rgba(0,0,0,.2);border:1px solid var(--glass-border);border-radius:14px;padding:clamp(12px,3vw,16px);margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .code-box{background:rgba(0,0,0,.35);border:1px solid var(--glass-border);border-radius:10px;padding:10px;font-family:'Courier New',monospace;font-size:clamp(10px,2.5vw,12px);color:#67e8f9;white-space:pre-wrap;word-break:break-all;margin:8px 0}
 
-/* Loading */
 .loading-screen{position:fixed;inset:0;background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));display:grid;place-items:center;z-index:999}
 .spinner{width:50px;height:50px;border:3px solid rgba(255,255,255,.1);border-top-color:var(--accent);border-radius:50%;animation:spin 1s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* Day Chips */
 .day-toggle{display:inline-flex;gap:4px;flex-wrap:wrap;margin-top:6px}
 .day-chip{padding:8px 12px;border-radius:8px;background:rgba(255,255,255,.06);border:1px solid var(--glass-border);font-size:clamp(10px,2.8vw,12px);cursor:pointer;font-weight:600;transition:.2s;user-select:none;min-height:36px;display:grid;place-items:center}
 .day-chip.on{background:linear-gradient(135deg,var(--accent),var(--accent2));border-color:transparent;color:#fff}
 
-/* UPI */
 .upi-box{background:linear-gradient(135deg,rgba(16,185,129,.15),rgba(6,182,212,.15));border:1px solid rgba(16,185,129,.3);border-radius:16px;padding:clamp(14px,3vw,20px);margin-top:18px}
 .upi-box h4{font-family:'Space Grotesk';margin-bottom:14px;display:flex;align-items:center;gap:10px;font-size:clamp(15px,4vw,17px)}
 .upi-details{display:grid;grid-template-columns:1fr auto;gap:clamp(12px,3vw,20px);align-items:center}
@@ -245,7 +216,6 @@ tr:hover td{background:rgba(255,255,255,.03)}
 .upi-qr{text-align:center;background:#fff;padding:10px;border-radius:12px;flex-shrink:0}
 .upi-qr img{display:block;width:clamp(120px,30vw,180px);height:auto}
 
-/* About */
 .about-section{background:var(--glass);backdrop-filter:blur(14px);border:1px solid var(--glass-border);border-radius:24px;padding:clamp(20px,5vw,40px);text-align:center}
 .about-avatar{width:clamp(80px,20vw,120px);height:clamp(80px,20vw,120px);border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:grid;place-items:center;margin:0 auto 20px;font-size:clamp(28px,8vw,40px);font-weight:700;box-shadow:0 8px 32px rgba(124,58,237,.4);overflow:hidden}
 .about-avatar img{width:100%;height:100%;object-fit:cover}
@@ -257,7 +227,6 @@ tr:hover td{background:rgba(255,255,255,.03)}
 .about-contact:hover{transform:translateY(-3px);border-color:var(--accent);background:rgba(0,0,0,.4)}
 .about-contact svg{flex-shrink:0;width:20px;height:20px}
 
-/* Backup Schedule */
 .backup-schedule{background:rgba(0,0,0,.2);border:1px solid var(--glass-border);border-radius:14px;padding:clamp(12px,3vw,18px);margin-top:14px}
 .schedule-row{display:flex;align-items:center;justify-content:space-between;padding:clamp(10px,2.5vw,14px);background:rgba(0,0,0,.2);border-radius:12px;margin-bottom:10px;flex-wrap:wrap;gap:12px}
 .schedule-row:last-child{margin-bottom:0}
@@ -265,37 +234,42 @@ tr:hover td{background:rgba(255,255,255,.03)}
 .schedule-row .sub{font-size:clamp(10px,2.5vw,11px);color:var(--muted)}
 .schedule-row select,.schedule-row input[type="time"]{padding:8px 12px;border-radius:8px;background:rgba(0,0,0,.3);border:1px solid var(--glass-border);color:var(--text);font:500 clamp(11px,3vw,13px) 'Inter';min-height:40px}
 
-/* Monthly Banner */
 .monthly-banner{background:linear-gradient(135deg,rgba(245,158,11,.2),rgba(236,72,153,.15));border:1px solid rgba(245,158,11,.4);border-radius:14px;padding:clamp(12px,3vw,18px);margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
 .monthly-banner h4{font-family:'Space Grotesk';margin-bottom:4px;font-size:clamp(13px,3.5vw,15px)}
 .monthly-banner p{font-size:clamp(10px,2.5vw,12px);color:var(--muted)}
 
-/* ==================== MOBILE RESPONSIVE ==================== */
+/* ROUTINE PREVIEW MODAL (NEW) */
+.routine-preview{background:linear-gradient(135deg,#1e1b4b,#312e81);border:1px solid var(--glass-border);border-radius:22px;padding:clamp(20px,4vw,28px);max-width:480px;width:100%;animation:pop .3s cubic-bezier(.34,1.56,.64,1)}
+.routine-preview h3{font-family:'Space Grotesk';margin-bottom:6px;font-size:clamp(18px,4.5vw,22px)}
+.routine-preview .class-sub{color:var(--muted);font-size:12px;margin-bottom:18px}
+.routine-info{background:rgba(0,0,0,.3);border:1px solid var(--glass-border);border-radius:14px;padding:16px;margin-bottom:14px}
+.routine-info .r-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.routine-info .r-days{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.routine-info .r-time{font-family:'Space Grotesk';font-size:20px;font-weight:700;color:#e9d5ff}
+.routine-info .r-fine{font-size:13px;color:var(--muted);margin-top:8px}
+.routine-info .r-fine b{color:#fca5a5}
+.routine-days-display{display:flex;gap:6px;flex-wrap:wrap}
+.routine-day-pill{padding:6px 12px;border-radius:20px;background:linear-gradient(135deg,rgba(124,58,237,.25),rgba(236,72,153,.25));border:1px solid rgba(236,72,153,.4);color:#e9d5ff;font-size:12px;font-weight:600}
+.routine-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+
+/* MOBILE */
 @media (max-width: 768px) {
-  /* Mobile: Bottom Navigation Bar */
   .app{grid-template-columns:1fr}
   .sidebar{position:fixed;top:0;left:-100%;width:85%;max-width:320px;height:100vh;z-index:1000;transition:left .3s ease;padding-top:60px;box-shadow:4px 0 30px rgba(0,0,0,.5)}
   .sidebar.open{left:0}
-  .sidebar-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:999;display:none;backdrop-filter:blur(2px)}
+  .sidebar-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:999;display:none}
   .sidebar-overlay.show{display:block}
-  
-  /* Hamburger Menu Button */
   .menu-toggle{position:fixed;top:14px;left:14px;z-index:998;width:44px;height:44px;border-radius:12px;background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--glass-border);display:grid;place-items:center;cursor:pointer;color:var(--text);font-size:20px;box-shadow:0 4px 12px rgba(0,0,0,.3)}
   .menu-toggle:hover{background:rgba(255,255,255,.15)}
-  
-  /* Bottom Navigation */
   .bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:rgba(15,12,41,.95);backdrop-filter:blur(20px);border-top:1px solid var(--glass-border);display:grid;grid-template-columns:repeat(5,1fr);padding:8px 4px;padding-bottom:calc(8px + env(safe-area-inset-bottom));box-shadow:0 -4px 20px rgba(0,0,0,.3)}
   .bottom-nav-btn{display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 4px;background:none;border:none;color:var(--muted);cursor:pointer;transition:.2s;border-radius:10px;min-height:56px}
   .bottom-nav-btn.active{color:var(--accent2)}
   .bottom-nav-btn svg{width:20px;height:20px}
   .bottom-nav-btn .lbl{font-size:9px;font-weight:600;letter-spacing:.3px}
-  
   .main{padding:clamp(16px,3vw,24px);padding-top:70px;padding-bottom:100px}
-  
   .user-box{display:none}
   .page-head .btn{font-size:11px;padding:8px 12px}
   
-  /* Mobile Cards Layout for Students Table */
   .mobile-cards .m-card{background:rgba(0,0,0,.25);border:1px solid var(--glass-border);border-radius:14px;padding:14px;margin-bottom:10px;display:flex;gap:12px;align-items:flex-start}
   .mobile-cards .m-card .photo{width:50px;height:50px;font-size:18px;flex-shrink:0}
   .mobile-cards .m-card .body{flex:1;min-width:0}
@@ -310,7 +284,6 @@ tr:hover td{background:rgba(255,255,255,.03)}
   .att-btn{flex:1}
 }
 
-/* Desktop/Tablet */
 @media (min-width: 769px) {
   .menu-toggle{display:none}
   .bottom-nav{display:none}
@@ -319,7 +292,6 @@ tr:hover td{background:rgba(255,255,255,.03)}
   .tbl-wrap{display:block}
 }
 
-/* Very small screens */
 @media (max-width: 380px) {
   .main{padding:12px;padding-top:60px;padding-bottom:90px}
   .stat{padding:12px}
@@ -330,12 +302,10 @@ tr:hover td{background:rgba(255,255,255,.03)}
 <body>
 <div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div>
 
-<!-- Loading -->
 <div class="loading-screen" id="loadingScreen">
   <div style="text-align:center"><div class="spinner"></div><p style="margin-top:20px;color:var(--muted)">Loading TuitionPro...</p></div>
 </div>
 
-<!-- Login -->
 <div class="login-wrap" id="loginScreen" style="display:none">
   <div class="login-card">
     <div style="text-align:center;font-size:48px;margin-bottom:10px">🎓</div>
@@ -354,11 +324,9 @@ tr:hover td{background:rgba(255,255,255,.03)}
   </div>
 </div>
 
-<!-- Menu Toggle (Mobile Only) -->
 <button class="menu-toggle" id="menuToggle" onclick="toggleSidebar()" style="display:none">☰</button>
 <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
 
-<!-- Main App -->
 <div class="app" id="mainApp">
   <aside class="sidebar" id="sidebar">
     <div class="logo"><div class="logo-icon">🎓</div><h1>Tuition<span>Pro</span></h1></div>
@@ -370,7 +338,7 @@ tr:hover td{background:rgba(255,255,255,.03)}
     <button class="nav-btn" data-page="backup"><span class="ic">💾</span> Backup</button>
     <button class="nav-btn" data-page="about"><span class="ic">ℹ️</span> About Us</button>
     <div class="user-box">
-      <div style="font-size:11px;color:var(--muted);margin-bottom:4px">Logged in as</div>
+      <div class="lbl">Logged in as</div>
       <div class="mail" id="userEmail"></div>
       <button class="btn btn-danger btn-sm" style="width:100%" onclick="doLogout()">🚪 Logout</button>
     </div>
@@ -393,6 +361,7 @@ tr:hover td{background:rgba(255,255,255,.03)}
       <div class="card">
         <h3 style="margin-bottom:14px;font-family:'Space Grotesk';font-size:clamp(15px,4vw,18px)">⚠️ Students with Pending Fees</h3>
         <div class="tbl-wrap"><table id="dashDueTbl"><thead><tr><th>Student</th><th>Class</th><th>Due</th><th>Action</th></tr></thead><tbody></tbody></table></div>
+        <div class="mobile-cards" id="dashDueCards"></div>
         <div id="dashDueEmpty" class="empty-state" style="display:none;padding:30px"><div class="big">🎉</div>All fees are paid!</div>
       </div>
     </section>
@@ -417,7 +386,7 @@ tr:hover td{background:rgba(255,255,255,.03)}
 
     <!-- Attendance -->
     <section class="page" id="attendance">
-      <div class="page-head"><div><h2>Smart <span>Attendance</span></h2><p>Choose a class below</p></div></div>
+      <div class="page-head"><div><h2>Smart <span>Attendance</span></h2><p>Tap a class to check routine, then start</p></div></div>
       <div id="attStep1"><div class="class-select-grid" id="attClassGrid"></div></div>
       <div id="attStep2" style="display:none">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:10px">
@@ -464,7 +433,6 @@ tr:hover td{background:rgba(255,255,255,.03)}
     <!-- Backup -->
     <section class="page" id="backup">
       <div class="page-head"><div><h2>Backup & <span>Settings</span></h2></div></div>
-      
       <div class="card">
         <h3 style="margin-bottom:12px;font-family:'Space Grotesk';font-size:clamp(15px,4vw,18px)">💾 Manual Backup</h3>
         <p style="color:var(--muted);font-size:12px;margin-bottom:14px">Download or email your data anytime</p>
@@ -475,15 +443,14 @@ tr:hover td{background:rgba(255,255,255,.03)}
         </div>
         <p style="color:var(--muted);font-size:11px;margin-top:12px">Last backup: <b id="lastBackup">Never</b></p>
       </div>
-
       <div class="card">
-        <h3 style="margin-bottom:6px;font-family:'Space Grotesk';font-size:clamp(15px,4vw,18px)">📧 Email Backup (EmailJS)</h3>
+        <h3 style="margin-bottom:6px;font-family:'Space Grotesk';font-size:clamp(15px,4vw,18px)">📧 Email Backup</h3>
         <p style="color:var(--muted);font-size:12px;margin-bottom:14px">Bind email for auto backups</p>
         <div class="form-grid">
-          <div class="field"><label>Your Email</label><input id="emailTo" placeholder="you@gmail.com"/></div>
-          <div class="field"><label>Service ID</label><input id="emailService" placeholder="service_xxx"/></div>
-          <div class="field"><label>Template ID</label><input id="emailTemplate" placeholder="template_xxx"/></div>
-          <div class="field"><label>Public Key</label><input id="emailKey" placeholder="AbCdEf123"/></div>
+          <div class="field"><label>Your Email</label><input id="emailTo"/></div>
+          <div class="field"><label>Service ID</label><input id="emailService"/></div>
+          <div class="field"><label>Template ID</label><input id="emailTemplate"/></div>
+          <div class="field"><label>Public Key</label><input id="emailKey"/></div>
         </div>
         <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap">
           <button class="btn btn-ghost" onclick="saveEmailSettings()">💾 Save</button>
@@ -491,13 +458,11 @@ tr:hover td{background:rgba(255,255,255,.03)}
           <button class="btn btn-primary" onclick="emailBackup()">📧 Email Backup</button>
         </div>
       </div>
-
       <div class="card">
-        <h3 style="margin-bottom:12px;font-family:'Space Grotesk';font-size:clamp(15px,4vw,18px)">⏰ Auto Backup Schedule</h3>
-        <p style="color:var(--muted);font-size:12px;margin-bottom:14px">Default: every day at 12am</p>
+        <h3 style="margin-bottom:12px;font-family:'Space Grotesk';font-size:clamp(15px,4vw,18px)">⏰ Auto Backup</h3>
         <div class="backup-schedule">
           <div class="schedule-row">
-            <div><div class="lbl">Backup Frequency</div><div class="sub">How often to backup</div></div>
+            <div><div class="lbl">Frequency</div><div class="sub">How often</div></div>
             <select id="backupFreq" onchange="saveBackupSettings()">
               <option value="daily">Every Day</option>
               <option value="weekly">Every Week</option>
@@ -506,19 +471,17 @@ tr:hover td{background:rgba(255,255,255,.03)}
             </select>
           </div>
           <div class="schedule-row">
-            <div><div class="lbl">Backup Time</div><div class="sub">Default 00:00 (12 AM)</div></div>
+            <div><div class="lbl">Backup Time</div><div class="sub">Default 00:00</div></div>
             <input type="time" id="backupTime" value="00:00" onchange="saveBackupSettings()"/>
           </div>
           <div class="schedule-row">
-            <div><div class="lbl">Monthly Reminder</div><div class="sub">Alert on 1st of every month</div></div>
+            <div><div class="lbl">Monthly Reminder</div><div class="sub">1st of every month</div></div>
             <span class="toggle on" id="monthlyReminder" onclick="toggleMonthlyReminder()"></span>
           </div>
         </div>
       </div>
-
       <div class="card">
         <h3 style="margin-bottom:12px;font-family:'Space Grotesk';font-size:clamp(15px,4vw,18px)">💳 UPI Settings</h3>
-        <p style="color:var(--muted);font-size:12px;margin-bottom:14px">Shown in fee reminder messages</p>
         <div class="form-grid">
           <div class="field"><label>UPI ID</label><input id="upiId" value="arho065-1@okicici"/></div>
           <div class="field"><label>UPI Phone</label><input id="upiPhone" value="9564385573"/></div>
@@ -527,13 +490,11 @@ tr:hover td{background:rgba(255,255,255,.03)}
       </div>
     </section>
 
-    <!-- About Us -->
+    <!-- About -->
     <section class="page" id="about">
-      <div class="page-head"><div><h2>About <span>Us</span></h2><p>The team behind TuitionPro</p></div></div>
+      <div class="page-head"><div><h2>About <span>Us</span></h2></div></div>
       <div class="about-section">
-        <div class="about-avatar">
-          <img src="https://i.ibb.co/ycsPZbXS/arifforweb-jpg.jpg" alt="Arif Hussain" onerror="this.style.display='none';this.parentNode.textContent='AH'"/>
-        </div>
+        <div class="about-avatar"><img src="https://i.ibb.co/ycsPZbXS/arifforweb-jpg.jpg" alt="Arif Hussain" onerror="this.style.display='none';this.parentNode.textContent='AH'"/></div>
         <h2>Arif Hussain</h2>
         <p class="role">Creator & Developer — TuitionPro</p>
         <p class="desc">বেলডাঙ্গা, মুর্শিদাবাদ থেকে পরিচালিত। পরীক্ষার্থীদের জন্য সঠিক ও মানসম্মত পড়াশোনাকে কার্যকর করাই লক্ষ্য।</p>
@@ -555,11 +516,10 @@ tr:hover td{background:rgba(255,255,255,.03)}
     </section>
   </main>
 
-  <!-- Bottom Navigation (Mobile) -->
   <nav class="bottom-nav" id="bottomNav">
     <button class="bottom-nav-btn active" data-page="dashboard">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l9-9 9 9M5 10v10h14V10"/></svg>
-      <span class="lbl">Dashboard</span>
+      <span class="lbl">Home</span>
     </button>
     <button class="bottom-nav-btn" data-page="students">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
@@ -594,7 +554,7 @@ tr:hover td{background:rgba(255,255,255,.03)}
         <div class="field"><label>Admission Date *</label><input type="date" id="stuAdm" required/></div>
         <div class="field"><label>Mobile</label><input id="stuMobile"/></div>
         <div class="field"><label>WhatsApp</label><input id="stuWa"/></div>
-        <div class="field"><label>Instagram</label><input id="stuIg" placeholder="@username"/></div>
+        <div class="field"><label>Instagram</label><input id="stuIg"/></div>
         <div class="field"><label>Photo</label><input type="file" id="stuPhoto" accept="image/*"/></div>
       </div>
       <div style="display:flex;gap:10px;margin-top:20px;justify-content:flex-end;flex-wrap:wrap">
@@ -631,6 +591,29 @@ tr:hover td{background:rgba(255,255,255,.03)}
   </div>
 </div>
 
+<!-- Routine Preview Modal (NEW) -->
+<div class="modal-bg" id="routineModal" style="align-items:center">
+  <div class="routine-preview">
+    <button class="modal-close" onclick="closeModal('routineModal')">×</button>
+    <h3 id="routineClassName">Class Routine</h3>
+    <p class="class-sub" id="routineStudentCount">0 students</p>
+    <div class="routine-info">
+      <div class="r-label">📅 Tuition Days</div>
+      <div class="routine-days-display" id="routineDaysDisplay"></div>
+    </div>
+    <div class="routine-info">
+      <div class="r-label">🕐 Class Time</div>
+      <div class="r-time" id="routineTimeDisplay">Not set</div>
+      <div class="r-fine" id="routineFineDisplay"></div>
+    </div>
+    <div class="routine-actions">
+      <button class="btn btn-primary" style="flex:1" onclick="startAttendanceFromRoutine()">▶️ Start Attendance</button>
+      <button class="btn btn-ghost" style="flex:1" onclick="editRoutineClass()">✏️ Edit Routine</button>
+    </div>
+    <button class="btn btn-ghost btn-sm" style="width:100%;margin-top:8px" onclick="closeModal('routineModal');renderAttClassGrid()">← Back to classes</button>
+  </div>
+</div>
+
 <!-- Profile Modal -->
 <div class="modal-bg" id="profileModal">
   <div class="modal">
@@ -639,7 +622,7 @@ tr:hover td{background:rgba(255,255,255,.03)}
     <div class="profile-tabs">
       <button class="profile-tab active" data-tab="info" onclick="switchProfileTab('info')">ℹ️ Info</button>
       <button class="profile-tab" data-tab="att" onclick="switchProfileTab('att')">📅 Att.</button>
-      <button class="profile-tab" data-tab="pay" onclick="switchProfileTab('pay')">💰 Payments</button>
+      <button class="profile-tab" data-tab="pay" onclick="switchProfileTab('pay')">💰 Pay</button>
     </div>
     <div class="profile-pane active" id="pane-info"></div>
     <div class="profile-pane" id="pane-att"></div>
@@ -664,7 +647,6 @@ tr:hover td{background:rgba(255,255,255,.03)}
 
 <div class="toast" id="toast"></div>
 
-<!-- Official Brand SVG Icons (used in alerts) -->
 <svg style="display:none">
   <symbol id="icon-wa" viewBox="0 0 24 24"><path fill="#25D366" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.297-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></symbol>
   <symbol id="icon-ig" viewBox="0 0 24 24"><defs><linearGradient id="igGrad" x1="0" y1="100" x2="100" y2="0"><stop offset="0" stop-color="#FFC107"/><stop offset=".5" stop-color="#F44336"/><stop offset="1" stop-color="#9C27B0"/></linearGradient></defs><path fill="url(#igGrad)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></symbol>
@@ -694,13 +676,9 @@ const db = firebase.firestore();
 
 let currentUser = null;
 let DB = { students:[], classes:{}, settings:{backupFreq:'daily',backupTime:'00:00',lastBackup:null,monthlyReminder:true,email:{},upi:{id:'arho065-1@okicici',phone:'9564385573'}} };
-let unsubscribe = null;
-let savingTimer = null;
-let isSaving = false;
-let currentAttClass = null;
-let currentProfileId = null;
-let profileMonth = new Date();
-let autoBackupInterval = null;
+let unsubscribe = null, savingTimer = null, isSaving = false;
+let currentAttClass = null, currentProfileId = null, profileMonth = new Date(), autoBackupInterval = null;
+let pendingRoutineClass = null;
 
 const DAY_NAMES = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 const DAY_FULL = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
@@ -711,16 +689,8 @@ const todayYM=()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getM
 const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2600);}
 function closeModal(id){document.getElementById(id).classList.remove('show')}
+function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('sidebarOverlay').classList.toggle('show')}
 
-/* Sidebar Toggle */
-function toggleSidebar(){
-  const sb = document.getElementById('sidebar');
-  const ov = document.getElementById('sidebarOverlay');
-  sb.classList.toggle('open');
-  ov.classList.toggle('show');
-}
-
-/* AUTH */
 let authMode = 'login';
 function switchTab(mode){
   authMode = mode;
@@ -749,9 +719,7 @@ auth.onAuthStateChanged(async (user) => {
     document.getElementById('mainApp').classList.add('show');
     document.getElementById('menuToggle').style.display = '';
     document.getElementById('userEmail').textContent = user.email;
-    startCloudSync();
-    startAutoBackupTimer();
-    checkMonthlyReminder();
+    startCloudSync(); startAutoBackupTimer(); checkMonthlyReminder();
   } else {
     currentUser = null;
     if(unsubscribe){ unsubscribe(); unsubscribe=null; }
@@ -789,9 +757,7 @@ async function startCloudSync(){
       renderAll();
     }
   });
-  renderAll();
-  loadUPISettings();
-  loadBackupSettings();
+  renderAll(); loadUPISettings(); loadBackupSettings();
 }
 function saveToCloud(){
   if(!currentUser) return;
@@ -804,23 +770,17 @@ function saveToCloud(){
   }, 500);
 }
 
-/* NAV - both sidebar and bottom nav */
 document.querySelectorAll('.nav-btn, .bottom-nav-btn').forEach(b=>{b.onclick=()=>{
   document.querySelectorAll('.nav-btn, .bottom-nav-btn').forEach(x=>x.classList.remove('active'));
   document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
   document.querySelectorAll(`[data-page="${b.dataset.page}"]`).forEach(x=>x.classList.add('active'));
   document.getElementById(b.dataset.page).classList.add('active');
   if(b.dataset.page==='attendance'){ currentAttClass=null; document.getElementById('attStep1').style.display=''; document.getElementById('attStep2').style.display='none'; renderAttClassGrid(); }
-  // Close sidebar on mobile
-  if(window.innerWidth<=768){
-    document.getElementById('sidebar').classList.remove('open');
-    document.getElementById('sidebarOverlay').classList.remove('show');
-  }
+  if(window.innerWidth<=768){document.getElementById('sidebar').classList.remove('open');document.getElementById('sidebarOverlay').classList.remove('show');}
   window.scrollTo({top:0,behavior:'smooth'});
   renderAll();
 };});
 
-/* AUTO BACKUP */
 function startAutoBackupTimer(){
   if(autoBackupInterval) clearInterval(autoBackupInterval);
   autoBackupInterval = setInterval(() => {
@@ -849,18 +809,11 @@ async function doAutoBackup(){
     emailjs.init({publicKey:c.publicKey});
     const slim = JSON.parse(JSON.stringify(DB));
     slim.students.forEach(s=>s.photo='');
-    await emailjs.send(c.serviceId,c.templateId,{
-      to_email:c.toEmail,
-      subject:'🤖 Auto Backup - '+new Date().toLocaleString('en-IN'),
-      message:JSON.stringify(slim,null,2)
-    });
+    await emailjs.send(c.serviceId,c.templateId,{to_email:c.toEmail,subject:'🤖 Auto Backup - '+new Date().toLocaleString('en-IN'),message:JSON.stringify(slim,null,2)});
     DB.settings.lastBackup = new Date().toISOString();
-    saveToCloud();
-    toast('🤖 Auto backup sent');
+    saveToCloud(); toast('🤖 Auto backup sent');
   }catch(e){ console.error(e); }
 }
-
-/* MONTHLY REMINDER */
 function checkMonthlyReminder(){
   if(!DB.settings.monthlyReminder) return;
   const now = new Date();
@@ -869,25 +822,17 @@ function checkMonthlyReminder(){
   if(lastAlert === key) return;
   if(now.getDate() <= 3){
     localStorage.setItem('lastMonthlyAlert', key);
-    setTimeout(() => {
-      document.querySelector('[data-page="dashboard"]').click();
-      renderMonthlyBanner();
-    }, 1500);
+    setTimeout(() => { document.querySelector('[data-page="dashboard"]').click(); renderMonthlyBanner(); }, 1500);
   }
 }
 function renderMonthlyBanner(){
   const now = new Date();
-  const banner = document.getElementById('monthlyAlertBanner');
-  banner.innerHTML = `<div class="monthly-banner">
-    <div>
-      <h4>📅 New Month — ${MONTH_NAMES[now.getMonth()]} ${now.getFullYear()}</h4>
-      <p>Time to collect this month's fees and backup!</p>
-    </div>
+  document.getElementById('monthlyAlertBanner').innerHTML = `<div class="monthly-banner">
+    <div><h4>📅 New Month — ${MONTH_NAMES[now.getMonth()]} ${now.getFullYear()}</h4><p>Time to collect fees and backup!</p></div>
     <div style="display:flex;gap:8px;flex-wrap:wrap">
       <button class="btn btn-primary btn-sm" onclick="backupNow()">💾 Backup</button>
       <button class="btn btn-ghost btn-sm" onclick="this.closest('.monthly-banner').remove()">✕</button>
-    </div>
-  </div>`;
+    </div></div>`;
 }
 function toggleMonthlyReminder(){
   const t = document.getElementById('monthlyReminder');
@@ -895,42 +840,30 @@ function toggleMonthlyReminder(){
   DB.settings.monthlyReminder = t.classList.contains('on');
   saveBackupSettings();
 }
-
-/* BACKUP SETTINGS */
 function loadBackupSettings(){
   document.getElementById('backupFreq').value = DB.settings.backupFreq || 'daily';
   document.getElementById('backupTime').value = DB.settings.backupTime || '00:00';
-  const t = document.getElementById('monthlyReminder');
-  t.classList.toggle('on', DB.settings.monthlyReminder !== false);
+  document.getElementById('monthlyReminder').classList.toggle('on', DB.settings.monthlyReminder !== false);
   if(DB.settings.lastBackup) document.getElementById('lastBackup').textContent = new Date(DB.settings.lastBackup).toLocaleString('en-IN');
 }
 function saveBackupSettings(){
   DB.settings.backupFreq = document.getElementById('backupFreq').value;
   DB.settings.backupTime = document.getElementById('backupTime').value;
   DB.settings.monthlyReminder = document.getElementById('monthlyReminder').classList.contains('on');
-  saveToCloud();
-  startAutoBackupTimer();
-  toast('✅ Saved');
+  saveToCloud(); startAutoBackupTimer(); toast('✅ Saved');
 }
-
-/* UPI */
 function loadUPISettings(){
   document.getElementById('upiId').value = DB.settings.upi?.id || 'arho065-1@okicici';
   document.getElementById('upiPhone').value = DB.settings.upi?.phone || '9564385573';
 }
 function saveUPISettings(){
-  DB.settings.upi = {
-    id: document.getElementById('upiId').value.trim(),
-    phone: document.getElementById('upiPhone').value.trim()
-  };
-  saveToCloud();
-  toast('✅ UPI saved');
+  DB.settings.upi = {id:document.getElementById('upiId').value.trim(),phone:document.getElementById('upiPhone').value.trim()};
+  saveToCloud(); toast('✅ UPI saved');
 }
 function getUPIString(amount){
   const u = DB.settings.upi || {};
   if(!u.id) return '';
-  let s = `\n\n💳 *Pay via UPI:*\n`;
-  s += `📱 UPI ID: ${u.id}\n`;
+  let s = `\n\n💳 *Pay via UPI:*\n📱 UPI ID: ${u.id}\n`;
   if(u.phone) s += `📞 Phone: ${u.phone}\n`;
   if(amount) s += `💰 Amount: ₹${amount}\n`;
   s += `\n*If you want, you can even pay with UPI* 🙏`;
@@ -943,21 +876,24 @@ function getUPIQRLink(amount){
   if(amount) upi += `&am=${amount}&cu=INR`;
   return `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upi)}`;
 }
-
-/* HELPERS */
 function isTuitionDay(dateISO, className){
   const cls = DB.classes[className];
   if(!cls || !cls.days || cls.days.length===0) return true;
-  const d = new Date(dateISO).getDay();
-  return cls.days.includes(d);
+  return cls.days.includes(new Date(dateISO).getDay());
 }
 function formatDateShort(iso){
   if(!iso) return '';
   const d = new Date(iso);
   return `${d.getDate()} ${MONTH_NAMES[d.getMonth()].slice(0,3)} ${d.getFullYear()}`;
 }
+function formatTime12(t){
+  if(!t) return 'Not set';
+  const [h,m] = t.split(':').map(Number);
+  const ampm = h>=12?'PM':'AM';
+  const h12 = h%12||12;
+  return `${h12}:${String(m).padStart(2,'0')} ${ampm}`;
+}
 
-/* WIPE */
 function openWipeModal(){ document.getElementById('wipeInput').value=''; document.getElementById('wipeConfirmBtn').disabled=true; document.getElementById('wipeModal').classList.add('show'); }
 document.getElementById('wipeInput').addEventListener('input',e=>{ document.getElementById('wipeConfirmBtn').disabled = e.target.value.trim().toLowerCase()!=='wipe out all data'; });
 function doWipe(){
@@ -966,7 +902,6 @@ function doWipe(){
   saveToCloud();renderAll();closeModal('wipeModal');toast('🗑️ Wiped');
 }
 
-/* STUDENTS */
 function openStudentModal(id=null){
   if(Object.keys(DB.classes).length===0){ DB.classes['General']={days:[],time:'',fineEnabled:false,fineAmount:10}; saveToCloud(); }
   const sel=document.getElementById('stuClass');
@@ -1002,11 +937,12 @@ function saveStudent(e){
 }
 function deleteStudent(id){if(!confirm('Delete this student?'))return;DB.students=DB.students.filter(x=>x.id!==id);saveToCloud();renderAll();toast('🗑️ Deleted');}
 
-/* CLASS MODAL */
 let editingClassDays = [];
-function openClassModal(origName=null){
+let afterClassSaveCallback = null;
+function openClassModal(origName=null, callback=null){
   document.getElementById('clsOrigName').value = origName||'';
   document.getElementById('clsModalTitle').textContent = origName?'✏️ Edit Class':'➕ Add Class';
+  afterClassSaveCallback = callback;
   if(origName){
     const c = DB.classes[origName];
     document.getElementById('clsName').value = origName;
@@ -1042,10 +978,10 @@ function saveClass(){
     fineAmount: +document.getElementById('clsFine').value || 10
   };
   saveToCloud();closeModal('classModal');renderAll();toast('✅ Saved');
+  if(afterClassSaveCallback){ afterClassSaveCallback(name); afterClassSaveCallback=null; }
 }
 function deleteClass(name){ if(!confirm(`Delete "${name}"?`))return; delete DB.classes[name]; saveToCloud();renderAll(); }
 
-/* DUES */
 function getDueMonths(stu){
   const adm=new Date(stu.admission);const now=new Date();let months=[];
   let cur=new Date(adm.getFullYear(),adm.getMonth(),1);const end=new Date(now.getFullYear(),now.getMonth(),1);
@@ -1071,7 +1007,6 @@ function feeMessage(s){
 function photoHTML(s,lg=false){
   if(s.photo)return `<div class="photo ${lg?'lg':''}"><img src="${s.photo}"/></div>`;
   return `<div class="photo ${lg?'lg':''}">${s.name.charAt(0).toUpperCase()}</div>`;}
-
 function alertButtons(s){
   const msg = feeMessage(s);
   const waNum=(s.wa||s.mobile||'').replace(/\D/g,'');
@@ -1087,7 +1022,6 @@ function alertButtons(s){
   </div>`;
 }
 
-/* RENDER ALL */
 function renderAll(){
   renderDashboard();renderStudents();renderAttClassGrid();renderFees();renderClasses();loadEmailSettings();
   const classes=Object.keys(DB.classes);
@@ -1111,11 +1045,25 @@ function renderDashboard(){
   });
   document.getElementById('sAtt').textContent=(marked?Math.round(present/marked*100):0)+'%';
   document.getElementById('sAttSub').textContent=marked?`${present}/${marked} present`:'Not marked';
+  
   const tbody=document.querySelector('#dashDueTbl tbody');tbody.innerHTML='';
   dueStudents.sort((a,b)=>b.due-a.due).slice(0,10).forEach(({s,due})=>{
     tbody.innerHTML+=`<tr><td><div style="display:flex;align-items:center;gap:10px">${photoHTML(s)}<b style="cursor:pointer" onclick="openProfile('${s.id}')">${s.name}</b></div></td>
     <td><span class="badge badge-class">${s.class}</span></td><td><span class="badge badge-due">₹${due.toLocaleString('en-IN')}</span></td>
     <td>${alertButtons(s)}</td></tr>`;});
+  
+  // Mobile cards for pending fees (FIX)
+  const cards = document.getElementById('dashDueCards');
+  cards.innerHTML = dueStudents.sort((a,b)=>b.due-a.due).slice(0,10).map(({s,due})=>`
+    <div class="m-card">
+      ${photoHTML(s)}
+      <div class="body">
+        <div class="nm" onclick="openProfile('${s.id}')">${s.name}</div>
+        <div class="meta"><span class="badge badge-class">${s.class}</span><span class="badge badge-due">₹${due.toLocaleString('en-IN')} due</span></div>
+        <div class="actions">${alertButtons(s)}</div>
+      </div>
+    </div>`).join('');
+  
   document.getElementById('dashDueEmpty').style.display=dueStudents.length?'none':'block';
   document.getElementById('dashDueTbl').style.display=dueStudents.length?'':'none';
 }
@@ -1131,7 +1079,6 @@ function renderStudents(){
   if(sort==='admission')list.sort((a,b)=>new Date(a.admission)-new Date(b.admission));
   if(sort==='due')list.sort((a,b)=>(getDueMonths(b).length*b.fee+getFineTotal(b))-(getDueMonths(a).length*a.fee+getFineTotal(a)));
   
-  // Desktop table
   const tbody=document.querySelector('#studentsTbl tbody');
   tbody.innerHTML=list.map(s=>`<tr>
     <td>${photoHTML(s)}</td>
@@ -1145,7 +1092,6 @@ function renderStudents(){
       <button class="icon-btn del" onclick="deleteStudent('${s.id}')"><svg viewBox="0 0 24 24"><use href="#icon-del"/></svg></button>
     </div></td></tr>`).join('');
   
-  // Mobile cards
   const cards = document.getElementById('studentsCards');
   cards.innerHTML = list.map(s=>`<div class="m-card">
     ${photoHTML(s)}
@@ -1167,7 +1113,7 @@ function renderStudents(){
   document.getElementById('stuEmpty').style.display=list.length?'none':'block';
 }
 
-/* ATTENDANCE */
+/* ATTENDANCE with ROUTINE PREVIEW */
 function renderAttClassGrid(){
   const grid = document.getElementById('attClassGrid');
   const classes = Object.keys(DB.classes);
@@ -1176,15 +1122,57 @@ function renderAttClassGrid(){
     const c = DB.classes[name];
     const count = DB.students.filter(s=>s.class===name).length;
     const daysText = c.days && c.days.length ? c.days.map(d=>DAY_NAMES[d]).join(', ') : 'No routine';
-    const sel = currentAttClass===name ? 'selected':'';
-    return `<div class="class-pick-card ${sel}" onclick="selectAttClass('${name.replace(/'/g,"\\'")}')">
+    return `<div class="class-pick-card" onclick="showRoutinePreview('${name.replace(/'/g,"\\'")}')">
       <div class="nm">${name}</div>
-      <div class="info">🕐 ${c.time||'No time'}</div>
+      <div class="info">🕐 ${c.time?formatTime12(c.time):'No time'}</div>
       <div class="info">📅 ${daysText}</div>
       <div class="count">👥 ${count} student(s)</div>
     </div>`;
   }).join('');
 }
+
+function showRoutinePreview(name){
+  pendingRoutineClass = name;
+  const c = DB.classes[name];
+  const count = DB.students.filter(s=>s.class===name).length;
+  document.getElementById('routineClassName').textContent = name;
+  document.getElementById('routineStudentCount').textContent = `${count} student(s)`;
+  
+  const daysDisp = document.getElementById('routineDaysDisplay');
+  if(c.days && c.days.length){
+    daysDisp.innerHTML = c.days.map(d=>`<span class="routine-day-pill">${DAY_FULL[d]}</span>`).join('');
+  } else {
+    daysDisp.innerHTML = '<span style="color:var(--muted);font-size:13px">Every day (no routine set)</span>';
+  }
+  
+  document.getElementById('routineTimeDisplay').textContent = formatTime12(c.time);
+  document.getElementById('routineFineDisplay').innerHTML = c.fineEnabled 
+    ? `Fine: <b>₹${c.fineAmount}</b>/absent day (enabled)` 
+    : `Fine: disabled`;
+  
+  document.getElementById('routineModal').classList.add('show');
+}
+
+function startAttendanceFromRoutine(){
+  if(!pendingRoutineClass) return;
+  closeModal('routineModal');
+  currentAttClass = pendingRoutineClass;
+  document.getElementById('attStep1').style.display='none';
+  document.getElementById('attStep2').style.display='';
+  document.getElementById('attClassName').textContent = currentAttClass;
+  document.getElementById('attDate').value = todayISO();
+  renderAttendanceDay();
+}
+
+function editRoutineClass(){
+  if(!pendingRoutineClass) return;
+  closeModal('routineModal');
+  openClassModal(pendingRoutineClass, (savedName) => {
+    // After editing, re-open the preview
+    setTimeout(() => showRoutinePreview(savedName), 300);
+  });
+}
+
 function selectAttClass(name){
   currentAttClass = name;
   document.getElementById('attStep1').style.display='none';
@@ -1258,12 +1246,9 @@ function setAtt(sid,date,val){
   renderDashboard();
 }
 
-/* PROFILE */
 function openProfile(id, tab='info'){
-  currentProfileId = id;
-  profileMonth = new Date();
-  renderProfile();
-  switchProfileTab(tab);
+  currentProfileId = id; profileMonth = new Date();
+  renderProfile(); switchProfileTab(tab);
   document.getElementById('profileModal').classList.add('show');
 }
 function switchProfileTab(tab){
@@ -1278,10 +1263,7 @@ function renderProfile(){
   const s = DB.students.find(x=>x.id===currentProfileId);if(!s)return;
   document.getElementById('profileHeader').innerHTML = `
     ${photoHTML(s,true)}
-    <div class="info">
-      <h3>${s.name}</h3>
-      <div style="color:var(--muted);font-size:12px"><span class="badge badge-class">${s.class}</span> • ₹${s.fee}/mo</div>
-    </div>
+    <div class="info"><h3>${s.name}</h3><div style="color:var(--muted);font-size:12px"><span class="badge badge-class">${s.class}</span> • ₹${s.fee}/mo</div></div>
     <button class="btn btn-ghost btn-sm" onclick="closeModal('profileModal');openStudentModal('${s.id}')">✏️ Edit</button>`;
   renderProfileInfo();
 }
@@ -1292,7 +1274,6 @@ function renderProfileInfo(){
   const daysText = cls.days && cls.days.length ? cls.days.map(d=>DAY_FULL[d]).join(', ') : 'Every day';
   const upi = DB.settings.upi || {};
   const qrUrl = getUPIQRLink(total);
-  
   document.getElementById('pane-info').innerHTML = `
     <div class="info-grid">
       <div class="info-item"><div class="lbl">Name</div><div class="val">${s.name}</div></div>
@@ -1314,7 +1295,6 @@ function renderProfileInfo(){
         <button class="btn btn-danger" onclick="alertParents('${s.id}')">📨 Remind</button>
       </div>
     </div>
-    
     <div class="upi-box">
       <h4>💳 Payment Details</h4>
       <p style="font-size:11px;color:var(--muted);margin-bottom:14px;font-style:italic">If you want, you can even pay with UPI 🙏</p>
@@ -1327,7 +1307,6 @@ function renderProfileInfo(){
         ${upi.id ? `<div class="upi-qr"><img src="${qrUrl}" alt="UPI QR"/><div style="font-size:9px;color:#666;margin-top:6px">Scan to pay</div></div>` : ''}
       </div>
     </div>
-    
     <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;justify-content:center">${alertButtons(s)}</div>`;
 }
 function alertParents(sid){
@@ -1336,7 +1315,6 @@ function alertParents(sid){
   if(waNum) window.open(`https://wa.me/${waNum}?text=${encodeURIComponent(feeMessage(s))}`,'_blank');
   else toast('⚠️ No WhatsApp/Mobile saved');
 }
-
 function renderProfileAtt(){
   const s = DB.students.find(x=>x.id===currentProfileId);if(!s)return;
   const y = profileMonth.getFullYear(); const m = profileMonth.getMonth();
@@ -1344,8 +1322,7 @@ function renderProfileAtt(){
   const daysInMonth = new Date(y,m+1,0).getDate();
   const firstDay = new Date(y,m,1).getDay();
   const today = new Date(); today.setHours(0,0,0,0);
-  const cls = DB.classes[s.class] || {};
-  const fineOn = cls.fineEnabled;
+  const fineOn = DB.classes[s.class]?.fineEnabled;
   let present=0, absent=0;
   let calHTML = DAY_NAMES.map(d=>`<div class="cal-head">${d}</div>`).join('');
   for(let i=0;i<firstDay;i++) calHTML += `<div class="cal-day empty"></div>`;
@@ -1386,15 +1363,12 @@ function toggleProfileAtt(key){
   else if(cur===true) s.attendance[key] = false;
   else delete s.attendance[key];
   saveToCloud();
-  renderProfileAtt();
-  renderDashboard();
+  renderProfileAtt(); renderDashboard();
   if(document.getElementById('attStep2').style.display!=='none') renderAttendanceDay();
 }
-
 function renderProfilePay(){
   const s = DB.students.find(x=>x.id===currentProfileId);if(!s)return;
-  const adm = new Date(s.admission);
-  const now = new Date();
+  const adm = new Date(s.admission); const now = new Date();
   let rows = [];
   let cur = new Date(adm.getFullYear(), adm.getMonth(), 1);
   const end = new Date(now.getFullYear(), now.getMonth(), 1);
@@ -1412,13 +1386,9 @@ function renderProfilePay(){
   const grand = totalDue + fine;
   document.getElementById('pane-pay').innerHTML = `
     <div style="background:linear-gradient(135deg,rgba(124,58,237,.2),rgba(236,72,153,.2));border:1px solid rgba(236,72,153,.3);border-radius:14px;padding:14px;margin-bottom:16px">
-      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
-        <div>
-          <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px">Total Outstanding</div>
-          <div style="font-family:'Space Grotesk';font-size:clamp(22px,6vw,28px);font-weight:700">₹${grand.toLocaleString('en-IN')}</div>
-          <div style="font-size:11px;color:var(--muted)">Fee ₹${totalDue} ${fine?`+ Fine ₹${fine}`:''}</div>
-        </div>
-      </div>
+      <div><div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px">Total Outstanding</div>
+      <div style="font-family:'Space Grotesk';font-size:clamp(22px,6vw,28px);font-weight:700">₹${grand.toLocaleString('en-IN')}</div>
+      <div style="font-size:11px;color:var(--muted)">Fee ₹${totalDue} ${fine?`+ Fine ₹${fine}`:''}</div></div>
     </div>
     <h4 style="font-family:'Space Grotesk';margin-bottom:10px;font-size:15px">Payment History</h4>
     ${rows.map(r=>`
@@ -1426,12 +1396,8 @@ function renderProfilePay(){
         <div class="ym">${MONTH_NAMES[r.m].slice(0,3)} ${r.y}</div>
         <div style="flex:1;font-size:11px;color:var(--muted)">${r.paid?'Paid '+formatDateShort(r.date):'Unpaid'}</div>
         <div class="amt" style="color:${r.paid?'#6ee7b7':'#fca5a5'}">₹${s.fee}</div>
-        ${r.paid
-          ? `<button class="btn btn-sm btn-ghost" onclick="unmarkPaid('${s.id}','${r.ym}')">↶</button>`
-          : `<button class="btn btn-sm btn-success" onclick="markPaidMonth('${s.id}','${r.ym}')">✓</button>`
-        }
-      </div>`).join('')}
-  `;
+        ${r.paid?`<button class="btn btn-sm btn-ghost" onclick="unmarkPaid('${s.id}','${r.ym}')">↶</button>`:`<button class="btn btn-sm btn-success" onclick="markPaidMonth('${s.id}','${r.ym}')">✓</button>`}
+      </div>`).join('')}`;
 }
 function markPaidMonth(sid,ym){
   const s = DB.students.find(x=>x.id===sid);if(!s)return;
@@ -1445,13 +1411,10 @@ function unmarkPaid(sid,ym){
   saveToCloud();renderProfilePay();renderAll();toast('↶ Removed');
 }
 
-/* FEES */
 function renderFees(){
   if(Object.keys(DB.classes).length===0){DB.classes['General']={days:[],time:'',fineEnabled:false,fineAmount:10};saveToCloud();}
   const cls=document.getElementById('feeClass')?.value||'';
   const list=DB.students.filter(s=>!cls||s.class===cls);
-  
-  // Desktop
   const tbody=document.querySelector('#feesTbl tbody');
   tbody.innerHTML=list.map(s=>{const months=getDueMonths(s);const fine=getFineTotal(s);const total=months.length*s.fee+fine;
     const isDue=total>0;
@@ -1463,8 +1426,6 @@ function renderFees(){
       <td class="due-cell"><span class="due-formula">${months.length} × ₹${s.fee}${fine?` + ₹${fine}`:''}</span></td>
       <td><span class="due-total" style="color:${isDue?'#fca5a5':'#6ee7b7'}">₹${total.toLocaleString('en-IN')}</span></td>
       <td>${alertButtons(s)}</td></tr>`;}).join('');
-  
-  // Mobile cards
   const cards = document.getElementById('feesCards');
   cards.innerHTML = list.map(s=>{const months=getDueMonths(s);const fine=getFineTotal(s);const total=months.length*s.fee+fine;
     const isDue=total>0;
@@ -1488,7 +1449,6 @@ function sendBulkReminder(){if(!confirm('Send WhatsApp to all with dues?'))retur
     if(waNum){setTimeout(()=>window.open(`https://wa.me/${waNum}?text=${encodeURIComponent(feeMessage(s))}`,'_blank'),count*500);count++;}});
   toast(`📨 ${count} reminder(s)`);}
 
-/* CLASSES */
 function renderClasses(){
   if(Object.keys(DB.classes).length===0){DB.classes['General']={days:[],time:'',fineEnabled:false,fineAmount:10};saveToCloud();}
   const card=document.getElementById('classesCard');
@@ -1499,6 +1459,7 @@ function renderClasses(){
       <div style="flex:1;min-width:200px">
         <h4 style="font-family:'Space Grotesk';font-size:clamp(14px,4vw,17px)">${name}</h4>
         <div style="font-size:11px;color:var(--muted);margin-top:4px">👥 ${count} • 📅 ${daysText}</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px">🕐 ${cfg.time?formatTime12(cfg.time):'No time'}</div>
         <div style="font-size:11px;color:var(--muted);margin-top:2px">💰 ₹${cfg.fineAmount}/day ${cfg.fineEnabled?'<span style="color:#6ee7b7">ON</span>':'<span style="color:#94a3b8">OFF</span>'}</div>
       </div>
       <div style="display:flex;gap:8px;flex-wrap:wrap">
@@ -1509,7 +1470,6 @@ function renderClasses(){
     +(entries.length===0?'<div class="empty-state"><div class="big">🏫</div>Add a class</div>':'');
 }
 
-/* BACKUP */
 function backupNow(){
   DB.settings.lastBackup=new Date().toISOString();
   saveToCloud();
@@ -1545,21 +1505,13 @@ async function testEmail(){saveEmailSettings();if(!emailReady()){toast('⚠️ F
     await emailjs.send(c.serviceId,c.templateId,{to_email:c.toEmail,subject:'Test',message:'OK! 🎉'});
     toast('✅ Sent!');}catch(e){toast('❌ '+(e.text||'Failed'));}}
 async function emailBackup(){
-  saveEmailSettings();
-  if(!emailReady()){toast('⚠️ Bind email');return;}
-  toast('📧 Preparing...');
-  const c=DB.settings.email;
-  const slim=JSON.parse(JSON.stringify(DB));
-  slim.students.forEach(s=>s.photo='');
+  saveEmailSettings();if(!emailReady()){toast('⚠️ Bind email');return;}
+  toast('📧 Preparing...');const c=DB.settings.email;
+  const slim=JSON.parse(JSON.stringify(DB));slim.students.forEach(s=>s.photo='');
   try{
     emailjs.init({publicKey:c.publicKey});
-    await emailjs.send(c.serviceId,c.templateId,{
-      to_email:c.toEmail,
-      subject:'💾 Backup - '+new Date().toLocaleString('en-IN'),
-      message:JSON.stringify(slim,null,2)
-    });
-    DB.settings.lastBackup=new Date().toISOString();
-    saveToCloud();
+    await emailjs.send(c.serviceId,c.templateId,{to_email:c.toEmail,subject:'💾 Backup - '+new Date().toLocaleString('en-IN'),message:JSON.stringify(slim,null,2)});
+    DB.settings.lastBackup=new Date().toISOString();saveToCloud();
     document.getElementById('lastBackup').textContent=new Date().toLocaleString('en-IN');
     toast('✅ Emailed!');
   }catch(e){toast('❌ '+(e.text||'Failed'));}
