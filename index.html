@@ -2,32 +2,38 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 <title>TuitionPro ✨</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <style>
-:root{--bg1:#0f0c29;--bg2:#302b63;--bg3:#24243e;--accent:#7c3aed;--accent2:#ec4899;--accent3:#06b6d4;--glass:rgba(255,255,255,.06);--glass-border:rgba(255,255,255,.12);--text:#f1f5f9;--muted:#94a3b8;--danger:#ef4444;--success:#10b981}
-*{margin:0;padding:0;box-sizing:border-box}
-html,body{height:100%;font-family:'Inter',sans-serif;color:var(--text);overflow-x:hidden}
+:root{--bg1:#0f0c29;--bg2:#302b63;--bg3:#24243e;--accent:#7c3aed;--accent2:#ec4899;--accent3:#06b6d4;--glass:rgba(255,255,255,.06);--glass-border:rgba(255,255,255,.12);--text:#f1f5f9;--muted:#94a3b8;--danger:#ef4444;--success:#10b981;--wa:#25D366;--ig-pink:#E1306C;--ig-orange:#F77737;--tg-blue:#229ED9}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;font-family:'Inter',sans-serif;color:var(--text);overflow-x:hidden;overscroll-behavior:none}
 body{background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));background-size:400% 400%;animation:bgShift 20s ease infinite;min-height:100vh}
 @keyframes bgShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-.orb{position:fixed;border-radius:50%;filter:blur(80px);opacity:.35;z-index:0;pointer-events:none}
+.orb{position:fixed;border-radius:50%;filter:blur(80px);opacity:.3;z-index:0;pointer-events:none}
 .orb1{width:400px;height:400px;background:#7c3aed;top:-100px;left:-100px;animation:float 15s infinite}
 .orb2{width:350px;height:350px;background:#ec4899;bottom:-80px;right:-80px;animation:float 18s infinite reverse}
 .orb3{width:300px;height:300px;background:#06b6d4;top:40%;left:50%;animation:float 22s infinite}
 @keyframes float{0%,100%{transform:translate(0,0)}50%{transform:translate(60px,-40px)}}
+
+/* Login */
 .login-wrap{position:relative;z-index:1;min-height:100vh;display:grid;place-items:center;padding:20px}
-.login-card{background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--glass-border);border-radius:24px;padding:40px;max-width:420px;width:100%;animation:pop .5s}
-.login-card h2{font-family:'Space Grotesk';font-size:28px;margin-bottom:6px;text-align:center}
+.login-card{background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--glass-border);border-radius:24px;padding:clamp(24px,5vw,40px);max-width:420px;width:100%;animation:pop .5s}
+.login-card h2{font-family:'Space Grotesk';font-size:clamp(22px,6vw,28px);margin-bottom:6px;text-align:center}
 .login-card h2 span{background:linear-gradient(135deg,var(--accent2),var(--accent3));-webkit-background-clip:text;background-clip:text;color:transparent}
 .login-card p{text-align:center;color:var(--muted);font-size:13px;margin-bottom:24px}
 .login-tabs{display:flex;background:rgba(0,0,0,.3);border-radius:12px;padding:4px;margin-bottom:20px}
 .login-tab{flex:1;padding:10px;border:none;background:transparent;color:var(--muted);cursor:pointer;font:600 13px 'Inter';border-radius:9px;transition:.2s}
 .login-tab.active{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff}
+
+/* Layout */
 .app{position:relative;z-index:1;display:grid;grid-template-columns:260px 1fr;min-height:100vh;display:none}
 .app.show{display:grid}
-.sidebar{background:rgba(15,12,41,.6);backdrop-filter:blur(20px);border-right:1px solid var(--glass-border);padding:28px 18px;display:flex;flex-direction:column;gap:8px;position:sticky;top:0;height:100vh}
+
+/* Sidebar */
+.sidebar{background:rgba(15,12,41,.95);backdrop-filter:blur(20px);border-right:1px solid var(--glass-border);padding:28px 18px;display:flex;flex-direction:column;gap:8px;position:sticky;top:0;height:100vh}
 .logo{display:flex;align-items:center;gap:10px;padding:8px 10px 22px;border-bottom:1px solid var(--glass-border);margin-bottom:18px}
 .logo-icon{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:grid;place-items:center;font-size:22px;box-shadow:0 8px 24px rgba(124,58,237,.4)}
 .logo h1{font-family:'Space Grotesk';font-size:20px;font-weight:700;letter-spacing:-.5px}
@@ -38,12 +44,16 @@ body{background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));backgro
 .nav-btn .ic{font-size:18px}
 .user-box{margin-top:auto;padding:12px;background:rgba(0,0,0,.3);border-radius:12px;border:1px solid var(--glass-border)}
 .user-box .mail{font-size:11px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-bottom:8px}
-.main{padding:32px 40px;overflow-y:auto}
-.page-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;flex-wrap:wrap;gap:14px}
-.page-head h2{font-family:'Space Grotesk';font-size:30px;font-weight:700;letter-spacing:-1px}
+
+/* Main */
+.main{padding:clamp(16px,3vw,40px);padding-bottom:calc(clamp(16px,3vw,40px) + 90px);overflow-y:auto;min-height:100vh}
+.page-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:clamp(16px,3vw,28px);flex-wrap:wrap;gap:12px}
+.page-head h2{font-family:'Space Grotesk';font-size:clamp(22px,5.5vw,30px);font-weight:700;letter-spacing:-.5px}
 .page-head h2 span{background:linear-gradient(135deg,var(--accent2),var(--accent3));-webkit-background-clip:text;background-clip:text;color:transparent}
-.page-head p{color:var(--muted);font-size:13px;margin-top:4px}
-.btn{padding:10px 18px;border-radius:11px;border:none;cursor:pointer;font:600 13px 'Inter';transition:.2s;display:inline-flex;align-items:center;gap:8px}
+.page-head p{color:var(--muted);font-size:clamp(11px,3vw,13px);margin-top:4px}
+
+/* Buttons */
+.btn{padding:clamp(9px,2.5vw,12px) clamp(14px,4vw,18px);border-radius:11px;border:none;cursor:pointer;font:600 clamp(11px,3vw,13px) 'Inter';transition:.2s;display:inline-flex;align-items:center;gap:8px;min-height:40px;justify-content:center;white-space:nowrap}
 .btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 6px 20px rgba(124,58,237,.4)}
 .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(124,58,237,.6)}
 .btn-ghost{background:var(--glass);color:var(--text);border:1px solid var(--glass-border)}
@@ -51,162 +61,281 @@ body{background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));backgro
 .btn-danger{background:rgba(239,68,68,.15);color:#fca5a5;border:1px solid rgba(239,68,68,.3)}
 .btn-danger:hover{background:rgba(239,68,68,.25)}
 .btn-success{background:rgba(16,185,129,.15);color:#6ee7b7;border:1px solid rgba(16,185,129,.3)}
-.btn-sm{padding:6px 12px;font-size:12px;border-radius:8px}
+.btn-sm{padding:8px 12px;font-size:11px;border-radius:8px;min-height:34px}
 .btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:28px}
-.stat{background:var(--glass);backdrop-filter:blur(14px);border:1px solid var(--glass-border);border-radius:18px;padding:20px;position:relative;overflow:hidden;transition:.3s}
+
+/* Stats */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:clamp(10px,2vw,16px);margin-bottom:clamp(16px,3vw,28px)}
+.stat{background:var(--glass);backdrop-filter:blur(14px);border:1px solid var(--glass-border);border-radius:18px;padding:clamp(14px,3vw,20px);position:relative;overflow:hidden;transition:.3s}
 .stat:hover{transform:translateY(-4px);border-color:rgba(255,255,255,.2)}
 .stat::before{content:'';position:absolute;top:0;left:0;width:60px;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:0 0 3px 0}
-.stat .label{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;font-weight:600}
-.stat .val{font-family:'Space Grotesk';font-size:30px;font-weight:700;margin-top:8px}
-.stat .sub{font-size:12px;color:var(--muted);margin-top:4px}
-.card{background:var(--glass);backdrop-filter:blur(14px);border:1px solid var(--glass-border);border-radius:20px;padding:24px;margin-bottom:20px}
-.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
-.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px;font-weight:500;text-transform:uppercase;letter-spacing:.5px}
-.field input,.field select,.field textarea{width:100%;padding:11px 14px;border-radius:10px;background:rgba(0,0,0,.25);border:1px solid var(--glass-border);color:var(--text);font:400 14px 'Inter';transition:.2s}
+.stat .label{font-size:clamp(10px,2.5vw,12px);color:var(--muted);text-transform:uppercase;letter-spacing:1px;font-weight:600}
+.stat .val{font-family:'Space Grotesk';font-size:clamp(22px,5.5vw,30px);font-weight:700;margin-top:8px}
+.stat .sub{font-size:clamp(10px,2.5vw,12px);color:var(--muted);margin-top:4px}
+
+/* Card */
+.card{background:var(--glass);backdrop-filter:blur(14px);border:1px solid var(--glass-border);border-radius:20px;padding:clamp(16px,3vw,24px);margin-bottom:clamp(14px,3vw,20px)}
+
+/* Forms */
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:clamp(10px,2.5vw,14px)}
+.field label{display:block;font-size:clamp(10px,2.5vw,12px);color:var(--muted);margin-bottom:6px;font-weight:500;text-transform:uppercase;letter-spacing:.5px}
+.field input,.field select,.field textarea{width:100%;padding:clamp(10px,2.5vw,12px) 14px;border-radius:10px;background:rgba(0,0,0,.25);border:1px solid var(--glass-border);color:var(--text);font:400 clamp(13px,3.5vw,14px) 'Inter';transition:.2s;min-height:44px}
 .field input:focus,.field select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(124,58,237,.2)}
-.tbl-wrap{overflow-x:auto;border-radius:14px}
-table{width:100%;border-collapse:collapse;font-size:13px}
-th{background:rgba(0,0,0,.3);padding:12px;text-align:left;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);border-bottom:1px solid var(--glass-border)}
-td{padding:12px;border-bottom:1px solid rgba(255,255,255,.05)}
+
+/* Tables */
+.tbl-wrap{overflow-x:auto;border-radius:14px;margin:0 -4px;padding:0 4px}
+table{width:100%;border-collapse:collapse;font-size:clamp(11px,3vw,13px);min-width:600px}
+th{background:rgba(0,0,0,.3);padding:12px;text-align:left;font-weight:600;font-size:clamp(10px,2.5vw,11px);text-transform:uppercase;letter-spacing:1px;color:var(--muted);border-bottom:1px solid var(--glass-border)}
+td{padding:12px;border-bottom:1px solid rgba(255,255,255,.05);vertical-align:middle}
 tr:hover td{background:rgba(255,255,255,.03)}
+
+/* Photo */
 .photo{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:grid;place-items:center;font-weight:700;color:#fff;font-size:14px;flex-shrink:0}
 .photo.lg{width:70px;height:70px;font-size:24px}
 .photo img{width:100%;height:100%;border-radius:50%;object-fit:cover}
-.badge{padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;display:inline-block}
+
+/* Badges */
+.badge{padding:3px 10px;border-radius:20px;font-size:clamp(9px,2.5vw,11px);font-weight:600;display:inline-block}
 .badge-ok{background:rgba(16,185,129,.15);color:#6ee7b7;border:1px solid rgba(16,185,129,.3)}
 .badge-due{background:rgba(239,68,68,.18);color:#fca5a5;border:1px solid rgba(239,68,68,.4);animation:pulse 2s infinite}
 .badge-class{background:rgba(6,182,212,.15);color:#67e8f9;border:1px solid rgba(6,182,212,.3)}
 .badge-tuition{background:linear-gradient(135deg,rgba(124,58,237,.25),rgba(236,72,153,.25));color:#e9d5ff;border:1px solid rgba(236,72,153,.4)}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.7}}
+
+/* Due */
 .due-cell{display:flex;flex-direction:column;gap:4px}
-.due-formula{font-size:11px;color:var(--muted);font-family:'Courier New',monospace;background:rgba(0,0,0,.25);padding:3px 7px;border-radius:6px}
-.due-total{font-weight:700;color:#fca5a5;font-size:15px}
+.due-formula{font-size:clamp(9px,2.3vw,11px);color:var(--muted);font-family:'Courier New',monospace;background:rgba(0,0,0,.25);padding:3px 7px;border-radius:6px;word-break:break-word}
+.due-total{font-weight:700;color:#fca5a5;font-size:clamp(13px,3.5vw,15px)}
+
+/* Action Row */
 .action-row{display:flex;gap:6px;flex-wrap:wrap}
-.icon-btn{width:32px;height:32px;border-radius:9px;border:none;cursor:pointer;display:grid;place-items:center;font-size:14px;transition:.2s;background:rgba(255,255,255,.06);color:var(--text);text-decoration:none}
+.icon-btn{width:38px;height:38px;border-radius:10px;border:none;cursor:pointer;display:grid;place-items:center;transition:.2s;text-decoration:none;flex-shrink:0}
 .icon-btn:hover{transform:translateY(-2px)}
-.icon-btn.wa{background:rgba(37,211,102,.15);color:#25d366}
+.icon-btn svg{width:18px;height:18px}
+.icon-btn.wa{background:rgba(37,211,102,.15);color:var(--wa)}
 .icon-btn.sms{background:rgba(6,182,212,.15);color:#22d3ee}
 .icon-btn.call{background:rgba(124,58,237,.15);color:#a78bfa}
-.icon-btn.ig{background:linear-gradient(135deg,rgba(225,48,108,.15),rgba(252,175,69,.15));color:#e1306c}
-.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;z-index:100;padding:20px}
+.icon-btn.ig{background:linear-gradient(135deg,rgba(225,48,108,.15),rgba(252,175,69,.15));color:var(--ig-pink)}
+.icon-btn.edit{background:rgba(124,58,237,.15);color:#a78bfa}
+.icon-btn.del{background:rgba(239,68,68,.15);color:#fca5a5}
+
+/* Modals */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);display:none;align-items:flex-end;justify-content:center;z-index:100;padding:0}
 .modal-bg.show{display:flex;animation:fade .2s}
 @keyframes fade{from{opacity:0}to{opacity:1}}
-.modal{background:linear-gradient(135deg,#1e1b4b,#312e81);border:1px solid var(--glass-border);border-radius:22px;padding:28px;max-width:720px;width:100%;max-height:90vh;overflow-y:auto;animation:pop .3s cubic-bezier(.34,1.56,.64,1)}
+.modal{background:linear-gradient(135deg,#1e1b4b,#312e81);border:1px solid var(--glass-border);border-radius:22px 22px 0 0;padding:clamp(20px,4vw,28px);max-width:720px;width:100%;max-height:92vh;overflow-y:auto;animation:slideUp .3s cubic-bezier(.34,1.2,.64,1)}
 .modal.sm{max-width:480px}
-@keyframes pop{from{transform:scale(.9);opacity:0}to{transform:scale(1);opacity:1}}
-.modal h3{font-family:'Space Grotesk';margin-bottom:18px;font-size:22px}
-.modal-close{float:right;background:none;border:none;color:var(--muted);font-size:24px;cursor:pointer}
-.class-select-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:24px}
-.class-pick-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:16px;padding:20px;cursor:pointer;transition:.25s;text-align:center}
+@keyframes slideUp{from{transform:translateY(100%);opacity:0}to{transform:translateY(0);opacity:1}}
+.modal h3{font-family:'Space Grotesk';margin-bottom:18px;font-size:clamp(18px,4.5vw,22px)}
+.modal-close{float:right;background:none;border:none;color:var(--muted);font-size:28px;cursor:pointer;line-height:1}
+
+/* Class Grid */
+.class-select-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:clamp(10px,2.5vw,14px);margin-bottom:24px}
+.class-pick-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:16px;padding:clamp(14px,3vw,20px);cursor:pointer;transition:.25s;text-align:center}
 .class-pick-card:hover{transform:translateY(-3px);border-color:var(--accent)}
 .class-pick-card.selected{background:linear-gradient(135deg,rgba(124,58,237,.25),rgba(236,72,153,.15));border-color:var(--accent);box-shadow:0 8px 24px rgba(124,58,237,.3)}
-.class-pick-card .nm{font-family:'Space Grotesk';font-size:18px;font-weight:700;margin-bottom:4px}
-.class-pick-card .info{font-size:11px;color:var(--muted)}
+.class-pick-card .nm{font-family:'Space Grotesk';font-size:clamp(15px,4vw,18px);font-weight:700;margin-bottom:4px}
+.class-pick-card .info{font-size:clamp(10px,2.5vw,11px);color:var(--muted)}
 .class-pick-card .count{font-size:12px;color:#67e8f9;margin-top:6px}
-.tuition-day-banner{background:linear-gradient(135deg,rgba(124,58,237,.2),rgba(236,72,153,.2));border:1px solid rgba(236,72,153,.4);border-radius:14px;padding:14px 18px;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+
+/* Tuition Banner */
+.tuition-day-banner{background:linear-gradient(135deg,rgba(124,58,237,.2),rgba(236,72,153,.2));border:1px solid rgba(236,72,153,.4);border-radius:14px;padding:clamp(12px,3vw,16px);margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
 .tuition-day-banner.off{background:rgba(0,0,0,.25);border:1px solid var(--glass-border)}
-.tuition-day-banner .txt{font-weight:600;display:flex;align-items:center;gap:10px}
-.stu-att-row{background:rgba(0,0,0,.2);border:1px solid var(--glass-border);border-radius:14px;padding:14px;margin-bottom:10px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;transition:.2s}
+.tuition-day-banner .txt{font-weight:600;display:flex;align-items:center;gap:10px;font-size:clamp(12px,3.2vw,14px)}
+
+/* Attendance Row */
+.stu-att-row{background:rgba(0,0,0,.2);border:1px solid var(--glass-border);border-radius:14px;padding:clamp(10px,2.5vw,14px);margin-bottom:10px;display:flex;align-items:center;gap:clamp(10px,2.5vw,14px);flex-wrap:wrap;transition:.2s}
 .stu-att-row:hover{border-color:var(--accent)}
 .stu-att-row .info{flex:1;min-width:140px;cursor:pointer}
-.stu-att-row .info .nm{font-weight:600;font-size:15px;margin-bottom:3px}
-.stu-att-row .info .sub{font-size:11px;color:var(--muted)}
-.att-actions{display:flex;gap:6px}
-.att-btn{padding:8px 14px;border-radius:10px;border:none;cursor:pointer;font:600 12px 'Inter';transition:.2s;min-width:80px}
+.stu-att-row .info .nm{font-weight:600;font-size:clamp(13px,3.5vw,15px);margin-bottom:3px}
+.stu-att-row .info .sub{font-size:clamp(10px,2.5vw,11px);color:var(--muted)}
+.att-actions{display:flex;gap:4px}
+.att-btn{padding:8px 12px;border-radius:10px;border:none;cursor:pointer;font:600 clamp(10px,2.5vw,12px) 'Inter';transition:.2s;min-width:70px}
 .att-btn.present{background:rgba(16,185,129,.2);color:#6ee7b7;border:1px solid rgba(16,185,129,.4)}
 .att-btn.absent{background:rgba(239,68,68,.2);color:#fca5a5;border:1px solid rgba(239,68,68,.4)}
 .att-btn.none{background:rgba(255,255,255,.05);color:var(--muted);border:1px solid var(--glass-border)}
 .att-btn.active.present{background:#10b981;color:#fff;box-shadow:0 0 0 2px rgba(16,185,129,.5)}
 .att-btn.active.absent{background:#ef4444;color:#fff;box-shadow:0 0 0 2px rgba(239,68,68,.5)}
-.profile-header{display:flex;gap:18px;align-items:center;margin-bottom:18px;padding-bottom:18px;border-bottom:1px solid var(--glass-border)}
-.profile-header .info h3{margin-bottom:4px;font-size:22px}
-.profile-tabs{display:flex;gap:6px;background:rgba(0,0,0,.3);border-radius:12px;padding:4px;margin-bottom:18px}
-.profile-tab{flex:1;padding:10px;border:none;background:transparent;color:var(--muted);cursor:pointer;font:600 13px 'Inter';border-radius:9px;transition:.2s}
+
+/* Profile */
+.profile-header{display:flex;gap:18px;align-items:center;margin-bottom:18px;padding-bottom:18px;border-bottom:1px solid var(--glass-border);flex-wrap:wrap}
+.profile-header .info{flex:1;min-width:140px}
+.profile-header .info h3{margin-bottom:4px;font-size:clamp(18px,4.5vw,22px)}
+.profile-tabs{display:flex;gap:4px;background:rgba(0,0,0,.3);border-radius:12px;padding:4px;margin-bottom:18px;overflow-x:auto;scrollbar-width:none}
+.profile-tabs::-webkit-scrollbar{display:none}
+.profile-tab{flex-shrink:0;padding:10px 14px;border:none;background:transparent;color:var(--muted);cursor:pointer;font:600 clamp(11px,3vw,13px) 'Inter';border-radius:9px;transition:.2s;white-space:nowrap}
 .profile-tab.active{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff}
 .profile-pane{display:none}
 .profile-pane.active{display:block;animation:slideIn .3s}
-.info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
-.info-item{background:rgba(0,0,0,.25);border-radius:10px;padding:12px}
-.info-item .lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
-.info-item .val{font-weight:600;font-size:14px}
-.month-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;background:rgba(0,0,0,.25);border-radius:12px;padding:10px 14px}
-.month-nav button{background:rgba(255,255,255,.08);border:1px solid var(--glass-border);color:var(--text);padding:6px 12px;border-radius:8px;cursor:pointer;font-weight:600}
+
+/* Info Grid */
+.info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:clamp(8px,2vw,14px)}
+.info-item{background:rgba(0,0,0,.25);border-radius:10px;padding:clamp(10px,2.5vw,12px)}
+.info-item .lbl{font-size:clamp(9px,2.3vw,11px);color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.info-item .val{font-weight:600;font-size:clamp(12px,3.2vw,14px);word-break:break-word}
+
+/* Month Nav */
+.month-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;background:rgba(0,0,0,.25);border-radius:12px;padding:10px 14px;gap:8px}
+.month-nav button{background:rgba(255,255,255,.08);border:1px solid var(--glass-border);color:var(--text);padding:8px 12px;border-radius:8px;cursor:pointer;font-weight:600;min-width:40px;min-height:40px}
 .month-nav button:hover{background:rgba(255,255,255,.15)}
-.month-nav .mn-label{font-family:'Space Grotesk';font-size:16px;font-weight:700}
-.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
-.cal-head{font-size:10px;color:var(--muted);text-align:center;font-weight:700;text-transform:uppercase;padding:6px 0}
-.cal-day{aspect-ratio:1;border-radius:10px;display:grid;place-items:center;background:rgba(255,255,255,.04);font-size:12px;cursor:pointer;transition:.2s;border:1px solid transparent;position:relative}
+.month-nav .mn-label{font-family:'Space Grotesk';font-size:clamp(13px,3.5vw,16px);font-weight:700}
+
+/* Calendar */
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:clamp(4px,1vw,6px)}
+.cal-head{font-size:clamp(9px,2.3vw,10px);color:var(--muted);text-align:center;font-weight:700;text-transform:uppercase;padding:6px 0}
+.cal-day{aspect-ratio:1;border-radius:8px;display:grid;place-items:center;background:rgba(255,255,255,.04);font-size:clamp(10px,2.8vw,12px);cursor:pointer;transition:.2s;border:1px solid transparent;position:relative}
 .cal-day:hover{background:rgba(255,255,255,.1)}
-.cal-day.tuition{background:rgba(124,58,237,.1);border-color:rgba(124,58,237,.3)}
-.cal-day.present{background:rgba(16,185,129,.3);border-color:rgba(16,185,129,.5);color:#6ee7b7}
-.cal-day.absent{background:rgba(239,68,68,.25);border-color:rgba(239,68,68,.5);color:#fca5a5}
-.cal-day.fined::after{content:'₹';position:absolute;bottom:2px;right:4px;font-size:9px;color:#fca5a5;font-weight:700}
+.cal-day.tuition{background:rgba(124,58,237,.15);border-color:rgba(124,58,237,.4)}
+.cal-day.present{background:rgba(16,185,129,.35);border-color:rgba(16,185,129,.6);color:#6ee7b7}
+.cal-day.absent{background:rgba(239,68,68,.3);border-color:rgba(239,68,68,.6);color:#fca5a5}
+.cal-day.fined::after{content:'₹';position:absolute;bottom:1px;right:2px;font-size:8px;color:#fca5a5;font-weight:700}
 .cal-day.empty{visibility:hidden}
 .cal-day.future{opacity:.4;cursor:not-allowed}
-.pay-month-row{background:rgba(0,0,0,.25);border-radius:12px;padding:14px;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
-.pay-month-row .ym{font-weight:700;font-size:14px;min-width:100px}
-.pay-month-row .amt{font-family:'Space Grotesk';font-weight:700;font-size:15px}
-.toggle{position:relative;width:44px;height:24px;background:rgba(255,255,255,.1);border-radius:12px;cursor:pointer;transition:.2s;display:inline-block}
+
+/* Pay Row */
+.pay-month-row{background:rgba(0,0,0,.25);border-radius:12px;padding:clamp(10px,2.5vw,14px);margin-bottom:8px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.pay-month-row .ym{font-weight:700;font-size:clamp(12px,3.2vw,14px);min-width:90px}
+.pay-month-row .amt{font-family:'Space Grotesk';font-weight:700;font-size:clamp(13px,3.5vw,15px)}
+
+/* Toggle */
+.toggle{position:relative;width:44px;height:24px;background:rgba(255,255,255,.1);border-radius:12px;cursor:pointer;transition:.2s;display:inline-block;flex-shrink:0}
 .toggle.on{background:linear-gradient(135deg,var(--accent),var(--accent2))}
 .toggle::after{content:'';position:absolute;width:18px;height:18px;background:#fff;border-radius:50%;top:3px;left:3px;transition:.2s}
 .toggle.on::after{left:23px}
+
+/* Search Bar */
 .search-bar{display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap}
-.search-bar input,.search-bar select{padding:10px 14px;border-radius:10px;background:rgba(0,0,0,.25);border:1px solid var(--glass-border);color:var(--text);font:400 13px 'Inter'}
+.search-bar input,.search-bar select{padding:clamp(10px,2.5vw,12px) 14px;border-radius:10px;background:rgba(0,0,0,.25);border:1px solid var(--glass-border);color:var(--text);font:400 clamp(12px,3.2vw,13px) 'Inter';min-height:44px;flex:1;min-width:120px}
+
+/* Pages */
 .page{display:none;animation:slideIn .4s}
 .page.active{display:block}
 @keyframes slideIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-.empty-state{text-align:center;padding:60px 20px;color:var(--muted)}
-.empty-state .big{font-size:60px;margin-bottom:14px;opacity:.3}
-.toast{position:fixed;bottom:24px;right:24px;padding:14px 20px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;font-weight:500;font-size:14px;z-index:200;box-shadow:0 10px 30px rgba(0,0,0,.3);animation:toastIn .3s;display:none}
+
+/* Empty */
+.empty-state{text-align:center;padding:clamp(30px,8vw,60px) 20px;color:var(--muted)}
+.empty-state .big{font-size:clamp(40px,12vw,60px);margin-bottom:14px;opacity:.3}
+
+/* Toast */
+.toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);padding:12px 20px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;font-weight:500;font-size:13px;z-index:200;box-shadow:0 10px 30px rgba(0,0,0,.3);animation:toastIn .3s;display:none;max-width:90%;text-align:center}
 .toast.show{display:block}
-@keyframes toastIn{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
-.class-card{background:rgba(0,0,0,.2);border:1px solid var(--glass-border);border-radius:14px;padding:16px;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.code-box{background:rgba(0,0,0,.35);border:1px solid var(--glass-border);border-radius:10px;padding:10px;font-family:'Courier New',monospace;font-size:12px;color:#67e8f9;white-space:pre-wrap;word-break:break-all;margin:8px 0}
+@keyframes toastIn{from{transform:translate(-50%,20px);opacity:0}to{transform:translate(-50%,0);opacity:1}}
+
+/* Class Card */
+.class-card{background:rgba(0,0,0,.2);border:1px solid var(--glass-border);border-radius:14px;padding:clamp(12px,3vw,16px);margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.code-box{background:rgba(0,0,0,.35);border:1px solid var(--glass-border);border-radius:10px;padding:10px;font-family:'Courier New',monospace;font-size:clamp(10px,2.5vw,12px);color:#67e8f9;white-space:pre-wrap;word-break:break-all;margin:8px 0}
+
+/* Loading */
 .loading-screen{position:fixed;inset:0;background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));display:grid;place-items:center;z-index:999}
 .spinner{width:50px;height:50px;border:3px solid rgba(255,255,255,.1);border-top-color:var(--accent);border-radius:50%;animation:spin 1s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
+
+/* Day Chips */
 .day-toggle{display:inline-flex;gap:4px;flex-wrap:wrap;margin-top:6px}
-.day-chip{padding:6px 10px;border-radius:8px;background:rgba(255,255,255,.06);border:1px solid var(--glass-border);font-size:12px;cursor:pointer;font-weight:600;transition:.2s;user-select:none}
+.day-chip{padding:8px 12px;border-radius:8px;background:rgba(255,255,255,.06);border:1px solid var(--glass-border);font-size:clamp(10px,2.8vw,12px);cursor:pointer;font-weight:600;transition:.2s;user-select:none;min-height:36px;display:grid;place-items:center}
 .day-chip.on{background:linear-gradient(135deg,var(--accent),var(--accent2));border-color:transparent;color:#fff}
-.upi-box{background:linear-gradient(135deg,rgba(16,185,129,.15),rgba(6,182,212,.15));border:1px solid rgba(16,185,129,.3);border-radius:16px;padding:20px;margin-top:18px}
-.upi-box h4{font-family:'Space Grotesk';margin-bottom:14px;display:flex;align-items:center;gap:10px;font-size:17px}
-.upi-details{display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center}
-.upi-info .upi-hint{font-size:12px;color:var(--muted);margin-bottom:10px;font-style:italic}
-.upi-row{display:flex;justify-content:space-between;align-items:center;padding:10px;background:rgba(0,0,0,.25);border-radius:10px;margin-bottom:8px;gap:10px}
-.upi-row .lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
-.upi-row .val{font-family:'Courier New';font-weight:700;font-size:14px;color:#67e8f9}
-.upi-qr{text-align:center;background:#fff;padding:12px;border-radius:12px}
-.upi-qr img{display:block;max-width:180px}
-.about-section{background:var(--glass);backdrop-filter:blur(14px);border:1px solid var(--glass-border);border-radius:24px;padding:40px;text-align:center}
-.about-avatar{width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:grid;place-items:center;margin:0 auto 20px;font-size:40px;font-weight:700;box-shadow:0 8px 32px rgba(124,58,237,.4);overflow:hidden}
+
+/* UPI */
+.upi-box{background:linear-gradient(135deg,rgba(16,185,129,.15),rgba(6,182,212,.15));border:1px solid rgba(16,185,129,.3);border-radius:16px;padding:clamp(14px,3vw,20px);margin-top:18px}
+.upi-box h4{font-family:'Space Grotesk';margin-bottom:14px;display:flex;align-items:center;gap:10px;font-size:clamp(15px,4vw,17px)}
+.upi-details{display:grid;grid-template-columns:1fr auto;gap:clamp(12px,3vw,20px);align-items:center}
+.upi-row{display:flex;justify-content:space-between;align-items:center;padding:10px;background:rgba(0,0,0,.25);border-radius:10px;margin-bottom:8px;gap:10px;flex-wrap:wrap}
+.upi-row .lbl{font-size:clamp(9px,2.3vw,11px);color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+.upi-row .val{font-family:'Courier New';font-weight:700;font-size:clamp(11px,3vw,14px);color:#67e8f9;word-break:break-all}
+.upi-qr{text-align:center;background:#fff;padding:10px;border-radius:12px;flex-shrink:0}
+.upi-qr img{display:block;width:clamp(120px,30vw,180px);height:auto}
+
+/* About */
+.about-section{background:var(--glass);backdrop-filter:blur(14px);border:1px solid var(--glass-border);border-radius:24px;padding:clamp(20px,5vw,40px);text-align:center}
+.about-avatar{width:clamp(80px,20vw,120px);height:clamp(80px,20vw,120px);border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:grid;place-items:center;margin:0 auto 20px;font-size:clamp(28px,8vw,40px);font-weight:700;box-shadow:0 8px 32px rgba(124,58,237,.4);overflow:hidden}
 .about-avatar img{width:100%;height:100%;object-fit:cover}
-.about-section h2{font-family:'Space Grotesk';font-size:28px;margin-bottom:6px}
-.about-section .role{color:var(--muted);font-size:13px;margin-bottom:16px}
-.about-section .desc{color:var(--text);font-size:15px;line-height:1.7;margin-bottom:24px;max-width:600px;margin-left:auto;margin-right:auto}
+.about-section h2{font-family:'Space Grotesk';font-size:clamp(20px,5.5vw,28px);margin-bottom:6px}
+.about-section .role{color:var(--muted);font-size:clamp(11px,3vw,13px);margin-bottom:16px}
+.about-section .desc{color:var(--text);font-size:clamp(13px,3.5vw,15px);line-height:1.7;margin-bottom:24px;max-width:600px;margin-left:auto;margin-right:auto}
 .about-contacts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;max-width:700px;margin:0 auto}
-.about-contact{display:flex;align-items:center;gap:12px;padding:14px 18px;background:rgba(0,0,0,.3);border:1px solid var(--glass-border);border-radius:14px;text-decoration:none;color:var(--text);transition:.25s;font-size:13px;justify-content:center}
+.about-contact{display:flex;align-items:center;gap:12px;padding:clamp(12px,3vw,14px) clamp(14px,3.5vw,18px);background:rgba(0,0,0,.3);border:1px solid var(--glass-border);border-radius:14px;text-decoration:none;color:var(--text);transition:.25s;font-size:clamp(11px,3vw,13px);justify-content:center;min-height:56px}
 .about-contact:hover{transform:translateY(-3px);border-color:var(--accent);background:rgba(0,0,0,.4)}
-.about-contact svg{flex-shrink:0}
-.backup-schedule{background:rgba(0,0,0,.2);border:1px solid var(--glass-border);border-radius:14px;padding:18px;margin-top:14px}
-.schedule-row{display:flex;align-items:center;justify-content:space-between;padding:14px;background:rgba(0,0,0,.2);border-radius:12px;margin-bottom:10px;flex-wrap:wrap;gap:12px}
+.about-contact svg{flex-shrink:0;width:20px;height:20px}
+
+/* Backup Schedule */
+.backup-schedule{background:rgba(0,0,0,.2);border:1px solid var(--glass-border);border-radius:14px;padding:clamp(12px,3vw,18px);margin-top:14px}
+.schedule-row{display:flex;align-items:center;justify-content:space-between;padding:clamp(10px,2.5vw,14px);background:rgba(0,0,0,.2);border-radius:12px;margin-bottom:10px;flex-wrap:wrap;gap:12px}
 .schedule-row:last-child{margin-bottom:0}
-.schedule-row .lbl{font-weight:600;font-size:14px;margin-bottom:2px}
-.schedule-row .sub{font-size:11px;color:var(--muted)}
-.schedule-row select,.schedule-row input[type="time"]{padding:8px 12px;border-radius:8px;background:rgba(0,0,0,.3);border:1px solid var(--glass-border);color:var(--text);font:500 13px 'Inter'}
-.monthly-banner{background:linear-gradient(135deg,rgba(245,158,11,.2),rgba(236,72,153,.15));border:1px solid rgba(245,158,11,.4);border-radius:14px;padding:18px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
-.monthly-banner h4{font-family:'Space Grotesk';margin-bottom:4px}
-.monthly-banner p{font-size:12px;color:var(--muted)}
-@media(max-width:768px){.app{grid-template-columns:1fr}.sidebar{position:relative;height:auto;flex-direction:row;overflow-x:auto;padding:14px}.sidebar .logo{display:none}.nav-btn{flex-shrink:0}.user-box{display:none}.main{padding:20px}.upi-details{grid-template-columns:1fr}.upi-qr{margin-top:12px}}
+.schedule-row .lbl{font-weight:600;font-size:clamp(12px,3.2vw,14px);margin-bottom:2px}
+.schedule-row .sub{font-size:clamp(10px,2.5vw,11px);color:var(--muted)}
+.schedule-row select,.schedule-row input[type="time"]{padding:8px 12px;border-radius:8px;background:rgba(0,0,0,.3);border:1px solid var(--glass-border);color:var(--text);font:500 clamp(11px,3vw,13px) 'Inter';min-height:40px}
+
+/* Monthly Banner */
+.monthly-banner{background:linear-gradient(135deg,rgba(245,158,11,.2),rgba(236,72,153,.15));border:1px solid rgba(245,158,11,.4);border-radius:14px;padding:clamp(12px,3vw,18px);margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.monthly-banner h4{font-family:'Space Grotesk';margin-bottom:4px;font-size:clamp(13px,3.5vw,15px)}
+.monthly-banner p{font-size:clamp(10px,2.5vw,12px);color:var(--muted)}
+
+/* ==================== MOBILE RESPONSIVE ==================== */
+@media (max-width: 768px) {
+  /* Mobile: Bottom Navigation Bar */
+  .app{grid-template-columns:1fr}
+  .sidebar{position:fixed;top:0;left:-100%;width:85%;max-width:320px;height:100vh;z-index:1000;transition:left .3s ease;padding-top:60px;box-shadow:4px 0 30px rgba(0,0,0,.5)}
+  .sidebar.open{left:0}
+  .sidebar-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:999;display:none;backdrop-filter:blur(2px)}
+  .sidebar-overlay.show{display:block}
+  
+  /* Hamburger Menu Button */
+  .menu-toggle{position:fixed;top:14px;left:14px;z-index:998;width:44px;height:44px;border-radius:12px;background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--glass-border);display:grid;place-items:center;cursor:pointer;color:var(--text);font-size:20px;box-shadow:0 4px 12px rgba(0,0,0,.3)}
+  .menu-toggle:hover{background:rgba(255,255,255,.15)}
+  
+  /* Bottom Navigation */
+  .bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:rgba(15,12,41,.95);backdrop-filter:blur(20px);border-top:1px solid var(--glass-border);display:grid;grid-template-columns:repeat(5,1fr);padding:8px 4px;padding-bottom:calc(8px + env(safe-area-inset-bottom));box-shadow:0 -4px 20px rgba(0,0,0,.3)}
+  .bottom-nav-btn{display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 4px;background:none;border:none;color:var(--muted);cursor:pointer;transition:.2s;border-radius:10px;min-height:56px}
+  .bottom-nav-btn.active{color:var(--accent2)}
+  .bottom-nav-btn svg{width:20px;height:20px}
+  .bottom-nav-btn .lbl{font-size:9px;font-weight:600;letter-spacing:.3px}
+  
+  .main{padding:clamp(16px,3vw,24px);padding-top:70px;padding-bottom:100px}
+  
+  .user-box{display:none}
+  .page-head .btn{font-size:11px;padding:8px 12px}
+  
+  /* Mobile Cards Layout for Students Table */
+  .mobile-cards .m-card{background:rgba(0,0,0,.25);border:1px solid var(--glass-border);border-radius:14px;padding:14px;margin-bottom:10px;display:flex;gap:12px;align-items:flex-start}
+  .mobile-cards .m-card .photo{width:50px;height:50px;font-size:18px;flex-shrink:0}
+  .mobile-cards .m-card .body{flex:1;min-width:0}
+  .mobile-cards .m-card .nm{font-weight:600;font-size:15px;margin-bottom:4px;cursor:pointer}
+  .mobile-cards .m-card .meta{font-size:11px;color:var(--muted);margin-bottom:8px;display:flex;flex-wrap:wrap;gap:6px}
+  .mobile-cards .m-card .actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+  
+  .tbl-wrap{display:none}
+  .mobile-cards{display:block}
+  
+  .att-actions{flex:1;min-width:100%;justify-content:stretch}
+  .att-btn{flex:1}
+}
+
+/* Desktop/Tablet */
+@media (min-width: 769px) {
+  .menu-toggle{display:none}
+  .bottom-nav{display:none}
+  .sidebar-overlay{display:none !important}
+  .mobile-cards{display:none}
+  .tbl-wrap{display:block}
+}
+
+/* Very small screens */
+@media (max-width: 380px) {
+  .main{padding:12px;padding-top:60px;padding-bottom:90px}
+  .stat{padding:12px}
+  .stu-att-row{padding:10px;gap:8px}
+}
 </style>
 </head>
 <body>
 <div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div>
 
+<!-- Loading -->
 <div class="loading-screen" id="loadingScreen">
   <div style="text-align:center"><div class="spinner"></div><p style="margin-top:20px;color:var(--muted)">Loading TuitionPro...</p></div>
 </div>
 
+<!-- Login -->
 <div class="login-wrap" id="loginScreen" style="display:none">
   <div class="login-card">
     <div style="text-align:center;font-size:48px;margin-bottom:10px">🎓</div>
@@ -225,8 +354,13 @@ tr:hover td{background:rgba(255,255,255,.03)}
   </div>
 </div>
 
+<!-- Menu Toggle (Mobile Only) -->
+<button class="menu-toggle" id="menuToggle" onclick="toggleSidebar()" style="display:none">☰</button>
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+<!-- Main App -->
 <div class="app" id="mainApp">
-  <aside class="sidebar">
+  <aside class="sidebar" id="sidebar">
     <div class="logo"><div class="logo-icon">🎓</div><h1>Tuition<span>Pro</span></h1></div>
     <button class="nav-btn active" data-page="dashboard"><span class="ic">📊</span> Dashboard</button>
     <button class="nav-btn" data-page="students"><span class="ic">👥</span> Students</button>
@@ -243,6 +377,7 @@ tr:hover td{background:rgba(255,255,255,.03)}
   </aside>
 
   <main class="main">
+    <!-- Dashboard -->
     <section class="page active" id="dashboard">
       <div class="page-head">
         <div><h2>Welcome back, <span>Teacher</span> 👋</h2><p id="todayDate"></p></div>
@@ -250,53 +385,56 @@ tr:hover td{background:rgba(255,255,255,.03)}
       </div>
       <div id="monthlyAlertBanner"></div>
       <div class="stats">
-        <div class="stat"><div class="label">Total Students</div><div class="val" id="sTotal">0</div><div class="sub">Across all classes</div></div>
+        <div class="stat"><div class="label">Students</div><div class="val" id="sTotal">0</div><div class="sub">All classes</div></div>
         <div class="stat"><div class="label">Total Dues</div><div class="val" id="sDues">₹0</div><div class="sub" id="sDuesSub">No pending fees</div></div>
-        <div class="stat"><div class="label">Today's Attendance</div><div class="val" id="sAtt">0%</div><div class="sub" id="sAttSub">Mark attendance</div></div>
+        <div class="stat"><div class="label">Today Att.</div><div class="val" id="sAtt">0%</div><div class="sub" id="sAttSub">Mark attendance</div></div>
         <div class="stat"><div class="label">Classes</div><div class="val" id="sClass">0</div><div class="sub">Active batches</div></div>
       </div>
       <div class="card">
-        <h3 style="margin-bottom:14px;font-family:'Space Grotesk'">⚠️ Students with Pending Fees</h3>
+        <h3 style="margin-bottom:14px;font-family:'Space Grotesk';font-size:clamp(15px,4vw,18px)">⚠️ Students with Pending Fees</h3>
         <div class="tbl-wrap"><table id="dashDueTbl"><thead><tr><th>Student</th><th>Class</th><th>Due</th><th>Action</th></tr></thead><tbody></tbody></table></div>
         <div id="dashDueEmpty" class="empty-state" style="display:none;padding:30px"><div class="big">🎉</div>All fees are paid!</div>
       </div>
     </section>
 
+    <!-- Students -->
     <section class="page" id="students">
-      <div class="page-head"><div><h2>My <span>Students</span></h2><p>Click any name to see full profile</p></div><button class="btn btn-primary" onclick="openStudentModal()">➕ Add Student</button></div>
+      <div class="page-head"><div><h2>My <span>Students</span></h2><p>Click name for profile</p></div><button class="btn btn-primary" onclick="openStudentModal()">➕ Add Student</button></div>
       <div class="search-bar">
-        <input id="searchInput" placeholder="🔍 Search by name..." oninput="renderStudents()" style="flex:1;min-width:200px"/>
+        <input id="searchInput" placeholder="🔍 Search..." oninput="renderStudents()"/>
         <select id="classFilter" onchange="renderStudents()"><option value="">All Classes</option></select>
         <select id="sortBy" onchange="renderStudents()">
           <option value="name">Sort: Name</option><option value="class">Sort: Class</option>
-          <option value="admission">Sort: Admission Date</option><option value="due">Sort: Due Amount</option>
+          <option value="admission">Sort: Admission</option><option value="due">Sort: Due</option>
         </select>
       </div>
       <div class="card">
         <div class="tbl-wrap"><table id="studentsTbl"><thead><tr><th>Photo</th><th>Name</th><th>Class</th><th>Fee</th><th>Admission</th><th>Contact</th><th>Actions</th></tr></thead><tbody></tbody></table></div>
+        <div class="mobile-cards" id="studentsCards"></div>
         <div id="stuEmpty" class="empty-state" style="display:none"><div class="big">👥</div>No students yet.</div>
       </div>
     </section>
 
+    <!-- Attendance -->
     <section class="page" id="attendance">
-      <div class="page-head"><div><h2>Smart <span>Attendance</span></h2><p>Step 1: Choose a class below</p></div></div>
+      <div class="page-head"><div><h2>Smart <span>Attendance</span></h2><p>Choose a class below</p></div></div>
       <div id="attStep1"><div class="class-select-grid" id="attClassGrid"></div></div>
       <div id="attStep2" style="display:none">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:10px">
           <div>
-            <button class="btn btn-ghost btn-sm" onclick="backToClassSelect()">← Change Class</button>
-            <span style="margin-left:10px;font-family:'Space Grotesk';font-size:20px;font-weight:700" id="attClassName"></span>
+            <button class="btn btn-ghost btn-sm" onclick="backToClassSelect()">← Change</button>
+            <span style="margin-left:8px;font-family:'Space Grotesk';font-size:clamp(15px,4vw,20px);font-weight:700" id="attClassName"></span>
           </div>
           <div style="display:flex;gap:8px;align-items:center">
-            <input type="date" id="attDate" onchange="renderAttendanceDay()"/>
+            <input type="date" id="attDate" onchange="renderAttendanceDay()" style="padding:8px;border-radius:8px;background:rgba(0,0,0,.25);border:1px solid var(--glass-border);color:var(--text);min-height:40px"/>
             <button class="btn btn-ghost btn-sm" onclick="setAttToday()">Today</button>
           </div>
         </div>
         <div id="tuitionBanner"></div>
         <div class="card">
-          <h3 style="margin-bottom:14px;font-family:'Space Grotesk';display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+          <h3 style="margin-bottom:14px;font-family:'Space Grotesk';font-size:clamp(15px,4vw,18px);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
             <span>👥 Students</span>
-            <span style="font-size:12px;color:var(--muted);font-weight:500" id="attSummary"></span>
+            <span style="font-size:11px;color:var(--muted);font-weight:500" id="attSummary"></span>
           </h3>
           <div id="attStudentsList"></div>
           <div id="attEmpty" class="empty-state" style="display:none;padding:30px"><div class="big">👥</div>No students in this class</div>
@@ -304,39 +442,43 @@ tr:hover td{background:rgba(255,255,255,.03)}
       </div>
     </section>
 
+    <!-- Fees -->
     <section class="page" id="fees">
-      <div class="page-head"><div><h2>Fees & <span>Dues</span></h2><p>Track payments & send reminders</p></div></div>
+      <div class="page-head"><div><h2>Fees & <span>Dues</span></h2><p>Track payments</p></div></div>
       <div class="search-bar">
         <select id="feeClass" onchange="renderFees()"><option value="">All Classes</option></select>
-        <button class="btn btn-danger" onclick="sendBulkReminder()">📨 Remind All Dues</button>
+        <button class="btn btn-danger" onclick="sendBulkReminder()">📨 Remind All</button>
       </div>
       <div class="card">
         <div class="tbl-wrap"><table id="feesTbl"><thead><tr><th>Student</th><th>Class</th><th>Fee</th><th>Due Months</th><th>Breakdown</th><th>Total</th><th>Alert</th></tr></thead><tbody></tbody></table></div>
+        <div class="mobile-cards" id="feesCards"></div>
       </div>
     </section>
 
+    <!-- Classes -->
     <section class="page" id="classes">
-      <div class="page-head"><div><h2>Classes & <span>Routine</span></h2><p>Set routine & fine rules per class</p></div><button class="btn btn-primary" onclick="openClassModal()">➕ Add Class</button></div>
+      <div class="page-head"><div><h2>Classes & <span>Routine</span></h2><p>Set routine & fines</p></div><button class="btn btn-primary" onclick="openClassModal()">➕ Add Class</button></div>
       <div class="card" id="classesCard"></div>
     </section>
 
+    <!-- Backup -->
     <section class="page" id="backup">
       <div class="page-head"><div><h2>Backup & <span>Settings</span></h2></div></div>
       
       <div class="card">
-        <h3 style="margin-bottom:12px;font-family:'Space Grotesk'">💾 Manual Backup</h3>
-        <p style="color:var(--muted);font-size:13px;margin-bottom:14px">Download or email your data anytime. Click the button when you want.</p>
+        <h3 style="margin-bottom:12px;font-family:'Space Grotesk';font-size:clamp(15px,4vw,18px)">💾 Manual Backup</h3>
+        <p style="color:var(--muted);font-size:12px;margin-bottom:14px">Download or email your data anytime</p>
         <div style="display:flex;gap:10px;flex-wrap:wrap">
-          <button class="btn btn-primary" onclick="backupNow()">⬇️ Download Backup</button>
+          <button class="btn btn-primary" onclick="backupNow()">⬇️ Download</button>
           <label class="btn btn-ghost" style="cursor:pointer">⬆️ Restore<input type="file" accept=".json" onchange="restoreBackup(event)" style="display:none"/></label>
-          <button class="btn btn-danger" onclick="openWipeModal()">🗑️ Wipe All Data</button>
+          <button class="btn btn-danger" onclick="openWipeModal()">🗑️ Wipe Data</button>
         </div>
-        <p style="color:var(--muted);font-size:12px;margin-top:12px">Last backup: <b id="lastBackup">Never</b></p>
+        <p style="color:var(--muted);font-size:11px;margin-top:12px">Last backup: <b id="lastBackup">Never</b></p>
       </div>
 
       <div class="card">
-        <h3 style="margin-bottom:6px;font-family:'Space Grotesk'">📧 Email Backup (EmailJS)</h3>
-        <p style="color:var(--muted);font-size:13px;margin-bottom:14px">Bind your email for automatic backups like Google Drive/WhatsApp</p>
+        <h3 style="margin-bottom:6px;font-family:'Space Grotesk';font-size:clamp(15px,4vw,18px)">📧 Email Backup (EmailJS)</h3>
+        <p style="color:var(--muted);font-size:12px;margin-bottom:14px">Bind email for auto backups</p>
         <div class="form-grid">
           <div class="field"><label>Your Email</label><input id="emailTo" placeholder="you@gmail.com"/></div>
           <div class="field"><label>Service ID</label><input id="emailService" placeholder="service_xxx"/></div>
@@ -344,15 +486,15 @@ tr:hover td{background:rgba(255,255,255,.03)}
           <div class="field"><label>Public Key</label><input id="emailKey" placeholder="AbCdEf123"/></div>
         </div>
         <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap">
-          <button class="btn btn-ghost" onclick="saveEmailSettings()">💾 Save Settings</button>
-          <button class="btn btn-ghost" onclick="testEmail()">🧪 Test Email</button>
-          <button class="btn btn-primary" onclick="emailBackup()">📧 Email Backup Now</button>
+          <button class="btn btn-ghost" onclick="saveEmailSettings()">💾 Save</button>
+          <button class="btn btn-ghost" onclick="testEmail()">🧪 Test</button>
+          <button class="btn btn-primary" onclick="emailBackup()">📧 Email Backup</button>
         </div>
       </div>
 
       <div class="card">
-        <h3 style="margin-bottom:12px;font-family:'Space Grotesk'">⏰ Auto Backup Schedule</h3>
-        <p style="color:var(--muted);font-size:13px;margin-bottom:14px">Default: every day at 12am. Change frequency and time as you like.</p>
+        <h3 style="margin-bottom:12px;font-family:'Space Grotesk';font-size:clamp(15px,4vw,18px)">⏰ Auto Backup Schedule</h3>
+        <p style="color:var(--muted);font-size:12px;margin-bottom:14px">Default: every day at 12am</p>
         <div class="backup-schedule">
           <div class="schedule-row">
             <div><div class="lbl">Backup Frequency</div><div class="sub">How often to backup</div></div>
@@ -364,7 +506,7 @@ tr:hover td{background:rgba(255,255,255,.03)}
             </select>
           </div>
           <div class="schedule-row">
-            <div><div class="lbl">Backup Time</div><div class="sub">Default: 00:00 (12 AM)</div></div>
+            <div><div class="lbl">Backup Time</div><div class="sub">Default 00:00 (12 AM)</div></div>
             <input type="time" id="backupTime" value="00:00" onchange="saveBackupSettings()"/>
           </div>
           <div class="schedule-row">
@@ -372,20 +514,20 @@ tr:hover td{background:rgba(255,255,255,.03)}
             <span class="toggle on" id="monthlyReminder" onclick="toggleMonthlyReminder()"></span>
           </div>
         </div>
-        <p style="color:var(--muted);font-size:11px;margin-top:10px">⚠️ Auto backup works only when app is open in your browser at that time.</p>
       </div>
 
       <div class="card">
-        <h3 style="margin-bottom:12px;font-family:'Space Grotesk'">💳 UPI Payment Settings</h3>
-        <p style="color:var(--muted);font-size:13px;margin-bottom:14px">These details will be shown in every fee reminder message</p>
+        <h3 style="margin-bottom:12px;font-family:'Space Grotesk';font-size:clamp(15px,4vw,18px)">💳 UPI Settings</h3>
+        <p style="color:var(--muted);font-size:12px;margin-bottom:14px">Shown in fee reminder messages</p>
         <div class="form-grid">
-          <div class="field"><label>UPI ID</label><input id="upiId" value="arho065-1@okicici" placeholder="your@upi"/></div>
-          <div class="field"><label>UPI Phone Number</label><input id="upiPhone" value="9564385573" placeholder="+91..."/></div>
+          <div class="field"><label>UPI ID</label><input id="upiId" value="arho065-1@okicici"/></div>
+          <div class="field"><label>UPI Phone</label><input id="upiPhone" value="9564385573"/></div>
         </div>
-        <button class="btn btn-ghost" style="margin-top:10px" onclick="saveUPISettings()">💾 Save UPI Settings</button>
+        <button class="btn btn-ghost" style="margin-top:10px" onclick="saveUPISettings()">💾 Save UPI</button>
       </div>
     </section>
 
+    <!-- About Us -->
     <section class="page" id="about">
       <div class="page-head"><div><h2>About <span>Us</span></h2><p>The team behind TuitionPro</p></div></div>
       <div class="about-section">
@@ -397,20 +539,48 @@ tr:hover td{background:rgba(255,255,255,.03)}
         <p class="desc">বেলডাঙ্গা, মুর্শিদাবাদ থেকে পরিচালিত। পরীক্ষার্থীদের জন্য সঠিক ও মানসম্মত পড়াশোনাকে কার্যকর করাই লক্ষ্য।</p>
         <div class="about-contacts">
           <a href="https://t.me/beldanga1" target="_blank" class="about-contact">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="#229ED9"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+            <svg viewBox="0 0 24 24" fill="#229ED9"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
             <span><b>Telegram</b><br><small>@beldanga1</small></span>
           </a>
           <a href="https://instagram.com/arifhussain.x" target="_blank" class="about-contact">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="#E1306C"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            <svg viewBox="0 0 24 24" fill="#E1306C"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
             <span><b>Instagram</b><br><small>@arifhussain.x</small></span>
+          </a>
+          <a href="mailto:arho065@gmail.com" class="about-contact">
+            <svg viewBox="0 0 24 24" fill="#EA4335"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
+            <span><b>Email</b><br><small>arho065@gmail.com</small></span>
           </a>
         </div>
       </div>
     </section>
   </main>
+
+  <!-- Bottom Navigation (Mobile) -->
+  <nav class="bottom-nav" id="bottomNav">
+    <button class="bottom-nav-btn active" data-page="dashboard">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l9-9 9 9M5 10v10h14V10"/></svg>
+      <span class="lbl">Dashboard</span>
+    </button>
+    <button class="bottom-nav-btn" data-page="students">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      <span class="lbl">Students</span>
+    </button>
+    <button class="bottom-nav-btn" data-page="attendance">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      <span class="lbl">Attendance</span>
+    </button>
+    <button class="bottom-nav-btn" data-page="fees">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      <span class="lbl">Fees</span>
+    </button>
+    <button class="bottom-nav-btn" data-page="backup">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+      <span class="lbl">More</span>
+    </button>
+  </nav>
 </div>
 
-<!-- Student Add/Edit Modal -->
+<!-- Student Modal -->
 <div class="modal-bg" id="studentModal">
   <div class="modal">
     <button class="modal-close" onclick="closeModal('studentModal')">×</button>
@@ -427,7 +597,7 @@ tr:hover td{background:rgba(255,255,255,.03)}
         <div class="field"><label>Instagram</label><input id="stuIg" placeholder="@username"/></div>
         <div class="field"><label>Photo</label><input type="file" id="stuPhoto" accept="image/*"/></div>
       </div>
-      <div style="display:flex;gap:10px;margin-top:20px;justify-content:flex-end">
+      <div style="display:flex;gap:10px;margin-top:20px;justify-content:flex-end;flex-wrap:wrap">
         <button type="button" class="btn btn-ghost" onclick="closeModal('studentModal')">Cancel</button>
         <button type="submit" class="btn btn-primary">💾 Save</button>
       </div>
@@ -442,9 +612,9 @@ tr:hover td{background:rgba(255,255,255,.03)}
     <h3 id="clsModalTitle">➕ Add Class</h3>
     <input type="hidden" id="clsOrigName"/>
     <div class="form-grid">
-      <div class="field" style="grid-column:1/-1"><label>Class Name *</label><input id="clsName" required placeholder="e.g. Class 10 - Maths"/></div>
+      <div class="field" style="grid-column:1/-1"><label>Class Name *</label><input id="clsName" required/></div>
       <div class="field"><label>Time</label><input type="time" id="clsTime"/></div>
-      <div class="field"><label>Fine per Absent Day (₹)</label><input type="number" id="clsFine" min="0" value="10"/></div>
+      <div class="field"><label>Fine/Day (₹)</label><input type="number" id="clsFine" min="0" value="10"/></div>
     </div>
     <div class="field" style="margin-top:10px">
       <label>Tuition Days (click to toggle)</label>
@@ -456,7 +626,7 @@ tr:hover td{background:rgba(255,255,255,.03)}
     </div>
     <div style="display:flex;gap:10px;margin-top:20px;justify-content:flex-end">
       <button class="btn btn-ghost" onclick="closeModal('classModal')">Cancel</button>
-      <button class="btn btn-primary" onclick="saveClass()">💾 Save Class</button>
+      <button class="btn btn-primary" onclick="saveClass()">💾 Save</button>
     </div>
   </div>
 </div>
@@ -468,7 +638,7 @@ tr:hover td{background:rgba(255,255,255,.03)}
     <div class="profile-header" id="profileHeader"></div>
     <div class="profile-tabs">
       <button class="profile-tab active" data-tab="info" onclick="switchProfileTab('info')">ℹ️ Info</button>
-      <button class="profile-tab" data-tab="att" onclick="switchProfileTab('att')">📅 Attendance</button>
+      <button class="profile-tab" data-tab="att" onclick="switchProfileTab('att')">📅 Att.</button>
       <button class="profile-tab" data-tab="pay" onclick="switchProfileTab('pay')">💰 Payments</button>
     </div>
     <div class="profile-pane active" id="pane-info"></div>
@@ -482,17 +652,27 @@ tr:hover td{background:rgba(255,255,255,.03)}
   <div class="modal sm">
     <button class="modal-close" onclick="closeModal('wipeModal')">×</button>
     <h3>⚠️ Wipe All Data</h3>
-    <p style="color:var(--muted);font-size:14px;margin-bottom:14px">Type below exactly:</p>
+    <p style="color:var(--muted);font-size:13px;margin-bottom:14px">Type below exactly:</p>
     <div class="code-box">wipe out all data</div>
     <div class="field"><input id="wipeInput" placeholder='Type: wipe out all data' autocomplete="off"/></div>
     <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:18px">
       <button class="btn btn-ghost" onclick="closeModal('wipeModal')">Cancel</button>
-      <button class="btn btn-danger" id="wipeConfirmBtn" onclick="doWipe()" disabled>🗑️ Delete Forever</button>
+      <button class="btn btn-danger" id="wipeConfirmBtn" onclick="doWipe()" disabled>🗑️ Delete</button>
     </div>
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
+
+<!-- Official Brand SVG Icons (used in alerts) -->
+<svg style="display:none">
+  <symbol id="icon-wa" viewBox="0 0 24 24"><path fill="#25D366" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.297-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></symbol>
+  <symbol id="icon-ig" viewBox="0 0 24 24"><defs><linearGradient id="igGrad" x1="0" y1="100" x2="100" y2="0"><stop offset="0" stop-color="#FFC107"/><stop offset=".5" stop-color="#F44336"/><stop offset="1" stop-color="#9C27B0"/></linearGradient></defs><path fill="url(#igGrad)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></symbol>
+  <symbol id="icon-sms" viewBox="0 0 24 24" fill="#22d3ee"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 11H7V9h2v2zm4 0h-2V9h2v2zm4 0h-2V9h2v2z"/></symbol>
+  <symbol id="icon-call" viewBox="0 0 24 24" fill="#a78bfa"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></symbol>
+  <symbol id="icon-edit" viewBox="0 0 24 24" fill="#a78bfa"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a.996.996 0 000-1.41l-2.34-2.34a.996.996 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></symbol>
+  <symbol id="icon-del" viewBox="0 0 24 24" fill="#fca5a5"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></symbol>
+</svg>
 
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
@@ -532,7 +712,15 @@ const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2600);}
 function closeModal(id){document.getElementById(id).classList.remove('show')}
 
-/* ===== AUTH ===== */
+/* Sidebar Toggle */
+function toggleSidebar(){
+  const sb = document.getElementById('sidebar');
+  const ov = document.getElementById('sidebarOverlay');
+  sb.classList.toggle('open');
+  ov.classList.toggle('show');
+}
+
+/* AUTH */
 let authMode = 'login';
 function switchTab(mode){
   authMode = mode;
@@ -559,6 +747,7 @@ auth.onAuthStateChanged(async (user) => {
     currentUser = user;
     document.getElementById('loginScreen').style.display = 'none';
     document.getElementById('mainApp').classList.add('show');
+    document.getElementById('menuToggle').style.display = '';
     document.getElementById('userEmail').textContent = user.email;
     startCloudSync();
     startAutoBackupTimer();
@@ -569,6 +758,7 @@ auth.onAuthStateChanged(async (user) => {
     if(autoBackupInterval){ clearInterval(autoBackupInterval); autoBackupInterval=null; }
     document.getElementById('loginScreen').style.display = 'grid';
     document.getElementById('mainApp').classList.remove('show');
+    document.getElementById('menuToggle').style.display = 'none';
   }
 });
 
@@ -614,17 +804,23 @@ function saveToCloud(){
   }, 500);
 }
 
-/* ===== NAV ===== */
-document.querySelectorAll('.nav-btn').forEach(b=>{b.onclick=()=>{
-  document.querySelectorAll('.nav-btn').forEach(x=>x.classList.remove('active'));
+/* NAV - both sidebar and bottom nav */
+document.querySelectorAll('.nav-btn, .bottom-nav-btn').forEach(b=>{b.onclick=()=>{
+  document.querySelectorAll('.nav-btn, .bottom-nav-btn').forEach(x=>x.classList.remove('active'));
   document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
-  b.classList.add('active');
+  document.querySelectorAll(`[data-page="${b.dataset.page}"]`).forEach(x=>x.classList.add('active'));
   document.getElementById(b.dataset.page).classList.add('active');
   if(b.dataset.page==='attendance'){ currentAttClass=null; document.getElementById('attStep1').style.display=''; document.getElementById('attStep2').style.display='none'; renderAttClassGrid(); }
+  // Close sidebar on mobile
+  if(window.innerWidth<=768){
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('sidebarOverlay').classList.remove('show');
+  }
+  window.scrollTo({top:0,behavior:'smooth'});
   renderAll();
 };});
 
-/* ===== AUTO BACKUP ===== */
+/* AUTO BACKUP */
 function startAutoBackupTimer(){
   if(autoBackupInterval) clearInterval(autoBackupInterval);
   autoBackupInterval = setInterval(() => {
@@ -632,13 +828,10 @@ function startAutoBackupTimer(){
     const freq = DB.settings.backupFreq;
     const time = DB.settings.backupTime || '00:00';
     if(freq === 'off') return;
-    
     const now = new Date();
     const [hh, mm] = time.split(':').map(Number);
     const last = DB.settings.lastBackup ? new Date(DB.settings.lastBackup) : null;
-    
     if(now.getHours() === hh && now.getMinutes() === mm){
-      // Check if we already backed up in this interval
       if(last){
         const diffH = (now - last) / (1000*60*60);
         if(freq === 'daily' && diffH < 23) return;
@@ -647,10 +840,10 @@ function startAutoBackupTimer(){
       }
       doAutoBackup();
     }
-  }, 60000); // check every minute
+  }, 60000);
 }
 async function doAutoBackup(){
-  if(!emailReady()){ console.log('Auto backup skipped: email not bound'); return; }
+  if(!emailReady()){ return; }
   try{
     const c = DB.settings.email;
     emailjs.init({publicKey:c.publicKey});
@@ -663,18 +856,18 @@ async function doAutoBackup(){
     });
     DB.settings.lastBackup = new Date().toISOString();
     saveToCloud();
-    toast('🤖 Auto backup sent to email');
-  }catch(e){ console.error('Auto backup failed', e); }
+    toast('🤖 Auto backup sent');
+  }catch(e){ console.error(e); }
 }
 
-/* ===== MONTHLY REMINDER ===== */
+/* MONTHLY REMINDER */
 function checkMonthlyReminder(){
   if(!DB.settings.monthlyReminder) return;
   const now = new Date();
   const key = `monthly_${now.getFullYear()}_${now.getMonth()}`;
   const lastAlert = localStorage.getItem('lastMonthlyAlert');
   if(lastAlert === key) return;
-  if(now.getDate() <= 3){ // alert within first 3 days of month
+  if(now.getDate() <= 3){
     localStorage.setItem('lastMonthlyAlert', key);
     setTimeout(() => {
       document.querySelector('[data-page="dashboard"]').click();
@@ -688,11 +881,11 @@ function renderMonthlyBanner(){
   banner.innerHTML = `<div class="monthly-banner">
     <div>
       <h4>📅 New Month — ${MONTH_NAMES[now.getMonth()]} ${now.getFullYear()}</h4>
-      <p>Time to collect this month's fees and download a backup!</p>
+      <p>Time to collect this month's fees and backup!</p>
     </div>
     <div style="display:flex;gap:8px;flex-wrap:wrap">
-      <button class="btn btn-primary btn-sm" onclick="backupNow()">💾 Backup Now</button>
-      <button class="btn btn-ghost btn-sm" onclick="this.closest('.monthly-banner').remove()">✕ Dismiss</button>
+      <button class="btn btn-primary btn-sm" onclick="backupNow()">💾 Backup</button>
+      <button class="btn btn-ghost btn-sm" onclick="this.closest('.monthly-banner').remove()">✕</button>
     </div>
   </div>`;
 }
@@ -703,15 +896,13 @@ function toggleMonthlyReminder(){
   saveBackupSettings();
 }
 
-/* ===== BACKUP SETTINGS ===== */
+/* BACKUP SETTINGS */
 function loadBackupSettings(){
   document.getElementById('backupFreq').value = DB.settings.backupFreq || 'daily';
   document.getElementById('backupTime').value = DB.settings.backupTime || '00:00';
   const t = document.getElementById('monthlyReminder');
   t.classList.toggle('on', DB.settings.monthlyReminder !== false);
-  if(DB.settings.lastBackup){
-    document.getElementById('lastBackup').textContent = new Date(DB.settings.lastBackup).toLocaleString('en-IN');
-  }
+  if(DB.settings.lastBackup) document.getElementById('lastBackup').textContent = new Date(DB.settings.lastBackup).toLocaleString('en-IN');
 }
 function saveBackupSettings(){
   DB.settings.backupFreq = document.getElementById('backupFreq').value;
@@ -719,10 +910,10 @@ function saveBackupSettings(){
   DB.settings.monthlyReminder = document.getElementById('monthlyReminder').classList.contains('on');
   saveToCloud();
   startAutoBackupTimer();
-  toast('✅ Schedule saved');
+  toast('✅ Saved');
 }
 
-/* ===== UPI ===== */
+/* UPI */
 function loadUPISettings(){
   document.getElementById('upiId').value = DB.settings.upi?.id || 'arho065-1@okicici';
   document.getElementById('upiPhone').value = DB.settings.upi?.phone || '9564385573';
@@ -733,7 +924,7 @@ function saveUPISettings(){
     phone: document.getElementById('upiPhone').value.trim()
   };
   saveToCloud();
-  toast('✅ UPI settings saved');
+  toast('✅ UPI saved');
 }
 function getUPIString(amount){
   const u = DB.settings.upi || {};
@@ -753,7 +944,7 @@ function getUPIQRLink(amount){
   return `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upi)}`;
 }
 
-/* ===== HELPERS ===== */
+/* HELPERS */
 function isTuitionDay(dateISO, className){
   const cls = DB.classes[className];
   if(!cls || !cls.days || cls.days.length===0) return true;
@@ -766,16 +957,16 @@ function formatDateShort(iso){
   return `${d.getDate()} ${MONTH_NAMES[d.getMonth()].slice(0,3)} ${d.getFullYear()}`;
 }
 
-/* ===== WIPE ===== */
+/* WIPE */
 function openWipeModal(){ document.getElementById('wipeInput').value=''; document.getElementById('wipeConfirmBtn').disabled=true; document.getElementById('wipeModal').classList.add('show'); }
 document.getElementById('wipeInput').addEventListener('input',e=>{ document.getElementById('wipeConfirmBtn').disabled = e.target.value.trim().toLowerCase()!=='wipe out all data'; });
 function doWipe(){
   const keepEmail=DB.settings.email, keepFreq=DB.settings.backupFreq, keepTime=DB.settings.backupTime, keepUPI=DB.settings.upi, keepMR=DB.settings.monthlyReminder;
   DB={students:[],classes:{'General':{days:[],time:'',fineEnabled:false,fineAmount:10}},settings:{backupFreq:keepFreq,backupTime:keepTime,lastBackup:null,monthlyReminder:keepMR,email:keepEmail,upi:keepUPI}};
-  saveToCloud();renderAll();closeModal('wipeModal');toast('🗑️ All data wiped');
+  saveToCloud();renderAll();closeModal('wipeModal');toast('🗑️ Wiped');
 }
 
-/* ===== STUDENTS ===== */
+/* STUDENTS */
 function openStudentModal(id=null){
   if(Object.keys(DB.classes).length===0){ DB.classes['General']={days:[],time:'',fineEnabled:false,fineAmount:10}; saveToCloud(); }
   const sel=document.getElementById('stuClass');
@@ -811,7 +1002,7 @@ function saveStudent(e){
 }
 function deleteStudent(id){if(!confirm('Delete this student?'))return;DB.students=DB.students.filter(x=>x.id!==id);saveToCloud();renderAll();toast('🗑️ Deleted');}
 
-/* ===== CLASS MODAL ===== */
+/* CLASS MODAL */
 let editingClassDays = [];
 function openClassModal(origName=null){
   document.getElementById('clsOrigName').value = origName||'';
@@ -832,8 +1023,7 @@ function openClassModal(origName=null){
   document.getElementById('classModal').classList.add('show');
 }
 function renderDayToggles(){
-  const wrap = document.getElementById('clsDays');
-  wrap.innerHTML = DAY_NAMES.map((d,i)=>`<span class="day-chip ${editingClassDays.includes(i)?'on':''}" onclick="toggleDayChip(${i})">${d}</span>`).join('');
+  document.getElementById('clsDays').innerHTML = DAY_NAMES.map((d,i)=>`<span class="day-chip ${editingClassDays.includes(i)?'on':''}" onclick="toggleDayChip(${i})">${d}</span>`).join('');
 }
 function toggleDayChip(i){
   if(editingClassDays.includes(i)) editingClassDays = editingClassDays.filter(x=>x!==i);
@@ -851,11 +1041,11 @@ function saveClass(){
     fineEnabled: document.getElementById('clsFineToggle').classList.contains('on'),
     fineAmount: +document.getElementById('clsFine').value || 10
   };
-  saveToCloud();closeModal('classModal');renderAll();toast('✅ Class saved');
+  saveToCloud();closeModal('classModal');renderAll();toast('✅ Saved');
 }
 function deleteClass(name){ if(!confirm(`Delete "${name}"?`))return; delete DB.classes[name]; saveToCloud();renderAll(); }
 
-/* ===== DUES ===== */
+/* DUES */
 function getDueMonths(stu){
   const adm=new Date(stu.admission);const now=new Date();let months=[];
   let cur=new Date(adm.getFullYear(),adm.getMonth(),1);const end=new Date(now.getFullYear(),now.getMonth(),1);
@@ -874,29 +1064,30 @@ function getFineTotal(stu){
 }
 function feeMessage(s){
   const months=getDueMonths(s);const fine=getFineTotal(s);const total=months.length*s.fee+fine;
-  let msg = `Dear Parent, gentle reminder: *${s.name}*'s tuition fee *₹${total}* is pending (${months.length} month(s) × ₹${s.fee}${fine?` + ₹${fine} fine`:''}). Please clear at earliest. Thank you.`;
+  let msg = `Dear Parent, gentle reminder: *${s.name}*'s tuition fee *₹${total}* pending (${months.length} month(s) × ₹${s.fee}${fine?` + ₹${fine} fine`:''}). Please clear at earliest.`;
   msg += getUPIString(total);
   return msg;
 }
 function photoHTML(s,lg=false){
   if(s.photo)return `<div class="photo ${lg?'lg':''}"><img src="${s.photo}"/></div>`;
   return `<div class="photo ${lg?'lg':''}">${s.name.charAt(0).toUpperCase()}</div>`;}
+
 function alertButtons(s){
-  const months=getDueMonths(s);const fine=getFineTotal(s);const total=months.length*s.fee+fine;
   const msg = feeMessage(s);
   const waNum=(s.wa||s.mobile||'').replace(/\D/g,'');
   const waLink=waNum?`https://wa.me/${waNum}?text=${encodeURIComponent(msg)}`:'#';
   const smsLink=s.mobile?`sms:${s.mobile}?body=${encodeURIComponent(msg)}`:'#';
-  const callLink=s.mobile?`tel:${s.mobile}`:'#';const igLink=s.ig?`https://instagram.com/${s.ig}`:'#';
+  const callLink=s.mobile?`tel:${s.mobile}`:'#';
+  const igLink=s.ig?`https://instagram.com/${s.ig}`:'#';
   return `<div class="action-row">
-    <a class="icon-btn wa" href="${waLink}" target="_blank" title="WhatsApp (with UPI QR)">💬</a>
-    <a class="icon-btn sms" href="${smsLink}" title="SMS">✉️</a>
-    <a class="icon-btn call" href="${callLink}" title="Call">📞</a>
-    <a class="icon-btn ig" href="${igLink}" target="_blank" title="Instagram">📸</a>
+    <a class="icon-btn wa" href="${waLink}" target="_blank" title="WhatsApp"><svg viewBox="0 0 24 24"><use href="#icon-wa"/></svg></a>
+    <a class="icon-btn sms" href="${smsLink}" title="SMS"><svg viewBox="0 0 24 24"><use href="#icon-sms"/></svg></a>
+    <a class="icon-btn call" href="${callLink}" title="Call"><svg viewBox="0 0 24 24"><use href="#icon-call"/></svg></a>
+    <a class="icon-btn ig" href="${igLink}" target="_blank" title="Instagram"><svg viewBox="0 0 24 24"><use href="#icon-ig"/></svg></a>
   </div>`;
 }
 
-/* ===== RENDER ALL ===== */
+/* RENDER ALL */
 function renderAll(){
   renderDashboard();renderStudents();renderAttClassGrid();renderFees();renderClasses();loadEmailSettings();
   const classes=Object.keys(DB.classes);
@@ -939,6 +1130,8 @@ function renderStudents(){
   if(sort==='class')list.sort((a,b)=>a.class.localeCompare(b.class));
   if(sort==='admission')list.sort((a,b)=>new Date(a.admission)-new Date(b.admission));
   if(sort==='due')list.sort((a,b)=>(getDueMonths(b).length*b.fee+getFineTotal(b))-(getDueMonths(a).length*a.fee+getFineTotal(a)));
+  
+  // Desktop table
   const tbody=document.querySelector('#studentsTbl tbody');
   tbody.innerHTML=list.map(s=>`<tr>
     <td>${photoHTML(s)}</td>
@@ -946,20 +1139,39 @@ function renderStudents(){
     <td><span class="badge badge-class">${s.class}</span></td>
     <td>₹${s.fee}</td>
     <td>${formatDateShort(s.admission)}</td>
-    <td style="font-size:12px;color:var(--muted)">${s.mobile||'—'}</td>
+    <td style="font-size:11px;color:var(--muted)">${s.mobile||'—'}</td>
     <td><div class="action-row">
-      <button class="icon-btn" onclick="openStudentModal('${s.id}')">✏️</button>
-      <button class="icon-btn" onclick="deleteStudent('${s.id}')" style="color:#fca5a5">🗑️</button>
+      <button class="icon-btn edit" onclick="openStudentModal('${s.id}')"><svg viewBox="0 0 24 24"><use href="#icon-edit"/></svg></button>
+      <button class="icon-btn del" onclick="deleteStudent('${s.id}')"><svg viewBox="0 0 24 24"><use href="#icon-del"/></svg></button>
     </div></td></tr>`).join('');
+  
+  // Mobile cards
+  const cards = document.getElementById('studentsCards');
+  cards.innerHTML = list.map(s=>`<div class="m-card">
+    ${photoHTML(s)}
+    <div class="body">
+      <div class="nm" onclick="openProfile('${s.id}')">${s.name}</div>
+      <div class="meta">
+        <span class="badge badge-class">${s.class}</span>
+        <span>₹${s.fee}/mo</span>
+        <span>${formatDateShort(s.admission)}</span>
+      </div>
+      <div class="actions">
+        <button class="icon-btn edit" onclick="openStudentModal('${s.id}')"><svg viewBox="0 0 24 24"><use href="#icon-edit"/></svg></button>
+        <button class="icon-btn del" onclick="deleteStudent('${s.id}')"><svg viewBox="0 0 24 24"><use href="#icon-del"/></svg></button>
+        ${alertButtons(s)}
+      </div>
+    </div>
+  </div>`).join('');
+  
   document.getElementById('stuEmpty').style.display=list.length?'none':'block';
-  document.getElementById('studentsTbl').style.display=list.length?'':'none';
 }
 
-/* ===== ATTENDANCE ===== */
+/* ATTENDANCE */
 function renderAttClassGrid(){
   const grid = document.getElementById('attClassGrid');
   const classes = Object.keys(DB.classes);
-  if(!classes.length){ grid.innerHTML='<div class="empty-state"><div class="big">🏫</div>No classes yet. Add one first!</div>'; return; }
+  if(!classes.length){ grid.innerHTML='<div class="empty-state"><div class="big">🏫</div>No classes yet!</div>'; return; }
   grid.innerHTML = classes.map(name=>{
     const c = DB.classes[name];
     const count = DB.students.filter(s=>s.class===name).length;
@@ -967,7 +1179,7 @@ function renderAttClassGrid(){
     const sel = currentAttClass===name ? 'selected':'';
     return `<div class="class-pick-card ${sel}" onclick="selectAttClass('${name.replace(/'/g,"\\'")}')">
       <div class="nm">${name}</div>
-      <div class="info">🕐 ${c.time||'No time set'}</div>
+      <div class="info">🕐 ${c.time||'No time'}</div>
       <div class="info">📅 ${daysText}</div>
       <div class="count">👥 ${count} student(s)</div>
     </div>`;
@@ -999,12 +1211,12 @@ function renderAttendanceDay(){
   const banner = document.getElementById('tuitionBanner');
   if(isTuition){
     banner.innerHTML = `<div class="tuition-day-banner">
-      <div class="txt">📚 <b>TUITION DAY</b> — ${dayName}, ${formatDateShort(dateISO)} ${cls.time?'• '+cls.time:''}</div>
+      <div class="txt">📚 <b>TUITION DAY</b> — ${dayName}, ${formatDateShort(dateISO)}</div>
       <span class="badge badge-tuition">Active</span>
     </div>`;
   } else {
     banner.innerHTML = `<div class="tuition-day-banner off">
-      <div class="txt">😴 <b>No class</b> on ${dayName}, ${formatDateShort(dateISO)}</div>
+      <div class="txt">😴 <b>No class</b> — ${dayName}</div>
       <span class="badge">Holiday</span>
     </div>`;
   }
@@ -1026,16 +1238,16 @@ function renderAttendanceDay(){
       ${photoHTML(s)}
       <div class="info" onclick="openProfile('${s.id}','att')">
         <div class="nm">${s.name}</div>
-        <div class="sub">₹${s.fee}/month • ${st===true?'✅ Present':st===false?'❌ Absent':'Not marked'}</div>
+        <div class="sub">₹${s.fee}/mo • ${st===true?'✅ Present':st===false?'❌ Absent':'Not marked'}</div>
       </div>
       <div class="att-actions">
-        <button class="att-btn present ${status==='present'?'active':''}" onclick="setAtt('${s.id}','${dateISO}',true)">✓ Present</button>
-        <button class="att-btn absent ${status==='absent'?'active':''}" onclick="setAtt('${s.id}','${dateISO}',false)">✗ Absent</button>
+        <button class="att-btn present ${status==='present'?'active':''}" onclick="setAtt('${s.id}','${dateISO}',true)">✓</button>
+        <button class="att-btn absent ${status==='absent'?'active':''}" onclick="setAtt('${s.id}','${dateISO}',false)">✗</button>
         <button class="att-btn none ${status==='none'?'active':''}" onclick="setAtt('${s.id}','${dateISO}',null)">—</button>
       </div>
     </div>`;
   }).join('');
-  document.getElementById('attSummary').textContent = `${present} present • ${absent} absent • ${unmarked} unmarked`;
+  document.getElementById('attSummary').textContent = `${present} ✓ • ${absent} ✗ • ${unmarked} ?`;
 }
 function setAtt(sid,date,val){
   const s = DB.students.find(x=>x.id===sid);if(!s)return;
@@ -1046,7 +1258,7 @@ function setAtt(sid,date,val){
   renderDashboard();
 }
 
-/* ===== PROFILE ===== */
+/* PROFILE */
 function openProfile(id, tab='info'){
   currentProfileId = id;
   profileMonth = new Date();
@@ -1066,13 +1278,11 @@ function renderProfile(){
   const s = DB.students.find(x=>x.id===currentProfileId);if(!s)return;
   document.getElementById('profileHeader').innerHTML = `
     ${photoHTML(s,true)}
-    <div class="info" style="flex:1">
+    <div class="info">
       <h3>${s.name}</h3>
-      <div style="color:var(--muted);font-size:13px"><span class="badge badge-class">${s.class}</span> • ₹${s.fee}/month</div>
+      <div style="color:var(--muted);font-size:12px"><span class="badge badge-class">${s.class}</span> • ₹${s.fee}/mo</div>
     </div>
-    <div style="display:flex;gap:6px;flex-wrap:wrap">
-      <button class="btn btn-ghost btn-sm" onclick="closeModal('profileModal');openStudentModal('${s.id}')">✏️ Edit</button>
-    </div>`;
+    <button class="btn btn-ghost btn-sm" onclick="closeModal('profileModal');openStudentModal('${s.id}')">✏️ Edit</button>`;
   renderProfileInfo();
 }
 function renderProfileInfo(){
@@ -1085,11 +1295,11 @@ function renderProfileInfo(){
   
   document.getElementById('pane-info').innerHTML = `
     <div class="info-grid">
-      <div class="info-item"><div class="lbl">Full Name</div><div class="val">${s.name}</div></div>
+      <div class="info-item"><div class="lbl">Name</div><div class="val">${s.name}</div></div>
       <div class="info-item"><div class="lbl">Class</div><div class="val">${s.class}</div></div>
-      <div class="info-item"><div class="lbl">Monthly Fee</div><div class="val">₹${s.fee}</div></div>
-      <div class="info-item"><div class="lbl">Admission Date</div><div class="val">${formatDateShort(s.admission)}</div></div>
-      <div class="info-item"><div class="lbl">Routine</div><div class="val">${daysText}${cls.time?' • '+cls.time:''}</div></div>
+      <div class="info-item"><div class="lbl">Fee</div><div class="val">₹${s.fee}</div></div>
+      <div class="info-item"><div class="lbl">Admission</div><div class="val">${formatDateShort(s.admission)}</div></div>
+      <div class="info-item"><div class="lbl">Routine</div><div class="val">${daysText}</div></div>
       <div class="info-item"><div class="lbl">Mobile</div><div class="val">${s.mobile||'—'}</div></div>
       <div class="info-item"><div class="lbl">WhatsApp</div><div class="val">${s.wa||'—'}</div></div>
       <div class="info-item"><div class="lbl">Instagram</div><div class="val">${s.ig?'@'+s.ig:'—'}</div></div>
@@ -1097,28 +1307,28 @@ function renderProfileInfo(){
     <div style="margin-top:18px;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.3);border-radius:12px;padding:14px">
       <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
         <div>
-          <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px">Total Due</div>
-          <div style="font-family:'Space Grotesk';font-size:24px;font-weight:700;color:#fca5a5">₹${total.toLocaleString('en-IN')}</div>
-          <div style="font-size:12px;color:var(--muted);margin-top:2px">${months.length} month(s) × ₹${s.fee}${fine?` + ₹${fine} fine`:''}</div>
+          <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px">Total Due</div>
+          <div style="font-family:'Space Grotesk';font-size:clamp(20px,5.5vw,24px);font-weight:700;color:#fca5a5">₹${total.toLocaleString('en-IN')}</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:2px">${months.length} × ₹${s.fee}${fine?` + ₹${fine}`:''}</div>
         </div>
-        <button class="btn btn-danger" onclick="alertParents('${s.id}')">📨 Send Reminder</button>
+        <button class="btn btn-danger" onclick="alertParents('${s.id}')">📨 Remind</button>
       </div>
     </div>
     
     <div class="upi-box">
       <h4>💳 Payment Details</h4>
-      <p style="font-size:12px;color:var(--muted);margin-bottom:14px;font-style:italic">If you want, you can even pay with UPI 🙏</p>
+      <p style="font-size:11px;color:var(--muted);margin-bottom:14px;font-style:italic">If you want, you can even pay with UPI 🙏</p>
       <div class="upi-details">
         <div class="upi-info">
-          <div class="upi-row"><div><div class="lbl">UPI ID</div></div><div class="val">${upi.id||'Not set'}</div></div>
-          <div class="upi-row"><div><div class="lbl">Phone</div></div><div class="val">${upi.phone||'Not set'}</div></div>
-          <div class="upi-row"><div><div class="lbl">Amount</div></div><div class="val" style="color:#fca5a5">₹${total.toLocaleString('en-IN')}</div></div>
+          <div class="upi-row"><div class="lbl">UPI ID</div><div class="val">${upi.id||'Not set'}</div></div>
+          <div class="upi-row"><div class="lbl">Phone</div><div class="val">${upi.phone||'Not set'}</div></div>
+          <div class="upi-row"><div class="lbl">Amount</div><div class="val" style="color:#fca5a5">₹${total.toLocaleString('en-IN')}</div></div>
         </div>
-        ${upi.id ? `<div class="upi-qr"><img src="${qrUrl}" alt="UPI QR"/><div style="font-size:10px;color:#666;margin-top:6px">Scan to pay</div></div>` : ''}
+        ${upi.id ? `<div class="upi-qr"><img src="${qrUrl}" alt="UPI QR"/><div style="font-size:9px;color:#666;margin-top:6px">Scan to pay</div></div>` : ''}
       </div>
     </div>
     
-    <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">${alertButtons(s)}</div>`;
+    <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;justify-content:center">${alertButtons(s)}</div>`;
 }
 function alertParents(sid){
   const s=DB.students.find(x=>x.id===sid);if(!s)return;
@@ -1153,19 +1363,18 @@ function renderProfileAtt(){
   const total = getFineTotal(s);
   document.getElementById('pane-att').innerHTML = `
     <div class="month-nav">
-      <button onclick="shiftProfileMonth(-1)">← Prev</button>
+      <button onclick="shiftProfileMonth(-1)">←</button>
       <div class="mn-label">${MONTH_NAMES[m]} ${y}</div>
-      <button onclick="shiftProfileMonth(1)">Next →</button>
+      <button onclick="shiftProfileMonth(1)">→</button>
     </div>
-    <div style="display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap;font-size:12px;color:var(--muted)">
-      <span>🟣 Tuition Day</span><span>🟢 Present</span><span>🔴 Absent${fineOn?' (+fine)':''}</span>
-      <span>Click a day to toggle</span>
+    <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;font-size:10px;color:var(--muted)">
+      <span>🟣 Tuition</span><span>🟢 Present</span><span>🔴 Absent</span>
     </div>
     <div class="cal-grid">${calHTML}</div>
-    <div style="margin-top:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px">
+    <div style="margin-top:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:8px">
       <div class="info-item"><div class="lbl">Present</div><div class="val" style="color:#6ee7b7">${present}</div></div>
       <div class="info-item"><div class="lbl">Absent</div><div class="val" style="color:#fca5a5">${absent}</div></div>
-      <div class="info-item"><div class="lbl">Current Fine</div><div class="val">₹${total}</div></div>
+      <div class="info-item"><div class="lbl">Fine</div><div class="val">₹${total}</div></div>
     </div>`;
 }
 function shiftProfileMonth(delta){ profileMonth.setMonth(profileMonth.getMonth()+delta); renderProfileAtt(); }
@@ -1202,24 +1411,24 @@ function renderProfilePay(){
   const fine = getFineTotal(s);
   const grand = totalDue + fine;
   document.getElementById('pane-pay').innerHTML = `
-    <div style="background:linear-gradient(135deg,rgba(124,58,237,.2),rgba(236,72,153,.2));border:1px solid rgba(236,72,153,.3);border-radius:14px;padding:16px;margin-bottom:16px">
+    <div style="background:linear-gradient(135deg,rgba(124,58,237,.2),rgba(236,72,153,.2));border:1px solid rgba(236,72,153,.3);border-radius:14px;padding:14px;margin-bottom:16px">
       <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
         <div>
-          <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px">Total Outstanding</div>
-          <div style="font-family:'Space Grotesk';font-size:28px;font-weight:700">₹${grand.toLocaleString('en-IN')}</div>
-          <div style="font-size:12px;color:var(--muted)">Fee: ₹${totalDue} ${fine?`+ Fine: ₹${fine}`:''}</div>
+          <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px">Total Outstanding</div>
+          <div style="font-family:'Space Grotesk';font-size:clamp(22px,6vw,28px);font-weight:700">₹${grand.toLocaleString('en-IN')}</div>
+          <div style="font-size:11px;color:var(--muted)">Fee ₹${totalDue} ${fine?`+ Fine ₹${fine}`:''}</div>
         </div>
       </div>
     </div>
-    <h4 style="font-family:'Space Grotesk';margin-bottom:10px">Month-by-Month History</h4>
+    <h4 style="font-family:'Space Grotesk';margin-bottom:10px;font-size:15px">Payment History</h4>
     ${rows.map(r=>`
       <div class="pay-month-row">
-        <div class="ym">${MONTH_NAMES[r.m]} ${r.y}</div>
-        <div style="flex:1;font-size:12px;color:var(--muted)">${r.paid?'Paid '+formatDateShort(r.date):'Unpaid'}</div>
+        <div class="ym">${MONTH_NAMES[r.m].slice(0,3)} ${r.y}</div>
+        <div style="flex:1;font-size:11px;color:var(--muted)">${r.paid?'Paid '+formatDateShort(r.date):'Unpaid'}</div>
         <div class="amt" style="color:${r.paid?'#6ee7b7':'#fca5a5'}">₹${s.fee}</div>
         ${r.paid
-          ? `<button class="btn btn-sm btn-ghost" onclick="unmarkPaid('${s.id}','${r.ym}')">↶ Undo</button>`
-          : `<button class="btn btn-sm btn-success" onclick="markPaidMonth('${s.id}','${r.ym}')">✓ Mark Paid</button>`
+          ? `<button class="btn btn-sm btn-ghost" onclick="unmarkPaid('${s.id}','${r.ym}')">↶</button>`
+          : `<button class="btn btn-sm btn-success" onclick="markPaidMonth('${s.id}','${r.ym}')">✓</button>`
         }
       </div>`).join('')}
   `;
@@ -1227,20 +1436,22 @@ function renderProfilePay(){
 function markPaidMonth(sid,ym){
   const s = DB.students.find(x=>x.id===sid);if(!s)return;
   if(!s.payments) s.payments=[];
-  if(!s.payments.some(p=>p.ym===ym)){ s.payments.push({ym,date:todayISO()}); saveToCloud(); renderProfilePay(); renderAll(); toast('💰 Marked paid'); }
+  if(!s.payments.some(p=>p.ym===ym)){ s.payments.push({ym,date:todayISO()}); saveToCloud(); renderProfilePay(); renderAll(); toast('💰 Paid'); }
 }
 function unmarkPaid(sid,ym){
   const s = DB.students.find(x=>x.id===sid);if(!s)return;
-  if(!confirm('Remove payment record for '+ym+'?')) return;
+  if(!confirm('Remove '+ym+' payment?')) return;
   s.payments = (s.payments||[]).filter(p=>p.ym!==ym);
-  saveToCloud();renderProfilePay();renderAll();toast('↶ Payment removed');
+  saveToCloud();renderProfilePay();renderAll();toast('↶ Removed');
 }
 
-/* ===== FEES ===== */
+/* FEES */
 function renderFees(){
   if(Object.keys(DB.classes).length===0){DB.classes['General']={days:[],time:'',fineEnabled:false,fineAmount:10};saveToCloud();}
   const cls=document.getElementById('feeClass')?.value||'';
   const list=DB.students.filter(s=>!cls||s.class===cls);
+  
+  // Desktop
   const tbody=document.querySelector('#feesTbl tbody');
   tbody.innerHTML=list.map(s=>{const months=getDueMonths(s);const fine=getFineTotal(s);const total=months.length*s.fee+fine;
     const isDue=total>0;
@@ -1248,40 +1459,57 @@ function renderFees(){
       <td><div style="display:flex;align-items:center;gap:10px">${photoHTML(s)}<b style="cursor:pointer" onclick="openProfile('${s.id}','pay')">${s.name}</b></div></td>
       <td><span class="badge badge-class">${s.class}</span></td>
       <td>₹${s.fee}</td>
-      <td>${isDue?`<span class="badge badge-due">${months.length} month(s)</span>`:`<span class="badge badge-ok">Clear</span>`}</td>
-      <td class="due-cell"><span class="due-formula">${months.length} × ₹${s.fee}${fine?` + ₹${fine} fine`:''}</span></td>
+      <td>${isDue?`<span class="badge badge-due">${months.length} mo</span>`:`<span class="badge badge-ok">Clear</span>`}</td>
+      <td class="due-cell"><span class="due-formula">${months.length} × ₹${s.fee}${fine?` + ₹${fine}`:''}</span></td>
       <td><span class="due-total" style="color:${isDue?'#fca5a5':'#6ee7b7'}">₹${total.toLocaleString('en-IN')}</span></td>
       <td>${alertButtons(s)}</td></tr>`;}).join('');
+  
+  // Mobile cards
+  const cards = document.getElementById('feesCards');
+  cards.innerHTML = list.map(s=>{const months=getDueMonths(s);const fine=getFineTotal(s);const total=months.length*s.fee+fine;
+    const isDue=total>0;
+    return `<div class="m-card">
+      ${photoHTML(s)}
+      <div class="body" style="flex:1">
+        <div class="nm" onclick="openProfile('${s.id}','pay')">${s.name}</div>
+        <div class="meta">
+          <span class="badge badge-class">${s.class}</span>
+          ${isDue?`<span class="badge badge-due">${months.length} mo due</span>`:`<span class="badge badge-ok">Clear</span>`}
+        </div>
+        <div style="margin:8px 0"><span class="due-formula">${months.length} × ₹${s.fee}${fine?` + ₹${fine}`:''}</span></div>
+        <div style="font-family:'Space Grotesk';font-weight:700;font-size:18px;color:${isDue?'#fca5a5':'#6ee7b7'}">₹${total.toLocaleString('en-IN')}</div>
+        <div class="actions" style="margin-top:8px">${alertButtons(s)}</div>
+      </div>
+    </div>`;}).join('');
 }
-function sendBulkReminder(){if(!confirm('Open WhatsApp for ALL students with pending dues?'))return;let count=0;
+function sendBulkReminder(){if(!confirm('Send WhatsApp to all with dues?'))return;let count=0;
   DB.students.forEach(s=>{const months=getDueMonths(s);const fine=getFineTotal(s);const total=months.length*s.fee+fine;
     if(total<=0)return;const waNum=(s.wa||s.mobile||'').replace(/\D/g,'');
     if(waNum){setTimeout(()=>window.open(`https://wa.me/${waNum}?text=${encodeURIComponent(feeMessage(s))}`,'_blank'),count*500);count++;}});
   toast(`📨 ${count} reminder(s)`);}
 
-/* ===== CLASSES RENDER ===== */
+/* CLASSES */
 function renderClasses(){
   if(Object.keys(DB.classes).length===0){DB.classes['General']={days:[],time:'',fineEnabled:false,fineAmount:10};saveToCloud();}
   const card=document.getElementById('classesCard');
   const entries=Object.entries(DB.classes);
   card.innerHTML=entries.map(([name,cfg])=>{const count=DB.students.filter(s=>s.class===name).length;
-    const daysText = cfg.days&&cfg.days.length ? cfg.days.map(d=>DAY_NAMES[d]).join(', ') : 'No routine set';
+    const daysText = cfg.days&&cfg.days.length ? cfg.days.map(d=>DAY_NAMES[d]).join(', ') : 'No routine';
     return `<div class="class-card">
       <div style="flex:1;min-width:200px">
-        <h4 style="font-family:'Space Grotesk';font-size:17px">${name}</h4>
-        <div style="font-size:12px;color:var(--muted);margin-top:4px">👥 ${count} students</div>
-        <div style="font-size:12px;color:var(--muted);margin-top:2px">📅 ${daysText}${cfg.time?' • 🕐 '+cfg.time:''}</div>
-        <div style="font-size:12px;color:var(--muted);margin-top:2px">💰 Fine: ₹${cfg.fineAmount}/day ${cfg.fineEnabled?'<span style="color:#6ee7b7">ON</span>':'<span style="color:#94a3b8">OFF</span>'}</div>
+        <h4 style="font-family:'Space Grotesk';font-size:clamp(14px,4vw,17px)">${name}</h4>
+        <div style="font-size:11px;color:var(--muted);margin-top:4px">👥 ${count} • 📅 ${daysText}</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px">💰 ₹${cfg.fineAmount}/day ${cfg.fineEnabled?'<span style="color:#6ee7b7">ON</span>':'<span style="color:#94a3b8">OFF</span>'}</div>
       </div>
       <div style="display:flex;gap:8px;flex-wrap:wrap">
-        <button class="btn btn-sm btn-ghost" onclick="openClassModal('${name.replace(/'/g,"\\'")}')">✏️ Edit</button>
+        <button class="btn btn-sm btn-ghost" onclick="openClassModal('${name.replace(/'/g,"\\'")}')">✏️</button>
         <button class="btn btn-sm btn-danger" onclick="deleteClass('${name.replace(/'/g,"\\'")}')">🗑️</button>
       </div>
     </div>`;}).join('')
-    +(entries.length===0?'<div class="empty-state"><div class="big">🏫</div>Add a class to start</div>':'');
+    +(entries.length===0?'<div class="empty-state"><div class="big">🏫</div>Add a class</div>':'');
 }
 
-/* ===== BACKUP ===== */
+/* BACKUP */
 function backupNow(){
   DB.settings.lastBackup=new Date().toISOString();
   saveToCloud();
@@ -1294,10 +1522,10 @@ function backupNow(){
 function restoreBackup(e){
   const f=e.target.files[0];if(!f)return;const r=new FileReader();
   r.onload=ev=>{try{const data=JSON.parse(ev.target.result);if(!data.students)throw 0;
-    if(!confirm('Replace all current data?'))return;
+    if(!confirm('Replace all data?'))return;
     DB=data;DB.settings.email=DB.settings.email||{};DB.settings.upi=DB.settings.upi||{id:'arho065-1@okicici',phone:'9564385573'};
     saveToCloud();renderAll();loadUPISettings();loadBackupSettings();toast('✅ Restored');
-  }catch{toast('❌ Invalid file') }};r.readAsText(f);
+  }catch{toast('❌ Invalid') }};r.readAsText(f);
 }
 function loadEmailSettings(){const c=DB.settings.email||{};
   document.getElementById('emailTo').value=c.toEmail||'';
@@ -1314,11 +1542,11 @@ function emailReady(){const c=DB.settings.email;return c&&c.publicKey&&c.service
 async function testEmail(){saveEmailSettings();if(!emailReady()){toast('⚠️ Fill all 4');return;}
   toast('📧 Sending...');const c=DB.settings.email;
   try{emailjs.init({publicKey:c.publicKey});
-    await emailjs.send(c.serviceId,c.templateId,{to_email:c.toEmail,subject:'TuitionPro Test',message:'Working! 🎉'});
+    await emailjs.send(c.serviceId,c.templateId,{to_email:c.toEmail,subject:'Test',message:'OK! 🎉'});
     toast('✅ Sent!');}catch(e){toast('❌ '+(e.text||'Failed'));}}
 async function emailBackup(){
   saveEmailSettings();
-  if(!emailReady()){toast('⚠️ Bind email first');return;}
+  if(!emailReady()){toast('⚠️ Bind email');return;}
   toast('📧 Preparing...');
   const c=DB.settings.email;
   const slim=JSON.parse(JSON.stringify(DB));
@@ -1327,7 +1555,7 @@ async function emailBackup(){
     emailjs.init({publicKey:c.publicKey});
     await emailjs.send(c.serviceId,c.templateId,{
       to_email:c.toEmail,
-      subject:'💾 TuitionPro Backup - '+new Date().toLocaleString('en-IN'),
+      subject:'💾 Backup - '+new Date().toLocaleString('en-IN'),
       message:JSON.stringify(slim,null,2)
     });
     DB.settings.lastBackup=new Date().toISOString();
