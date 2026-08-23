@@ -30,19 +30,63 @@ body{background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));backgro
 .app{position:relative;z-index:1;display:grid;grid-template-columns:260px 1fr;min-height:100vh;display:none}
 .app.show{display:grid}
 
-/* Sidebar - FIXED: no blur, sharp text */
-.sidebar{background:rgba(15,12,41,.98);border-right:1px solid var(--glass-border);padding:28px 18px;display:flex;flex-direction:column;gap:8px;position:sticky;top:0;height:100vh}
+/* SIDEBAR - FIXED: solid bg, sharp text, working buttons */
+.sidebar{
+  background:#0f0c29;
+  border-right:1px solid var(--glass-border);
+  padding:28px 18px 18px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  position:sticky;
+  top:0;
+  height:100vh;
+  overflow-y:auto;
+}
 .logo{display:flex;align-items:center;gap:10px;padding:8px 10px 22px;border-bottom:1px solid var(--glass-border);margin-bottom:18px}
 .logo-icon{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:grid;place-items:center;font-size:22px;box-shadow:0 8px 24px rgba(124,58,237,.4)}
 .logo h1{font-family:'Space Grotesk';font-size:20px;font-weight:700;letter-spacing:-.5px;color:#fff}
 .logo h1 span{background:linear-gradient(135deg,var(--accent2),var(--accent3));-webkit-background-clip:text;background-clip:text;color:transparent}
-.nav-btn{display:flex;align-items:center;gap:12px;padding:13px 14px;border-radius:12px;background:transparent;border:none;color:#e2e8f0;font:600 14px 'Inter';cursor:pointer;transition:.2s;text-align:left;width:100%}
-.nav-btn:hover{background:rgba(255,255,255,.08);color:#fff}
-.nav-btn.active{background:linear-gradient(135deg,rgba(124,58,237,.35),rgba(236,72,153,.25));color:#fff;box-shadow:inset 0 0 0 1px var(--glass-border)}
+
+/* NAV BUTTONS - clear text, solid hover */
+.nav-btn{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:13px 14px;
+  border-radius:12px;
+  background:transparent;
+  border:1px solid transparent;
+  color:#e2e8f0;
+  font:600 14px 'Inter';
+  cursor:pointer;
+  transition:.2s;
+  text-align:left;
+  width:100%;
+  pointer-events:auto;
+  position:relative;
+}
+.nav-btn:hover{background:rgba(255,255,255,.08);color:#fff;border-color:rgba(255,255,255,.08)}
+.nav-btn:active{transform:scale(.97)}
+.nav-btn.active{
+  background:linear-gradient(135deg,rgba(124,58,237,.45),rgba(236,72,153,.35));
+  color:#fff;
+  border-color:rgba(236,72,153,.5);
+  box-shadow:0 4px 12px rgba(124,58,237,.3);
+}
 .nav-btn .ic{font-size:18px}
-.user-box{margin-top:auto;padding:12px;background:rgba(0,0,0,.4);border-radius:12px;border:1px solid var(--glass-border)}
-.user-box .lbl{font-size:10px;color:#cbd5e1;margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px}
-.user-box .mail{font-size:12px;color:#fff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-bottom:8px;font-weight:500}
+
+/* USER BOX (logout) - always visible */
+.user-box{
+  margin-top:auto;
+  padding:14px;
+  background:rgba(255,255,255,.05);
+  border-radius:12px;
+  border:1px solid var(--glass-border);
+  flex-shrink:0;
+}
+.user-box .lbl{font-size:10px;color:#94a3b8;margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px;font-weight:600}
+.user-box .mail{font-size:12px;color:#fff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-bottom:10px;font-weight:500}
 
 .main{padding:clamp(16px,3vw,40px);padding-bottom:calc(clamp(16px,3vw,40px) + 90px);overflow-y:auto;min-height:100vh}
 .page-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:clamp(16px,3vw,28px);flex-wrap:wrap;gap:12px}
@@ -122,7 +166,7 @@ tr:hover td{background:rgba(255,255,255,.03)}
 .class-pick-card:hover{transform:translateY(-3px);border-color:var(--accent)}
 .class-pick-card.selected{background:linear-gradient(135deg,rgba(124,58,237,.25),rgba(236,72,153,.15));border-color:var(--accent);box-shadow:0 8px 24px rgba(124,58,237,.3)}
 .class-pick-card .nm{font-family:'Space Grotesk';font-size:clamp(15px,4vw,18px);font-weight:700;margin-bottom:4px}
-.class-pick-card .info{font-size:clamp(10px,2.5vw,11px);color:var(--muted)}
+.class-pick-card .info{font-size:clamp(10px,2.5vw,11px);color:var(--muted);margin-top:2px}
 .class-pick-card .count{font-size:12px;color:#67e8f9;margin-top:6px}
 
 .tuition-day-banner{background:linear-gradient(135deg,rgba(124,58,237,.2),rgba(236,72,153,.2));border:1px solid rgba(236,72,153,.4);border-radius:14px;padding:clamp(12px,3vw,16px);margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
@@ -203,9 +247,58 @@ tr:hover td{background:rgba(255,255,255,.03)}
 .spinner{width:50px;height:50px;border:3px solid rgba(255,255,255,.1);border-top-color:var(--accent);border-radius:50%;animation:spin 1s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-.day-toggle{display:inline-flex;gap:4px;flex-wrap:wrap;margin-top:6px}
-.day-chip{padding:8px 12px;border-radius:8px;background:rgba(255,255,255,.06);border:1px solid var(--glass-border);font-size:clamp(10px,2.8vw,12px);cursor:pointer;font-weight:600;transition:.2s;user-select:none;min-height:36px;display:grid;place-items:center}
-.day-chip.on{background:linear-gradient(135deg,var(--accent),var(--accent2));border-color:transparent;color:#fff}
+/* DAY CHIPS with PER-DAY TIME (NEW) */
+.day-toggle{display:flex;flex-direction:column;gap:8px;margin-top:8px;width:100%}
+.day-item{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:10px;
+  align-items:center;
+  padding:10px;
+  background:rgba(0,0,0,.25);
+  border-radius:12px;
+  border:1px solid var(--glass-border);
+  transition:.2s;
+}
+.day-item.active{
+  background:linear-gradient(135deg,rgba(124,58,237,.2),rgba(236,72,153,.15));
+  border-color:rgba(236,72,153,.4);
+}
+.day-chip{
+  padding:8px 14px;
+  border-radius:8px;
+  background:rgba(255,255,255,.08);
+  border:1px solid transparent;
+  font-size:clamp(12px,3vw,13px);
+  cursor:pointer;
+  font-weight:600;
+  transition:.2s;
+  user-select:none;
+  min-height:38px;
+  display:grid;
+  place-items:center;
+  color:#94a3b8;
+}
+.day-chip.on{
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  border-color:transparent;
+  color:#fff;
+  box-shadow:0 2px 8px rgba(124,58,237,.4);
+}
+.day-time-input{
+  padding:8px 12px;
+  border-radius:8px;
+  background:rgba(0,0,0,.4);
+  border:1px solid var(--glass-border);
+  color:var(--text);
+  font:500 13px 'Inter';
+  min-height:38px;
+  width:120px;
+}
+.day-time-input:disabled{
+  opacity:.4;
+  cursor:not-allowed;
+}
 
 .upi-box{background:linear-gradient(135deg,rgba(16,185,129,.15),rgba(6,182,212,.15));border:1px solid rgba(16,185,129,.3);border-radius:16px;padding:clamp(14px,3vw,20px);margin-top:18px}
 .upi-box h4{font-family:'Space Grotesk';margin-bottom:14px;display:flex;align-items:center;gap:10px;font-size:clamp(15px,4vw,17px)}
@@ -238,37 +331,120 @@ tr:hover td{background:rgba(255,255,255,.03)}
 .monthly-banner h4{font-family:'Space Grotesk';margin-bottom:4px;font-size:clamp(13px,3.5vw,15px)}
 .monthly-banner p{font-size:clamp(10px,2.5vw,12px);color:var(--muted)}
 
-/* ROUTINE PREVIEW MODAL (NEW) */
 .routine-preview{background:linear-gradient(135deg,#1e1b4b,#312e81);border:1px solid var(--glass-border);border-radius:22px;padding:clamp(20px,4vw,28px);max-width:480px;width:100%;animation:pop .3s cubic-bezier(.34,1.56,.64,1)}
 .routine-preview h3{font-family:'Space Grotesk';margin-bottom:6px;font-size:clamp(18px,4.5vw,22px)}
 .routine-preview .class-sub{color:var(--muted);font-size:12px;margin-bottom:18px}
 .routine-info{background:rgba(0,0,0,.3);border:1px solid var(--glass-border);border-radius:14px;padding:16px;margin-bottom:14px}
 .routine-info .r-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
-.routine-info .r-days{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
-.routine-info .r-time{font-family:'Space Grotesk';font-size:20px;font-weight:700;color:#e9d5ff}
 .routine-info .r-fine{font-size:13px;color:var(--muted);margin-top:8px}
 .routine-info .r-fine b{color:#fca5a5}
-.routine-days-display{display:flex;gap:6px;flex-wrap:wrap}
-.routine-day-pill{padding:6px 12px;border-radius:20px;background:linear-gradient(135deg,rgba(124,58,237,.25),rgba(236,72,153,.25));border:1px solid rgba(236,72,153,.4);color:#e9d5ff;font-size:12px;font-weight:600}
+
+/* NEW: Schedule list in routine preview */
+.routine-schedule-list{display:flex;flex-direction:column;gap:8px;margin-top:8px}
+.routine-day-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:10px 14px;
+  background:rgba(0,0,0,.3);
+  border-radius:10px;
+  border:1px solid rgba(236,72,153,.3);
+}
+.routine-day-row .day-name{font-weight:600;font-size:14px;color:#e9d5ff}
+.routine-day-row .day-time{font-family:'Space Grotesk';font-weight:700;font-size:15px;color:#67e8f9}
+
 .routine-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
 
-/* MOBILE */
+/* ==================== MOBILE ==================== */
 @media (max-width: 768px) {
   .app{grid-template-columns:1fr}
-  .sidebar{position:fixed;top:0;left:-100%;width:85%;max-width:320px;height:100vh;z-index:1000;transition:left .3s ease;padding-top:60px;box-shadow:4px 0 30px rgba(0,0,0,.5)}
+  
+  /* Sidebar: slide from left, solid bg, z-index correct */
+  .sidebar{
+    position:fixed;
+    top:0;
+    left:-100%;
+    width:85%;
+    max-width:320px;
+    height:100vh;
+    z-index:1000;
+    transition:left .3s ease;
+    padding-top:70px;
+    box-shadow:4px 0 30px rgba(0,0,0,.5);
+    background:#0f0c29;
+  }
   .sidebar.open{left:0}
-  .sidebar-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:999;display:none}
-  .sidebar-overlay.show{display:block}
-  .menu-toggle{position:fixed;top:14px;left:14px;z-index:998;width:44px;height:44px;border-radius:12px;background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--glass-border);display:grid;place-items:center;cursor:pointer;color:var(--text);font-size:20px;box-shadow:0 4px 12px rgba(0,0,0,.3)}
-  .menu-toggle:hover{background:rgba(255,255,255,.15)}
-  .bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:rgba(15,12,41,.95);backdrop-filter:blur(20px);border-top:1px solid var(--glass-border);display:grid;grid-template-columns:repeat(5,1fr);padding:8px 4px;padding-bottom:calc(8px + env(safe-area-inset-bottom));box-shadow:0 -4px 20px rgba(0,0,0,.3)}
-  .bottom-nav-btn{display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 4px;background:none;border:none;color:var(--muted);cursor:pointer;transition:.2s;border-radius:10px;min-height:56px}
+  
+  /* Overlay: transparent layer with no blur, blocks clicks only when shown */
+  .sidebar-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    z-index:999;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .3s;
+  }
+  .sidebar-overlay.show{
+    opacity:1;
+    pointer-events:auto;
+  }
+  
+  /* Hamburger button */
+  .menu-toggle{
+    position:fixed;
+    top:14px;
+    left:14px;
+    z-index:998;
+    width:44px;
+    height:44px;
+    border-radius:12px;
+    background:#1e1b4b;
+    border:1px solid var(--glass-border);
+    display:grid;
+    place-items:center;
+    cursor:pointer;
+    color:#fff;
+    font-size:22px;
+    box-shadow:0 4px 12px rgba(0,0,0,.3);
+    font-weight:700;
+  }
+  .menu-toggle:hover{background:#312e81}
+  
+  /* Bottom Nav */
+  .bottom-nav{
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    z-index:50;
+    background:#0f0c29;
+    border-top:1px solid var(--glass-border);
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    padding:8px 4px;
+    padding-bottom:calc(8px + env(safe-area-inset-bottom));
+    box-shadow:0 -4px 20px rgba(0,0,0,.3);
+  }
+  .bottom-nav-btn{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:3px;
+    padding:6px 4px;
+    background:none;
+    border:none;
+    color:var(--muted);
+    cursor:pointer;
+    transition:.2s;
+    border-radius:10px;
+    min-height:56px;
+  }
   .bottom-nav-btn.active{color:var(--accent2)}
   .bottom-nav-btn svg{width:20px;height:20px}
   .bottom-nav-btn .lbl{font-size:9px;font-weight:600;letter-spacing:.3px}
+  
   .main{padding:clamp(16px,3vw,24px);padding-top:70px;padding-bottom:100px}
-  .user-box{display:none}
-  .page-head .btn{font-size:11px;padding:8px 12px}
   
   .mobile-cards .m-card{background:rgba(0,0,0,.25);border:1px solid var(--glass-border);border-radius:14px;padding:14px;margin-bottom:10px;display:flex;gap:12px;align-items:flex-start}
   .mobile-cards .m-card .photo{width:50px;height:50px;font-size:18px;flex-shrink:0}
@@ -426,7 +602,7 @@ tr:hover td{background:rgba(255,255,255,.03)}
 
     <!-- Classes -->
     <section class="page" id="classes">
-      <div class="page-head"><div><h2>Classes & <span>Routine</span></h2><p>Set routine & fines</p></div><button class="btn btn-primary" onclick="openClassModal()">➕ Add Class</button></div>
+      <div class="page-head"><div><h2>Classes & <span>Routine</span></h2><p>Set routine & fines per class</p></div><button class="btn btn-primary" onclick="openClassModal()">➕ Add Class</button></div>
       <div class="card" id="classesCard"></div>
     </section>
 
@@ -565,19 +741,18 @@ tr:hover td{background:rgba(255,255,255,.03)}
   </div>
 </div>
 
-<!-- Class Modal -->
+<!-- Class Modal with PER-DAY TIME -->
 <div class="modal-bg" id="classModal">
   <div class="modal sm">
     <button class="modal-close" onclick="closeModal('classModal')">×</button>
     <h3 id="clsModalTitle">➕ Add Class</h3>
     <input type="hidden" id="clsOrigName"/>
     <div class="form-grid">
-      <div class="field" style="grid-column:1/-1"><label>Class Name *</label><input id="clsName" required/></div>
-      <div class="field"><label>Time</label><input type="time" id="clsTime"/></div>
+      <div class="field" style="grid-column:1/-1"><label>Class Name *</label><input id="clsName" required placeholder="e.g. Class 10 - Maths"/></div>
       <div class="field"><label>Fine/Day (₹)</label><input type="number" id="clsFine" min="0" value="10"/></div>
     </div>
-    <div class="field" style="margin-top:10px">
-      <label>Tuition Days (click to toggle)</label>
+    <div class="field" style="margin-top:14px">
+      <label>📅 Tuition Days & Time (tap a day to enable, set its time)</label>
       <div class="day-toggle" id="clsDays"></div>
     </div>
     <div class="field" style="margin-top:14px;display:flex;align-items:center;justify-content:space-between">
@@ -591,26 +766,24 @@ tr:hover td{background:rgba(255,255,255,.03)}
   </div>
 </div>
 
-<!-- Routine Preview Modal (NEW) -->
+<!-- Routine Preview Modal -->
 <div class="modal-bg" id="routineModal" style="align-items:center">
   <div class="routine-preview">
     <button class="modal-close" onclick="closeModal('routineModal')">×</button>
     <h3 id="routineClassName">Class Routine</h3>
     <p class="class-sub" id="routineStudentCount">0 students</p>
     <div class="routine-info">
-      <div class="r-label">📅 Tuition Days</div>
-      <div class="routine-days-display" id="routineDaysDisplay"></div>
+      <div class="r-label">📅 Weekly Schedule</div>
+      <div class="routine-schedule-list" id="routineScheduleList"></div>
     </div>
     <div class="routine-info">
-      <div class="r-label">🕐 Class Time</div>
-      <div class="r-time" id="routineTimeDisplay">Not set</div>
+      <div class="r-label">💰 Fine System</div>
       <div class="r-fine" id="routineFineDisplay"></div>
     </div>
     <div class="routine-actions">
       <button class="btn btn-primary" style="flex:1" onclick="startAttendanceFromRoutine()">▶️ Start Attendance</button>
-      <button class="btn btn-ghost" style="flex:1" onclick="editRoutineClass()">✏️ Edit Routine</button>
+      <button class="btn btn-ghost" style="flex:1" onclick="editRoutineClass()">✏️ Edit</button>
     </div>
-    <button class="btn btn-ghost btn-sm" style="width:100%;margin-top:8px" onclick="closeModal('routineModal');renderAttClassGrid()">← Back to classes</button>
   </div>
 </div>
 
@@ -689,7 +862,14 @@ const todayYM=()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getM
 const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2600);}
 function closeModal(id){document.getElementById(id).classList.remove('show')}
-function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('sidebarOverlay').classList.toggle('show')}
+
+/* FIXED: Sidebar toggle with proper z-index management */
+function toggleSidebar(){
+  const sb = document.getElementById('sidebar');
+  const ov = document.getElementById('sidebarOverlay');
+  sb.classList.toggle('open');
+  ov.classList.toggle('show');
+}
 
 let authMode = 'login';
 function switchTab(mode){
@@ -742,7 +922,7 @@ async function startCloudSync(){
       DB.settings.email = DB.settings.email || {};
       DB.settings.upi = DB.settings.upi || {id:'arho065-1@okicici',phone:'9564385573'};
     } else {
-      DB.classes = {'General':{days:[],time:'',fineEnabled:false,fineAmount:10}};
+      DB.classes = {'General':{days:[],times:{},fineEnabled:false,fineAmount:10}};
       await userDoc().set({students:[],classes:DB.classes,settings:DB.settings});
     }
   }catch(e){ console.error(e); }
@@ -770,16 +950,23 @@ function saveToCloud(){
   }, 500);
 }
 
-document.querySelectorAll('.nav-btn, .bottom-nav-btn').forEach(b=>{b.onclick=()=>{
-  document.querySelectorAll('.nav-btn, .bottom-nav-btn').forEach(x=>x.classList.remove('active'));
-  document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
-  document.querySelectorAll(`[data-page="${b.dataset.page}"]`).forEach(x=>x.classList.add('active'));
-  document.getElementById(b.dataset.page).classList.add('active');
-  if(b.dataset.page==='attendance'){ currentAttClass=null; document.getElementById('attStep1').style.display=''; document.getElementById('attStep2').style.display='none'; renderAttClassGrid(); }
-  if(window.innerWidth<=768){document.getElementById('sidebar').classList.remove('open');document.getElementById('sidebarOverlay').classList.remove('show');}
-  window.scrollTo({top:0,behavior:'smooth'});
-  renderAll();
-};});
+/* NAV: both sidebar and bottom nav */
+document.querySelectorAll('.nav-btn, .bottom-nav-btn').forEach(b=>{
+  b.addEventListener('click', function(e){
+    e.preventDefault();
+    document.querySelectorAll('.nav-btn, .bottom-nav-btn').forEach(x=>x.classList.remove('active'));
+    document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+    document.querySelectorAll(`[data-page="${b.dataset.page}"]`).forEach(x=>x.classList.add('active'));
+    document.getElementById(b.dataset.page).classList.add('active');
+    if(b.dataset.page==='attendance'){ currentAttClass=null; document.getElementById('attStep1').style.display=''; document.getElementById('attStep2').style.display='none'; renderAttClassGrid(); }
+    if(window.innerWidth<=768){
+      document.getElementById('sidebar').classList.remove('open');
+      document.getElementById('sidebarOverlay').classList.remove('show');
+    }
+    window.scrollTo({top:0,behavior:'smooth'});
+    renderAll();
+  });
+});
 
 function startAutoBackupTimer(){
   if(autoBackupInterval) clearInterval(autoBackupInterval);
@@ -876,18 +1063,30 @@ function getUPIQRLink(amount){
   if(amount) upi += `&am=${amount}&cu=INR`;
   return `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upi)}`;
 }
+
+/* PER-DAY TIME HELPERS */
 function isTuitionDay(dateISO, className){
   const cls = DB.classes[className];
   if(!cls || !cls.days || cls.days.length===0) return true;
   return cls.days.includes(new Date(dateISO).getDay());
 }
+
+function getDayTime(className, dayIndex){
+  const cls = DB.classes[className];
+  if(!cls) return '';
+  // Try per-day time first
+  if(cls.times && cls.times[String(dayIndex)]) return cls.times[String(dayIndex)];
+  // Fallback to legacy single time
+  return cls.time || '';
+}
+
 function formatDateShort(iso){
   if(!iso) return '';
   const d = new Date(iso);
   return `${d.getDate()} ${MONTH_NAMES[d.getMonth()].slice(0,3)} ${d.getFullYear()}`;
 }
 function formatTime12(t){
-  if(!t) return 'Not set';
+  if(!t) return '';
   const [h,m] = t.split(':').map(Number);
   const ampm = h>=12?'PM':'AM';
   const h12 = h%12||12;
@@ -898,12 +1097,12 @@ function openWipeModal(){ document.getElementById('wipeInput').value=''; documen
 document.getElementById('wipeInput').addEventListener('input',e=>{ document.getElementById('wipeConfirmBtn').disabled = e.target.value.trim().toLowerCase()!=='wipe out all data'; });
 function doWipe(){
   const keepEmail=DB.settings.email, keepFreq=DB.settings.backupFreq, keepTime=DB.settings.backupTime, keepUPI=DB.settings.upi, keepMR=DB.settings.monthlyReminder;
-  DB={students:[],classes:{'General':{days:[],time:'',fineEnabled:false,fineAmount:10}},settings:{backupFreq:keepFreq,backupTime:keepTime,lastBackup:null,monthlyReminder:keepMR,email:keepEmail,upi:keepUPI}};
+  DB={students:[],classes:{'General':{days:[],times:{},fineEnabled:false,fineAmount:10}},settings:{backupFreq:keepFreq,backupTime:keepTime,lastBackup:null,monthlyReminder:keepMR,email:keepEmail,upi:keepUPI}};
   saveToCloud();renderAll();closeModal('wipeModal');toast('🗑️ Wiped');
 }
 
 function openStudentModal(id=null){
-  if(Object.keys(DB.classes).length===0){ DB.classes['General']={days:[],time:'',fineEnabled:false,fineAmount:10}; saveToCloud(); }
+  if(Object.keys(DB.classes).length===0){ DB.classes['General']={days:[],times:{},fineEnabled:false,fineAmount:10}; saveToCloud(); }
   const sel=document.getElementById('stuClass');
   sel.innerHTML=Object.keys(DB.classes).map(c=>`<option>${c}</option>`).join('');
   document.getElementById('stuId').value='';document.getElementById('studentForm').reset();
@@ -937,8 +1136,11 @@ function saveStudent(e){
 }
 function deleteStudent(id){if(!confirm('Delete this student?'))return;DB.students=DB.students.filter(x=>x.id!==id);saveToCloud();renderAll();toast('🗑️ Deleted');}
 
+/* CLASS MODAL with PER-DAY TIME */
 let editingClassDays = [];
+let editingClassTimes = {};
 let afterClassSaveCallback = null;
+
 function openClassModal(origName=null, callback=null){
   document.getElementById('clsOrigName').value = origName||'';
   document.getElementById('clsModalTitle').textContent = origName?'✏️ Edit Class':'➕ Add Class';
@@ -946,34 +1148,72 @@ function openClassModal(origName=null, callback=null){
   if(origName){
     const c = DB.classes[origName];
     document.getElementById('clsName').value = origName;
-    document.getElementById('clsTime').value = c.time||'';
     document.getElementById('clsFine').value = c.fineAmount||10;
     document.getElementById('clsFineToggle').classList.toggle('on', !!c.fineEnabled);
     editingClassDays = [...(c.days||[])];
+    editingClassTimes = {...(c.times||{})};
+    // Migrate: if legacy 'time' exists but no per-day times, copy to all active days
+    if(c.time && (!c.times || Object.keys(c.times).length===0)){
+      editingClassDays.forEach(d => { editingClassTimes[String(d)] = c.time; });
+    }
   } else {
-    document.getElementById('clsName').value='';document.getElementById('clsTime').value='';
-    document.getElementById('clsFine').value=10;document.getElementById('clsFineToggle').classList.remove('on');
+    document.getElementById('clsName').value='';
+    document.getElementById('clsFine').value=10;
+    document.getElementById('clsFineToggle').classList.remove('on');
     editingClassDays = [];
+    editingClassTimes = {};
   }
   renderDayToggles();
   document.getElementById('classModal').classList.add('show');
 }
+
 function renderDayToggles(){
-  document.getElementById('clsDays').innerHTML = DAY_NAMES.map((d,i)=>`<span class="day-chip ${editingClassDays.includes(i)?'on':''}" onclick="toggleDayChip(${i})">${d}</span>`).join('');
+  const wrap = document.getElementById('clsDays');
+  wrap.innerHTML = DAY_NAMES.map((d,i)=>{
+    const active = editingClassDays.includes(i);
+    const time = editingClassTimes[String(i)] || '';
+    return `<div class="day-item ${active?'active':''}">
+      <span class="day-chip ${active?'on':''}" onclick="toggleDayChip(${i})">${d}</span>
+      <input type="time" class="day-time-input" data-day="${i}" 
+        value="${time}" 
+        ${active?'':'disabled'}
+        onchange="setDayTime(${i}, this.value)"
+        onclick="event.stopPropagation()"/>
+    </div>`;
+  }).join('');
 }
+
 function toggleDayChip(i){
-  if(editingClassDays.includes(i)) editingClassDays = editingClassDays.filter(x=>x!==i);
-  else editingClassDays.push(i);
+  if(editingClassDays.includes(i)){
+    editingClassDays = editingClassDays.filter(x=>x!==i);
+    delete editingClassTimes[String(i)];
+  } else {
+    editingClassDays.push(i);
+    if(!editingClassTimes[String(i)]) editingClassTimes[String(i)] = '18:00';
+  }
   renderDayToggles();
 }
+
+function setDayTime(dayIndex, value){
+  if(value) editingClassTimes[String(dayIndex)] = value;
+  else delete editingClassTimes[String(dayIndex)];
+}
+
 function saveClass(){
   const name = document.getElementById('clsName').value.trim();
   if(!name){ toast('⚠️ Name required'); return; }
   const orig = document.getElementById('clsOrigName').value;
   if(orig && orig!==name){ delete DB.classes[orig]; DB.students.forEach(s=>{ if(s.class===orig) s.class=name; }); }
+  
+  // Build times object - only keep times for active days
+  const times = {};
+  editingClassDays.forEach(d => {
+    if(editingClassTimes[String(d)]) times[String(d)] = editingClassTimes[String(d)];
+  });
+  
   DB.classes[name] = {
-    days: [...editingClassDays],
-    time: document.getElementById('clsTime').value,
+    days: [...editingClassDays].sort((a,b)=>a-b),
+    times: times,
     fineEnabled: document.getElementById('clsFineToggle').classList.contains('on'),
     fineAmount: +document.getElementById('clsFine').value || 10
   };
@@ -1045,14 +1285,11 @@ function renderDashboard(){
   });
   document.getElementById('sAtt').textContent=(marked?Math.round(present/marked*100):0)+'%';
   document.getElementById('sAttSub').textContent=marked?`${present}/${marked} present`:'Not marked';
-  
   const tbody=document.querySelector('#dashDueTbl tbody');tbody.innerHTML='';
   dueStudents.sort((a,b)=>b.due-a.due).slice(0,10).forEach(({s,due})=>{
     tbody.innerHTML+=`<tr><td><div style="display:flex;align-items:center;gap:10px">${photoHTML(s)}<b style="cursor:pointer" onclick="openProfile('${s.id}')">${s.name}</b></div></td>
     <td><span class="badge badge-class">${s.class}</span></td><td><span class="badge badge-due">₹${due.toLocaleString('en-IN')}</span></td>
     <td>${alertButtons(s)}</td></tr>`;});
-  
-  // Mobile cards for pending fees (FIX)
   const cards = document.getElementById('dashDueCards');
   cards.innerHTML = dueStudents.sort((a,b)=>b.due-a.due).slice(0,10).map(({s,due})=>`
     <div class="m-card">
@@ -1063,13 +1300,12 @@ function renderDashboard(){
         <div class="actions">${alertButtons(s)}</div>
       </div>
     </div>`).join('');
-  
   document.getElementById('dashDueEmpty').style.display=dueStudents.length?'none':'block';
   document.getElementById('dashDueTbl').style.display=dueStudents.length?'':'none';
 }
 
 function renderStudents(){
-  if(Object.keys(DB.classes).length===0){DB.classes['General']={days:[],time:'',fineEnabled:false,fineAmount:10};saveToCloud();}
+  if(Object.keys(DB.classes).length===0){DB.classes['General']={days:[],times:{},fineEnabled:false,fineAmount:10};saveToCloud();}
   const q=(document.getElementById('searchInput')?.value||'').toLowerCase();
   const cf=document.getElementById('classFilter')?.value||'';
   const sort=document.getElementById('sortBy')?.value||'name';
@@ -1078,7 +1314,6 @@ function renderStudents(){
   if(sort==='class')list.sort((a,b)=>a.class.localeCompare(b.class));
   if(sort==='admission')list.sort((a,b)=>new Date(a.admission)-new Date(b.admission));
   if(sort==='due')list.sort((a,b)=>(getDueMonths(b).length*b.fee+getFineTotal(b))-(getDueMonths(a).length*a.fee+getFineTotal(a)));
-  
   const tbody=document.querySelector('#studentsTbl tbody');
   tbody.innerHTML=list.map(s=>`<tr>
     <td>${photoHTML(s)}</td>
@@ -1091,7 +1326,6 @@ function renderStudents(){
       <button class="icon-btn edit" onclick="openStudentModal('${s.id}')"><svg viewBox="0 0 24 24"><use href="#icon-edit"/></svg></button>
       <button class="icon-btn del" onclick="deleteStudent('${s.id}')"><svg viewBox="0 0 24 24"><use href="#icon-del"/></svg></button>
     </div></td></tr>`).join('');
-  
   const cards = document.getElementById('studentsCards');
   cards.innerHTML = list.map(s=>`<div class="m-card">
     ${photoHTML(s)}
@@ -1109,11 +1343,9 @@ function renderStudents(){
       </div>
     </div>
   </div>`).join('');
-  
   document.getElementById('stuEmpty').style.display=list.length?'none':'block';
 }
 
-/* ATTENDANCE with ROUTINE PREVIEW */
 function renderAttClassGrid(){
   const grid = document.getElementById('attClassGrid');
   const classes = Object.keys(DB.classes);
@@ -1121,10 +1353,14 @@ function renderAttClassGrid(){
   grid.innerHTML = classes.map(name=>{
     const c = DB.classes[name];
     const count = DB.students.filter(s=>s.class===name).length;
-    const daysText = c.days && c.days.length ? c.days.map(d=>DAY_NAMES[d]).join(', ') : 'No routine';
+    const daysText = c.days && c.days.length 
+      ? c.days.map(d => {
+          const t = getDayTime(name, d);
+          return DAY_NAMES[d] + (t ? ' ' + formatTime12(t) : '');
+        }).join(', ') 
+      : 'No routine';
     return `<div class="class-pick-card" onclick="showRoutinePreview('${name.replace(/'/g,"\\'")}')">
       <div class="nm">${name}</div>
-      <div class="info">🕐 ${c.time?formatTime12(c.time):'No time'}</div>
       <div class="info">📅 ${daysText}</div>
       <div class="count">👥 ${count} student(s)</div>
     </div>`;
@@ -1138,17 +1374,22 @@ function showRoutinePreview(name){
   document.getElementById('routineClassName').textContent = name;
   document.getElementById('routineStudentCount').textContent = `${count} student(s)`;
   
-  const daysDisp = document.getElementById('routineDaysDisplay');
+  const list = document.getElementById('routineScheduleList');
   if(c.days && c.days.length){
-    daysDisp.innerHTML = c.days.map(d=>`<span class="routine-day-pill">${DAY_FULL[d]}</span>`).join('');
+    list.innerHTML = c.days.map(d=>{
+      const t = getDayTime(name, d);
+      return `<div class="routine-day-row">
+        <span class="day-name">📅 ${DAY_FULL[d]}</span>
+        <span class="day-time">${t ? '🕐 ' + formatTime12(t) : '🕐 —'}</span>
+      </div>`;
+    }).join('');
   } else {
-    daysDisp.innerHTML = '<span style="color:var(--muted);font-size:13px">Every day (no routine set)</span>';
+    list.innerHTML = '<div style="color:var(--muted);font-size:13px;padding:10px;text-align:center">Every day (no routine set)</div>';
   }
   
-  document.getElementById('routineTimeDisplay').textContent = formatTime12(c.time);
   document.getElementById('routineFineDisplay').innerHTML = c.fineEnabled 
-    ? `Fine: <b>₹${c.fineAmount}</b>/absent day (enabled)` 
-    : `Fine: disabled`;
+    ? `Fine enabled: <b>₹${c.fineAmount}</b> per absent tuition day` 
+    : `Fine system: <b style="color:#94a3b8">Disabled</b>`;
   
   document.getElementById('routineModal').classList.add('show');
 }
@@ -1168,19 +1409,10 @@ function editRoutineClass(){
   if(!pendingRoutineClass) return;
   closeModal('routineModal');
   openClassModal(pendingRoutineClass, (savedName) => {
-    // After editing, re-open the preview
     setTimeout(() => showRoutinePreview(savedName), 300);
   });
 }
 
-function selectAttClass(name){
-  currentAttClass = name;
-  document.getElementById('attStep1').style.display='none';
-  document.getElementById('attStep2').style.display='';
-  document.getElementById('attClassName').textContent = name;
-  document.getElementById('attDate').value = todayISO();
-  renderAttendanceDay();
-}
 function backToClassSelect(){
   currentAttClass=null;
   document.getElementById('attStep1').style.display='';
@@ -1196,10 +1428,11 @@ function renderAttendanceDay(){
   const isTuition = isTuitionDay(dateISO, currentAttClass);
   const d = new Date(dateISO);
   const dayName = DAY_FULL[d.getDay()];
+  const dayTime = getDayTime(currentAttClass, d.getDay());
   const banner = document.getElementById('tuitionBanner');
   if(isTuition){
     banner.innerHTML = `<div class="tuition-day-banner">
-      <div class="txt">📚 <b>TUITION DAY</b> — ${dayName}, ${formatDateShort(dateISO)}</div>
+      <div class="txt">📚 <b>TUITION DAY</b> — ${dayName}${dayTime?' • 🕐 '+formatTime12(dayTime):''} • ${formatDateShort(dateISO)}</div>
       <span class="badge badge-tuition">Active</span>
     </div>`;
   } else {
@@ -1271,7 +1504,13 @@ function renderProfileInfo(){
   const s = DB.students.find(x=>x.id===currentProfileId);if(!s)return;
   const months = getDueMonths(s); const fine = getFineTotal(s); const total = months.length*s.fee + fine;
   const cls = DB.classes[s.class] || {};
-  const daysText = cls.days && cls.days.length ? cls.days.map(d=>DAY_FULL[d]).join(', ') : 'Every day';
+  let daysText = 'Every day';
+  if(cls.days && cls.days.length){
+    daysText = cls.days.map(d=>{
+      const t = getDayTime(s.class, d);
+      return DAY_FULL[d] + (t ? ' • ' + formatTime12(t) : '');
+    }).join('<br>');
+  }
   const upi = DB.settings.upi || {};
   const qrUrl = getUPIQRLink(total);
   document.getElementById('pane-info').innerHTML = `
@@ -1280,7 +1519,7 @@ function renderProfileInfo(){
       <div class="info-item"><div class="lbl">Class</div><div class="val">${s.class}</div></div>
       <div class="info-item"><div class="lbl">Fee</div><div class="val">₹${s.fee}</div></div>
       <div class="info-item"><div class="lbl">Admission</div><div class="val">${formatDateShort(s.admission)}</div></div>
-      <div class="info-item"><div class="lbl">Routine</div><div class="val">${daysText}</div></div>
+      <div class="info-item" style="grid-column:1/-1"><div class="lbl">Routine</div><div class="val" style="line-height:1.6">${daysText}</div></div>
       <div class="info-item"><div class="lbl">Mobile</div><div class="val">${s.mobile||'—'}</div></div>
       <div class="info-item"><div class="lbl">WhatsApp</div><div class="val">${s.wa||'—'}</div></div>
       <div class="info-item"><div class="lbl">Instagram</div><div class="val">${s.ig?'@'+s.ig:'—'}</div></div>
@@ -1412,7 +1651,7 @@ function unmarkPaid(sid,ym){
 }
 
 function renderFees(){
-  if(Object.keys(DB.classes).length===0){DB.classes['General']={days:[],time:'',fineEnabled:false,fineAmount:10};saveToCloud();}
+  if(Object.keys(DB.classes).length===0){DB.classes['General']={days:[],times:{},fineEnabled:false,fineAmount:10};saveToCloud();}
   const cls=document.getElementById('feeClass')?.value||'';
   const list=DB.students.filter(s=>!cls||s.class===cls);
   const tbody=document.querySelector('#feesTbl tbody');
@@ -1450,16 +1689,21 @@ function sendBulkReminder(){if(!confirm('Send WhatsApp to all with dues?'))retur
   toast(`📨 ${count} reminder(s)`);}
 
 function renderClasses(){
-  if(Object.keys(DB.classes).length===0){DB.classes['General']={days:[],time:'',fineEnabled:false,fineAmount:10};saveToCloud();}
+  if(Object.keys(DB.classes).length===0){DB.classes['General']={days:[],times:{},fineEnabled:false,fineAmount:10};saveToCloud();}
   const card=document.getElementById('classesCard');
   const entries=Object.entries(DB.classes);
   card.innerHTML=entries.map(([name,cfg])=>{const count=DB.students.filter(s=>s.class===name).length;
-    const daysText = cfg.days&&cfg.days.length ? cfg.days.map(d=>DAY_NAMES[d]).join(', ') : 'No routine';
+    const daysText = cfg.days&&cfg.days.length 
+      ? cfg.days.map(d => {
+          const t = getDayTime(name, d);
+          return DAY_NAMES[d] + (t ? ' ' + formatTime12(t) : '');
+        }).join(', ') 
+      : 'No routine';
     return `<div class="class-card">
       <div style="flex:1;min-width:200px">
         <h4 style="font-family:'Space Grotesk';font-size:clamp(14px,4vw,17px)">${name}</h4>
-        <div style="font-size:11px;color:var(--muted);margin-top:4px">👥 ${count} • 📅 ${daysText}</div>
-        <div style="font-size:11px;color:var(--muted);margin-top:2px">🕐 ${cfg.time?formatTime12(cfg.time):'No time'}</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:4px">👥 ${count} students</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px">📅 ${daysText}</div>
         <div style="font-size:11px;color:var(--muted);margin-top:2px">💰 ₹${cfg.fineAmount}/day ${cfg.fineEnabled?'<span style="color:#6ee7b7">ON</span>':'<span style="color:#94a3b8">OFF</span>'}</div>
       </div>
       <div style="display:flex;gap:8px;flex-wrap:wrap">
