@@ -18,7 +18,6 @@ body{background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));backgro
 .orb3{width:300px;height:300px;background:#06b6d4;top:40%;left:50%;animation:float 22s infinite}
 @keyframes float{0%,100%{transform:translate(0,0)}50%{transform:translate(60px,-40px)}}
 
-/* LOGIN */
 .login-wrap{position:relative;z-index:1;min-height:100vh;display:grid;place-items:center;padding:20px}
 .login-card{background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--glass-border);border-radius:24px;padding:40px;max-width:420px;width:100%;animation:pop .5s}
 .login-card h2{font-family:'Space Grotesk';font-size:28px;margin-bottom:6px;text-align:center}
@@ -27,8 +26,6 @@ body{background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));backgro
 .login-tabs{display:flex;background:rgba(0,0,0,.3);border-radius:12px;padding:4px;margin-bottom:20px}
 .login-tab{flex:1;padding:10px;border:none;background:transparent;color:var(--muted);cursor:pointer;font:600 13px 'Inter';border-radius:9px;transition:.2s}
 .login-tab.active{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff}
-.login-card .field{margin-bottom:14px}
-.login-card button[type="submit"]{width:100%;margin-top:8px}
 
 .app{position:relative;z-index:1;display:grid;grid-template-columns:260px 1fr;min-height:100vh;display:none}
 .app.show{display:grid}
@@ -56,8 +53,10 @@ body{background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));backgro
 .btn-ghost:hover{background:rgba(255,255,255,.12)}
 .btn-danger{background:rgba(239,68,68,.15);color:#fca5a5;border:1px solid rgba(239,68,68,.3)}
 .btn-danger:hover{background:rgba(239,68,68,.25)}
+.btn-success{background:rgba(16,185,129,.15);color:#6ee7b7;border:1px solid rgba(16,185,129,.3)}
 .btn-sm{padding:6px 12px;font-size:12px;border-radius:8px}
 .btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:28px}
 .stat{background:var(--glass);backdrop-filter:blur(14px);border:1px solid var(--glass-border);border-radius:18px;padding:20px;position:relative;overflow:hidden;transition:.3s}
 .stat:hover{transform:translateY(-4px);border-color:rgba(255,255,255,.2)}
@@ -75,12 +74,14 @@ table{width:100%;border-collapse:collapse;font-size:13px}
 th{background:rgba(0,0,0,.3);padding:12px;text-align:left;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);border-bottom:1px solid var(--glass-border)}
 td{padding:12px;border-bottom:1px solid rgba(255,255,255,.05)}
 tr:hover td{background:rgba(255,255,255,.03)}
-.photo{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:grid;place-items:center;font-weight:700;color:#fff;font-size:14px}
+.photo{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:grid;place-items:center;font-weight:700;color:#fff;font-size:14px;flex-shrink:0}
+.photo.lg{width:70px;height:70px;font-size:24px}
 .photo img{width:100%;height:100%;border-radius:50%;object-fit:cover}
 .badge{padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;display:inline-block}
 .badge-ok{background:rgba(16,185,129,.15);color:#6ee7b7;border:1px solid rgba(16,185,129,.3)}
 .badge-due{background:rgba(239,68,68,.18);color:#fca5a5;border:1px solid rgba(239,68,68,.4);animation:pulse 2s infinite}
 .badge-class{background:rgba(6,182,212,.15);color:#67e8f9;border:1px solid rgba(6,182,212,.3)}
+.badge-tuition{background:linear-gradient(135deg,rgba(124,58,237,.25),rgba(236,72,153,.25));color:#e9d5ff;border:1px solid rgba(236,72,153,.4)}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.7}}
 .due-cell{display:flex;flex-direction:column;gap:4px}
 .due-formula{font-size:11px;color:var(--muted);font-family:'Courier New',monospace;background:rgba(0,0,0,.25);padding:3px 7px;border-radius:6px}
@@ -92,26 +93,83 @@ tr:hover td{background:rgba(255,255,255,.03)}
 .icon-btn.sms{background:rgba(6,182,212,.15);color:#22d3ee}
 .icon-btn.call{background:rgba(124,58,237,.15);color:#a78bfa}
 .icon-btn.ig{background:linear-gradient(135deg,rgba(225,48,108,.15),rgba(252,175,69,.15));color:#e1306c}
+
 .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;z-index:100;padding:20px}
 .modal-bg.show{display:flex;animation:fade .2s}
 @keyframes fade{from{opacity:0}to{opacity:1}}
-.modal{background:linear-gradient(135deg,#1e1b4b,#312e81);border:1px solid var(--glass-border);border-radius:22px;padding:28px;max-width:640px;width:100%;max-height:90vh;overflow-y:auto;animation:pop .3s cubic-bezier(.34,1.56,.64,1)}
+.modal{background:linear-gradient(135deg,#1e1b4b,#312e81);border:1px solid var(--glass-border);border-radius:22px;padding:28px;max-width:720px;width:100%;max-height:90vh;overflow-y:auto;animation:pop .3s cubic-bezier(.34,1.56,.64,1)}
+.modal.sm{max-width:480px}
 @keyframes pop{from{transform:scale(.9);opacity:0}to{transform:scale(1);opacity:1}}
 .modal h3{font-family:'Space Grotesk';margin-bottom:18px;font-size:22px}
 .modal-close{float:right;background:none;border:none;color:var(--muted);font-size:24px;cursor:pointer}
-.cal-head{font-size:10px;color:var(--muted);text-align:center;font-weight:700;text-transform:uppercase}
+
+/* Attendance page redesign */
+.class-select-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:24px}
+.class-pick-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:16px;padding:20px;cursor:pointer;transition:.25s;text-align:center}
+.class-pick-card:hover{transform:translateY(-3px);border-color:var(--accent)}
+.class-pick-card.selected{background:linear-gradient(135deg,rgba(124,58,237,.25),rgba(236,72,153,.15));border-color:var(--accent);box-shadow:0 8px 24px rgba(124,58,237,.3)}
+.class-pick-card .nm{font-family:'Space Grotesk';font-size:18px;font-weight:700;margin-bottom:4px}
+.class-pick-card .info{font-size:11px;color:var(--muted)}
+.class-pick-card .count{font-size:12px;color:#67e8f9;margin-top:6px}
+
+.tuition-day-banner{background:linear-gradient(135deg,rgba(124,58,237,.2),rgba(236,72,153,.2));border:1px solid rgba(236,72,153,.4);border-radius:14px;padding:14px 18px;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.tuition-day-banner.off{background:rgba(0,0,0,.25);border:1px solid var(--glass-border)}
+.tuition-day-banner .txt{font-weight:600;display:flex;align-items:center;gap:10px}
+
+.stu-att-row{background:rgba(0,0,0,.2);border:1px solid var(--glass-border);border-radius:14px;padding:14px;margin-bottom:10px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;transition:.2s}
+.stu-att-row:hover{border-color:var(--accent)}
+.stu-att-row .info{flex:1;min-width:140px;cursor:pointer}
+.stu-att-row .info .nm{font-weight:600;font-size:15px;margin-bottom:3px}
+.stu-att-row .info .sub{font-size:11px;color:var(--muted)}
+.att-actions{display:flex;gap:6px}
+.att-btn{padding:8px 14px;border-radius:10px;border:none;cursor:pointer;font:600 12px 'Inter';transition:.2s;min-width:80px}
+.att-btn.present{background:rgba(16,185,129,.2);color:#6ee7b7;border:1px solid rgba(16,185,129,.4)}
+.att-btn.absent{background:rgba(239,68,68,.2);color:#fca5a5;border:1px solid rgba(239,68,68,.4)}
+.att-btn.none{background:rgba(255,255,255,.05);color:var(--muted);border:1px solid var(--glass-border)}
+.att-btn.active.present{background:#10b981;color:#fff;box-shadow:0 0 0 2px rgba(16,185,129,.5)}
+.att-btn.active.absent{background:#ef4444;color:#fff;box-shadow:0 0 0 2px rgba(239,68,68,.5)}
+
+/* Profile Modal */
+.profile-header{display:flex;gap:18px;align-items:center;margin-bottom:18px;padding-bottom:18px;border-bottom:1px solid var(--glass-border)}
+.profile-header .info h3{margin-bottom:4px;font-size:22px}
+.profile-tabs{display:flex;gap:6px;background:rgba(0,0,0,.3);border-radius:12px;padding:4px;margin-bottom:18px}
+.profile-tab{flex:1;padding:10px;border:none;background:transparent;color:var(--muted);cursor:pointer;font:600 13px 'Inter';border-radius:9px;transition:.2s}
+.profile-tab.active{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff}
+.profile-pane{display:none}
+.profile-pane.active{display:block;animation:slideIn .3s}
+
+.info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+.info-item{background:rgba(0,0,0,.25);border-radius:10px;padding:12px}
+.info-item .lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.info-item .val{font-weight:600;font-size:14px}
+
+.month-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;background:rgba(0,0,0,.25);border-radius:12px;padding:10px 14px}
+.month-nav button{background:rgba(255,255,255,.08);border:1px solid var(--glass-border);color:var(--text);padding:6px 12px;border-radius:8px;cursor:pointer;font-weight:600}
+.month-nav button:hover{background:rgba(255,255,255,.15)}
+.month-nav .mn-label{font-family:'Space Grotesk';font-size:16px;font-weight:700}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.cal-head{font-size:10px;color:var(--muted);text-align:center;font-weight:700;text-transform:uppercase;padding:6px 0}
 .cal-day{aspect-ratio:1;border-radius:10px;display:grid;place-items:center;background:rgba(255,255,255,.04);font-size:12px;cursor:pointer;transition:.2s;border:1px solid transparent;position:relative}
 .cal-day:hover{background:rgba(255,255,255,.1)}
-.cal-day.present{background:rgba(16,185,129,.25);border-color:rgba(16,185,129,.5);color:#6ee7b7}
-.cal-day.absent{background:rgba(239,68,68,.2);border-color:rgba(239,68,68,.5);color:#fca5a5}
+.cal-day.tuition{background:rgba(124,58,237,.1);border-color:rgba(124,58,237,.3)}
+.cal-day.present{background:rgba(16,185,129,.3);border-color:rgba(16,185,129,.5);color:#6ee7b7}
+.cal-day.absent{background:rgba(239,68,68,.25);border-color:rgba(239,68,68,.5);color:#fca5a5}
+.cal-day.fined::after{content:'₹';position:absolute;bottom:2px;right:4px;font-size:9px;color:#fca5a5;font-weight:700}
 .cal-day.empty{visibility:hidden}
-.cal-day.fined::after{content:'₹';position:absolute;bottom:2px;right:4px;font-size:9px;color:#fca5a5}
+.cal-day.future{opacity:.4;cursor:not-allowed}
+
+.pay-month-row{background:rgba(0,0,0,.25);border-radius:12px;padding:14px;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.pay-month-row .ym{font-weight:700;font-size:14px;min-width:100px}
+.pay-month-row .amt{font-family:'Space Grotesk';font-weight:700;font-size:15px}
+
 .toggle{position:relative;width:44px;height:24px;background:rgba(255,255,255,.1);border-radius:12px;cursor:pointer;transition:.2s;display:inline-block}
 .toggle.on{background:linear-gradient(135deg,var(--accent),var(--accent2))}
 .toggle::after{content:'';position:absolute;width:18px;height:18px;background:#fff;border-radius:50%;top:3px;left:3px;transition:.2s}
 .toggle.on::after{left:23px}
+
 .search-bar{display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap}
 .search-bar input,.search-bar select{padding:10px 14px;border-radius:10px;background:rgba(0,0,0,.25);border:1px solid var(--glass-border);color:var(--text);font:400 13px 'Inter'}
+
 .page{display:none;animation:slideIn .4s}
 .page.active{display:block}
 @keyframes slideIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
@@ -125,21 +183,21 @@ tr:hover td{background:rgba(255,255,255,.03)}
 .loading-screen{position:fixed;inset:0;background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));display:grid;place-items:center;z-index:999}
 .spinner{width:50px;height:50px;border:3px solid rgba(255,255,255,.1);border-top-color:var(--accent);border-radius:50%;animation:spin 1s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
+
+.day-toggle{display:inline-flex;gap:4px;flex-wrap:wrap;margin-top:6px}
+.day-chip{padding:6px 10px;border-radius:8px;background:rgba(255,255,255,.06);border:1px solid var(--glass-border);font-size:12px;cursor:pointer;font-weight:600;transition:.2s;user-select:none}
+.day-chip.on{background:linear-gradient(135deg,var(--accent),var(--accent2));border-color:transparent;color:#fff}
+
 @media(max-width:768px){.app{grid-template-columns:1fr}.sidebar{position:relative;height:auto;flex-direction:row;overflow-x:auto;padding:14px}.sidebar .logo{display:none}.nav-btn{flex-shrink:0}.user-box{display:none}.main{padding:20px}}
 </style>
 </head>
 <body>
 <div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div>
 
-<!-- LOADING -->
 <div class="loading-screen" id="loadingScreen">
-  <div style="text-align:center">
-    <div class="spinner"></div>
-    <p style="margin-top:20px;color:var(--muted)">Loading TuitionPro...</p>
-  </div>
+  <div style="text-align:center"><div class="spinner"></div><p style="margin-top:20px;color:var(--muted)">Loading TuitionPro...</p></div>
 </div>
 
-<!-- LOGIN -->
 <div class="login-wrap" id="loginScreen" style="display:none">
   <div class="login-card">
     <div style="text-align:center;font-size:48px;margin-bottom:10px">🎓</div>
@@ -152,13 +210,12 @@ tr:hover td{background:rgba(255,255,255,.03)}
     <form onsubmit="handleAuth(event)">
       <div class="field"><label>Email</label><input type="email" id="authEmail" required placeholder="you@gmail.com"/></div>
       <div class="field"><label>Password (min 6 chars)</label><input type="password" id="authPass" required minlength="6" placeholder="••••••"/></div>
-      <button type="submit" class="btn btn-primary" id="authBtn">🔐 Login</button>
+      <button type="submit" class="btn btn-primary" id="authBtn" style="width:100%">🔐 Login</button>
     </form>
     <p id="authError" style="color:#fca5a5;font-size:12px;text-align:center;margin-top:10px;display:none"></p>
   </div>
 </div>
 
-<!-- MAIN APP -->
 <div class="app" id="mainApp">
   <aside class="sidebar">
     <div class="logo"><div class="logo-icon">🎓</div><h1>Tuition<span>Pro</span></h1></div>
@@ -166,8 +223,8 @@ tr:hover td{background:rgba(255,255,255,.03)}
     <button class="nav-btn" data-page="students"><span class="ic">👥</span> Students</button>
     <button class="nav-btn" data-page="attendance"><span class="ic">📅</span> Attendance</button>
     <button class="nav-btn" data-page="fees"><span class="ic">💰</span> Fees & Dues</button>
-    <button class="nav-btn" data-page="classes"><span class="ic">🏫</span> Classes & Fines</button>
-    <button class="nav-btn" data-page="backup"><span class="ic">💾</span> Backup & Email</button>
+    <button class="nav-btn" data-page="classes"><span class="ic">🏫</span> Classes</button>
+    <button class="nav-btn" data-page="backup"><span class="ic">💾</span> Backup</button>
     <div class="user-box">
       <div style="font-size:11px;color:var(--muted);margin-bottom:4px">Logged in as</div>
       <div class="mail" id="userEmail"></div>
@@ -176,7 +233,6 @@ tr:hover td{background:rgba(255,255,255,.03)}
   </aside>
 
   <main class="main">
-    <!-- DASHBOARD -->
     <section class="page active" id="dashboard">
       <div class="page-head">
         <div><h2>Welcome back, <span>Teacher</span> 👋</h2><p id="todayDate"></p></div>
@@ -195,9 +251,8 @@ tr:hover td{background:rgba(255,255,255,.03)}
       </div>
     </section>
 
-    <!-- STUDENTS -->
     <section class="page" id="students">
-      <div class="page-head"><div><h2>My <span>Students</span></h2><p>Manage your student roster (synced to cloud)</p></div><button class="btn btn-primary" onclick="openStudentModal()">➕ Add Student</button></div>
+      <div class="page-head"><div><h2>My <span>Students</span></h2><p>Click any name to see full profile</p></div><button class="btn btn-primary" onclick="openStudentModal()">➕ Add Student</button></div>
       <div class="search-bar">
         <input id="searchInput" placeholder="🔍 Search by name..." oninput="renderStudents()" style="flex:1;min-width:200px"/>
         <select id="classFilter" onchange="renderStudents()"><option value="">All Classes</option></select>
@@ -208,22 +263,43 @@ tr:hover td{background:rgba(255,255,255,.03)}
       </div>
       <div class="card">
         <div class="tbl-wrap"><table id="studentsTbl"><thead><tr><th>Photo</th><th>Name</th><th>Class</th><th>Fee</th><th>Admission</th><th>Contact</th><th>Actions</th></tr></thead><tbody></tbody></table></div>
-        <div id="stuEmpty" class="empty-state" style="display:none"><div class="big">👥</div>No students yet. Click "Add Student"!</div>
+        <div id="stuEmpty" class="empty-state" style="display:none"><div class="big">👥</div>No students yet.</div>
       </div>
     </section>
 
-    <!-- ATTENDANCE -->
+    <!-- NEW ATTENDANCE PAGE -->
     <section class="page" id="attendance">
-      <div class="page-head"><div><h2>Daily <span>Attendance</span></h2><p>Mark presence day by day</p></div></div>
-      <div class="search-bar">
-        <select id="attClass" onchange="renderAttendance()"><option value="">All Classes</option></select>
-        <input type="month" id="attMonth" onchange="renderAttendance()"/>
-        <button class="btn btn-ghost" onclick="markAllPresent()">✅ Mark All Present</button>
+      <div class="page-head"><div><h2>Smart <span>Attendance</span></h2><p>Step 1: Choose a class below</p></div></div>
+
+      <div id="attStep1">
+        <div class="class-select-grid" id="attClassGrid"></div>
       </div>
-      <div class="card" id="attCard"></div>
+
+      <div id="attStep2" style="display:none">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:10px">
+          <div>
+            <button class="btn btn-ghost btn-sm" onclick="backToClassSelect()">← Change Class</button>
+            <span style="margin-left:10px;font-family:'Space Grotesk';font-size:20px;font-weight:700" id="attClassName"></span>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center">
+            <input type="date" id="attDate" onchange="renderAttendanceDay()"/>
+            <button class="btn btn-ghost btn-sm" onclick="setAttToday()">Today</button>
+          </div>
+        </div>
+
+        <div id="tuitionBanner"></div>
+
+        <div class="card">
+          <h3 style="margin-bottom:14px;font-family:'Space Grotesk';display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+            <span>👥 Students</span>
+            <span style="font-size:12px;color:var(--muted);font-weight:500" id="attSummary"></span>
+          </h3>
+          <div id="attStudentsList"></div>
+          <div id="attEmpty" class="empty-state" style="display:none;padding:30px"><div class="big">👥</div>No students in this class</div>
+        </div>
+      </div>
     </section>
 
-    <!-- FEES -->
     <section class="page" id="fees">
       <div class="page-head"><div><h2>Fees & <span>Dues</span></h2><p>Track payments & send reminders</p></div></div>
       <div class="search-bar">
@@ -231,54 +307,49 @@ tr:hover td{background:rgba(255,255,255,.03)}
         <button class="btn btn-danger" onclick="sendBulkReminder()">📨 Remind All Dues</button>
       </div>
       <div class="card">
-        <div class="tbl-wrap"><table id="feesTbl"><thead><tr><th>Student</th><th>Class</th><th>Monthly Fee</th><th>Due Months</th><th>Breakdown</th><th>Total Due</th><th>Alert</th></tr></thead><tbody></tbody></table></div>
+        <div class="tbl-wrap"><table id="feesTbl"><thead><tr><th>Student</th><th>Class</th><th>Fee</th><th>Due Months</th><th>Breakdown</th><th>Total</th><th>Alert</th></tr></thead><tbody></tbody></table></div>
       </div>
     </section>
 
-    <!-- CLASSES -->
     <section class="page" id="classes">
-      <div class="page-head"><div><h2>Classes & <span>Fine Rules</span></h2><p>Toggle fines per class (default ₹10/day absent)</p></div><button class="btn btn-primary" onclick="addClassPrompt()">➕ Add Class</button></div>
+      <div class="page-head"><div><h2>Classes & <span>Routine</span></h2><p>Set routine & fine rules per class</p></div><button class="btn btn-primary" onclick="openClassModal()">➕ Add Class</button></div>
       <div class="card" id="classesCard"></div>
     </section>
 
-    <!-- BACKUP -->
     <section class="page" id="backup">
-      <div class="page-head"><div><h2>Backup & <span>Email</span></h2><p>Download or email your data</p></div></div>
+      <div class="page-head"><div><h2>Backup & <span>Email</span></h2></div></div>
       <div class="card">
         <h3 style="margin-bottom:12px;font-family:'Space Grotesk'">💾 Backup Now</h3>
-        <p style="color:var(--muted);font-size:13px;margin-bottom:14px">Download all your data (with photos) as a JSON file.</p>
         <div style="display:flex;gap:10px;flex-wrap:wrap">
           <button class="btn btn-primary" onclick="backupNow()">⬇️ Download Full Backup</button>
-          <label class="btn btn-ghost" style="cursor:pointer">⬆️ Restore from File<input type="file" accept=".json" onchange="restoreBackup(event)" style="display:none"/></label>
+          <label class="btn btn-ghost" style="cursor:pointer">⬆️ Restore<input type="file" accept=".json" onchange="restoreBackup(event)" style="display:none"/></label>
           <button class="btn btn-danger" onclick="openWipeModal()">🗑️ Wipe All Data</button>
         </div>
         <p style="color:var(--muted);font-size:12px;margin-top:12px">Last backup: <b id="lastBackup">Never</b></p>
       </div>
       <div class="card">
-        <h3 style="margin-bottom:6px;font-family:'Space Grotesk'">📧 Email Backup</h3>
-        <p style="color:var(--muted);font-size:13px;margin-bottom:14px">Uses EmailJS (free). Fill 4 boxes, then click Email Backup.</p>
+        <h3 style="margin-bottom:6px;font-family:'Space Grotesk'">📧 Email Backup (EmailJS)</h3>
         <div class="form-grid">
-          <div class="field"><label>Your Email</label><input id="emailTo" placeholder="you@gmail.com"/></div>
-          <div class="field"><label>EmailJS Service ID</label><input id="emailService" placeholder="service_xxx"/></div>
-          <div class="field"><label>EmailJS Template ID</label><input id="emailTemplate" placeholder="template_xxx"/></div>
-          <div class="field"><label>EmailJS Public Key</label><input id="emailKey" placeholder="AbCdEf123"/></div>
+          <div class="field"><label>Your Email</label><input id="emailTo"/></div>
+          <div class="field"><label>Service ID</label><input id="emailService"/></div>
+          <div class="field"><label>Template ID</label><input id="emailTemplate"/></div>
+          <div class="field"><label>Public Key</label><input id="emailKey"/></div>
         </div>
-        <div style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap">
-          <button class="btn btn-ghost" onclick="saveEmailSettings()">💾 Save Settings</button>
-          <button class="btn btn-ghost" onclick="testEmail()">🧪 Test Email</button>
+        <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap">
+          <button class="btn btn-ghost" onclick="saveEmailSettings()">💾 Save</button>
+          <button class="btn btn-ghost" onclick="testEmail()">🧪 Test</button>
           <button class="btn btn-primary" onclick="emailBackup()">📧 Email Backup</button>
         </div>
-        <div class="code-box" style="margin-top:14px">EmailJS Template: Subject={{subject}}, To={{to_email}}, Body={{message}}</div>
       </div>
     </section>
   </main>
 </div>
 
-<!-- MODALS -->
+<!-- Student Add/Edit Modal -->
 <div class="modal-bg" id="studentModal">
   <div class="modal">
     <button class="modal-close" onclick="closeModal('studentModal')">×</button>
-    <h3 id="stuModalTitle">➕ Add New Student</h3>
+    <h3 id="stuModalTitle">➕ Add Student</h3>
     <form id="studentForm" onsubmit="saveStudent(event)">
       <input type="hidden" id="stuId"/>
       <div class="form-grid">
@@ -286,24 +357,66 @@ tr:hover td{background:rgba(255,255,255,.03)}
         <div class="field"><label>Class *</label><select id="stuClass" required></select></div>
         <div class="field"><label>Monthly Fee (₹) *</label><input type="number" id="stuFee" min="0" required/></div>
         <div class="field"><label>Admission Date *</label><input type="date" id="stuAdm" required/></div>
-        <div class="field"><label>Mobile Number</label><input id="stuMobile" placeholder="+91..."/></div>
-        <div class="field"><label>WhatsApp Number</label><input id="stuWa" placeholder="+91..."/></div>
-        <div class="field"><label>Instagram Username</label><input id="stuIg" placeholder="@username"/></div>
+        <div class="field"><label>Mobile</label><input id="stuMobile"/></div>
+        <div class="field"><label>WhatsApp</label><input id="stuWa"/></div>
+        <div class="field"><label>Instagram</label><input id="stuIg" placeholder="@username"/></div>
         <div class="field"><label>Photo</label><input type="file" id="stuPhoto" accept="image/*"/></div>
       </div>
       <div style="display:flex;gap:10px;margin-top:20px;justify-content:flex-end">
         <button type="button" class="btn btn-ghost" onclick="closeModal('studentModal')">Cancel</button>
-        <button type="submit" class="btn btn-primary">💾 Save Student</button>
+        <button type="submit" class="btn btn-primary">💾 Save</button>
       </div>
     </form>
   </div>
 </div>
 
+<!-- Class Modal (routine + fine) -->
+<div class="modal-bg" id="classModal">
+  <div class="modal sm">
+    <button class="modal-close" onclick="closeModal('classModal')">×</button>
+    <h3 id="clsModalTitle">➕ Add Class</h3>
+    <input type="hidden" id="clsOrigName"/>
+    <div class="form-grid">
+      <div class="field" style="grid-column:1/-1"><label>Class Name *</label><input id="clsName" required placeholder="e.g. Class 10 - Maths"/></div>
+      <div class="field"><label>Time</label><input type="time" id="clsTime"/></div>
+      <div class="field"><label>Fine per Absent Day (₹)</label><input type="number" id="clsFine" min="0" value="10"/></div>
+    </div>
+    <div class="field" style="margin-top:10px">
+      <label>Tuition Days (click to toggle)</label>
+      <div class="day-toggle" id="clsDays"></div>
+    </div>
+    <div class="field" style="margin-top:14px;display:flex;align-items:center;justify-content:space-between">
+      <label style="margin:0">Enable Fine System</label>
+      <span class="toggle" id="clsFineToggle" onclick="this.classList.toggle('on')"></span>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:20px;justify-content:flex-end">
+      <button class="btn btn-ghost" onclick="closeModal('classModal')">Cancel</button>
+      <button class="btn btn-primary" onclick="saveClass()">💾 Save Class</button>
+    </div>
+  </div>
+</div>
+
+<!-- Student Profile Modal (NEW) -->
+<div class="modal-bg" id="profileModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('profileModal')">×</button>
+    <div class="profile-header" id="profileHeader"></div>
+    <div class="profile-tabs">
+      <button class="profile-tab active" data-tab="info" onclick="switchProfileTab('info')">ℹ️ Info</button>
+      <button class="profile-tab" data-tab="att" onclick="switchProfileTab('att')">📅 Attendance</button>
+      <button class="profile-tab" data-tab="pay" onclick="switchProfileTab('pay')">💰 Payments</button>
+    </div>
+    <div class="profile-pane active" id="pane-info"></div>
+    <div class="profile-pane" id="pane-att"></div>
+    <div class="profile-pane" id="pane-pay"></div>
+  </div>
+</div>
+
 <div class="modal-bg" id="wipeModal">
-  <div class="modal" style="max-width:460px">
+  <div class="modal sm">
     <button class="modal-close" onclick="closeModal('wipeModal')">×</button>
     <h3>⚠️ Wipe All Data</h3>
-    <p style="color:var(--muted);font-size:14px;margin-bottom:14px">Type below exactly to confirm:</p>
+    <p style="color:var(--muted);font-size:14px;margin-bottom:14px">Type below exactly:</p>
     <div class="code-box">wipe out all data</div>
     <div class="field"><input id="wipeInput" placeholder='Type: wipe out all data' autocomplete="off"/></div>
     <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:18px">
@@ -315,13 +428,11 @@ tr:hover td{background:rgba(255,255,255,.03)}
 
 <div class="toast" id="toast"></div>
 
-<!-- FIREBASE SDK (compat version - stable & easy) -->
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 
 <script>
-/* ===== FIREBASE INIT ===== */
 const firebaseConfig = {
   apiKey: "AIzaSyBQzKo8mH7URnwjH91MfcvD6fPCL9uB-tk",
   authDomain: "tution-a56bc.firebaseapp.com",
@@ -335,27 +446,30 @@ firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.firestore();
 
-/* ===== STATE ===== */
 let currentUser = null;
-let DB = { students:[], classes:{'General':{fineEnabled:false,fineAmount:10}}, settings:{backupFreq:'daily',lastBackup:null,email:{}} };
+let DB = { students:[], classes:{}, settings:{backupFreq:'daily',lastBackup:null,email:{}} };
 let unsubscribe = null;
 let savingTimer = null;
 let isSaving = false;
+let currentAttClass = null;
+let currentProfileId = null;
+let profileMonth = new Date();
 
-/* ===== HELPERS ===== */
+const DAY_NAMES = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+const DAY_FULL = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
 const todayISO=()=>new Date().toISOString().slice(0,10);
 const todayYM=()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`};
 const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2600);}
 function closeModal(id){document.getElementById(id).classList.remove('show')}
 
-/* ===== AUTH UI ===== */
+/* ===== AUTH ===== */
 let authMode = 'login';
 function switchTab(mode){
   authMode = mode;
-  document.querySelectorAll('.login-tab').forEach((t,i)=>{
-    t.classList.toggle('active', (mode==='login'?i===0:i===1));
-  });
+  document.querySelectorAll('.login-tab').forEach((t,i)=>t.classList.toggle('active', (mode==='login'?i===0:i===1)));
   document.getElementById('authBtn').textContent = mode==='login' ? '🔐 Login' : '✨ Create Account';
   document.getElementById('authError').style.display = 'none';
 }
@@ -366,23 +480,12 @@ async function handleAuth(e){
   const err = document.getElementById('authError');
   err.style.display='none';
   try{
-    if(authMode==='signup'){
-      await auth.createUserWithEmailAndPassword(email, pass);
-      toast('✅ Account created!');
-    } else {
-      await auth.signInWithEmailAndPassword(email, pass);
-      toast('✅ Logged in!');
-    }
-  }catch(e){
-    err.textContent = e.message.replace('Firebase: ','');
-    err.style.display = 'block';
-  }
+    if(authMode==='signup') await auth.createUserWithEmailAndPassword(email, pass);
+    else await auth.signInWithEmailAndPassword(email, pass);
+  }catch(e){ err.textContent = e.message.replace('Firebase: ',''); err.style.display = 'block'; }
 }
-function doLogout(){
-  if(confirm('Logout?')) auth.signOut();
-}
+function doLogout(){ if(confirm('Logout?')) auth.signOut(); }
 
-/* ===== AUTH STATE ===== */
 auth.onAuthStateChanged(async (user) => {
   document.getElementById('loadingScreen').style.display = 'none';
   if(user){
@@ -399,29 +502,21 @@ auth.onAuthStateChanged(async (user) => {
   }
 });
 
-/* ===== CLOUD SYNC ===== */
 function userDoc(){ return db.collection('users').doc(currentUser.uid); }
-
 async function startCloudSync(){
-  // Load initial data
   try{
     const doc = await userDoc().get();
     if(doc.exists){
       const data = doc.data();
       DB.students = data.students || [];
-      DB.classes = data.classes || {'General':{fineEnabled:false,fineAmount:10}};
-      DB.settings = data.settings || DB.settings;
+      DB.classes = data.classes || {};
+      DB.settings = data.settings || {backupFreq:'daily',lastBackup:null,email:{}};
       DB.settings.email = DB.settings.email || {};
     } else {
-      await userDoc().set({
-        students:[],
-        classes:{'General':{fineEnabled:false,fineAmount:10}},
-        settings:{backupFreq:'daily',lastBackup:null,email:{}}
-      });
+      DB.classes = {'General':{days:[],time:'',fineEnabled:false,fineAmount:10}};
+      await userDoc().set({students:[],classes:DB.classes,settings:DB.settings});
     }
-  }catch(e){ console.error('Load error', e); toast('⚠️ Cloud load failed, using cache'); }
-
-  // Listen for real-time updates
+  }catch(e){ console.error(e); }
   unsubscribe = userDoc().onSnapshot((doc) => {
     if(doc.exists && !isSaving){
       const data = doc.data();
@@ -432,22 +527,15 @@ async function startCloudSync(){
       renderAll();
     }
   });
-  
   renderAll();
 }
-
 function saveToCloud(){
   if(!currentUser) return;
   clearTimeout(savingTimer);
   savingTimer = setTimeout(async () => {
     isSaving = true;
-    try{
-      await userDoc().set({
-        students: DB.students,
-        classes: DB.classes,
-        settings: DB.settings
-      });
-    }catch(e){ console.error(e); toast('⚠️ Cloud save failed'); }
+    try{ await userDoc().set({students:DB.students,classes:DB.classes,settings:DB.settings}); }
+    catch(e){ toast('⚠️ Cloud save failed'); }
     isSaving = false;
   }, 500);
 }
@@ -456,32 +544,42 @@ function saveToCloud(){
 document.querySelectorAll('.nav-btn').forEach(b=>{b.onclick=()=>{
   document.querySelectorAll('.nav-btn').forEach(x=>x.classList.remove('active'));
   document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
-  b.classList.add('active');document.getElementById(b.dataset.page).classList.add('active');renderAll();
+  b.classList.add('active');
+  document.getElementById(b.dataset.page).classList.add('active');
+  if(b.dataset.page==='attendance'){ currentAttClass=null; document.getElementById('attStep1').style.display=''; document.getElementById('attStep2').style.display='none'; renderAttClassGrid(); }
+  renderAll();
 };});
 
-/* ===== WIPE ===== */
-function openWipeModal(){
-  document.getElementById('wipeInput').value='';
-  document.getElementById('wipeConfirmBtn').disabled=true;
-  document.getElementById('wipeModal').classList.add('show');
+/* ===== HELPERS ===== */
+function isTuitionDay(dateISO, className){
+  const cls = DB.classes[className];
+  if(!cls || !cls.days || cls.days.length===0) return true; // no routine = every day
+  const d = new Date(dateISO).getDay();
+  return cls.days.includes(d);
 }
-document.getElementById('wipeInput').addEventListener('input',e=>{
-  document.getElementById('wipeConfirmBtn').disabled = e.target.value.trim().toLowerCase()!=='wipe out all data';
-});
+function formatDateShort(iso){
+  if(!iso) return '';
+  const d = new Date(iso);
+  return `${d.getDate()} ${MONTH_NAMES[d.getMonth()].slice(0,3)} ${d.getFullYear()}`;
+}
+
+/* ===== WIPE ===== */
+function openWipeModal(){ document.getElementById('wipeInput').value=''; document.getElementById('wipeConfirmBtn').disabled=true; document.getElementById('wipeModal').classList.add('show'); }
+document.getElementById('wipeInput').addEventListener('input',e=>{ document.getElementById('wipeConfirmBtn').disabled = e.target.value.trim().toLowerCase()!=='wipe out all data'; });
 function doWipe(){
   const keepEmail=DB.settings.email, keepFreq=DB.settings.backupFreq;
-  DB={students:[],classes:{'General':{fineEnabled:false,fineAmount:10}},settings:{backupFreq:keepFreq,lastBackup:null,email:keepEmail}};
+  DB={students:[],classes:{'General':{days:[],time:'',fineEnabled:false,fineAmount:10}},settings:{backupFreq:keepFreq,lastBackup:null,email:keepEmail}};
   saveToCloud();renderAll();closeModal('wipeModal');toast('🗑️ All data wiped');
 }
 
 /* ===== STUDENTS ===== */
 function openStudentModal(id=null){
-  ensureDefaultClass();
+  if(Object.keys(DB.classes).length===0){ DB.classes['General']={days:[],time:'',fineEnabled:false,fineAmount:10}; saveToCloud(); }
   const sel=document.getElementById('stuClass');
   sel.innerHTML=Object.keys(DB.classes).map(c=>`<option>${c}</option>`).join('');
   document.getElementById('stuId').value='';document.getElementById('studentForm').reset();
   document.getElementById('stuAdm').value=todayISO();
-  document.getElementById('stuModalTitle').textContent=id?'✏️ Edit Student':'➕ Add New Student';
+  document.getElementById('stuModalTitle').textContent=id?'✏️ Edit Student':'➕ Add Student';
   if(id){const s=DB.students.find(x=>x.id===id);if(s){
     document.getElementById('stuId').value=s.id;document.getElementById('stuName').value=s.name;
     document.getElementById('stuClass').value=s.class;document.getElementById('stuFee').value=s.fee;
@@ -501,71 +599,129 @@ function saveStudent(e){
       mobile:document.getElementById('stuMobile').value.trim(),wa:document.getElementById('stuWa').value.trim(),
       ig:document.getElementById('stuIg').value.trim().replace('@',''),photo:photo||(existing?.photo||''),
       payments:existing?.payments||[],attendance:existing?.attendance||{}};
-    if(existing){DB.students=DB.students.map(x=>x.id===id?stu:x);toast('✅ Student updated');}
-    else{DB.students.push(stu);toast('🎉 Student added');}
+    if(existing){DB.students=DB.students.map(x=>x.id===id?stu:x);toast('✅ Updated');}
+    else{DB.students.push(stu);toast('🎉 Added');}
     saveToCloud();closeModal('studentModal');renderAll();
   };
   if(photoInput.files[0]){const r=new FileReader();r.onload=ev=>finalize(ev.target.result);r.readAsDataURL(photoInput.files[0]);}
   else finalize(null);
 }
-function deleteStudent(id){if(!confirm('Delete this student permanently?'))return;DB.students=DB.students.filter(x=>x.id!==id);saveToCloud();renderAll();toast('🗑️ Deleted');}
+function deleteStudent(id){if(!confirm('Delete this student?'))return;DB.students=DB.students.filter(x=>x.id!==id);saveToCloud();renderAll();toast('🗑️ Deleted');}
 
-/* ===== CLASSES ===== */
-function ensureDefaultClass(){if(Object.keys(DB.classes).length===0){DB.classes['General']={fineEnabled:false,fineAmount:10};saveToCloud();}}
-function addClassPrompt(){const name=prompt('Class name:');if(!name)return;DB.classes[name]={fineEnabled:false,fineAmount:10};saveToCloud();renderAll();toast('✅ Class added');}
-function toggleFine(cls){DB.classes[cls].fineEnabled=!DB.classes[cls].fineEnabled;saveToCloud();renderClasses();}
-function setFineAmt(cls,v){DB.classes[cls].fineAmount=+v||10;saveToCloud();}
-function deleteClass(cls){if(!confirm(`Delete class "${cls}"?`))return;delete DB.classes[cls];saveToCloud();renderAll();}
+/* ===== CLASS MODAL ===== */
+let editingClassDays = [];
+function openClassModal(origName=null){
+  document.getElementById('clsOrigName').value = origName||'';
+  document.getElementById('clsModalTitle').textContent = origName?'✏️ Edit Class':'➕ Add Class';
+  if(origName){
+    const c = DB.classes[origName];
+    document.getElementById('clsName').value = origName;
+    document.getElementById('clsTime').value = c.time||'';
+    document.getElementById('clsFine').value = c.fineAmount||10;
+    document.getElementById('clsFineToggle').classList.toggle('on', !!c.fineEnabled);
+    editingClassDays = [...(c.days||[])];
+  } else {
+    document.getElementById('clsName').value='';document.getElementById('clsTime').value='';
+    document.getElementById('clsFine').value=10;document.getElementById('clsFineToggle').classList.remove('on');
+    editingClassDays = [];
+  }
+  renderDayToggles();
+  document.getElementById('classModal').classList.add('show');
+}
+function renderDayToggles(){
+  const wrap = document.getElementById('clsDays');
+  wrap.innerHTML = DAY_NAMES.map((d,i)=>`<span class="day-chip ${editingClassDays.includes(i)?'on':''}" onclick="toggleDayChip(${i})">${d}</span>`).join('');
+}
+function toggleDayChip(i){
+  if(editingClassDays.includes(i)) editingClassDays = editingClassDays.filter(x=>x!==i);
+  else editingClassDays.push(i);
+  renderDayToggles();
+}
+function saveClass(){
+  const name = document.getElementById('clsName').value.trim();
+  if(!name){ toast('⚠️ Name required'); return; }
+  const orig = document.getElementById('clsOrigName').value;
+  if(orig && orig!==name){ delete DB.classes[orig]; DB.students.forEach(s=>{ if(s.class===orig) s.class=name; }); }
+  DB.classes[name] = {
+    days: [...editingClassDays],
+    time: document.getElementById('clsTime').value,
+    fineEnabled: document.getElementById('clsFineToggle').classList.contains('on'),
+    fineAmount: +document.getElementById('clsFine').value || 10
+  };
+  saveToCloud();closeModal('classModal');renderAll();toast('✅ Class saved');
+}
+function deleteClass(name){ if(!confirm(`Delete "${name}"?`))return; delete DB.classes[name]; saveToCloud();renderAll(); }
 
-/* ===== DUES ===== */
-function getDueMonths(stu){const adm=new Date(stu.admission);const now=new Date();let months=[];
+/* ===== DUES / FINES ===== */
+function getDueMonths(stu){
+  const adm=new Date(stu.admission);const now=new Date();let months=[];
   let cur=new Date(adm.getFullYear(),adm.getMonth(),1);const end=new Date(now.getFullYear(),now.getMonth(),1);
   while(cur<=end){const ym=`${cur.getFullYear()}-${String(cur.getMonth()+1).padStart(2,'0')}`;
     const paid=(stu.payments||[]).some(p=>p.ym===ym);if(!paid)months.push(ym);cur.setMonth(cur.getMonth()+1);}
-  return months;}
-function getFineTotal(stu){const cls=DB.classes[stu.class];if(!cls||!cls.fineEnabled)return 0;
+  return months;
+}
+function getFineTotal(stu){
+  const cls=DB.classes[stu.class];if(!cls||!cls.fineEnabled)return 0;
   const now=new Date();const ym=todayYM();let absent=0;
-  for(let d=1;d<=now.getDate();d++){const key=`${ym}-${String(d).padStart(2,'0')}`;if(stu.attendance&&stu.attendance[key]===false)absent++;}
-  return absent*cls.fineAmount;}
+  for(let d=1;d<=now.getDate();d++){
+    const key=`${ym}-${String(d).padStart(2,'0')}`;
+    if(stu.attendance&&stu.attendance[key]===false){
+      // only fine if it was a tuition day
+      if(isTuitionDay(key, stu.class)) absent++;
+    }
+  }
+  return absent*cls.fineAmount;
+}
 function feeMessage(s){const months=getDueMonths(s);const fine=getFineTotal(s);const total=months.length*s.fee+fine;
-  return `Dear Parent, gentle reminder: ${s.name}'s tuition fee ₹${total} pending (${months.length} month(s) × ₹${s.fee}${fine?` + ₹${fine} fine`:''}). Please clear at earliest. Thank you.`;}
-function photoHTML(s){if(s.photo)return `<div class="photo"><img src="${s.photo}"/></div>`;return `<div class="photo">${s.name.charAt(0).toUpperCase()}</div>`;}
+  return `Dear Parent, gentle reminder: ${s.name}'s tuition fee ₹${total} pending (${months.length} month(s) × ₹${s.fee}${fine?` + ₹${fine} fine`:''}). Please clear at earliest.`;}
+function photoHTML(s,lg=false){
+  if(s.photo)return `<div class="photo ${lg?'lg':''}"><img src="${s.photo}"/></div>`;
+  return `<div class="photo ${lg?'lg':''}">${s.name.charAt(0).toUpperCase()}</div>`;}
 function alertButtons(s){const waNum=(s.wa||s.mobile||'').replace(/\D/g,'');
   const waLink=waNum?`https://wa.me/${waNum}?text=${encodeURIComponent(feeMessage(s))}`:'#';
   const smsLink=s.mobile?`sms:${s.mobile}?body=${encodeURIComponent(feeMessage(s))}`:'#';
   const callLink=s.mobile?`tel:${s.mobile}`:'#';const igLink=s.ig?`https://instagram.com/${s.ig}`:'#';
   return `<div class="action-row">
-    <a class="icon-btn wa" href="${waLink}" target="_blank" title="WhatsApp">💬</a>
-    <a class="icon-btn sms" href="${smsLink}" title="SMS">✉️</a>
-    <a class="icon-btn call" href="${callLink}" title="Call">📞</a>
-    <a class="icon-btn ig" href="${igLink}" target="_blank" title="Instagram">📸</a></div>`;}
+    <a class="icon-btn wa" href="${waLink}" target="_blank">💬</a>
+    <a class="icon-btn sms" href="${smsLink}">✉️</a>
+    <a class="icon-btn call" href="${callLink}">📞</a>
+    <a class="icon-btn ig" href="${igLink}" target="_blank">📸</a></div>`;}
 
-/* ===== RENDER ===== */
-function renderAll(){renderDashboard();renderStudents();renderAttendance();renderFees();renderClasses();loadEmailSettings();
+/* ===== RENDER ALL ===== */
+function renderAll(){
+  renderDashboard();renderStudents();renderAttClassGrid();renderFees();renderClasses();loadEmailSettings();
   const classes=Object.keys(DB.classes);
-  ['classFilter','attClass','feeClass'].forEach(id=>{const el=document.getElementById(id);if(!el)return;const cur=el.value;
-    el.innerHTML='<option value="">All Classes</option>'+classes.map(c=>`<option ${cur===c?'selected':''}>${c}</option>`).join('');});}
+  ['classFilter','feeClass'].forEach(id=>{const el=document.getElementById(id);if(!el)return;const cur=el.value;
+    el.innerHTML='<option value="">All Classes</option>'+classes.map(c=>`<option ${cur===c?'selected':''}>${c}</option>`).join('');});
+  if(document.getElementById('attStep2').style.display!=='none' && currentAttClass) renderAttendanceDay();
+}
+
 function renderDashboard(){
   document.getElementById('todayDate').textContent=new Date().toLocaleDateString('en-IN',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
   document.getElementById('sTotal').textContent=DB.students.length;
   document.getElementById('sClass').textContent=new Set(DB.students.map(s=>s.class)).size;
   let totalDue=0,dueStudents=[];
   DB.students.forEach(s=>{const months=getDueMonths(s);const fine=getFineTotal(s);const due=months.length*s.fee+fine;
-    if(due>0){totalDue+=due;dueStudents.push({s,months,fine,due});}});
+    if(due>0){totalDue+=due;dueStudents.push({s,due});}});
   document.getElementById('sDues').textContent='₹'+totalDue.toLocaleString('en-IN');
-  document.getElementById('sDuesSub').textContent=dueStudents.length+' students pending';
+  document.getElementById('sDuesSub').textContent=dueStudents.length+' pending';
   const t=todayISO();let present=0,marked=0;
-  DB.students.forEach(s=>{if(s.attendance[t]!==undefined){marked++;if(s.attendance[t])present++;}});
+  DB.students.forEach(s=>{
+    if(s.attendance[t]!==undefined && isTuitionDay(t,s.class)){marked++;if(s.attendance[t])present++;}
+  });
   document.getElementById('sAtt').textContent=(marked?Math.round(present/marked*100):0)+'%';
-  document.getElementById('sAttSub').textContent=marked?`${present}/${marked} present`:'Not marked yet';
+  document.getElementById('sAttSub').textContent=marked?`${present}/${marked} present`:'Not marked';
   const tbody=document.querySelector('#dashDueTbl tbody');tbody.innerHTML='';
   dueStudents.sort((a,b)=>b.due-a.due).slice(0,10).forEach(({s,due})=>{
-    tbody.innerHTML+=`<tr><td><div style="display:flex;align-items:center;gap:10px">${photoHTML(s)}<b>${s.name}</b></div></td>
+    tbody.innerHTML+=`<tr><td><div style="display:flex;align-items:center;gap:10px">${photoHTML(s)}<b style="cursor:pointer" onclick="openProfile('${s.id}')">${s.name}</b></div></td>
     <td><span class="badge badge-class">${s.class}</span></td><td><span class="badge badge-due">₹${due.toLocaleString('en-IN')}</span></td>
     <td>${alertButtons(s)}</td></tr>`;});
   document.getElementById('dashDueEmpty').style.display=dueStudents.length?'none':'block';
-  document.getElementById('dashDueTbl').style.display=dueStudents.length?'':'none';}
-function renderStudents(){ensureDefaultClass();
+  document.getElementById('dashDueTbl').style.display=dueStudents.length?'':'none';
+}
+
+function renderStudents(){
+  if(Object.keys(DB.classes).length===0){DB.classes['General']={days:[],time:'',fineEnabled:false,fineAmount:10};saveToCloud();}
   const q=(document.getElementById('searchInput')?.value||'').toLowerCase();
   const cf=document.getElementById('classFilter')?.value||'';
   const sort=document.getElementById('sortBy')?.value||'name';
@@ -575,98 +731,355 @@ function renderStudents(){ensureDefaultClass();
   if(sort==='admission')list.sort((a,b)=>new Date(a.admission)-new Date(b.admission));
   if(sort==='due')list.sort((a,b)=>(getDueMonths(b).length*b.fee+getFineTotal(b))-(getDueMonths(a).length*a.fee+getFineTotal(a)));
   const tbody=document.querySelector('#studentsTbl tbody');
-  tbody.innerHTML=list.map(s=>`<tr><td>${photoHTML(s)}</td><td><b>${s.name}</b></td>
-    <td><span class="badge badge-class">${s.class}</span></td><td>₹${s.fee}</td>
-    <td>${new Date(s.admission).toLocaleDateString('en-IN')}</td>
-    <td style="font-size:12px;color:var(--muted)">${s.mobile||'—'}<br>${s.wa?'WA: '+s.wa:''}</td>
-    <td><div class="action-row"><button class="icon-btn" onclick="openStudentModal('${s.id}')" title="Edit">✏️</button>
-    <button class="icon-btn" onclick="deleteStudent('${s.id}')" title="Delete" style="color:#fca5a5">🗑️</button></div></td></tr>`).join('');
+  tbody.innerHTML=list.map(s=>`<tr>
+    <td>${photoHTML(s)}</td>
+    <td><b style="cursor:pointer;text-decoration:underline;text-decoration-color:rgba(236,72,153,.5)" onclick="openProfile('${s.id}')">${s.name}</b></td>
+    <td><span class="badge badge-class">${s.class}</span></td>
+    <td>₹${s.fee}</td>
+    <td>${formatDateShort(s.admission)}</td>
+    <td style="font-size:12px;color:var(--muted)">${s.mobile||'—'}</td>
+    <td><div class="action-row">
+      <button class="icon-btn" onclick="openStudentModal('${s.id}')">✏️</button>
+      <button class="icon-btn" onclick="deleteStudent('${s.id}')" style="color:#fca5a5">🗑️</button>
+    </div></td></tr>`).join('');
   document.getElementById('stuEmpty').style.display=list.length?'none':'block';
-  document.getElementById('studentsTbl').style.display=list.length?'':'none';}
-function renderAttendance(){const card=document.getElementById('attCard');
-  const cls=document.getElementById('attClass')?.value||'';
-  const ym=document.getElementById('attMonth')?.value||todayYM();
-  if(!document.getElementById('attMonth').value)document.getElementById('attMonth').value=todayYM();
-  const list=DB.students.filter(s=>!cls||s.class===cls);
-  if(!list.length){card.innerHTML='<div class="empty-state"><div class="big">📅</div>No students to mark</div>';return;}
-  const [y,m]=ym.split('-').map(Number);const daysInMonth=new Date(y,m,0).getDate();
-  const firstDay=new Date(y,m-1,1).getDay();const dayNames=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-  let html=`<h3 style="font-family:'Space Grotesk';margin-bottom:8px">📅 ${new Date(y,m-1,1).toLocaleDateString('en-IN',{month:'long',year:'numeric'})}</h3>`;
-  html+=`<div style="display:grid;grid-template-columns:180px 1fr;gap:20px;align-items:start"><div>`;
-  list.forEach(s=>{html+=`<div style="display:flex;align-items:center;gap:10px;padding:8px;border-bottom:1px solid rgba(255,255,255,.05)">${photoHTML(s)}
-    <div style="flex:1;min-width:0"><div style="font-weight:600;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${s.name}</div>
-    <div style="font-size:11px;color:var(--muted)">${s.class}</div></div></div>`;});
-  html+=`</div><div style="overflow-x:auto">`;
-  list.forEach(s=>{html+=`<div style="margin-bottom:16px"><div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;max-width:420px">`;
-    dayNames.forEach(d=>{html+=`<div class="cal-head">${d}</div>`;});
-    for(let i=0;i<firstDay;i++)html+=`<div class="cal-day empty"></div>`;
-    for(let d=1;d<=daysInMonth;d++){const key=`${ym}-${String(d).padStart(2,'0')}`;const st=s.attendance[key];
-      const cls2=st===true?'present':st===false?'absent':'';
-      const fined=st===false&&DB.classes[s.class]?.fineEnabled?'fined':'';
-      html+=`<div class="cal-day ${cls2} ${fined}" onclick="toggleAtt('${s.id}','${key}')">${d}</div>`;}
-    html+=`</div></div>`;});
-  html+=`</div></div><div style="margin-top:18px;display:flex;gap:14px;font-size:12px;color:var(--muted);flex-wrap:wrap">
-    <span><span style="display:inline-block;width:12px;height:12px;background:rgba(16,185,129,.4);border-radius:3px;vertical-align:middle"></span> Present</span>
-    <span><span style="display:inline-block;width:12px;height:12px;background:rgba(239,68,68,.4);border-radius:3px;vertical-align:middle"></span> Absent</span>
-    <span>Click a day to cycle: — → ✅ → ❌ → —</span></div>`;
-  card.innerHTML=html;}
-function toggleAtt(sid,key){const s=DB.students.find(x=>x.id===sid);if(!s)return;
-  if(!s.attendance)s.attendance={};const cur=s.attendance[key];
-  s.attendance[key]=cur===undefined?true:cur===true?false:undefined;
-  if(s.attendance[key]===undefined)delete s.attendance[key];
-  saveToCloud();renderAttendance();renderDashboard();}
-function markAllPresent(){const cls=document.getElementById('attClass')?.value||'';
-  const ym=document.getElementById('attMonth')?.value||todayYM();const [y,m]=ym.split('-').map(Number);
-  const today=new Date();const maxDay=(today.getFullYear()===y&&today.getMonth()+1===m)?today.getDate():new Date(y,m,0).getDate();
-  DB.students.forEach(s=>{if(cls&&s.class!==cls)return;if(!s.attendance)s.attendance={};
-    for(let d=1;d<=maxDay;d++){const key=`${ym}-${String(d).padStart(2,'0')}`;if(s.attendance[key]===undefined)s.attendance[key]=true;}});
-  saveToCloud();renderAttendance();toast('✅ All marked present');}
-function renderFees(){ensureDefaultClass();
+  document.getElementById('studentsTbl').style.display=list.length?'':'none';
+}
+
+/* ===== NEW ATTENDANCE FLOW ===== */
+function renderAttClassGrid(){
+  const grid = document.getElementById('attClassGrid');
+  const classes = Object.keys(DB.classes);
+  if(!classes.length){ grid.innerHTML='<div class="empty-state"><div class="big">🏫</div>No classes yet. Add one first!</div>'; return; }
+  grid.innerHTML = classes.map(name=>{
+    const c = DB.classes[name];
+    const count = DB.students.filter(s=>s.class===name).length;
+    const daysText = c.days && c.days.length ? c.days.map(d=>DAY_NAMES[d]).join(', ') : 'No routine';
+    const sel = currentAttClass===name ? 'selected':'';
+    return `<div class="class-pick-card ${sel}" onclick="selectAttClass('${name.replace(/'/g,"\\'")}')">
+      <div class="nm">${name}</div>
+      <div class="info">🕐 ${c.time||'No time set'}</div>
+      <div class="info">📅 ${daysText}</div>
+      <div class="count">👥 ${count} student(s)</div>
+    </div>`;
+  }).join('');
+}
+function selectAttClass(name){
+  currentAttClass = name;
+  document.getElementById('attStep1').style.display='none';
+  document.getElementById('attStep2').style.display='';
+  document.getElementById('attClassName').textContent = name;
+  document.getElementById('attDate').value = todayISO();
+  renderAttendanceDay();
+}
+function backToClassSelect(){
+  currentAttClass=null;
+  document.getElementById('attStep1').style.display='';
+  document.getElementById('attStep2').style.display='none';
+  renderAttClassGrid();
+}
+function setAttToday(){ document.getElementById('attDate').value = todayISO(); renderAttendanceDay(); }
+
+function renderAttendanceDay(){
+  const dateISO = document.getElementById('attDate').value;
+  if(!dateISO || !currentAttClass) return;
+  const cls = DB.classes[currentAttClass];
+  const isTuition = isTuitionDay(dateISO, currentAttClass);
+  const d = new Date(dateISO);
+  const dayName = DAY_FULL[d.getDay()];
+
+  // Banner
+  const banner = document.getElementById('tuitionBanner');
+  if(isTuition){
+    banner.innerHTML = `<div class="tuition-day-banner">
+      <div class="txt">📚 <b>TUITION DAY</b> — ${dayName}, ${formatDateShort(dateISO)} ${cls.time?'• '+cls.time:''}</div>
+      <span class="badge badge-tuition">Active</span>
+    </div>`;
+  } else {
+    banner.innerHTML = `<div class="tuition-day-banner off">
+      <div class="txt">😴 <b>No class</b> on ${dayName}, ${formatDateShort(dateISO)}</div>
+      <span class="badge">Holiday</span>
+    </div>`;
+  }
+
+  // Students list
+  const list = DB.students.filter(s=>s.class===currentAttClass);
+  const wrap = document.getElementById('attStudentsList');
+  if(!list.length){
+    wrap.innerHTML='';
+    document.getElementById('attEmpty').style.display='block';
+    document.getElementById('attSummary').textContent='';
+    return;
+  }
+  document.getElementById('attEmpty').style.display='none';
+
+  let present=0, absent=0, unmarked=0;
+  wrap.innerHTML = list.map(s=>{
+    const st = s.attendance?.[dateISO];
+    const status = st===true?'present':st===false?'absent':'none';
+    if(st===true) present++; else if(st===false) absent++; else unmarked++;
+    return `<div class="stu-att-row">
+      ${photoHTML(s)}
+      <div class="info" onclick="openProfile('${s.id}','att')">
+        <div class="nm">${s.name}</div>
+        <div class="sub">₹${s.fee}/month • ${st===true?'✅ Present':st===false?'❌ Absent':'Not marked'}</div>
+      </div>
+      <div class="att-actions">
+        <button class="att-btn present ${status==='present'?'active':''}" onclick="setAtt('${s.id}','${dateISO}',true)">✓ Present</button>
+        <button class="att-btn absent ${status==='absent'?'active':''}" onclick="setAtt('${s.id}','${dateISO}',false)">✗ Absent</button>
+        <button class="att-btn none ${status==='none'?'active':''}" onclick="setAtt('${s.id}','${dateISO}',null)">—</button>
+      </div>
+    </div>`;
+  }).join('');
+  document.getElementById('attSummary').textContent = `${present} present • ${absent} absent • ${unmarked} unmarked`;
+}
+function setAtt(sid,date,val){
+  const s = DB.students.find(x=>x.id===sid);if(!s)return;
+  if(!s.attendance) s.attendance={};
+  if(val===null) delete s.attendance[date]; else s.attendance[date]=val;
+  saveToCloud();
+  renderAttendanceDay();
+  renderDashboard();
+}
+
+/* ===== PROFILE MODAL ===== */
+function openProfile(id, tab='info'){
+  currentProfileId = id;
+  profileMonth = new Date();
+  renderProfile();
+  switchProfileTab(tab);
+  document.getElementById('profileModal').classList.add('show');
+}
+function switchProfileTab(tab){
+  document.querySelectorAll('.profile-tab').forEach(t=>t.classList.toggle('active', t.dataset.tab===tab));
+  document.querySelectorAll('.profile-pane').forEach(p=>p.classList.remove('active'));
+  document.getElementById('pane-'+tab).classList.add('active');
+  if(tab==='att') renderProfileAtt();
+  if(tab==='pay') renderProfilePay();
+  if(tab==='info') renderProfileInfo();
+}
+function renderProfile(){
+  const s = DB.students.find(x=>x.id===currentProfileId);if(!s)return;
+  document.getElementById('profileHeader').innerHTML = `
+    ${photoHTML(s,true)}
+    <div class="info" style="flex:1">
+      <h3>${s.name}</h3>
+      <div style="color:var(--muted);font-size:13px"><span class="badge badge-class">${s.class}</span> • ₹${s.fee}/month</div>
+    </div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap">
+      <button class="btn btn-ghost btn-sm" onclick="closeModal('profileModal');openStudentModal('${s.id}')">✏️ Edit</button>
+    </div>`;
+  renderProfileInfo();
+}
+function renderProfileInfo(){
+  const s = DB.students.find(x=>x.id===currentProfileId);if(!s)return;
+  const months = getDueMonths(s); const fine = getFineTotal(s); const total = months.length*s.fee + fine;
+  const cls = DB.classes[s.class] || {};
+  const daysText = cls.days && cls.days.length ? cls.days.map(d=>DAY_FULL[d]).join(', ') : 'Every day';
+  document.getElementById('pane-info').innerHTML = `
+    <div class="info-grid">
+      <div class="info-item"><div class="lbl">Full Name</div><div class="val">${s.name}</div></div>
+      <div class="info-item"><div class="lbl">Class</div><div class="val">${s.class}</div></div>
+      <div class="info-item"><div class="lbl">Monthly Fee</div><div class="val">₹${s.fee}</div></div>
+      <div class="info-item"><div class="lbl">Admission Date</div><div class="val">${formatDateShort(s.admission)}</div></div>
+      <div class="info-item"><div class="lbl">Routine</div><div class="val">${daysText}${cls.time?' • '+cls.time:''}</div></div>
+      <div class="info-item"><div class="lbl">Mobile</div><div class="val">${s.mobile||'—'}</div></div>
+      <div class="info-item"><div class="lbl">WhatsApp</div><div class="val">${s.wa||'—'}</div></div>
+      <div class="info-item"><div class="lbl">Instagram</div><div class="val">${s.ig?'@'+s.ig:'—'}</div></div>
+    </div>
+    <div style="margin-top:18px;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.3);border-radius:12px;padding:14px">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+        <div>
+          <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px">Total Due</div>
+          <div style="font-family:'Space Grotesk';font-size:24px;font-weight:700;color:#fca5a5">₹${total.toLocaleString('en-IN')}</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:2px">${months.length} month(s) × ₹${s.fee}${fine?` + ₹${fine} fine`:''}</div>
+        </div>
+        <button class="btn btn-danger" onclick="alertParents('${s.id}')">📨 Send Reminder</button>
+      </div>
+    </div>
+    <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">${alertButtons(s)}</div>`;
+}
+function alertParents(sid){
+  const s=DB.students.find(x=>x.id===sid);if(!s)return;
+  const waNum=(s.wa||s.mobile||'').replace(/\D/g,'');
+  if(waNum) window.open(`https://wa.me/${waNum}?text=${encodeURIComponent(feeMessage(s))}`,'_blank');
+  else toast('⚠️ No WhatsApp/Mobile saved');
+}
+
+function renderProfileAtt(){
+  const s = DB.students.find(x=>x.id===currentProfileId);if(!s)return;
+  const y = profileMonth.getFullYear(); const m = profileMonth.getMonth();
+  const ym = `${y}-${String(m+1).padStart(2,'0')}`;
+  const daysInMonth = new Date(y,m+1,0).getDate();
+  const firstDay = new Date(y,m,1).getDay();
+  const today = new Date(); today.setHours(0,0,0,0);
+  const cls = DB.classes[s.class] || {};
+  const fineOn = cls.fineEnabled;
+
+  let present=0, absent=0;
+  let calHTML = DAY_NAMES.map(d=>`<div class="cal-head">${d}</div>`).join('');
+  for(let i=0;i<firstDay;i++) calHTML += `<div class="cal-day empty"></div>`;
+  for(let d=1; d<=daysInMonth; d++){
+    const key = `${ym}-${String(d).padStart(2,'0')}`;
+    const dateObj = new Date(y,m,d);
+    const isFuture = dateObj > today;
+    const st = s.attendance?.[key];
+    const isTuition = isTuitionDay(key, s.class);
+    const fined = st===false && fineOn && isTuition;
+    if(st===true) present++; else if(st===false && isTuition) absent++;
+    calHTML += `<div class="cal-day ${isTuition?'tuition':''} ${st===true?'present':''} ${st===false?'absent':''} ${fined?'fined':''} ${isFuture?'future':''}"
+      onclick="${isFuture?'':`toggleProfileAtt('${key}')`}">${d}</div>`;
+  }
+
+  const total = getFineTotal(s);
+  document.getElementById('pane-att').innerHTML = `
+    <div class="month-nav">
+      <button onclick="shiftProfileMonth(-1)">← Prev</button>
+      <div class="mn-label">${MONTH_NAMES[m]} ${y}</div>
+      <button onclick="shiftProfileMonth(1)">Next →</button>
+    </div>
+    <div style="display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap;font-size:12px;color:var(--muted)">
+      <span>🟣 = Tuition Day</span>
+      <span>🟢 = Present</span>
+      <span>🔴 = Absent${fineOn?' (+fine)':''}</span>
+      <span>Click a day to toggle</span>
+    </div>
+    <div class="cal-grid">${calHTML}</div>
+    <div style="margin-top:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px">
+      <div class="info-item"><div class="lbl">Present</div><div class="val" style="color:#6ee7b7">${present}</div></div>
+      <div class="info-item"><div class="lbl">Absent (tuition days)</div><div class="val" style="color:#fca5a5">${absent}</div></div>
+      <div class="info-item"><div class="lbl">Current Fine</div><div class="val">₹${total}</div></div>
+    </div>`;
+}
+function shiftProfileMonth(delta){
+  profileMonth.setMonth(profileMonth.getMonth()+delta);
+  renderProfileAtt();
+}
+function toggleProfileAtt(key){
+  const s = DB.students.find(x=>x.id===currentProfileId);if(!s)return;
+  if(!s.attendance) s.attendance={};
+  const cur = s.attendance[key];
+  if(cur===undefined) s.attendance[key] = true;
+  else if(cur===true) s.attendance[key] = false;
+  else delete s.attendance[key];
+  saveToCloud();
+  renderProfileAtt();
+  renderDashboard();
+  if(document.getElementById('attStep2').style.display!=='none') renderAttendanceDay();
+}
+
+function renderProfilePay(){
+  const s = DB.students.find(x=>x.id===currentProfileId);if(!s)return;
+  const adm = new Date(s.admission);
+  const now = new Date();
+  let rows = [];
+  let cur = new Date(adm.getFullYear(), adm.getMonth(), 1);
+  const end = new Date(now.getFullYear(), now.getMonth(), 1);
+  let totalDue = 0;
+  while(cur <= end){
+    const ym = `${cur.getFullYear()}-${String(cur.getMonth()+1).padStart(2,'0')}`;
+    const payment = (s.payments||[]).find(p=>p.ym===ym);
+    const paid = !!payment;
+    if(!paid) totalDue += s.fee;
+    rows.push({ym, paid, date: payment?.date, m:cur.getMonth(), y:cur.getFullYear()});
+    cur.setMonth(cur.getMonth()+1);
+  }
+  rows.reverse();
+  const fine = getFineTotal(s);
+  const grand = totalDue + fine;
+
+  document.getElementById('pane-pay').innerHTML = `
+    <div style="background:linear-gradient(135deg,rgba(124,58,237,.2),rgba(236,72,153,.2));border:1px solid rgba(236,72,153,.3);border-radius:14px;padding:16px;margin-bottom:16px">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+        <div>
+          <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px">Total Outstanding</div>
+          <div style="font-family:'Space Grotesk';font-size:28px;font-weight:700">₹${grand.toLocaleString('en-IN')}</div>
+          <div style="font-size:12px;color:var(--muted)">Fee: ₹${totalDue} ${fine?`+ Fine: ₹${fine}`:''}</div>
+        </div>
+      </div>
+    </div>
+    <h4 style="font-family:'Space Grotesk';margin-bottom:10px">Month-by-Month History</h4>
+    ${rows.map(r=>`
+      <div class="pay-month-row">
+        <div class="ym">${MONTH_NAMES[r.m]} ${r.y}</div>
+        <div style="flex:1;font-size:12px;color:var(--muted)">${r.paid?'Paid '+formatDateShort(r.date):'Unpaid'}</div>
+        <div class="amt" style="color:${r.paid?'#6ee7b7':'#fca5a5'}">₹${s.fee}</div>
+        ${r.paid
+          ? `<button class="btn btn-sm btn-ghost" onclick="unmarkPaid('${s.id}','${r.ym}')">↶ Undo</button>`
+          : `<button class="btn btn-sm btn-success" onclick="markPaidMonth('${s.id}','${r.ym}')">✓ Mark Paid</button>`
+        }
+      </div>`).join('')}
+  `;
+}
+function markPaidMonth(sid,ym){
+  const s = DB.students.find(x=>x.id===sid);if(!s)return;
+  if(!s.payments) s.payments=[];
+  if(!s.payments.some(p=>p.ym===ym)){ s.payments.push({ym,date:todayISO()}); saveToCloud(); renderProfilePay(); renderAll(); toast('💰 Marked paid'); }
+}
+function unmarkPaid(sid,ym){
+  const s = DB.students.find(x=>x.id===sid);if(!s)return;
+  if(!confirm('Remove payment record for '+ym+'?')) return;
+  s.payments = (s.payments||[]).filter(p=>p.ym!==ym);
+  saveToCloud();renderProfilePay();renderAll();toast('↶ Payment removed');
+}
+
+/* ===== FEES ===== */
+function renderFees(){
+  if(Object.keys(DB.classes).length===0){DB.classes['General']={days:[],time:'',fineEnabled:false,fineAmount:10};saveToCloud();}
   const cls=document.getElementById('feeClass')?.value||'';
   const list=DB.students.filter(s=>!cls||s.class===cls);
   const tbody=document.querySelector('#feesTbl tbody');
   tbody.innerHTML=list.map(s=>{const months=getDueMonths(s);const fine=getFineTotal(s);const total=months.length*s.fee+fine;
     const isDue=total>0;
-    return `<tr><td><div style="display:flex;align-items:center;gap:10px">${photoHTML(s)}<b>${s.name}</b></div></td>
-    <td><span class="badge badge-class">${s.class}</span></td><td>₹${s.fee}</td>
-    <td>${isDue?`<span class="badge badge-due">${months.length} month(s)</span>`:`<span class="badge badge-ok">Clear</span>`}</td>
-    <td class="due-cell"><span class="due-formula">${months.length} × ₹${s.fee}${fine?` + ₹${fine} fine`:''}</span>
-    ${months.length?`<div style="font-size:10px;color:var(--muted);margin-top:2px">${months.join(', ')}</div>`:''}</td>
-    <td><span class="due-total" style="color:${isDue?'#fca5a5':'#6ee7b7'}">₹${total.toLocaleString('en-IN')}</span></td>
-    <td>${alertButtons(s)}<button class="btn btn-sm btn-ghost" style="margin-top:6px" onclick="markPaid('${s.id}')">✓ Mark Paid</button></td></tr>`;}).join('');}
-function markPaid(sid){const s=DB.students.find(x=>x.id===sid);if(!s)return;if(!s.payments)s.payments=[];
-  const ym=todayYM();if(!s.payments.some(p=>p.ym===ym)){s.payments.push({ym,date:todayISO()});saveToCloud();renderAll();toast('💰 Marked as paid');}
-  else toast('Already paid this month');}
+    return `<tr>
+      <td><div style="display:flex;align-items:center;gap:10px">${photoHTML(s)}<b style="cursor:pointer" onclick="openProfile('${s.id}','pay')">${s.name}</b></div></td>
+      <td><span class="badge badge-class">${s.class}</span></td>
+      <td>₹${s.fee}</td>
+      <td>${isDue?`<span class="badge badge-due">${months.length} month(s)</span>`:`<span class="badge badge-ok">Clear</span>`}</td>
+      <td class="due-cell"><span class="due-formula">${months.length} × ₹${s.fee}${fine?` + ₹${fine} fine`:''}</span></td>
+      <td><span class="due-total" style="color:${isDue?'#fca5a5':'#6ee7b7'}">₹${total.toLocaleString('en-IN')}</span></td>
+      <td>${alertButtons(s)}</td></tr>`;}).join('');
+}
 function sendBulkReminder(){if(!confirm('Open WhatsApp for ALL students with pending dues?'))return;let count=0;
   DB.students.forEach(s=>{const months=getDueMonths(s);const fine=getFineTotal(s);const total=months.length*s.fee+fine;
     if(total<=0)return;const waNum=(s.wa||s.mobile||'').replace(/\D/g,'');
-    if(waNum){setTimeout(()=>{window.open(`https://wa.me/${waNum}?text=${encodeURIComponent(feeMessage(s))}`,'_blank');},count*500);count++;}});
-  toast(`📨 Opening ${count} reminder(s)`);}
-function renderClasses(){ensureDefaultClass();const card=document.getElementById('classesCard');
+    if(waNum){setTimeout(()=>window.open(`https://wa.me/${waNum}?text=${encodeURIComponent(feeMessage(s))}`,'_blank'),count*500);count++;}});
+  toast(`📨 ${count} reminder(s)`);}
+
+/* ===== CLASSES RENDER ===== */
+function renderClasses(){
+  if(Object.keys(DB.classes).length===0){DB.classes['General']={days:[],time:'',fineEnabled:false,fineAmount:10};saveToCloud();}
+  const card=document.getElementById('classesCard');
   const entries=Object.entries(DB.classes);
   card.innerHTML=entries.map(([name,cfg])=>{const count=DB.students.filter(s=>s.class===name).length;
-    return `<div class="class-card"><div style="flex:1"><h4 style="font-family:'Space Grotesk';font-size:17px">${name}</h4>
-    <div style="font-size:12px;color:var(--muted);margin-top:4px">${count} student(s) • Fine: ₹${cfg.fineAmount}/day absent</div></div>
-    <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
-    <label style="font-size:12px;color:var(--muted);display:flex;align-items:center;gap:8px">Fine System
-    <span class="toggle ${cfg.fineEnabled?'on':''}" onclick="toggleFine('${name}')"></span></label>
-    <input type="number" value="${cfg.fineAmount}" min="0" onchange="setFineAmt('${name}',this.value)" style="width:80px;padding:7px;border-radius:8px;background:rgba(0,0,0,.25);border:1px solid var(--glass-border);color:var(--text)"/>
-    <button class="btn btn-sm btn-danger" onclick="deleteClass('${name}')">Delete</button></div></div>`;}).join('')
-    +(entries.length===0?'<div class="empty-state"><div class="big">🏫</div>No classes. Add one!</div>':'');}
+    const daysText = cfg.days&&cfg.days.length ? cfg.days.map(d=>DAY_NAMES[d]).join(', ') : 'No routine set';
+    return `<div class="class-card">
+      <div style="flex:1;min-width:200px">
+        <h4 style="font-family:'Space Grotesk';font-size:17px">${name}</h4>
+        <div style="font-size:12px;color:var(--muted);margin-top:4px">👥 ${count} students</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:2px">📅 ${daysText}${cfg.time?' • 🕐 '+cfg.time:''}</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:2px">💰 Fine: ₹${cfg.fineAmount}/day ${cfg.fineEnabled?'<span style="color:#6ee7b7">ON</span>':'<span style="color:#94a3b8">OFF</span>'}</div>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn btn-sm btn-ghost" onclick="openClassModal('${name.replace(/'/g,"\\'")}')">✏️ Edit</button>
+        <button class="btn btn-sm btn-danger" onclick="deleteClass('${name.replace(/'/g,"\\'")}')">🗑️</button>
+      </div>
+    </div>`;}).join('')
+    +(entries.length===0?'<div class="empty-state"><div class="big">🏫</div>Add a class to start</div>':'');
+}
 
 /* ===== BACKUP ===== */
 function backupNow(){DB.settings.lastBackup=new Date().toISOString();saveToCloud();
   const blob=new Blob([JSON.stringify(DB,null,2)],{type:'application/json'});
   const url=URL.createObjectURL(blob);const a=document.createElement('a');
   a.href=url;a.download=`TuitionPro_Backup_${todayISO()}.json`;a.click();URL.revokeObjectURL(url);
-  document.getElementById('lastBackup').textContent=new Date().toLocaleString('en-IN');toast('💾 Backup downloaded');}
+  document.getElementById('lastBackup').textContent=new Date().toLocaleString('en-IN');toast('💾 Downloaded');}
 function restoreBackup(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();
-  r.onload=ev=>{try{const data=JSON.parse(ev.target.result);if(!data.students)throw new Error('Invalid file');
-    if(!confirm('This will REPLACE all current data. Continue?'))return;
-    DB=data;DB.settings.email=DB.settings.email||{};saveToCloud();renderAll();toast('✅ Restored successfully');
-  }catch(err){toast('❌ Invalid backup file') }};r.readAsText(f);}
+  r.onload=ev=>{try{const data=JSON.parse(ev.target.result);if(!data.students)throw 0;
+    if(!confirm('Replace all current data?'))return;
+    DB=data;DB.settings.email=DB.settings.email||{};saveToCloud();renderAll();toast('✅ Restored');
+  }catch{toast('❌ Invalid file') }};r.readAsText(f);}
 
-/* ===== EMAIL ===== */
 function loadEmailSettings(){const c=DB.settings.email||{};
   document.getElementById('emailTo').value=c.toEmail||'';
   document.getElementById('emailService').value=c.serviceId||'';
@@ -677,21 +1090,21 @@ function saveEmailSettings(){DB.settings.email={
   serviceId:document.getElementById('emailService').value.trim(),
   templateId:document.getElementById('emailTemplate').value.trim(),
   publicKey:document.getElementById('emailKey').value.trim()};
-  saveToCloud();toast('✅ Email settings saved');}
+  saveToCloud();toast('✅ Saved');}
 function emailReady(){const c=DB.settings.email;return c&&c.publicKey&&c.serviceId&&c.templateId&&c.toEmail;}
-async function testEmail(){saveEmailSettings();if(!emailReady()){toast('⚠️ Fill all 4 email boxes');return;}
-  toast('📧 Sending test...');const c=DB.settings.email;
+async function testEmail(){saveEmailSettings();if(!emailReady()){toast('⚠️ Fill all 4');return;}
+  toast('📧 Sending...');const c=DB.settings.email;
   try{emailjs.init({publicKey:c.publicKey});
-    await emailjs.send(c.serviceId,c.templateId,{to_email:c.toEmail,subject:'TuitionPro Test',message:'Your email backup is working! 🎉'});
-    toast('✅ Test email sent!');}catch(e){toast('❌ '+(e.text||e.message||'Failed'));}}
-async function emailBackup(){saveEmailSettings();if(!emailReady()){toast('⚠️ Bind email first');return;}
+    await emailjs.send(c.serviceId,c.templateId,{to_email:c.toEmail,subject:'TuitionPro Test',message:'Working! 🎉'});
+    toast('✅ Sent!');}catch(e){toast('❌ '+(e.text||'Failed'));}}
+async function emailBackup(){saveEmailSettings();if(!emailReady()){toast('⚠️ Bind email');return;}
   toast('📧 Preparing...');const c=DB.settings.email;
   const slim=JSON.parse(JSON.stringify(DB));slim.students.forEach(s=>s.photo='');
   try{emailjs.init({publicKey:c.publicKey});
-    await emailjs.send(c.serviceId,c.templateId,{to_email:c.toEmail,subject:'TuitionPro Backup '+todayISO(),message:JSON.stringify(slim,null,2)});
+    await emailjs.send(c.serviceId,c.templateId,{to_email:c.toEmail,subject:'Backup '+todayISO(),message:JSON.stringify(slim,null,2)});
     DB.settings.lastBackup=new Date().toISOString();saveToCloud();
-    document.getElementById('lastBackup').textContent=new Date().toLocaleString('en-IN');
-    toast('✅ Backup emailed!');}catch(e){toast('❌ '+(e.text||e.message||'Failed'));}}
+    document.getElementById('lastBackup').textContent=new Date().toLocaleString('en-IN');toast('✅ Emailed!');}
+  catch(e){toast('❌ '+(e.text||'Failed'));}}
 </script>
 </body>
 </html>
