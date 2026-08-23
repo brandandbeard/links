@@ -17,7 +17,6 @@ body{background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));backgro
 .orb2{width:350px;height:350px;background:#ec4899;bottom:-80px;right:-80px;animation:float 18s infinite reverse}
 .orb3{width:300px;height:300px;background:#06b6d4;top:40%;left:50%;animation:float 22s infinite}
 @keyframes float{0%,100%{transform:translate(0,0)}50%{transform:translate(60px,-40px)}}
-
 .login-wrap{position:relative;z-index:1;min-height:100vh;display:grid;place-items:center;padding:20px}
 .login-card{background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--glass-border);border-radius:24px;padding:40px;max-width:420px;width:100%;animation:pop .5s}
 .login-card h2{font-family:'Space Grotesk';font-size:28px;margin-bottom:6px;text-align:center}
@@ -26,7 +25,6 @@ body{background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));backgro
 .login-tabs{display:flex;background:rgba(0,0,0,.3);border-radius:12px;padding:4px;margin-bottom:20px}
 .login-tab{flex:1;padding:10px;border:none;background:transparent;color:var(--muted);cursor:pointer;font:600 13px 'Inter';border-radius:9px;transition:.2s}
 .login-tab.active{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff}
-
 .app{position:relative;z-index:1;display:grid;grid-template-columns:260px 1fr;min-height:100vh;display:none}
 .app.show{display:grid}
 .sidebar{background:rgba(15,12,41,.6);backdrop-filter:blur(20px);border-right:1px solid var(--glass-border);padding:28px 18px;display:flex;flex-direction:column;gap:8px;position:sticky;top:0;height:100vh}
@@ -40,7 +38,6 @@ body{background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));backgro
 .nav-btn .ic{font-size:18px}
 .user-box{margin-top:auto;padding:12px;background:rgba(0,0,0,.3);border-radius:12px;border:1px solid var(--glass-border)}
 .user-box .mail{font-size:11px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-bottom:8px}
-
 .main{padding:32px 40px;overflow-y:auto}
 .page-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;flex-wrap:wrap;gap:14px}
 .page-head h2{font-family:'Space Grotesk';font-size:30px;font-weight:700;letter-spacing:-1px}
@@ -56,7 +53,6 @@ body{background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));backgro
 .btn-success{background:rgba(16,185,129,.15);color:#6ee7b7;border:1px solid rgba(16,185,129,.3)}
 .btn-sm{padding:6px 12px;font-size:12px;border-radius:8px}
 .btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
-
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:28px}
 .stat{background:var(--glass);backdrop-filter:blur(14px);border:1px solid var(--glass-border);border-radius:18px;padding:20px;position:relative;overflow:hidden;transition:.3s}
 .stat:hover{transform:translateY(-4px);border-color:rgba(255,255,255,.2)}
@@ -93,7 +89,6 @@ tr:hover td{background:rgba(255,255,255,.03)}
 .icon-btn.sms{background:rgba(6,182,212,.15);color:#22d3ee}
 .icon-btn.call{background:rgba(124,58,237,.15);color:#a78bfa}
 .icon-btn.ig{background:linear-gradient(135deg,rgba(225,48,108,.15),rgba(252,175,69,.15));color:#e1306c}
-
 .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;z-index:100;padding:20px}
 .modal-bg.show{display:flex;animation:fade .2s}
 @keyframes fade{from{opacity:0}to{opacity:1}}
@@ -102,8 +97,6 @@ tr:hover td{background:rgba(255,255,255,.03)}
 @keyframes pop{from{transform:scale(.9);opacity:0}to{transform:scale(1);opacity:1}}
 .modal h3{font-family:'Space Grotesk';margin-bottom:18px;font-size:22px}
 .modal-close{float:right;background:none;border:none;color:var(--muted);font-size:24px;cursor:pointer}
-
-/* Attendance page redesign */
 .class-select-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:24px}
 .class-pick-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:16px;padding:20px;cursor:pointer;transition:.25s;text-align:center}
 .class-pick-card:hover{transform:translateY(-3px);border-color:var(--accent)}
@@ -111,11 +104,9 @@ tr:hover td{background:rgba(255,255,255,.03)}
 .class-pick-card .nm{font-family:'Space Grotesk';font-size:18px;font-weight:700;margin-bottom:4px}
 .class-pick-card .info{font-size:11px;color:var(--muted)}
 .class-pick-card .count{font-size:12px;color:#67e8f9;margin-top:6px}
-
 .tuition-day-banner{background:linear-gradient(135deg,rgba(124,58,237,.2),rgba(236,72,153,.2));border:1px solid rgba(236,72,153,.4);border-radius:14px;padding:14px 18px;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
 .tuition-day-banner.off{background:rgba(0,0,0,.25);border:1px solid var(--glass-border)}
 .tuition-day-banner .txt{font-weight:600;display:flex;align-items:center;gap:10px}
-
 .stu-att-row{background:rgba(0,0,0,.2);border:1px solid var(--glass-border);border-radius:14px;padding:14px;margin-bottom:10px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;transition:.2s}
 .stu-att-row:hover{border-color:var(--accent)}
 .stu-att-row .info{flex:1;min-width:140px;cursor:pointer}
@@ -128,8 +119,6 @@ tr:hover td{background:rgba(255,255,255,.03)}
 .att-btn.none{background:rgba(255,255,255,.05);color:var(--muted);border:1px solid var(--glass-border)}
 .att-btn.active.present{background:#10b981;color:#fff;box-shadow:0 0 0 2px rgba(16,185,129,.5)}
 .att-btn.active.absent{background:#ef4444;color:#fff;box-shadow:0 0 0 2px rgba(239,68,68,.5)}
-
-/* Profile Modal */
 .profile-header{display:flex;gap:18px;align-items:center;margin-bottom:18px;padding-bottom:18px;border-bottom:1px solid var(--glass-border)}
 .profile-header .info h3{margin-bottom:4px;font-size:22px}
 .profile-tabs{display:flex;gap:6px;background:rgba(0,0,0,.3);border-radius:12px;padding:4px;margin-bottom:18px}
@@ -137,12 +126,10 @@ tr:hover td{background:rgba(255,255,255,.03)}
 .profile-tab.active{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff}
 .profile-pane{display:none}
 .profile-pane.active{display:block;animation:slideIn .3s}
-
 .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
 .info-item{background:rgba(0,0,0,.25);border-radius:10px;padding:12px}
 .info-item .lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
 .info-item .val{font-weight:600;font-size:14px}
-
 .month-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;background:rgba(0,0,0,.25);border-radius:12px;padding:10px 14px}
 .month-nav button{background:rgba(255,255,255,.08);border:1px solid var(--glass-border);color:var(--text);padding:6px 12px;border-radius:8px;cursor:pointer;font-weight:600}
 .month-nav button:hover{background:rgba(255,255,255,.15)}
@@ -157,19 +144,15 @@ tr:hover td{background:rgba(255,255,255,.03)}
 .cal-day.fined::after{content:'₹';position:absolute;bottom:2px;right:4px;font-size:9px;color:#fca5a5;font-weight:700}
 .cal-day.empty{visibility:hidden}
 .cal-day.future{opacity:.4;cursor:not-allowed}
-
 .pay-month-row{background:rgba(0,0,0,.25);border-radius:12px;padding:14px;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
 .pay-month-row .ym{font-weight:700;font-size:14px;min-width:100px}
 .pay-month-row .amt{font-family:'Space Grotesk';font-weight:700;font-size:15px}
-
 .toggle{position:relative;width:44px;height:24px;background:rgba(255,255,255,.1);border-radius:12px;cursor:pointer;transition:.2s;display:inline-block}
 .toggle.on{background:linear-gradient(135deg,var(--accent),var(--accent2))}
 .toggle::after{content:'';position:absolute;width:18px;height:18px;background:#fff;border-radius:50%;top:3px;left:3px;transition:.2s}
 .toggle.on::after{left:23px}
-
 .search-bar{display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap}
 .search-bar input,.search-bar select{padding:10px 14px;border-radius:10px;background:rgba(0,0,0,.25);border:1px solid var(--glass-border);color:var(--text);font:400 13px 'Inter'}
-
 .page{display:none;animation:slideIn .4s}
 .page.active{display:block}
 @keyframes slideIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
@@ -183,12 +166,38 @@ tr:hover td{background:rgba(255,255,255,.03)}
 .loading-screen{position:fixed;inset:0;background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));display:grid;place-items:center;z-index:999}
 .spinner{width:50px;height:50px;border:3px solid rgba(255,255,255,.1);border-top-color:var(--accent);border-radius:50%;animation:spin 1s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-
 .day-toggle{display:inline-flex;gap:4px;flex-wrap:wrap;margin-top:6px}
 .day-chip{padding:6px 10px;border-radius:8px;background:rgba(255,255,255,.06);border:1px solid var(--glass-border);font-size:12px;cursor:pointer;font-weight:600;transition:.2s;user-select:none}
 .day-chip.on{background:linear-gradient(135deg,var(--accent),var(--accent2));border-color:transparent;color:#fff}
-
-@media(max-width:768px){.app{grid-template-columns:1fr}.sidebar{position:relative;height:auto;flex-direction:row;overflow-x:auto;padding:14px}.sidebar .logo{display:none}.nav-btn{flex-shrink:0}.user-box{display:none}.main{padding:20px}}
+.upi-box{background:linear-gradient(135deg,rgba(16,185,129,.15),rgba(6,182,212,.15));border:1px solid rgba(16,185,129,.3);border-radius:16px;padding:20px;margin-top:18px}
+.upi-box h4{font-family:'Space Grotesk';margin-bottom:14px;display:flex;align-items:center;gap:10px;font-size:17px}
+.upi-details{display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center}
+.upi-info .upi-hint{font-size:12px;color:var(--muted);margin-bottom:10px;font-style:italic}
+.upi-row{display:flex;justify-content:space-between;align-items:center;padding:10px;background:rgba(0,0,0,.25);border-radius:10px;margin-bottom:8px;gap:10px}
+.upi-row .lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+.upi-row .val{font-family:'Courier New';font-weight:700;font-size:14px;color:#67e8f9}
+.upi-qr{text-align:center;background:#fff;padding:12px;border-radius:12px}
+.upi-qr img{display:block;max-width:180px}
+.about-section{background:var(--glass);backdrop-filter:blur(14px);border:1px solid var(--glass-border);border-radius:24px;padding:40px;text-align:center}
+.about-avatar{width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:grid;place-items:center;margin:0 auto 20px;font-size:40px;font-weight:700;box-shadow:0 8px 32px rgba(124,58,237,.4);overflow:hidden}
+.about-avatar img{width:100%;height:100%;object-fit:cover}
+.about-section h2{font-family:'Space Grotesk';font-size:28px;margin-bottom:6px}
+.about-section .role{color:var(--muted);font-size:13px;margin-bottom:16px}
+.about-section .desc{color:var(--text);font-size:15px;line-height:1.7;margin-bottom:24px;max-width:600px;margin-left:auto;margin-right:auto}
+.about-contacts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;max-width:700px;margin:0 auto}
+.about-contact{display:flex;align-items:center;gap:12px;padding:14px 18px;background:rgba(0,0,0,.3);border:1px solid var(--glass-border);border-radius:14px;text-decoration:none;color:var(--text);transition:.25s;font-size:13px;justify-content:center}
+.about-contact:hover{transform:translateY(-3px);border-color:var(--accent);background:rgba(0,0,0,.4)}
+.about-contact svg{flex-shrink:0}
+.backup-schedule{background:rgba(0,0,0,.2);border:1px solid var(--glass-border);border-radius:14px;padding:18px;margin-top:14px}
+.schedule-row{display:flex;align-items:center;justify-content:space-between;padding:14px;background:rgba(0,0,0,.2);border-radius:12px;margin-bottom:10px;flex-wrap:wrap;gap:12px}
+.schedule-row:last-child{margin-bottom:0}
+.schedule-row .lbl{font-weight:600;font-size:14px;margin-bottom:2px}
+.schedule-row .sub{font-size:11px;color:var(--muted)}
+.schedule-row select,.schedule-row input[type="time"]{padding:8px 12px;border-radius:8px;background:rgba(0,0,0,.3);border:1px solid var(--glass-border);color:var(--text);font:500 13px 'Inter'}
+.monthly-banner{background:linear-gradient(135deg,rgba(245,158,11,.2),rgba(236,72,153,.15));border:1px solid rgba(245,158,11,.4);border-radius:14px;padding:18px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.monthly-banner h4{font-family:'Space Grotesk';margin-bottom:4px}
+.monthly-banner p{font-size:12px;color:var(--muted)}
+@media(max-width:768px){.app{grid-template-columns:1fr}.sidebar{position:relative;height:auto;flex-direction:row;overflow-x:auto;padding:14px}.sidebar .logo{display:none}.nav-btn{flex-shrink:0}.user-box{display:none}.main{padding:20px}.upi-details{grid-template-columns:1fr}.upi-qr{margin-top:12px}}
 </style>
 </head>
 <body>
@@ -225,6 +234,7 @@ tr:hover td{background:rgba(255,255,255,.03)}
     <button class="nav-btn" data-page="fees"><span class="ic">💰</span> Fees & Dues</button>
     <button class="nav-btn" data-page="classes"><span class="ic">🏫</span> Classes</button>
     <button class="nav-btn" data-page="backup"><span class="ic">💾</span> Backup</button>
+    <button class="nav-btn" data-page="about"><span class="ic">ℹ️</span> About Us</button>
     <div class="user-box">
       <div style="font-size:11px;color:var(--muted);margin-bottom:4px">Logged in as</div>
       <div class="mail" id="userEmail"></div>
@@ -238,6 +248,7 @@ tr:hover td{background:rgba(255,255,255,.03)}
         <div><h2>Welcome back, <span>Teacher</span> 👋</h2><p id="todayDate"></p></div>
         <button class="btn btn-primary" onclick="openStudentModal()">➕ Add Student</button>
       </div>
+      <div id="monthlyAlertBanner"></div>
       <div class="stats">
         <div class="stat"><div class="label">Total Students</div><div class="val" id="sTotal">0</div><div class="sub">Across all classes</div></div>
         <div class="stat"><div class="label">Total Dues</div><div class="val" id="sDues">₹0</div><div class="sub" id="sDuesSub">No pending fees</div></div>
@@ -267,14 +278,9 @@ tr:hover td{background:rgba(255,255,255,.03)}
       </div>
     </section>
 
-    <!-- NEW ATTENDANCE PAGE -->
     <section class="page" id="attendance">
       <div class="page-head"><div><h2>Smart <span>Attendance</span></h2><p>Step 1: Choose a class below</p></div></div>
-
-      <div id="attStep1">
-        <div class="class-select-grid" id="attClassGrid"></div>
-      </div>
-
+      <div id="attStep1"><div class="class-select-grid" id="attClassGrid"></div></div>
       <div id="attStep2" style="display:none">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:10px">
           <div>
@@ -286,9 +292,7 @@ tr:hover td{background:rgba(255,255,255,.03)}
             <button class="btn btn-ghost btn-sm" onclick="setAttToday()">Today</button>
           </div>
         </div>
-
         <div id="tuitionBanner"></div>
-
         <div class="card">
           <h3 style="margin-bottom:14px;font-family:'Space Grotesk';display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
             <span>👥 Students</span>
@@ -317,28 +321,89 @@ tr:hover td{background:rgba(255,255,255,.03)}
     </section>
 
     <section class="page" id="backup">
-      <div class="page-head"><div><h2>Backup & <span>Email</span></h2></div></div>
+      <div class="page-head"><div><h2>Backup & <span>Settings</span></h2></div></div>
+      
       <div class="card">
-        <h3 style="margin-bottom:12px;font-family:'Space Grotesk'">💾 Backup Now</h3>
+        <h3 style="margin-bottom:12px;font-family:'Space Grotesk'">💾 Manual Backup</h3>
+        <p style="color:var(--muted);font-size:13px;margin-bottom:14px">Download or email your data anytime. Click the button when you want.</p>
         <div style="display:flex;gap:10px;flex-wrap:wrap">
-          <button class="btn btn-primary" onclick="backupNow()">⬇️ Download Full Backup</button>
+          <button class="btn btn-primary" onclick="backupNow()">⬇️ Download Backup</button>
           <label class="btn btn-ghost" style="cursor:pointer">⬆️ Restore<input type="file" accept=".json" onchange="restoreBackup(event)" style="display:none"/></label>
           <button class="btn btn-danger" onclick="openWipeModal()">🗑️ Wipe All Data</button>
         </div>
         <p style="color:var(--muted);font-size:12px;margin-top:12px">Last backup: <b id="lastBackup">Never</b></p>
       </div>
+
       <div class="card">
         <h3 style="margin-bottom:6px;font-family:'Space Grotesk'">📧 Email Backup (EmailJS)</h3>
+        <p style="color:var(--muted);font-size:13px;margin-bottom:14px">Bind your email for automatic backups like Google Drive/WhatsApp</p>
         <div class="form-grid">
-          <div class="field"><label>Your Email</label><input id="emailTo"/></div>
-          <div class="field"><label>Service ID</label><input id="emailService"/></div>
-          <div class="field"><label>Template ID</label><input id="emailTemplate"/></div>
-          <div class="field"><label>Public Key</label><input id="emailKey"/></div>
+          <div class="field"><label>Your Email</label><input id="emailTo" placeholder="you@gmail.com"/></div>
+          <div class="field"><label>Service ID</label><input id="emailService" placeholder="service_xxx"/></div>
+          <div class="field"><label>Template ID</label><input id="emailTemplate" placeholder="template_xxx"/></div>
+          <div class="field"><label>Public Key</label><input id="emailKey" placeholder="AbCdEf123"/></div>
         </div>
         <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap">
-          <button class="btn btn-ghost" onclick="saveEmailSettings()">💾 Save</button>
-          <button class="btn btn-ghost" onclick="testEmail()">🧪 Test</button>
-          <button class="btn btn-primary" onclick="emailBackup()">📧 Email Backup</button>
+          <button class="btn btn-ghost" onclick="saveEmailSettings()">💾 Save Settings</button>
+          <button class="btn btn-ghost" onclick="testEmail()">🧪 Test Email</button>
+          <button class="btn btn-primary" onclick="emailBackup()">📧 Email Backup Now</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 style="margin-bottom:12px;font-family:'Space Grotesk'">⏰ Auto Backup Schedule</h3>
+        <p style="color:var(--muted);font-size:13px;margin-bottom:14px">Default: every day at 12am. Change frequency and time as you like.</p>
+        <div class="backup-schedule">
+          <div class="schedule-row">
+            <div><div class="lbl">Backup Frequency</div><div class="sub">How often to backup</div></div>
+            <select id="backupFreq" onchange="saveBackupSettings()">
+              <option value="daily">Every Day</option>
+              <option value="weekly">Every Week</option>
+              <option value="monthly">Every Month</option>
+              <option value="off">Off</option>
+            </select>
+          </div>
+          <div class="schedule-row">
+            <div><div class="lbl">Backup Time</div><div class="sub">Default: 00:00 (12 AM)</div></div>
+            <input type="time" id="backupTime" value="00:00" onchange="saveBackupSettings()"/>
+          </div>
+          <div class="schedule-row">
+            <div><div class="lbl">Monthly Reminder</div><div class="sub">Alert on 1st of every month</div></div>
+            <span class="toggle on" id="monthlyReminder" onclick="toggleMonthlyReminder()"></span>
+          </div>
+        </div>
+        <p style="color:var(--muted);font-size:11px;margin-top:10px">⚠️ Auto backup works only when app is open in your browser at that time.</p>
+      </div>
+
+      <div class="card">
+        <h3 style="margin-bottom:12px;font-family:'Space Grotesk'">💳 UPI Payment Settings</h3>
+        <p style="color:var(--muted);font-size:13px;margin-bottom:14px">These details will be shown in every fee reminder message</p>
+        <div class="form-grid">
+          <div class="field"><label>UPI ID</label><input id="upiId" value="arho065-1@okicici" placeholder="your@upi"/></div>
+          <div class="field"><label>UPI Phone Number</label><input id="upiPhone" value="9564385573" placeholder="+91..."/></div>
+        </div>
+        <button class="btn btn-ghost" style="margin-top:10px" onclick="saveUPISettings()">💾 Save UPI Settings</button>
+      </div>
+    </section>
+
+    <section class="page" id="about">
+      <div class="page-head"><div><h2>About <span>Us</span></h2><p>The team behind TuitionPro</p></div></div>
+      <div class="about-section">
+        <div class="about-avatar">
+          <img src="https://i.ibb.co/ycsPZbXS/arifforweb-jpg.jpg" alt="Arif Hussain" onerror="this.style.display='none';this.parentNode.textContent='AH'"/>
+        </div>
+        <h2>Arif Hussain</h2>
+        <p class="role">Creator & Developer — TuitionPro</p>
+        <p class="desc">বেলডাঙ্গা, মুর্শিদাবাদ থেকে পরিচালিত। পরীক্ষার্থীদের জন্য সঠিক ও মানসম্মত পড়াশোনাকে কার্যকর করাই লক্ষ্য।</p>
+        <div class="about-contacts">
+          <a href="https://t.me/beldanga1" target="_blank" class="about-contact">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#229ED9"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+            <span><b>Telegram</b><br><small>@beldanga1</small></span>
+          </a>
+          <a href="https://instagram.com/arifhussain.x" target="_blank" class="about-contact">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#E1306C"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            <span><b>Instagram</b><br><small>@arifhussain.x</small></span>
+          </a>
         </div>
       </div>
     </section>
@@ -370,7 +435,7 @@ tr:hover td{background:rgba(255,255,255,.03)}
   </div>
 </div>
 
-<!-- Class Modal (routine + fine) -->
+<!-- Class Modal -->
 <div class="modal-bg" id="classModal">
   <div class="modal sm">
     <button class="modal-close" onclick="closeModal('classModal')">×</button>
@@ -396,7 +461,7 @@ tr:hover td{background:rgba(255,255,255,.03)}
   </div>
 </div>
 
-<!-- Student Profile Modal (NEW) -->
+<!-- Profile Modal -->
 <div class="modal-bg" id="profileModal">
   <div class="modal">
     <button class="modal-close" onclick="closeModal('profileModal')">×</button>
@@ -412,6 +477,7 @@ tr:hover td{background:rgba(255,255,255,.03)}
   </div>
 </div>
 
+<!-- Wipe Modal -->
 <div class="modal-bg" id="wipeModal">
   <div class="modal sm">
     <button class="modal-close" onclick="closeModal('wipeModal')">×</button>
@@ -447,13 +513,14 @@ const auth = firebase.auth();
 const db = firebase.firestore();
 
 let currentUser = null;
-let DB = { students:[], classes:{}, settings:{backupFreq:'daily',lastBackup:null,email:{}} };
+let DB = { students:[], classes:{}, settings:{backupFreq:'daily',backupTime:'00:00',lastBackup:null,monthlyReminder:true,email:{},upi:{id:'arho065-1@okicici',phone:'9564385573'}} };
 let unsubscribe = null;
 let savingTimer = null;
 let isSaving = false;
 let currentAttClass = null;
 let currentProfileId = null;
 let profileMonth = new Date();
+let autoBackupInterval = null;
 
 const DAY_NAMES = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 const DAY_FULL = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
@@ -494,9 +561,12 @@ auth.onAuthStateChanged(async (user) => {
     document.getElementById('mainApp').classList.add('show');
     document.getElementById('userEmail').textContent = user.email;
     startCloudSync();
+    startAutoBackupTimer();
+    checkMonthlyReminder();
   } else {
     currentUser = null;
     if(unsubscribe){ unsubscribe(); unsubscribe=null; }
+    if(autoBackupInterval){ clearInterval(autoBackupInterval); autoBackupInterval=null; }
     document.getElementById('loginScreen').style.display = 'grid';
     document.getElementById('mainApp').classList.remove('show');
   }
@@ -510,8 +580,9 @@ async function startCloudSync(){
       const data = doc.data();
       DB.students = data.students || [];
       DB.classes = data.classes || {};
-      DB.settings = data.settings || {backupFreq:'daily',lastBackup:null,email:{}};
+      DB.settings = Object.assign({backupFreq:'daily',backupTime:'00:00',lastBackup:null,monthlyReminder:true,email:{},upi:{id:'arho065-1@okicici',phone:'9564385573'}}, data.settings||{});
       DB.settings.email = DB.settings.email || {};
+      DB.settings.upi = DB.settings.upi || {id:'arho065-1@okicici',phone:'9564385573'};
     } else {
       DB.classes = {'General':{days:[],time:'',fineEnabled:false,fineAmount:10}};
       await userDoc().set({students:[],classes:DB.classes,settings:DB.settings});
@@ -522,12 +593,15 @@ async function startCloudSync(){
       const data = doc.data();
       DB.students = data.students || [];
       DB.classes = data.classes || DB.classes;
-      DB.settings = data.settings || DB.settings;
+      DB.settings = Object.assign(DB.settings, data.settings||{});
       DB.settings.email = DB.settings.email || {};
+      DB.settings.upi = DB.settings.upi || {id:'arho065-1@okicici',phone:'9564385573'};
       renderAll();
     }
   });
   renderAll();
+  loadUPISettings();
+  loadBackupSettings();
 }
 function saveToCloud(){
   if(!currentUser) return;
@@ -550,10 +624,139 @@ document.querySelectorAll('.nav-btn').forEach(b=>{b.onclick=()=>{
   renderAll();
 };});
 
+/* ===== AUTO BACKUP ===== */
+function startAutoBackupTimer(){
+  if(autoBackupInterval) clearInterval(autoBackupInterval);
+  autoBackupInterval = setInterval(() => {
+    if(!currentUser) return;
+    const freq = DB.settings.backupFreq;
+    const time = DB.settings.backupTime || '00:00';
+    if(freq === 'off') return;
+    
+    const now = new Date();
+    const [hh, mm] = time.split(':').map(Number);
+    const last = DB.settings.lastBackup ? new Date(DB.settings.lastBackup) : null;
+    
+    if(now.getHours() === hh && now.getMinutes() === mm){
+      // Check if we already backed up in this interval
+      if(last){
+        const diffH = (now - last) / (1000*60*60);
+        if(freq === 'daily' && diffH < 23) return;
+        if(freq === 'weekly' && diffH < 7*24-1) return;
+        if(freq === 'monthly' && diffH < 30*24-1) return;
+      }
+      doAutoBackup();
+    }
+  }, 60000); // check every minute
+}
+async function doAutoBackup(){
+  if(!emailReady()){ console.log('Auto backup skipped: email not bound'); return; }
+  try{
+    const c = DB.settings.email;
+    emailjs.init({publicKey:c.publicKey});
+    const slim = JSON.parse(JSON.stringify(DB));
+    slim.students.forEach(s=>s.photo='');
+    await emailjs.send(c.serviceId,c.templateId,{
+      to_email:c.toEmail,
+      subject:'🤖 Auto Backup - '+new Date().toLocaleString('en-IN'),
+      message:JSON.stringify(slim,null,2)
+    });
+    DB.settings.lastBackup = new Date().toISOString();
+    saveToCloud();
+    toast('🤖 Auto backup sent to email');
+  }catch(e){ console.error('Auto backup failed', e); }
+}
+
+/* ===== MONTHLY REMINDER ===== */
+function checkMonthlyReminder(){
+  if(!DB.settings.monthlyReminder) return;
+  const now = new Date();
+  const key = `monthly_${now.getFullYear()}_${now.getMonth()}`;
+  const lastAlert = localStorage.getItem('lastMonthlyAlert');
+  if(lastAlert === key) return;
+  if(now.getDate() <= 3){ // alert within first 3 days of month
+    localStorage.setItem('lastMonthlyAlert', key);
+    setTimeout(() => {
+      document.querySelector('[data-page="dashboard"]').click();
+      renderMonthlyBanner();
+    }, 1500);
+  }
+}
+function renderMonthlyBanner(){
+  const now = new Date();
+  const banner = document.getElementById('monthlyAlertBanner');
+  banner.innerHTML = `<div class="monthly-banner">
+    <div>
+      <h4>📅 New Month — ${MONTH_NAMES[now.getMonth()]} ${now.getFullYear()}</h4>
+      <p>Time to collect this month's fees and download a backup!</p>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn btn-primary btn-sm" onclick="backupNow()">💾 Backup Now</button>
+      <button class="btn btn-ghost btn-sm" onclick="this.closest('.monthly-banner').remove()">✕ Dismiss</button>
+    </div>
+  </div>`;
+}
+function toggleMonthlyReminder(){
+  const t = document.getElementById('monthlyReminder');
+  t.classList.toggle('on');
+  DB.settings.monthlyReminder = t.classList.contains('on');
+  saveBackupSettings();
+}
+
+/* ===== BACKUP SETTINGS ===== */
+function loadBackupSettings(){
+  document.getElementById('backupFreq').value = DB.settings.backupFreq || 'daily';
+  document.getElementById('backupTime').value = DB.settings.backupTime || '00:00';
+  const t = document.getElementById('monthlyReminder');
+  t.classList.toggle('on', DB.settings.monthlyReminder !== false);
+  if(DB.settings.lastBackup){
+    document.getElementById('lastBackup').textContent = new Date(DB.settings.lastBackup).toLocaleString('en-IN');
+  }
+}
+function saveBackupSettings(){
+  DB.settings.backupFreq = document.getElementById('backupFreq').value;
+  DB.settings.backupTime = document.getElementById('backupTime').value;
+  DB.settings.monthlyReminder = document.getElementById('monthlyReminder').classList.contains('on');
+  saveToCloud();
+  startAutoBackupTimer();
+  toast('✅ Schedule saved');
+}
+
+/* ===== UPI ===== */
+function loadUPISettings(){
+  document.getElementById('upiId').value = DB.settings.upi?.id || 'arho065-1@okicici';
+  document.getElementById('upiPhone').value = DB.settings.upi?.phone || '9564385573';
+}
+function saveUPISettings(){
+  DB.settings.upi = {
+    id: document.getElementById('upiId').value.trim(),
+    phone: document.getElementById('upiPhone').value.trim()
+  };
+  saveToCloud();
+  toast('✅ UPI settings saved');
+}
+function getUPIString(amount){
+  const u = DB.settings.upi || {};
+  if(!u.id) return '';
+  let s = `\n\n💳 *Pay via UPI:*\n`;
+  s += `📱 UPI ID: ${u.id}\n`;
+  if(u.phone) s += `📞 Phone: ${u.phone}\n`;
+  if(amount) s += `💰 Amount: ₹${amount}\n`;
+  s += `\n*If you want, you can even pay with UPI* 🙏`;
+  return s;
+}
+function getUPIQRLink(amount){
+  const u = DB.settings.upi || {};
+  if(!u.id) return '';
+  let upi = `upi://pay?pa=${encodeURIComponent(u.id)}&pn=${encodeURIComponent('TuitionPro')}`;
+  if(amount) upi += `&am=${amount}&cu=INR`;
+  return `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upi)}`;
+}
+
 /* ===== HELPERS ===== */
 function isTuitionDay(dateISO, className){
   const cls = DB.classes[className];
-  if(!cls || !cls.days || cls.days.length===0) return true; // no routine = every day
+  if(!cls || !cls.days || cls.days.length===0) return true;
   const d = new Date(dateISO).getDay();
   return cls.days.includes(d);
 }
@@ -567,8 +770,8 @@ function formatDateShort(iso){
 function openWipeModal(){ document.getElementById('wipeInput').value=''; document.getElementById('wipeConfirmBtn').disabled=true; document.getElementById('wipeModal').classList.add('show'); }
 document.getElementById('wipeInput').addEventListener('input',e=>{ document.getElementById('wipeConfirmBtn').disabled = e.target.value.trim().toLowerCase()!=='wipe out all data'; });
 function doWipe(){
-  const keepEmail=DB.settings.email, keepFreq=DB.settings.backupFreq;
-  DB={students:[],classes:{'General':{days:[],time:'',fineEnabled:false,fineAmount:10}},settings:{backupFreq:keepFreq,lastBackup:null,email:keepEmail}};
+  const keepEmail=DB.settings.email, keepFreq=DB.settings.backupFreq, keepTime=DB.settings.backupTime, keepUPI=DB.settings.upi, keepMR=DB.settings.monthlyReminder;
+  DB={students:[],classes:{'General':{days:[],time:'',fineEnabled:false,fineAmount:10}},settings:{backupFreq:keepFreq,backupTime:keepTime,lastBackup:null,monthlyReminder:keepMR,email:keepEmail,upi:keepUPI}};
   saveToCloud();renderAll();closeModal('wipeModal');toast('🗑️ All data wiped');
 }
 
@@ -652,7 +855,7 @@ function saveClass(){
 }
 function deleteClass(name){ if(!confirm(`Delete "${name}"?`))return; delete DB.classes[name]; saveToCloud();renderAll(); }
 
-/* ===== DUES / FINES ===== */
+/* ===== DUES ===== */
 function getDueMonths(stu){
   const adm=new Date(stu.admission);const now=new Date();let months=[];
   let cur=new Date(adm.getFullYear(),adm.getMonth(),1);const end=new Date(now.getFullYear(),now.getMonth(),1);
@@ -665,27 +868,33 @@ function getFineTotal(stu){
   const now=new Date();const ym=todayYM();let absent=0;
   for(let d=1;d<=now.getDate();d++){
     const key=`${ym}-${String(d).padStart(2,'0')}`;
-    if(stu.attendance&&stu.attendance[key]===false){
-      // only fine if it was a tuition day
-      if(isTuitionDay(key, stu.class)) absent++;
-    }
+    if(stu.attendance&&stu.attendance[key]===false && isTuitionDay(key, stu.class)) absent++;
   }
   return absent*cls.fineAmount;
 }
-function feeMessage(s){const months=getDueMonths(s);const fine=getFineTotal(s);const total=months.length*s.fee+fine;
-  return `Dear Parent, gentle reminder: ${s.name}'s tuition fee ₹${total} pending (${months.length} month(s) × ₹${s.fee}${fine?` + ₹${fine} fine`:''}). Please clear at earliest.`;}
+function feeMessage(s){
+  const months=getDueMonths(s);const fine=getFineTotal(s);const total=months.length*s.fee+fine;
+  let msg = `Dear Parent, gentle reminder: *${s.name}*'s tuition fee *₹${total}* is pending (${months.length} month(s) × ₹${s.fee}${fine?` + ₹${fine} fine`:''}). Please clear at earliest. Thank you.`;
+  msg += getUPIString(total);
+  return msg;
+}
 function photoHTML(s,lg=false){
   if(s.photo)return `<div class="photo ${lg?'lg':''}"><img src="${s.photo}"/></div>`;
   return `<div class="photo ${lg?'lg':''}">${s.name.charAt(0).toUpperCase()}</div>`;}
-function alertButtons(s){const waNum=(s.wa||s.mobile||'').replace(/\D/g,'');
-  const waLink=waNum?`https://wa.me/${waNum}?text=${encodeURIComponent(feeMessage(s))}`:'#';
-  const smsLink=s.mobile?`sms:${s.mobile}?body=${encodeURIComponent(feeMessage(s))}`:'#';
+function alertButtons(s){
+  const months=getDueMonths(s);const fine=getFineTotal(s);const total=months.length*s.fee+fine;
+  const msg = feeMessage(s);
+  const waNum=(s.wa||s.mobile||'').replace(/\D/g,'');
+  const waLink=waNum?`https://wa.me/${waNum}?text=${encodeURIComponent(msg)}`:'#';
+  const smsLink=s.mobile?`sms:${s.mobile}?body=${encodeURIComponent(msg)}`:'#';
   const callLink=s.mobile?`tel:${s.mobile}`:'#';const igLink=s.ig?`https://instagram.com/${s.ig}`:'#';
   return `<div class="action-row">
-    <a class="icon-btn wa" href="${waLink}" target="_blank">💬</a>
-    <a class="icon-btn sms" href="${smsLink}">✉️</a>
-    <a class="icon-btn call" href="${callLink}">📞</a>
-    <a class="icon-btn ig" href="${igLink}" target="_blank">📸</a></div>`;}
+    <a class="icon-btn wa" href="${waLink}" target="_blank" title="WhatsApp (with UPI QR)">💬</a>
+    <a class="icon-btn sms" href="${smsLink}" title="SMS">✉️</a>
+    <a class="icon-btn call" href="${callLink}" title="Call">📞</a>
+    <a class="icon-btn ig" href="${igLink}" target="_blank" title="Instagram">📸</a>
+  </div>`;
+}
 
 /* ===== RENDER ALL ===== */
 function renderAll(){
@@ -746,7 +955,7 @@ function renderStudents(){
   document.getElementById('studentsTbl').style.display=list.length?'':'none';
 }
 
-/* ===== NEW ATTENDANCE FLOW ===== */
+/* ===== ATTENDANCE ===== */
 function renderAttClassGrid(){
   const grid = document.getElementById('attClassGrid');
   const classes = Object.keys(DB.classes);
@@ -787,8 +996,6 @@ function renderAttendanceDay(){
   const isTuition = isTuitionDay(dateISO, currentAttClass);
   const d = new Date(dateISO);
   const dayName = DAY_FULL[d.getDay()];
-
-  // Banner
   const banner = document.getElementById('tuitionBanner');
   if(isTuition){
     banner.innerHTML = `<div class="tuition-day-banner">
@@ -801,8 +1008,6 @@ function renderAttendanceDay(){
       <span class="badge">Holiday</span>
     </div>`;
   }
-
-  // Students list
   const list = DB.students.filter(s=>s.class===currentAttClass);
   const wrap = document.getElementById('attStudentsList');
   if(!list.length){
@@ -812,7 +1017,6 @@ function renderAttendanceDay(){
     return;
   }
   document.getElementById('attEmpty').style.display='none';
-
   let present=0, absent=0, unmarked=0;
   wrap.innerHTML = list.map(s=>{
     const st = s.attendance?.[dateISO];
@@ -842,7 +1046,7 @@ function setAtt(sid,date,val){
   renderDashboard();
 }
 
-/* ===== PROFILE MODAL ===== */
+/* ===== PROFILE ===== */
 function openProfile(id, tab='info'){
   currentProfileId = id;
   profileMonth = new Date();
@@ -876,6 +1080,9 @@ function renderProfileInfo(){
   const months = getDueMonths(s); const fine = getFineTotal(s); const total = months.length*s.fee + fine;
   const cls = DB.classes[s.class] || {};
   const daysText = cls.days && cls.days.length ? cls.days.map(d=>DAY_FULL[d]).join(', ') : 'Every day';
+  const upi = DB.settings.upi || {};
+  const qrUrl = getUPIQRLink(total);
+  
   document.getElementById('pane-info').innerHTML = `
     <div class="info-grid">
       <div class="info-item"><div class="lbl">Full Name</div><div class="val">${s.name}</div></div>
@@ -897,6 +1104,20 @@ function renderProfileInfo(){
         <button class="btn btn-danger" onclick="alertParents('${s.id}')">📨 Send Reminder</button>
       </div>
     </div>
+    
+    <div class="upi-box">
+      <h4>💳 Payment Details</h4>
+      <p style="font-size:12px;color:var(--muted);margin-bottom:14px;font-style:italic">If you want, you can even pay with UPI 🙏</p>
+      <div class="upi-details">
+        <div class="upi-info">
+          <div class="upi-row"><div><div class="lbl">UPI ID</div></div><div class="val">${upi.id||'Not set'}</div></div>
+          <div class="upi-row"><div><div class="lbl">Phone</div></div><div class="val">${upi.phone||'Not set'}</div></div>
+          <div class="upi-row"><div><div class="lbl">Amount</div></div><div class="val" style="color:#fca5a5">₹${total.toLocaleString('en-IN')}</div></div>
+        </div>
+        ${upi.id ? `<div class="upi-qr"><img src="${qrUrl}" alt="UPI QR"/><div style="font-size:10px;color:#666;margin-top:6px">Scan to pay</div></div>` : ''}
+      </div>
+    </div>
+    
     <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">${alertButtons(s)}</div>`;
 }
 function alertParents(sid){
@@ -915,7 +1136,6 @@ function renderProfileAtt(){
   const today = new Date(); today.setHours(0,0,0,0);
   const cls = DB.classes[s.class] || {};
   const fineOn = cls.fineEnabled;
-
   let present=0, absent=0;
   let calHTML = DAY_NAMES.map(d=>`<div class="cal-head">${d}</div>`).join('');
   for(let i=0;i<firstDay;i++) calHTML += `<div class="cal-day empty"></div>`;
@@ -930,7 +1150,6 @@ function renderProfileAtt(){
     calHTML += `<div class="cal-day ${isTuition?'tuition':''} ${st===true?'present':''} ${st===false?'absent':''} ${fined?'fined':''} ${isFuture?'future':''}"
       onclick="${isFuture?'':`toggleProfileAtt('${key}')`}">${d}</div>`;
   }
-
   const total = getFineTotal(s);
   document.getElementById('pane-att').innerHTML = `
     <div class="month-nav">
@@ -939,22 +1158,17 @@ function renderProfileAtt(){
       <button onclick="shiftProfileMonth(1)">Next →</button>
     </div>
     <div style="display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap;font-size:12px;color:var(--muted)">
-      <span>🟣 = Tuition Day</span>
-      <span>🟢 = Present</span>
-      <span>🔴 = Absent${fineOn?' (+fine)':''}</span>
+      <span>🟣 Tuition Day</span><span>🟢 Present</span><span>🔴 Absent${fineOn?' (+fine)':''}</span>
       <span>Click a day to toggle</span>
     </div>
     <div class="cal-grid">${calHTML}</div>
     <div style="margin-top:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px">
       <div class="info-item"><div class="lbl">Present</div><div class="val" style="color:#6ee7b7">${present}</div></div>
-      <div class="info-item"><div class="lbl">Absent (tuition days)</div><div class="val" style="color:#fca5a5">${absent}</div></div>
+      <div class="info-item"><div class="lbl">Absent</div><div class="val" style="color:#fca5a5">${absent}</div></div>
       <div class="info-item"><div class="lbl">Current Fine</div><div class="val">₹${total}</div></div>
     </div>`;
 }
-function shiftProfileMonth(delta){
-  profileMonth.setMonth(profileMonth.getMonth()+delta);
-  renderProfileAtt();
-}
+function shiftProfileMonth(delta){ profileMonth.setMonth(profileMonth.getMonth()+delta); renderProfileAtt(); }
 function toggleProfileAtt(key){
   const s = DB.students.find(x=>x.id===currentProfileId);if(!s)return;
   if(!s.attendance) s.attendance={};
@@ -987,7 +1201,6 @@ function renderProfilePay(){
   rows.reverse();
   const fine = getFineTotal(s);
   const grand = totalDue + fine;
-
   document.getElementById('pane-pay').innerHTML = `
     <div style="background:linear-gradient(135deg,rgba(124,58,237,.2),rgba(236,72,153,.2));border:1px solid rgba(236,72,153,.3);border-radius:14px;padding:16px;margin-bottom:16px">
       <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
@@ -1069,17 +1282,23 @@ function renderClasses(){
 }
 
 /* ===== BACKUP ===== */
-function backupNow(){DB.settings.lastBackup=new Date().toISOString();saveToCloud();
+function backupNow(){
+  DB.settings.lastBackup=new Date().toISOString();
+  saveToCloud();
   const blob=new Blob([JSON.stringify(DB,null,2)],{type:'application/json'});
   const url=URL.createObjectURL(blob);const a=document.createElement('a');
   a.href=url;a.download=`TuitionPro_Backup_${todayISO()}.json`;a.click();URL.revokeObjectURL(url);
-  document.getElementById('lastBackup').textContent=new Date().toLocaleString('en-IN');toast('💾 Downloaded');}
-function restoreBackup(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();
+  document.getElementById('lastBackup').textContent=new Date().toLocaleString('en-IN');
+  toast('💾 Downloaded');
+}
+function restoreBackup(e){
+  const f=e.target.files[0];if(!f)return;const r=new FileReader();
   r.onload=ev=>{try{const data=JSON.parse(ev.target.result);if(!data.students)throw 0;
     if(!confirm('Replace all current data?'))return;
-    DB=data;DB.settings.email=DB.settings.email||{};saveToCloud();renderAll();toast('✅ Restored');
-  }catch{toast('❌ Invalid file') }};r.readAsText(f);}
-
+    DB=data;DB.settings.email=DB.settings.email||{};DB.settings.upi=DB.settings.upi||{id:'arho065-1@okicici',phone:'9564385573'};
+    saveToCloud();renderAll();loadUPISettings();loadBackupSettings();toast('✅ Restored');
+  }catch{toast('❌ Invalid file') }};r.readAsText(f);
+}
 function loadEmailSettings(){const c=DB.settings.email||{};
   document.getElementById('emailTo').value=c.toEmail||'';
   document.getElementById('emailService').value=c.serviceId||'';
@@ -1097,14 +1316,26 @@ async function testEmail(){saveEmailSettings();if(!emailReady()){toast('⚠️ F
   try{emailjs.init({publicKey:c.publicKey});
     await emailjs.send(c.serviceId,c.templateId,{to_email:c.toEmail,subject:'TuitionPro Test',message:'Working! 🎉'});
     toast('✅ Sent!');}catch(e){toast('❌ '+(e.text||'Failed'));}}
-async function emailBackup(){saveEmailSettings();if(!emailReady()){toast('⚠️ Bind email');return;}
-  toast('📧 Preparing...');const c=DB.settings.email;
-  const slim=JSON.parse(JSON.stringify(DB));slim.students.forEach(s=>s.photo='');
-  try{emailjs.init({publicKey:c.publicKey});
-    await emailjs.send(c.serviceId,c.templateId,{to_email:c.toEmail,subject:'Backup '+todayISO(),message:JSON.stringify(slim,null,2)});
-    DB.settings.lastBackup=new Date().toISOString();saveToCloud();
-    document.getElementById('lastBackup').textContent=new Date().toLocaleString('en-IN');toast('✅ Emailed!');}
-  catch(e){toast('❌ '+(e.text||'Failed'));}}
+async function emailBackup(){
+  saveEmailSettings();
+  if(!emailReady()){toast('⚠️ Bind email first');return;}
+  toast('📧 Preparing...');
+  const c=DB.settings.email;
+  const slim=JSON.parse(JSON.stringify(DB));
+  slim.students.forEach(s=>s.photo='');
+  try{
+    emailjs.init({publicKey:c.publicKey});
+    await emailjs.send(c.serviceId,c.templateId,{
+      to_email:c.toEmail,
+      subject:'💾 TuitionPro Backup - '+new Date().toLocaleString('en-IN'),
+      message:JSON.stringify(slim,null,2)
+    });
+    DB.settings.lastBackup=new Date().toISOString();
+    saveToCloud();
+    document.getElementById('lastBackup').textContent=new Date().toLocaleString('en-IN');
+    toast('✅ Emailed!');
+  }catch(e){toast('❌ '+(e.text||'Failed'));}
+}
 </script>
 </body>
 </html>
