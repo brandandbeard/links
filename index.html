@@ -7,7 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <style>
-:root{--bg1:#0f0c29;--bg2:#302b63;--bg3:#24243e;--accent:#7c3aed;--accent2:#ec4899;--accent3:#06b6d4;--glass:rgba(255,255,255,.06);--glass-border:rgba(255,255,255,.12);--text:#f1f5f9;--muted:#94a3b8;--danger:#ef4444;--success:#10b981;--wa:#25D366;--ig-pink:#E1306C;--tg-blue:#229ED9}
+:root{--bg1:#0f0c29;--bg2:#302b63;--bg3:#24243e;--accent:#7c3aed;--accent2:#ec4899;--accent3:#06b6d4;--glass:rgba(255,255,255,.06);--glass-border:rgba(255,255,255,.12);--text:#f1f5f9;--muted:#94a3b8;--danger:#ef4444;--success:#10b981;--wa:#25D366}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;font-family:'Inter',sans-serif;color:var(--text);overflow-x:hidden;overscroll-behavior:none}
 body{background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));background-size:400% 400%;animation:bgShift 20s ease infinite;min-height:100vh}
@@ -31,74 +31,63 @@ body{background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));backgro
 .app{position:relative;z-index:1;min-height:100vh;display:none}
 .app.show{display:block}
 
-/* ===== SIDEBAR — NO BLUR, SOLID BACKGROUND ===== */
+/* ===== FIXED SIDEBAR - EXACT WORKING PATTERN ===== */
 .sidebar{
   position:fixed;
   top:0;
-  left:-300px;
+  left:0;
+  bottom:0;
   width:280px;
   max-width:85vw;
-  height:100vh;
-  z-index:1100;
-  transition:left .3s cubic-bezier(.4,0,.2,1);
-  background:#0f0c29 !important;
+  transform:translateX(-100%);
+  transition:transform .4s cubic-bezier(.4,0,.2,1);
+  background:rgba(15,12,41,0.98);
   border-right:1px solid var(--glass-border);
-  padding:80px 18px 18px 18px;
+  padding:70px 18px 18px 18px;
   display:flex;
   flex-direction:column;
   gap:6px;
   overflow-y:auto;
   overflow-x:hidden;
-  box-shadow:4px 0 30px rgba(0,0,0,.6);
+  z-index:240;
+  box-shadow:8px 0 40px rgba(0,0,0,.5);
   -webkit-overflow-scrolling:touch;
 }
-.sidebar.open{left:0}
+.sidebar.open{
+  transform:translateX(0);
+}
 
-/* ===== MENU BUTTON ===== */
+/* ===== FIXED MENU TOGGLE - EXACT WORKING PATTERN ===== */
 .menu-toggle{
   position:fixed;
   top:14px;
   left:14px;
-  z-index:1050;
+  z-index:250;
   width:46px;
   height:46px;
   border-radius:12px;
-  background:linear-gradient(135deg,#1e1b4b,#312e81);
+  background:rgba(30,27,75,0.95);
   border:1px solid var(--glass-border);
-  display:grid;
-  place-items:center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   cursor:pointer;
   color:#fff;
   font-size:22px;
   box-shadow:0 4px 16px rgba(0,0,0,.4);
   font-weight:700;
-  transition:.2s;
-  touch-action:manipulation;
+  transition:.3s;
   -webkit-user-select:none;
   user-select:none;
 }
-.menu-toggle:hover{background:linear-gradient(135deg,#312e81,#4338ca)}
+.menu-toggle:hover{background:rgba(49,46,129,0.95)}
 .menu-toggle:active{transform:scale(.92)}
-.menu-toggle.hide{display:none !important}
-
-/* ===== OVERLAY ===== */
-.sidebar-overlay{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.6);
-  z-index:1000;
-  opacity:0;
-  pointer-events:none;
-  transition:opacity .3s;
-}
-.sidebar-overlay.show{opacity:1;pointer-events:auto}
 
 .logo{display:flex;align-items:center;gap:10px;padding:8px 10px 22px;border-bottom:1px solid var(--glass-border);margin-bottom:14px}
 .logo-icon{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:grid;place-items:center;font-size:22px;box-shadow:0 8px 24px rgba(124,58,237,.4);flex-shrink:0}
 .logo h1{font-family:'Space Grotesk';font-size:20px;font-weight:700;letter-spacing:-.5px;color:#fff}
 .logo h1 span{background:linear-gradient(135deg,var(--accent2),var(--accent3));-webkit-background-clip:text;background-clip:text;color:transparent}
 
-/* ===== NAV BUTTONS — FULLY CLICKABLE ===== */
 .nav-btn{
   display:flex;
   align-items:center;
@@ -113,13 +102,9 @@ body{background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));backgro
   transition:.15s;
   text-align:left;
   width:100%;
-  position:relative;
   -webkit-user-select:none;
   user-select:none;
-  touch-action:manipulation;
   min-height:48px;
-  pointer-events:auto !important;
-  z-index:1;
 }
 .nav-btn:hover{background:rgba(255,255,255,.08);color:#fff;border-color:rgba(255,255,255,.08)}
 .nav-btn:active{background:rgba(124,58,237,.3);transform:scale(.97)}
@@ -443,10 +428,11 @@ tr:hover td{background:rgba(255,255,255,.03)}
   </div>
 </div>
 
+<!-- Menu Toggle Button -->
 <button class="menu-toggle" id="menuToggle" style="display:none">☰</button>
-<div class="sidebar-overlay" id="sidebarOverlay"></div>
 
 <div class="app" id="mainApp">
+  <!-- Sidebar -->
   <aside class="sidebar" id="sidebar">
     <div class="logo"><div class="logo-icon">🎓</div><h1>Tuition<span>Pro</span></h1></div>
     <button class="nav-btn active" data-page="dashboard"><span class="ic">📊</span> Dashboard</button>
@@ -779,33 +765,21 @@ const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2600);}
 function closeModal(id){document.getElementById(id).classList.remove('show')}
 
-/* ===== SIDEBAR TOGGLE — FIXED ===== */
-function toggleSidebar(){
-  const sb = document.getElementById('sidebar');
-  const ov = document.getElementById('sidebarOverlay');
-  const mt = document.getElementById('menuToggle');
-  sb.classList.toggle('open');
-  ov.classList.toggle('show');
-  mt.classList.toggle('hide');
-}
+/* ===== SIDEBAR TOGGLE - EXACT WORKING PATTERN ===== */
+const sidebarEl = document.getElementById('sidebar');
+const menuToggleBtn = document.getElementById('menuToggle');
 
-// Menu button click
-document.getElementById('menuToggle').addEventListener('click', function(e){
-  e.preventDefault();
+menuToggleBtn.addEventListener('click', function(e) {
   e.stopPropagation();
-  toggleSidebar();
+  sidebarEl.classList.toggle('open');
 });
 
-// Overlay click closes sidebar
-document.getElementById('sidebarOverlay').addEventListener('click', function(e){
-  e.preventDefault();
-  e.stopPropagation();
-  const sb = document.getElementById('sidebar');
-  const mt = document.getElementById('menuToggle');
-  if(sb.classList.contains('open')){
-    sb.classList.remove('open');
-    document.getElementById('sidebarOverlay').classList.remove('show');
-    mt.classList.remove('hide');
+// Close sidebar when clicking outside
+document.addEventListener('click', function(e) {
+  if (window.innerWidth <= 768) {
+    if (!sidebarEl.contains(e.target) && !menuToggleBtn.contains(e.target)) {
+      sidebarEl.classList.remove('open');
+    }
   }
 });
 
@@ -835,7 +809,7 @@ auth.onAuthStateChanged(async (user) => {
     currentUser = user;
     document.getElementById('loginScreen').style.display = 'none';
     document.getElementById('mainApp').classList.add('show');
-    document.getElementById('menuToggle').style.display = 'grid';
+    document.getElementById('menuToggle').style.display = 'flex';
     document.getElementById('userEmail').textContent = user.email;
     startCloudSync(); startAutoBackupTimer(); checkMonthlyReminder();
   } else {
@@ -888,23 +862,19 @@ function saveToCloud(){
   }, 500);
 }
 
-/* ===== NAVIGATION — FIXED with direct event listeners ===== */
+/* ===== NAVIGATION - FIXED ===== */
 function setupNavigation(){
   document.querySelectorAll('.nav-btn').forEach(btn => {
-    // Remove any old listener by cloning
-    const newBtn = btn.cloneNode(true);
-    btn.parentNode.replaceChild(newBtn, btn);
-    
-    newBtn.addEventListener('click', function(e){
+    btn.addEventListener('click', function(e){
       e.preventDefault();
       e.stopPropagation();
       
-      const pageId = newBtn.getAttribute('data-page');
+      const pageId = btn.getAttribute('data-page');
       if(!pageId) return;
       
       // Remove active from all
       document.querySelectorAll('.nav-btn').forEach(x => x.classList.remove('active'));
-      newBtn.classList.add('active');
+      btn.classList.add('active');
       
       // Switch page
       document.querySelectorAll('.page').forEach(x => x.classList.remove('active'));
@@ -920,9 +890,7 @@ function setupNavigation(){
       }
       
       // Close sidebar
-      document.getElementById('sidebar').classList.remove('open');
-      document.getElementById('sidebarOverlay').classList.remove('show');
-      document.getElementById('menuToggle').classList.remove('hide');
+      sidebarEl.classList.remove('open');
       
       window.scrollTo({top:0, behavior:'smooth'});
       renderAll();
@@ -1717,19 +1685,6 @@ async function emailBackup(){
 document.addEventListener('DOMContentLoaded', function(){
   setupNavigation();
 });
-
-// Re-setup navigation when app shows (for dynamically added buttons)
-const observer = new MutationObserver(function(mutations){
-  mutations.forEach(function(mutation){
-    if(mutation.attributeName === 'class'){
-      const app = document.getElementById('mainApp');
-      if(app && app.classList.contains('show')){
-        setupNavigation();
-      }
-    }
-  });
-});
-observer.observe(document.getElementById('mainApp'), { attributes: true });
 </script>
 </body>
 </html>
