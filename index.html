@@ -31,51 +31,10 @@ body{background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));backgro
 .app{position:relative;z-index:1;min-height:100vh;display:none}
 .app.show{display:block}
 
-.sidebar{
-  position:fixed;
-  top:0;
-  left:0;
-  bottom:0;
-  width:280px;
-  max-width:85vw;
-  transform:translateX(-100%);
-  transition:transform .4s cubic-bezier(.4,0,.2,1);
-  background:rgba(15,12,41,0.98);
-  border-right:1px solid var(--glass-border);
-  padding:70px 18px 18px 18px;
-  display:flex;
-  flex-direction:column;
-  gap:6px;
-  overflow-y:auto;
-  overflow-x:hidden;
-  z-index:240;
-  box-shadow:8px 0 40px rgba(0,0,0,.5);
-  -webkit-overflow-scrolling:touch;
-}
+.sidebar{position:fixed;top:0;left:0;bottom:0;width:280px;max-width:85vw;transform:translateX(-100%);transition:transform .4s cubic-bezier(.4,0,.2,1);background:rgba(15,12,41,0.98);border-right:1px solid var(--glass-border);padding:70px 18px 18px 18px;display:flex;flex-direction:column;gap:6px;overflow-y:auto;overflow-x:hidden;z-index:240;box-shadow:8px 0 40px rgba(0,0,0,.5);-webkit-overflow-scrolling:touch}
 .sidebar.open{transform:translateX(0)}
 
-.menu-toggle{
-  position:fixed;
-  top:14px;
-  left:14px;
-  z-index:250;
-  width:46px;
-  height:46px;
-  border-radius:12px;
-  background:rgba(30,27,75,0.95);
-  border:1px solid var(--glass-border);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-  color:#fff;
-  font-size:22px;
-  box-shadow:0 4px 16px rgba(0,0,0,.4);
-  font-weight:700;
-  transition:.3s;
-  -webkit-user-select:none;
-  user-select:none;
-}
+.menu-toggle{position:fixed;top:14px;left:14px;z-index:250;width:46px;height:46px;border-radius:12px;background:rgba(30,27,75,0.95);border:1px solid var(--glass-border);display:flex;align-items:center;justify-content:center;cursor:pointer;color:#fff;font-size:22px;box-shadow:0 4px 16px rgba(0,0,0,.4);font-weight:700;transition:.3s;-webkit-user-select:none;user-select:none}
 .menu-toggle:hover{background:rgba(49,46,129,0.95)}
 .menu-toggle:active{transform:scale(.92)}
 
@@ -84,42 +43,13 @@ body{background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));backgro
 .logo h1{font-family:'Space Grotesk';font-size:20px;font-weight:700;letter-spacing:-.5px;color:#fff}
 .logo h1 span{background:linear-gradient(135deg,var(--accent2),var(--accent3));-webkit-background-clip:text;background-clip:text;color:transparent}
 
-.nav-btn{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  padding:14px 16px;
-  border-radius:12px;
-  background:transparent;
-  border:1px solid transparent;
-  color:#e2e8f0;
-  font:600 14px 'Inter';
-  cursor:pointer;
-  transition:.15s;
-  text-align:left;
-  width:100%;
-  -webkit-user-select:none;
-  user-select:none;
-  min-height:48px;
-}
+.nav-btn{display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:12px;background:transparent;border:1px solid transparent;color:#e2e8f0;font:600 14px 'Inter';cursor:pointer;transition:.15s;text-align:left;width:100%;-webkit-user-select:none;user-select:none;min-height:48px}
 .nav-btn:hover{background:rgba(255,255,255,.08);color:#fff;border-color:rgba(255,255,255,.08)}
 .nav-btn:active{background:rgba(124,58,237,.3);transform:scale(.97)}
-.nav-btn.active{
-  background:linear-gradient(135deg,rgba(124,58,237,.45),rgba(236,72,153,.35));
-  color:#fff;
-  border-color:rgba(236,72,153,.5);
-  box-shadow:0 4px 12px rgba(124,58,237,.3);
-}
+.nav-btn.active{background:linear-gradient(135deg,rgba(124,58,237,.45),rgba(236,72,153,.35));color:#fff;border-color:rgba(236,72,153,.5);box-shadow:0 4px 12px rgba(124,58,237,.3)}
 .nav-btn .ic{font-size:18px}
 
-.user-box{
-  margin-top:auto;
-  padding:14px;
-  background:rgba(255,255,255,.05);
-  border-radius:12px;
-  border:1px solid var(--glass-border);
-  flex-shrink:0;
-}
+.user-box{margin-top:auto;padding:14px;background:rgba(255,255,255,.05);border-radius:12px;border:1px solid var(--glass-border);flex-shrink:0}
 .user-box .lbl{font-size:10px;color:#94a3b8;margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px;font-weight:600}
 .user-box .mail{font-size:12px;color:#fff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-bottom:10px;font-weight:500}
 
@@ -180,19 +110,7 @@ tr:hover td{background:rgba(255,255,255,.03)}
 
 .action-row{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
 
-.icon-btn{
-  width:40px;
-  height:40px;
-  border-radius:10px;
-  border:none;
-  cursor:pointer;
-  display:grid;
-  place-items:center;
-  transition:.2s;
-  text-decoration:none;
-  flex-shrink:0;
-  background:rgba(255,255,255,.08);
-}
+.icon-btn{width:40px;height:40px;border-radius:10px;border:none;cursor:pointer;display:grid;place-items:center;transition:.2s;text-decoration:none;flex-shrink:0;background:rgba(255,255,255,.08)}
 .icon-btn:hover{transform:translateY(-2px) scale(1.05)}
 .icon-btn:active{transform:scale(.92)}
 .icon-btn svg{width:20px;height:20px;display:block}
@@ -314,12 +232,13 @@ tr:hover td{background:rgba(255,255,255,.03)}
 
 .upi-box{background:linear-gradient(135deg,rgba(16,185,129,.15),rgba(6,182,212,.15));border:1px solid rgba(16,185,129,.3);border-radius:16px;padding:clamp(14px,3vw,20px);margin-top:18px}
 .upi-box h4{font-family:'Space Grotesk';margin-bottom:14px;display:flex;align-items:center;gap:10px;font-size:clamp(15px,4vw,17px)}
-.upi-details{display:grid;grid-template-columns:1fr auto;gap:clamp(12px,3vw,20px);align-items:center}
+.upi-details{display:grid;gap:clamp(12px,3vw,20px)}
 .upi-row{display:flex;justify-content:space-between;align-items:center;padding:10px;background:rgba(0,0,0,.25);border-radius:10px;margin-bottom:8px;gap:10px;flex-wrap:wrap}
 .upi-row .lbl{font-size:clamp(9px,2.3vw,11px);color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
 .upi-row .val{font-family:'Courier New';font-weight:700;font-size:clamp(11px,3vw,14px);color:#67e8f9;word-break:break-all}
-.upi-qr{text-align:center;background:#fff;padding:10px;border-radius:12px;flex-shrink:0}
-.upi-qr img{display:block;width:clamp(120px,30vw,180px);height:auto}
+.upi-qr{text-align:center;background:#fff;padding:20px;border-radius:16px;margin:16px 0}
+.upi-qr img{display:block;width:220px;height:220px;margin:0 auto}
+.upi-qr-label{margin-top:10px;font-size:13px;color:#333;font-weight:600}
 
 .about-section{background:var(--glass);backdrop-filter:blur(14px);border:1px solid var(--glass-border);border-radius:24px;padding:clamp(20px,5vw,40px);text-align:center}
 .about-avatar{width:clamp(80px,20vw,120px);height:clamp(80px,20vw,120px);border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:grid;place-items:center;margin:0 auto 20px;font-size:clamp(28px,8vw,40px);font-weight:700;box-shadow:0 8px 32px rgba(124,58,237,.4);overflow:hidden}
@@ -357,29 +276,12 @@ tr:hover td{background:rgba(255,255,255,.03)}
 .routine-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
 
 .mobile-cards{display:block;padding-bottom:20px}
-.mobile-cards .m-card{
-  background:rgba(0,0,0,.25);
-  border:1px solid var(--glass-border);
-  border-radius:14px;
-  padding:14px;
-  margin-bottom:12px;
-  display:flex;
-  gap:12px;
-  align-items:flex-start;
-}
+.mobile-cards .m-card{background:rgba(0,0,0,.25);border:1px solid var(--glass-border);border-radius:14px;padding:14px;margin-bottom:12px;display:flex;gap:12px;align-items:flex-start}
 .mobile-cards .m-card .photo{width:50px;height:50px;font-size:18px;flex-shrink:0}
 .mobile-cards .m-card .body{flex:1;min-width:0}
 .mobile-cards .m-card .nm{font-weight:600;font-size:15px;margin-bottom:4px;cursor:pointer}
 .mobile-cards .m-card .meta{font-size:11px;color:var(--muted);margin-bottom:8px;display:flex;flex-wrap:wrap;gap:6px}
-.mobile-cards .m-card .actions{
-  display:flex;
-  gap:6px;
-  flex-wrap:wrap;
-  justify-content:flex-start;
-  margin-top:10px;
-  padding-top:10px;
-  border-top:1px solid rgba(255,255,255,.08);
-}
+.mobile-cards .m-card .actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-start;margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.08)}
 
 @media (max-width: 768px) {
   .tbl-wrap{display:none}
@@ -530,7 +432,6 @@ tr:hover td{background:rgba(255,255,255,.03)}
     <section class="page" id="backup">
       <div class="page-head"><div><h2>Backup & <span>Settings</span></h2></div></div>
       
-      <!-- Google Sheet Backup -->
       <div class="card">
         <h3 style="margin-bottom:12px;font-family:'Space Grotesk';font-size:clamp(15px,4vw,18px)">📊 Google Sheet Backup</h3>
         <p style="color:var(--muted);font-size:12px;margin-bottom:14px">তোমার নিজের Google Sheet-এ সরাসরি ব্যাকআপ যাবে</p>
@@ -549,7 +450,6 @@ tr:hover td{background:rgba(255,255,255,.03)}
         <p id="sheetStatus" style="color:var(--muted);font-size:11px;margin-top:12px"></p>
       </div>
 
-      <!-- Email Backup -->
       <div class="card">
         <h3 style="margin-bottom:6px;font-family:'Space Grotesk';font-size:clamp(15px,4vw,18px)">📧 Email Backup</h3>
         <p style="color:var(--muted);font-size:12px;margin-bottom:14px">Bind email for auto backups</p>
@@ -567,7 +467,6 @@ tr:hover td{background:rgba(255,255,255,.03)}
         </div>
       </div>
 
-      <!-- Manual Backup -->
       <div class="card">
         <h3 style="margin-bottom:12px;font-family:'Space Grotesk';font-size:clamp(15px,4vw,18px)">💾 Manual Backup</h3>
         <p style="color:var(--muted);font-size:12px;margin-bottom:14px">Download or restore your data</p>
@@ -580,7 +479,6 @@ tr:hover td{background:rgba(255,255,255,.03)}
         <p style="color:var(--muted);font-size:11px;margin-top:12px">Last backup: <b id="lastBackup">Never</b></p>
       </div>
 
-      <!-- Auto Backup -->
       <div class="card">
         <h3 style="margin-bottom:12px;font-family:'Space Grotesk';font-size:clamp(15px,4vw,18px)">⏰ Auto Backup</h3>
         <div class="backup-schedule">
@@ -604,7 +502,6 @@ tr:hover td{background:rgba(255,255,255,.03)}
         </div>
       </div>
 
-      <!-- UPI Settings -->
       <div class="card">
         <h3 style="margin-bottom:12px;font-family:'Space Grotesk';font-size:clamp(15px,4vw,18px)">💳 UPI Settings</h3>
         <div class="form-grid">
@@ -641,7 +538,6 @@ tr:hover td{background:rgba(255,255,255,.03)}
   </main>
 </div>
 
-<!-- Modals -->
 <div class="modal-bg" id="studentModal">
   <div class="modal">
     <button class="modal-close" onclick="closeModal('studentModal')">×</button>
@@ -906,7 +802,6 @@ function setupNavigation(){
   });
 }
 
-/* ===== GOOGLE SHEET BACKUP FUNCTIONS ===== */
 function loadSheetUrl() {
   const url = DB.settings.sheetBackupUrl || '';
   const el = document.getElementById('sheetBackupUrl');
@@ -959,14 +854,8 @@ async function testSheetConnection() {
 
 async function backupToSheet() {
   const url = DB.settings.sheetBackupUrl;
-  if (!url) { 
-    toast('⚠️ আগে Apps Script URL সেভ করো!'); 
-    return; 
-  }
-  if (DB.students.length === 0) {
-    toast('⚠️ কোনো স্টুডেন্ট নেই!');
-    return;
-  }
+  if (!url) { toast('⚠️ আগে Apps Script URL সেভ করো!'); return; }
+  if (DB.students.length === 0) { toast('⚠️ কোনো স্টুডেন্ট নেই!'); return; }
   const status = document.getElementById('sheetStatus');
   status.innerHTML = '📤 Sheet-এ পাঠানো হচ্ছে...';
   status.style.color = 'var(--muted)';
@@ -978,31 +867,21 @@ async function backupToSheet() {
   });
   const payload = {
     students: DB.students.map(s => ({
-      id: s.id,
-      name: s.name,
-      class: s.class,
-      fee: s.fee,
-      admission: s.admission,
-      mobile: s.mobile || '',
-      wa: s.wa || '',
-      ig: s.ig || '',
-      payments: s.payments || []
+      id: s.id, name: s.name, class: s.class, fee: s.fee, admission: s.admission,
+      mobile: s.mobile || '', wa: s.wa || '', ig: s.ig || '', payments: s.payments || []
     })),
-    classes: DB.classes,
-    dues: dues,
-    backupTime: new Date().toISOString()
+    classes: DB.classes, dues: dues, backupTime: new Date().toISOString()
   };
   try {
-    const r = await fetch(url, {
-      method: 'POST',
-      mode: 'no-cors',
+    await fetch(url, {
+      method: 'POST', mode: 'no-cors',
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
       body: JSON.stringify(payload)
     });
     DB.settings.lastBackup = new Date().toISOString();
     saveToCloud();
     document.getElementById('lastBackup').textContent = new Date().toLocaleString('en-IN');
-    status.innerHTML = `✅ সফল! <a href="https://docs.google.com/spreadsheets" target="_blank" style="color:#67e8f9;text-decoration:underline">Sheet খুলে দেখো →</a>`;
+    status.innerHTML = '✅ সফল! <a href="https://docs.google.com/spreadsheets" target="_blank" style="color:#67e8f9;text-decoration:underline">Sheet খুলে দেখো →</a>';
     status.style.color = '#6ee7b7';
     toast('✅ Google Sheet-এ ব্যাকআপ হয়েছে!');
   } catch (e) {
@@ -1016,15 +895,10 @@ function openSheetGuide() {
   const guideHtml = `
     <div style="padding:20px;max-width:600px">
       <h3 style="font-family:'Space Grotesk';margin-bottom:16px">📊 Google Sheet সেটআপ গাইড</h3>
-      <p style="color:var(--muted);font-size:13px;margin-bottom:20px">
-        প্রতিটা ইউজার নিজের Sheet-এ ব্যাকআপ রাখতে পারবে। একবার সেটআপ করলেই হবে!
-      </p>
+      <p style="color:var(--muted);font-size:13px;margin-bottom:20px">প্রতিটা ইউজার নিজের Sheet-এ ব্যাকআপ রাখতে পারবে। একবার সেটআপ করলেই হবে!</p>
       <div style="background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.3);border-radius:12px;padding:16px;margin-bottom:16px">
         <h4 style="margin-bottom:10px;color:#a78bfa">🎯 Step 1: Google Sheet খোলো</h4>
-        <p style="font-size:13px;color:var(--muted)">
-          <a href="https://sheets.new" target="_blank" style="color:#67e8f9;text-decoration:underline">sheets.new</a> 
-          এ গিয়ে নতুন Sheet খোলো।
-        </p>
+        <p style="font-size:13px;color:var(--muted)"><a href="https://sheets.new" target="_blank" style="color:#67e8f9;text-decoration:underline">sheets.new</a> এ গিয়ে নতুন Sheet খোলো।</p>
       </div>
       <div style="background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.3);border-radius:12px;padding:16px;margin-bottom:16px">
         <h4 style="margin-bottom:10px;color:#a78bfa">⚙️ Step 2: Apps Script যোগ করো</h4>
@@ -1051,31 +925,17 @@ function openSheetGuide() {
       </div>
       <div style="background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);border-radius:12px;padding:16px">
         <h4 style="margin-bottom:10px;color:#6ee7b7">✅ Step 4: TuitionPro-তে পেস্ট করো</h4>
-        <p style="font-size:13px;color:var(--muted)">
-          কপি করা URL টা উপরে <b>"Apps Script Web App URL"</b> বক্সে পেস্ট করে <b>Save</b> চাপো।
-          <br><br>
-          এরপর যখন খুশি <b>Backup to Sheet</b> বাটন চাপলেই ডাটা চলে যাবে! 🎉
-        </p>
+        <p style="font-size:13px;color:var(--muted)">কপি করা URL টা উপরে <b>"Apps Script Web App URL"</b> বক্সে পেস্ট করে <b>Save</b> চাপো।<br><br>এরপর যখন খুশি <b>Backup to Sheet</b> বাটন চাপলেই ডাটা চলে যাবে! 🎉</p>
       </div>
       <div style="margin-top:20px;padding:12px;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.3);border-radius:10px">
-        <p style="font-size:12px;color:#fbbf24">
-          🔒 <b>Privacy:</b> তোমার ডাটা শুধু তোমার Sheet-এ যাবে। অন্য কারো সাথে mix হবে না।
-        </p>
+        <p style="font-size:12px;color:#fbbf24">🔒 <b>Privacy:</b> তোমার ডাটা শুধু তোমার Sheet-এ যাবে। অন্য কারো সাথে mix হবে না।</p>
       </div>
-    </div>
-  `;
+    </div>`;
   const modal = document.createElement('div');
   modal.className = 'modal-bg show';
   modal.style.alignItems = 'center';
-  modal.innerHTML = `
-    <div class="modal" style="max-height:85vh">
-      <button class="modal-close" onclick="this.closest('.modal-bg').remove()">×</button>
-      ${guideHtml}
-    </div>
-  `;
-  modal.addEventListener('click', function(e) {
-    if (e.target === modal) modal.remove();
-  });
+  modal.innerHTML = `<div class="modal" style="max-height:85vh"><button class="modal-close" onclick="this.closest('.modal-bg').remove()">×</button>${guideHtml}</div>`;
+  modal.addEventListener('click', function(e) { if (e.target === modal) modal.remove(); });
   document.body.appendChild(modal);
 }
 
@@ -1122,10 +982,7 @@ function copyAppsScript() {
     return ContentService.createTextOutput(JSON.stringify({status: 'error', message: err.toString()})).setMimeType(ContentService.MimeType.JSON);
   }
 }
-
-function doGet(e) {
-  return ContentService.createTextOutput('✅ TuitionPro Backup Active!');
-}`;
+function doGet(e) { return ContentService.createTextOutput('✅ TuitionPro Backup Active!'); }`;
   navigator.clipboard.writeText(script).then(() => {
     toast('✅ কোড কপি হয়েছে! Apps Script-এ পেস্ট করো');
   }).catch(() => {
@@ -1143,15 +1000,10 @@ function openEmailGuide() {
   const guideHtml = `
     <div style="padding:20px;max-width:600px">
       <h3 style="font-family:'Space Grotesk';margin-bottom:16px">📧 Email Backup গাইড</h3>
-      <p style="color:var(--muted);font-size:13px;margin-bottom:20px">
-        EmailJS ব্যবহার করে সরাসরি তোমার ইমেইলে ব্যাকআপ পাঠাও
-      </p>
+      <p style="color:var(--muted);font-size:13px;margin-bottom:20px">EmailJS ব্যবহার করে সরাসরি তোমার ইমেইলে ব্যাকআপ পাঠাও</p>
       <div style="background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.3);border-radius:12px;padding:16px;margin-bottom:16px">
         <h4 style="margin-bottom:10px;color:#a78bfa">🎯 Step 1: EmailJS Account খোলো</h4>
-        <p style="font-size:13px;color:var(--muted)">
-          <a href="https://emailjs.com" target="_blank" style="color:#67e8f9;text-decoration:underline">emailjs.com</a> 
-          এ গিয়ে free account খোলো।
-        </p>
+        <p style="font-size:13px;color:var(--muted)"><a href="https://emailjs.com" target="_blank" style="color:#67e8f9;text-decoration:underline">emailjs.com</a> এ গিয়ে free account খোলো।</p>
       </div>
       <div style="background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.3);border-radius:12px;padding:16px;margin-bottom:16px">
         <h4 style="margin-bottom:10px;color:#a78bfa">⚙️ Step 2: Email Service সেটআপ করো</h4>
@@ -1184,31 +1036,14 @@ function openEmailGuide() {
       </div>
       <div style="background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);border-radius:12px;padding:16px">
         <h4 style="margin-bottom:10px;color:#6ee7b7">✅ Step 5: TuitionPro-তে সেভ করো</h4>
-        <p style="font-size:13px;color:var(--muted)">
-          ৪টা ফিল্ড পূরণ করো:
-          <br>• <b>Your Email</b> - তোমার Gmail
-          <br>• <b>Service ID</b> - Step 2 থেকে
-          <br>• <b>Template ID</b> - Step 3 থেকে
-          <br>• <b>Public Key</b> - Step 4 থেকে
-          <br><br>
-          <b>Save</b> চাপো, তারপর <b>Test</b> দিয়ে check করো।
-          <br>সব ঠিক থাকলে <b>Email Backup</b> বাটন চাপো! 🎉
-        </p>
+        <p style="font-size:13px;color:var(--muted)">৪টা ফিল্ড পূরণ করো:<br>• <b>Your Email</b> - তোমার Gmail<br>• <b>Service ID</b> - Step 2 থেকে<br>• <b>Template ID</b> - Step 3 থেকে<br>• <b>Public Key</b> - Step 4 থেকে<br><br><b>Save</b> চাপো, তারপর <b>Test</b> দিয়ে check করো।<br>সব ঠিক থাকলে <b>Email Backup</b> বাটন চাপো! 🎉</p>
       </div>
-    </div>
-  `;
+    </div>`;
   const modal = document.createElement('div');
   modal.className = 'modal-bg show';
   modal.style.alignItems = 'center';
-  modal.innerHTML = `
-    <div class="modal" style="max-height:85vh">
-      <button class="modal-close" onclick="this.closest('.modal-bg').remove()">×</button>
-      ${guideHtml}
-    </div>
-  `;
-  modal.addEventListener('click', function(e) {
-    if (e.target === modal) modal.remove();
-  });
+  modal.innerHTML = `<div class="modal" style="max-height:85vh"><button class="modal-close" onclick="this.closest('.modal-bg').remove()">×</button>${guideHtml}</div>`;
+  modal.addEventListener('click', function(e) { if (e.target === modal) modal.remove(); });
   document.body.appendChild(modal);
 }
 
@@ -1294,18 +1129,18 @@ function saveUPISettings(){
 function getUPIString(amount){
   const u = DB.settings.upi || {};
   if(!u.id) return '';
-  let s = `\n\n💳 *Pay via UPI:*\n📱 UPI ID: ${u.id}\n`;
-  if(u.phone) s += `📞 Phone: ${u.phone}\n`;
-  if(amount) s += `💰 Amount: ₹${amount}\n`;
-  s += `\n*If you want, you can even pay with UPI* 🙏`;
+  let s = `\n\n💳 *UPI-তে টাকা পাঠান:*\n📱 UPI ID: ${u.id}\n`;
+  if(u.phone) s += `📞 ফোন নম্বর: ${u.phone}\n`;
+  if(amount) s += `💰 টাকা: ₹${amount}\n`;
+  s += `\n✅ PhonePe / Google Pay / Paytm\nযেকোনো অ্যাপ থেকে পাঠাতে পারেন।`;
   return s;
 }
 function getUPIQRLink(amount){
   const u = DB.settings.upi || {};
   if(!u.id) return '';
-  let upi = `upi://pay?pa=${encodeURIComponent(u.id)}&pn=${encodeURIComponent('TuitionPro')}`;
-  if(amount) upi += `&am=${amount}&cu=INR`;
-  return `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upi)}`;
+  let upiString = `upi://pay?pa=${u.id}&pn=${encodeURIComponent('Tuition Fees')}&cu=INR`;
+  if(amount) upiString += `&am=${amount}`;
+  return `https://api.qrserver.com/v1/create-qr-code/?size=300x300&margin=10&data=${encodeURIComponent(upiString)}`;
 }
 function isTuitionDay(dateISO, className){
   const cls = DB.classes[className];
@@ -1409,11 +1244,7 @@ function renderDayToggles(){
     const time = editingClassTimes[String(i)] || '';
     return `<div class="day-item ${active?'active':''}">
       <span class="day-chip ${active?'on':''}" onclick="toggleDayChip(${i})">${d}</span>
-      <input type="time" class="day-time-input" data-day="${i}" 
-        value="${time}" 
-        ${active?'':'disabled'}
-        onchange="setDayTime(${i}, this.value)"
-        onclick="event.stopPropagation()"/>
+      <input type="time" class="day-time-input" data-day="${i}" value="${time}" ${active?'':'disabled'} onchange="setDayTime(${i}, this.value)" onclick="event.stopPropagation()"/>
     </div>`;
   }).join('');
 }
@@ -1468,9 +1299,19 @@ function getFineTotal(stu){
   return absent*cls.fineAmount;
 }
 function feeMessage(s){
-  const months=getDueMonths(s);const fine=getFineTotal(s);const total=months.length*s.fee+fine;
-  let msg = `Dear Parent, gentle reminder: *${s.name}*'s tuition fee *₹${total}* pending (${months.length} month(s) × ₹${s.fee}${fine?` + ₹${fine} fine`:''}). Please clear at earliest.`;
+  const months = getDueMonths(s);
+  const fine = getFineTotal(s);
+  const total = months.length * s.fee + fine;
+  
+  let msg = `নমস্কার 🙏\n\n`;
+  msg += `আপনার সন্তানের টিউশন ফি বাকি আছে।\n\n`;
+  msg += `👤 নাম: ${s.name}\n`;
+  msg += `💰 বাকি টাকা: ₹${total}\n`;
+  msg += `📅 ${months.length} মাসের ফি (₹${s.fee} × ${months.length})`;
+  if(fine > 0) msg += ` + জরিমানা ₹${fine}`;
+  msg += `\n\nঅনুরোধ - দয়া করে টাকাটা দিয়ে দিন।`;
   msg += getUPIString(total);
+  msg += `\n\nধন্যবাদ 🙏`;
   return msg;
 }
 function photoHTML(s,lg=false){
@@ -1729,6 +1570,9 @@ function renderProfileInfo(){
   const s = DB.students.find(x=>x.id===currentProfileId);if(!s)return;
   const months = getDueMonths(s); const fine = getFineTotal(s); const total = months.length*s.fee + fine;
   const cls = DB.classes[s.class] || {};
+  const upi = DB.settings.upi || {};
+  const qrUrl = getUPIQRLink(total);
+  
   let daysText = 'Every day';
   if(cls.days && cls.days.length){
     daysText = cls.days.map(d=>{
@@ -1736,43 +1580,109 @@ function renderProfileInfo(){
       return DAY_FULL[d] + (t ? ' • ' + formatTime12(t) : '');
     }).join('<br>');
   }
-  const upi = DB.settings.upi || {};
-  const qrUrl = getUPIQRLink(total);
+  
   document.getElementById('pane-info').innerHTML = `
     <div class="info-grid">
-      <div class="info-item"><div class="lbl">Name</div><div class="val">${s.name}</div></div>
-      <div class="info-item"><div class="lbl">Class</div><div class="val">${s.class}</div></div>
-      <div class="info-item"><div class="lbl">Fee</div><div class="val">₹${s.fee}</div></div>
-      <div class="info-item"><div class="lbl">Admission</div><div class="val">${formatDateShort(s.admission)}</div></div>
-      <div class="info-item" style="grid-column:1/-1"><div class="lbl">Routine</div><div class="val" style="line-height:1.6">${daysText}</div></div>
-      <div class="info-item"><div class="lbl">Mobile</div><div class="val">${s.mobile||'—'}</div></div>
+      <div class="info-item"><div class="lbl">নাম</div><div class="val">${s.name}</div></div>
+      <div class="info-item"><div class="lbl">ক্লাস</div><div class="val">${s.class}</div></div>
+      <div class="info-item"><div class="lbl">ফি</div><div class="val">₹${s.fee}</div></div>
+      <div class="info-item"><div class="lbl">ভর্তি</div><div class="val">${formatDateShort(s.admission)}</div></div>
+      <div class="info-item" style="grid-column:1/-1"><div class="lbl">রুটিন</div><div class="val" style="line-height:1.6">${daysText}</div></div>
+      <div class="info-item"><div class="lbl">মোবাইল</div><div class="val">${s.mobile||'—'}</div></div>
       <div class="info-item"><div class="lbl">WhatsApp</div><div class="val">${s.wa||'—'}</div></div>
       <div class="info-item"><div class="lbl">Instagram</div><div class="val">${s.ig?'@'+s.ig:'—'}</div></div>
     </div>
+    
     <div style="margin-top:18px;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.3);border-radius:12px;padding:14px">
       <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
         <div>
-          <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px">Total Due</div>
+          <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px">মোট বাকি</div>
           <div style="font-family:'Space Grotesk';font-size:clamp(20px,5.5vw,24px);font-weight:700;color:#fca5a5">₹${total.toLocaleString('en-IN')}</div>
           <div style="font-size:11px;color:var(--muted);margin-top:2px">${months.length} × ₹${s.fee}${fine?` + ₹${fine}`:''}</div>
         </div>
-        <button class="btn btn-danger" onclick="alertParents('${s.id}')">📨 Remind</button>
+        <button class="btn btn-danger" onclick="alertParents('${s.id}')">📨 মনে করিয়ে দিন</button>
       </div>
     </div>
+    
+    ${upi.id ? `
     <div class="upi-box">
-      <h4>💳 Payment Details</h4>
-      <p style="font-size:11px;color:var(--muted);margin-bottom:14px;font-style:italic">If you want, you can even pay with UPI 🙏</p>
-      <div class="upi-details">
-        <div class="upi-info">
-          <div class="upi-row"><div class="lbl">UPI ID</div><div class="val">${upi.id||'Not set'}</div></div>
-          <div class="upi-row"><div class="lbl">Phone</div><div class="val">${upi.phone||'Not set'}</div></div>
-          <div class="upi-row"><div class="lbl">Amount</div><div class="val" style="color:#fca5a5">₹${total.toLocaleString('en-IN')}</div></div>
-        </div>
-        ${upi.id ? `<div class="upi-qr"><img src="${qrUrl}" alt="UPI QR"/><div style="font-size:9px;color:#666;margin-top:6px">Scan to pay</div></div>` : ''}
+      <h4>💳 পেমেন্ট তথ্য</h4>
+      <p style="font-size:11px;color:var(--muted);margin-bottom:14px">📱 নিচের QR কোড স্ক্যান করে সরাসরি পেমেন্ট করুন</p>
+      
+      <div class="upi-qr">
+        <img src="${qrUrl}" alt="UPI QR"/>
+        <div class="upi-qr-label">₹${total.toLocaleString('en-IN')} — QR স্ক্যান করুন</div>
       </div>
+      
+      <div style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap">
+        <button class="btn btn-primary" style="flex:1" onclick="downloadQR('${qrUrl}', '${s.name.replace(/'/g,"\\'")}')">
+          ⬇️ QR ডাউনলোড
+        </button>
+        <button class="btn btn-success" style="flex:1" onclick="shareQR('${qrUrl}', '${s.name.replace(/'/g,"\\'")}', ${total})">
+          📤 QR শেয়ার
+        </button>
+      </div>
+      
+      <div class="upi-row"><div class="lbl">UPI ID</div><div class="val">${upi.id}</div></div>
+      ${upi.phone ? `<div class="upi-row"><div class="lbl">ফোন</div><div class="val">${upi.phone}</div></div>` : ''}
+      <div class="upi-row"><div class="lbl">টাকা</div><div class="val" style="color:#fca5a5">₹${total.toLocaleString('en-IN')}</div></div>
     </div>
+    ` : ''}
+    
     <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;justify-content:center">${alertButtons(s)}</div>`;
 }
+
+async function downloadQR(qrUrl, studentName) {
+  try {
+    toast('⬇️ QR ডাউনলোড হচ্ছে...');
+    const response = await fetch(qrUrl);
+    const blob = await response.blob();
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `QR_${studentName}_${todayISO()}.png`;
+    a.click();
+    URL.revokeObjectURL(url);
+    toast('✅ QR ডাউনলোড হয়েছে!');
+  } catch(e) {
+    window.open(qrUrl, '_blank');
+    toast('📱 QR নতুন ট্যাবে খুলেছে - সেভ করো');
+  }
+}
+
+async function shareQR(qrUrl, studentName, amount) {
+  if (navigator.share) {
+    try {
+      const response = await fetch(qrUrl);
+      const blob = await response.blob();
+      const file = new File([blob], `QR_${studentName}.png`, { type: 'image/png' });
+      
+      await navigator.share({
+        title: `${studentName} এর UPI QR`,
+        text: `${studentName} এর টিউশন ফি ₹${amount} - QR স্ক্যান করে পেমেন্ট করুন`,
+        files: [file]
+      });
+      toast('✅ শেয়ার হয়েছে!');
+    } catch(e) {
+      shareQRViaWhatsApp(qrUrl, studentName, amount);
+    }
+  } else {
+    shareQRViaWhatsApp(qrUrl, studentName, amount);
+  }
+}
+
+function shareQRViaWhatsApp(qrUrl, studentName, amount) {
+  const msg = `📱 *${studentName} এর UPI QR কোড*\n\n`;
+  msg += `💰 টাকা: ₹${amount}\n\n`;
+  msg += `🔗 QR লিঙ্ক (ক্লিক করুন):\n${qrUrl}\n\n`;
+  msg += `📱 অথবা UPI ID: ${DB.settings.upi?.id || ''}\n`;
+  msg += `🙏 ধন্যবাদ`;
+  
+  const waUrl = `https://wa.me/?text=${encodeURIComponent(msg)}`;
+  window.open(waUrl, '_blank');
+  toast('📱 WhatsApp খুলেছে - পাঠিয়ে দাও');
+}
+
 function alertParents(sid){
   const s=DB.students.find(x=>x.id===sid);if(!s)return;
   const waNum=(s.wa||s.mobile||'').replace(/\D/g,'');
