@@ -20,6 +20,7 @@ body{background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));backgro
 
 .login-wrap{position:relative;z-index:1;min-height:100vh;display:grid;place-items:center;padding:20px}
 .login-card{background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--glass-border);border-radius:24px;padding:clamp(24px,5vw,40px);max-width:420px;width:100%;animation:pop .5s}
+@keyframes pop{from{transform:scale(.95);opacity:0}to{transform:scale(1);opacity:1}}
 .login-card h2{font-family:'Space Grotesk';font-size:clamp(22px,6vw,28px);margin-bottom:6px;text-align:center}
 .login-card h2 span{background:linear-gradient(135deg,var(--accent2),var(--accent3));-webkit-background-clip:text;background-clip:text;color:transparent}
 .login-card p{text-align:center;color:var(--muted);font-size:13px;margin-bottom:24px}
@@ -30,25 +31,25 @@ body{background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));backgro
 .app{position:relative;z-index:1;display:grid;grid-template-columns:260px 1fr;min-height:100vh;display:none}
 .app.show{display:grid}
 
-/* SIDEBAR - FIXED: solid bg, sharp text, working buttons */
+/* ===== SIDEBAR (FIXED FOR MOBILE) ===== */
 .sidebar{
   background:#0f0c29;
   border-right:1px solid var(--glass-border);
   padding:28px 18px 18px;
   display:flex;
   flex-direction:column;
-  gap:8px;
-  position:sticky;
-  top:0;
+  gap:6px;
   height:100vh;
   overflow-y:auto;
+  pointer-events:auto;
+  position:relative;
+  z-index:1;
 }
-.logo{display:flex;align-items:center;gap:10px;padding:8px 10px 22px;border-bottom:1px solid var(--glass-border);margin-bottom:18px}
-.logo-icon{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:grid;place-items:center;font-size:22px;box-shadow:0 8px 24px rgba(124,58,237,.4)}
+.logo{display:flex;align-items:center;gap:10px;padding:8px 10px 22px;border-bottom:1px solid var(--glass-border);margin-bottom:14px}
+.logo-icon{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:grid;place-items:center;font-size:22px;box-shadow:0 8px 24px rgba(124,58,237,.4);flex-shrink:0}
 .logo h1{font-family:'Space Grotesk';font-size:20px;font-weight:700;letter-spacing:-.5px;color:#fff}
 .logo h1 span{background:linear-gradient(135deg,var(--accent2),var(--accent3));-webkit-background-clip:text;background-clip:text;color:transparent}
 
-/* NAV BUTTONS - clear text, solid hover */
 .nav-btn{
   display:flex;
   align-items:center;
@@ -60,14 +61,16 @@ body{background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));backgro
   color:#e2e8f0;
   font:600 14px 'Inter';
   cursor:pointer;
-  transition:.2s;
+  transition:.15s;
   text-align:left;
   width:100%;
   pointer-events:auto;
   position:relative;
+  -webkit-user-select:none;
+  user-select:none;
 }
 .nav-btn:hover{background:rgba(255,255,255,.08);color:#fff;border-color:rgba(255,255,255,.08)}
-.nav-btn:active{transform:scale(.97)}
+.nav-btn:active{background:rgba(124,58,237,.3);transform:scale(.97)}
 .nav-btn.active{
   background:linear-gradient(135deg,rgba(124,58,237,.45),rgba(236,72,153,.35));
   color:#fff;
@@ -76,7 +79,6 @@ body{background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));backgro
 }
 .nav-btn .ic{font-size:18px}
 
-/* USER BOX (logout) - always visible */
 .user-box{
   margin-top:auto;
   padding:14px;
@@ -88,7 +90,7 @@ body{background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));backgro
 .user-box .lbl{font-size:10px;color:#94a3b8;margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px;font-weight:600}
 .user-box .mail{font-size:12px;color:#fff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-bottom:10px;font-weight:500}
 
-.main{padding:clamp(16px,3vw,40px);padding-bottom:calc(clamp(16px,3vw,40px) + 90px);overflow-y:auto;min-height:100vh}
+.main{padding:clamp(16px,3vw,40px);padding-bottom:calc(clamp(16px,3vw,40px) + 100px);overflow-y:auto;min-height:100vh}
 .page-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:clamp(16px,3vw,28px);flex-wrap:wrap;gap:12px}
 .page-head h2{font-family:'Space Grotesk';font-size:clamp(22px,5.5vw,30px);font-weight:700;letter-spacing:-.5px}
 .page-head h2 span{background:linear-gradient(135deg,var(--accent2),var(--accent3));-webkit-background-clip:text;background-clip:text;color:transparent}
@@ -102,10 +104,12 @@ body{background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));backgro
 .btn-danger{background:rgba(239,68,68,.15);color:#fca5a5;border:1px solid rgba(239,68,68,.3)}
 .btn-danger:hover{background:rgba(239,68,68,.25)}
 .btn-success{background:rgba(16,185,129,.15);color:#6ee7b7;border:1px solid rgba(16,185,129,.3)}
+.btn-wa{background:rgba(37,211,102,.15);color:#25D366;border:1px solid rgba(37,211,102,.4)}
+.btn-wa:hover{background:rgba(37,211,102,.25)}
 .btn-sm{padding:8px 12px;font-size:11px;border-radius:8px;min-height:34px}
 .btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
 
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:clamp(10px,2vw,16px);margin-bottom:clamp(16px,3vw,28px)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:clamp(10px,2vw,16px);margin-bottom:clamp(16px,3vw,28px)}
 .stat{background:var(--glass);backdrop-filter:blur(14px);border:1px solid var(--glass-border);border-radius:18px;padding:clamp(14px,3vw,20px);position:relative;overflow:hidden;transition:.3s}
 .stat:hover{transform:translateY(-4px);border-color:rgba(255,255,255,.2)}
 .stat::before{content:'';position:absolute;top:0;left:0;width:60px;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:0 0 3px 0}
@@ -141,16 +145,37 @@ tr:hover td{background:rgba(255,255,255,.03)}
 .due-formula{font-size:clamp(9px,2.3vw,11px);color:var(--muted);font-family:'Courier New',monospace;background:rgba(0,0,0,.25);padding:3px 7px;border-radius:6px;word-break:break-word}
 .due-total{font-weight:700;color:#fca5a5;font-size:clamp(13px,3.5vw,15px)}
 
-.action-row{display:flex;gap:6px;flex-wrap:wrap}
-.icon-btn{width:38px;height:38px;border-radius:10px;border:none;cursor:pointer;display:grid;place-items:center;transition:.2s;text-decoration:none;flex-shrink:0}
-.icon-btn:hover{transform:translateY(-2px)}
-.icon-btn svg{width:18px;height:18px}
-.icon-btn.wa{background:rgba(37,211,102,.15);color:var(--wa)}
-.icon-btn.sms{background:rgba(6,182,212,.15);color:#22d3ee}
-.icon-btn.call{background:rgba(124,58,237,.15);color:#a78bfa}
-.icon-btn.ig{background:linear-gradient(135deg,rgba(225,48,108,.15),rgba(252,175,69,.15));color:var(--ig-pink)}
-.icon-btn.edit{background:rgba(124,58,237,.15);color:#a78bfa}
-.icon-btn.del{background:rgba(239,68,68,.15);color:#fca5a5}
+.action-row{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+
+/* ===== ICON BUTTONS (FIXED - bigger, visible) ===== */
+.icon-btn{
+  width:40px;
+  height:40px;
+  border-radius:10px;
+  border:none;
+  cursor:pointer;
+  display:grid;
+  place-items:center;
+  transition:.2s;
+  text-decoration:none;
+  flex-shrink:0;
+  background:rgba(255,255,255,.08);
+}
+.icon-btn:hover{transform:translateY(-2px) scale(1.05)}
+.icon-btn:active{transform:scale(.92)}
+.icon-btn svg{width:20px;height:20px;display:block}
+.icon-btn.wa{background:rgba(37,211,102,.15)}
+.icon-btn.wa svg{fill:#25D366}
+.icon-btn.sms{background:rgba(6,182,212,.15)}
+.icon-btn.sms svg{fill:#22d3ee}
+.icon-btn.call{background:rgba(124,58,237,.15)}
+.icon-btn.call svg{fill:#a78bfa}
+.icon-btn.ig{background:rgba(225,48,108,.15)}
+.icon-btn.ig svg{fill:#E1306C}
+.icon-btn.edit{background:rgba(124,58,237,.15)}
+.icon-btn.edit svg{fill:#a78bfa}
+.icon-btn.del{background:rgba(239,68,68,.15)}
+.icon-btn.del svg{fill:#fca5a5}
 
 .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);display:none;align-items:flex-end;justify-content:center;z-index:100;padding:0}
 .modal-bg.show{display:flex;animation:fade .2s}
@@ -195,6 +220,7 @@ tr:hover td{background:rgba(255,255,255,.03)}
 .profile-tab.active{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff}
 .profile-pane{display:none}
 .profile-pane.active{display:block;animation:slideIn .3s}
+@keyframes slideIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 
 .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:clamp(8px,2vw,14px)}
 .info-item{background:rgba(0,0,0,.25);border-radius:10px;padding:clamp(10px,2.5vw,12px)}
@@ -231,7 +257,6 @@ tr:hover td{background:rgba(255,255,255,.03)}
 
 .page{display:none;animation:slideIn .4s}
 .page.active{display:block}
-@keyframes slideIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 
 .empty-state{text-align:center;padding:clamp(30px,8vw,60px) 20px;color:var(--muted)}
 .empty-state .big{font-size:clamp(40px,12vw,60px);margin-bottom:14px;opacity:.3}
@@ -247,58 +272,13 @@ tr:hover td{background:rgba(255,255,255,.03)}
 .spinner{width:50px;height:50px;border:3px solid rgba(255,255,255,.1);border-top-color:var(--accent);border-radius:50%;animation:spin 1s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* DAY CHIPS with PER-DAY TIME (NEW) */
 .day-toggle{display:flex;flex-direction:column;gap:8px;margin-top:8px;width:100%}
-.day-item{
-  display:grid;
-  grid-template-columns:1fr auto;
-  gap:10px;
-  align-items:center;
-  padding:10px;
-  background:rgba(0,0,0,.25);
-  border-radius:12px;
-  border:1px solid var(--glass-border);
-  transition:.2s;
-}
-.day-item.active{
-  background:linear-gradient(135deg,rgba(124,58,237,.2),rgba(236,72,153,.15));
-  border-color:rgba(236,72,153,.4);
-}
-.day-chip{
-  padding:8px 14px;
-  border-radius:8px;
-  background:rgba(255,255,255,.08);
-  border:1px solid transparent;
-  font-size:clamp(12px,3vw,13px);
-  cursor:pointer;
-  font-weight:600;
-  transition:.2s;
-  user-select:none;
-  min-height:38px;
-  display:grid;
-  place-items:center;
-  color:#94a3b8;
-}
-.day-chip.on{
-  background:linear-gradient(135deg,var(--accent),var(--accent2));
-  border-color:transparent;
-  color:#fff;
-  box-shadow:0 2px 8px rgba(124,58,237,.4);
-}
-.day-time-input{
-  padding:8px 12px;
-  border-radius:8px;
-  background:rgba(0,0,0,.4);
-  border:1px solid var(--glass-border);
-  color:var(--text);
-  font:500 13px 'Inter';
-  min-height:38px;
-  width:120px;
-}
-.day-time-input:disabled{
-  opacity:.4;
-  cursor:not-allowed;
-}
+.day-item{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:10px;background:rgba(0,0,0,.25);border-radius:12px;border:1px solid var(--glass-border);transition:.2s}
+.day-item.active{background:linear-gradient(135deg,rgba(124,58,237,.2),rgba(236,72,153,.15));border-color:rgba(236,72,153,.4)}
+.day-chip{padding:8px 14px;border-radius:8px;background:rgba(255,255,255,.08);border:1px solid transparent;font-size:clamp(12px,3vw,13px);cursor:pointer;font-weight:600;transition:.2s;user-select:none;min-height:38px;display:grid;place-items:center;color:#94a3b8}
+.day-chip.on{background:linear-gradient(135deg,var(--accent),var(--accent2));border-color:transparent;color:#fff;box-shadow:0 2px 8px rgba(124,58,237,.4)}
+.day-time-input{padding:8px 12px;border-radius:8px;background:rgba(0,0,0,.4);border:1px solid var(--glass-border);color:var(--text);font:500 13px 'Inter';min-height:38px;width:120px}
+.day-time-input:disabled{opacity:.4;cursor:not-allowed}
 
 .upi-box{background:linear-gradient(135deg,rgba(16,185,129,.15),rgba(6,182,212,.15));border:1px solid rgba(16,185,129,.3);border-radius:16px;padding:clamp(14px,3vw,20px);margin-top:18px}
 .upi-box h4{font-family:'Space Grotesk';margin-bottom:14px;display:flex;align-items:center;gap:10px;font-size:clamp(15px,4vw,17px)}
@@ -338,28 +318,16 @@ tr:hover td{background:rgba(255,255,255,.03)}
 .routine-info .r-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
 .routine-info .r-fine{font-size:13px;color:var(--muted);margin-top:8px}
 .routine-info .r-fine b{color:#fca5a5}
-
-/* NEW: Schedule list in routine preview */
 .routine-schedule-list{display:flex;flex-direction:column;gap:8px;margin-top:8px}
-.routine-day-row{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:10px 14px;
-  background:rgba(0,0,0,.3);
-  border-radius:10px;
-  border:1px solid rgba(236,72,153,.3);
-}
+.routine-day-row{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:rgba(0,0,0,.3);border-radius:10px;border:1px solid rgba(236,72,153,.3)}
 .routine-day-row .day-name{font-weight:600;font-size:14px;color:#e9d5ff}
 .routine-day-row .day-time{font-family:'Space Grotesk';font-weight:700;font-size:15px;color:#67e8f9}
-
 .routine-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
 
-/* ==================== MOBILE ==================== */
+/* ===== MOBILE SPECIFIC ===== */
 @media (max-width: 768px) {
   .app{grid-template-columns:1fr}
   
-  /* Sidebar: slide from left, solid bg, z-index correct */
   .sidebar{
     position:fixed;
     top:0;
@@ -372,10 +340,11 @@ tr:hover td{background:rgba(255,255,255,.03)}
     padding-top:70px;
     box-shadow:4px 0 30px rgba(0,0,0,.5);
     background:#0f0c29;
+    pointer-events:auto;
+    overflow-y:auto;
   }
   .sidebar.open{left:0}
   
-  /* Overlay: transparent layer with no blur, blocks clicks only when shown */
   .sidebar-overlay{
     position:fixed;
     inset:0;
@@ -385,12 +354,8 @@ tr:hover td{background:rgba(255,255,255,.03)}
     pointer-events:none;
     transition:opacity .3s;
   }
-  .sidebar-overlay.show{
-    opacity:1;
-    pointer-events:auto;
-  }
+  .sidebar-overlay.show{opacity:1;pointer-events:auto}
   
-  /* Hamburger button */
   .menu-toggle{
     position:fixed;
     top:14px;
@@ -411,7 +376,6 @@ tr:hover td{background:rgba(255,255,255,.03)}
   }
   .menu-toggle:hover{background:#312e81}
   
-  /* Bottom Nav */
   .bottom-nav{
     position:fixed;
     bottom:0;
@@ -444,17 +408,35 @@ tr:hover td{background:rgba(255,255,255,.03)}
   .bottom-nav-btn svg{width:20px;height:20px}
   .bottom-nav-btn .lbl{font-size:9px;font-weight:600;letter-spacing:.3px}
   
-  .main{padding:clamp(16px,3vw,24px);padding-top:70px;padding-bottom:100px}
+  .main{padding:clamp(16px,3vw,24px);padding-top:70px;padding-bottom:120px}
   
-  .mobile-cards .m-card{background:rgba(0,0,0,.25);border:1px solid var(--glass-border);border-radius:14px;padding:14px;margin-bottom:10px;display:flex;gap:12px;align-items:flex-start}
+  /* Mobile student cards */
+  .mobile-cards{display:block;padding-bottom:20px}
+  .mobile-cards .m-card{
+    background:rgba(0,0,0,.25);
+    border:1px solid var(--glass-border);
+    border-radius:14px;
+    padding:14px;
+    margin-bottom:12px;
+    display:flex;
+    gap:12px;
+    align-items:flex-start;
+  }
   .mobile-cards .m-card .photo{width:50px;height:50px;font-size:18px;flex-shrink:0}
   .mobile-cards .m-card .body{flex:1;min-width:0}
   .mobile-cards .m-card .nm{font-weight:600;font-size:15px;margin-bottom:4px;cursor:pointer}
   .mobile-cards .m-card .meta{font-size:11px;color:var(--muted);margin-bottom:8px;display:flex;flex-wrap:wrap;gap:6px}
-  .mobile-cards .m-card .actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+  .mobile-cards .m-card .actions{
+    display:flex;
+    gap:6px;
+    flex-wrap:wrap;
+    justify-content:flex-start;
+    margin-top:10px;
+    padding-top:10px;
+    border-top:1px solid rgba(255,255,255,.08);
+  }
   
   .tbl-wrap{display:none}
-  .mobile-cards{display:block}
   
   .att-actions{flex:1;min-width:100%;justify-content:stretch}
   .att-btn{flex:1}
@@ -469,7 +451,7 @@ tr:hover td{background:rgba(255,255,255,.03)}
 }
 
 @media (max-width: 380px) {
-  .main{padding:12px;padding-top:60px;padding-bottom:90px}
+  .main{padding:12px;padding-top:60px;padding-bottom:110px}
   .stat{padding:12px}
   .stu-att-row{padding:10px;gap:8px}
 }
@@ -521,7 +503,6 @@ tr:hover td{background:rgba(255,255,255,.03)}
   </aside>
 
   <main class="main">
-    <!-- Dashboard -->
     <section class="page active" id="dashboard">
       <div class="page-head">
         <div><h2>Welcome back, <span>Teacher</span> 👋</h2><p id="todayDate"></p></div>
@@ -535,14 +516,16 @@ tr:hover td{background:rgba(255,255,255,.03)}
         <div class="stat"><div class="label">Classes</div><div class="val" id="sClass">0</div><div class="sub">Active batches</div></div>
       </div>
       <div class="card">
-        <h3 style="margin-bottom:14px;font-family:'Space Grotesk';font-size:clamp(15px,4vw,18px)">⚠️ Students with Pending Fees</h3>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:10px">
+          <h3 style="font-family:'Space Grotesk';font-size:clamp(15px,4vw,18px)">⚠️ Students with Pending Fees</h3>
+          <button class="btn btn-wa btn-sm" id="bulkAlertBtn" onclick="sendBulkReminder()" style="display:none">📱 Send All Alerts</button>
+        </div>
         <div class="tbl-wrap"><table id="dashDueTbl"><thead><tr><th>Student</th><th>Class</th><th>Due</th><th>Action</th></tr></thead><tbody></tbody></table></div>
         <div class="mobile-cards" id="dashDueCards"></div>
         <div id="dashDueEmpty" class="empty-state" style="display:none;padding:30px"><div class="big">🎉</div>All fees are paid!</div>
       </div>
     </section>
 
-    <!-- Students -->
     <section class="page" id="students">
       <div class="page-head"><div><h2>My <span>Students</span></h2><p>Click name for profile</p></div><button class="btn btn-primary" onclick="openStudentModal()">➕ Add Student</button></div>
       <div class="search-bar">
@@ -560,7 +543,6 @@ tr:hover td{background:rgba(255,255,255,.03)}
       </div>
     </section>
 
-    <!-- Attendance -->
     <section class="page" id="attendance">
       <div class="page-head"><div><h2>Smart <span>Attendance</span></h2><p>Tap a class to check routine, then start</p></div></div>
       <div id="attStep1"><div class="class-select-grid" id="attClassGrid"></div></div>
@@ -587,7 +569,6 @@ tr:hover td{background:rgba(255,255,255,.03)}
       </div>
     </section>
 
-    <!-- Fees -->
     <section class="page" id="fees">
       <div class="page-head"><div><h2>Fees & <span>Dues</span></h2><p>Track payments</p></div></div>
       <div class="search-bar">
@@ -600,13 +581,11 @@ tr:hover td{background:rgba(255,255,255,.03)}
       </div>
     </section>
 
-    <!-- Classes -->
     <section class="page" id="classes">
       <div class="page-head"><div><h2>Classes & <span>Routine</span></h2><p>Set routine & fines per class</p></div><button class="btn btn-primary" onclick="openClassModal()">➕ Add Class</button></div>
       <div class="card" id="classesCard"></div>
     </section>
 
-    <!-- Backup -->
     <section class="page" id="backup">
       <div class="page-head"><div><h2>Backup & <span>Settings</span></h2></div></div>
       <div class="card">
@@ -666,7 +645,6 @@ tr:hover td{background:rgba(255,255,255,.03)}
       </div>
     </section>
 
-    <!-- About -->
     <section class="page" id="about">
       <div class="page-head"><div><h2>About <span>Us</span></h2></div></div>
       <div class="about-section">
@@ -730,7 +708,7 @@ tr:hover td{background:rgba(255,255,255,.03)}
         <div class="field"><label>Admission Date *</label><input type="date" id="stuAdm" required/></div>
         <div class="field"><label>Mobile</label><input id="stuMobile"/></div>
         <div class="field"><label>WhatsApp</label><input id="stuWa"/></div>
-        <div class="field"><label>Instagram</label><input id="stuIg"/></div>
+        <div class="field"><label>Instagram</label><input id="stuIg" placeholder="@username"/></div>
         <div class="field"><label>Photo</label><input type="file" id="stuPhoto" accept="image/*"/></div>
       </div>
       <div style="display:flex;gap:10px;margin-top:20px;justify-content:flex-end;flex-wrap:wrap">
@@ -741,7 +719,7 @@ tr:hover td{background:rgba(255,255,255,.03)}
   </div>
 </div>
 
-<!-- Class Modal with PER-DAY TIME -->
+<!-- Class Modal -->
 <div class="modal-bg" id="classModal">
   <div class="modal sm">
     <button class="modal-close" onclick="closeModal('classModal')">×</button>
@@ -820,13 +798,14 @@ tr:hover td{background:rgba(255,255,255,.03)}
 
 <div class="toast" id="toast"></div>
 
-<svg style="display:none">
+<!-- SVG Icons (hidden, referenced by use) -->
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
   <symbol id="icon-wa" viewBox="0 0 24 24"><path fill="#25D366" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.297-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></symbol>
-  <symbol id="icon-ig" viewBox="0 0 24 24"><defs><linearGradient id="igGrad" x1="0" y1="100" x2="100" y2="0"><stop offset="0" stop-color="#FFC107"/><stop offset=".5" stop-color="#F44336"/><stop offset="1" stop-color="#9C27B0"/></linearGradient></defs><path fill="url(#igGrad)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></symbol>
-  <symbol id="icon-sms" viewBox="0 0 24 24" fill="#22d3ee"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 11H7V9h2v2zm4 0h-2V9h2v2zm4 0h-2V9h2v2z"/></symbol>
-  <symbol id="icon-call" viewBox="0 0 24 24" fill="#a78bfa"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></symbol>
-  <symbol id="icon-edit" viewBox="0 0 24 24" fill="#a78bfa"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a.996.996 0 000-1.41l-2.34-2.34a.996.996 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></symbol>
-  <symbol id="icon-del" viewBox="0 0 24 24" fill="#fca5a5"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></symbol>
+  <symbol id="icon-ig" viewBox="0 0 24 24"><path fill="#E1306C" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></symbol>
+  <symbol id="icon-sms" viewBox="0 0 24 24"><path fill="#22d3ee" d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 11H7V9h2v2zm4 0h-2V9h2v2zm4 0h-2V9h2v2z"/></symbol>
+  <symbol id="icon-call" viewBox="0 0 24 24"><path fill="#a78bfa" d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></symbol>
+  <symbol id="icon-edit" viewBox="0 0 24 24"><path fill="#a78bfa" d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a.996.996 0 000-1.41l-2.34-2.34a.996.996 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></symbol>
+  <symbol id="icon-del" viewBox="0 0 24 24"><path fill="#fca5a5" d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></symbol>
 </svg>
 
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
@@ -863,7 +842,6 @@ const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2600);}
 function closeModal(id){document.getElementById(id).classList.remove('show')}
 
-/* FIXED: Sidebar toggle with proper z-index management */
 function toggleSidebar(){
   const sb = document.getElementById('sidebar');
   const ov = document.getElementById('sidebarOverlay');
@@ -950,23 +928,38 @@ function saveToCloud(){
   }, 500);
 }
 
-/* NAV: both sidebar and bottom nav */
-document.querySelectorAll('.nav-btn, .bottom-nav-btn').forEach(b=>{
-  b.addEventListener('click', function(e){
-    e.preventDefault();
-    document.querySelectorAll('.nav-btn, .bottom-nav-btn').forEach(x=>x.classList.remove('active'));
-    document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
-    document.querySelectorAll(`[data-page="${b.dataset.page}"]`).forEach(x=>x.classList.add('active'));
-    document.getElementById(b.dataset.page).classList.add('active');
-    if(b.dataset.page==='attendance'){ currentAttClass=null; document.getElementById('attStep1').style.display=''; document.getElementById('attStep2').style.display='none'; renderAttClassGrid(); }
-    if(window.innerWidth<=768){
-      document.getElementById('sidebar').classList.remove('open');
-      document.getElementById('sidebarOverlay').classList.remove('show');
-    }
-    window.scrollTo({top:0,behavior:'smooth'});
-    renderAll();
+/* NAV - FIXED: uses addEventListener with proper touch handling */
+function setupNavigation(){
+  document.querySelectorAll('.nav-btn, .bottom-nav-btn').forEach(b=>{
+    const handler = function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      document.querySelectorAll('.nav-btn, .bottom-nav-btn').forEach(x=>x.classList.remove('active'));
+      document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+      const pageId = b.getAttribute('data-page');
+      document.querySelectorAll(`[data-page="${pageId}"]`).forEach(x=>x.classList.add('active'));
+      const pageEl = document.getElementById(pageId);
+      if(pageEl) pageEl.classList.add('active');
+      if(pageId==='attendance'){ 
+        currentAttClass=null; 
+        document.getElementById('attStep1').style.display=''; 
+        document.getElementById('attStep2').style.display='none'; 
+        renderAttClassGrid(); 
+      }
+      if(window.innerWidth<=768){
+        document.getElementById('sidebar').classList.remove('open');
+        document.getElementById('sidebarOverlay').classList.remove('show');
+      }
+      window.scrollTo({top:0,behavior:'smooth'});
+      renderAll();
+    };
+    b.addEventListener('click', handler);
+    b.addEventListener('touchend', function(e){
+      e.preventDefault();
+      handler(e);
+    });
   });
-});
+}
 
 function startAutoBackupTimer(){
   if(autoBackupInterval) clearInterval(autoBackupInterval);
@@ -1009,7 +1002,11 @@ function checkMonthlyReminder(){
   if(lastAlert === key) return;
   if(now.getDate() <= 3){
     localStorage.setItem('lastMonthlyAlert', key);
-    setTimeout(() => { document.querySelector('[data-page="dashboard"]').click(); renderMonthlyBanner(); }, 1500);
+    setTimeout(() => { 
+      const dashBtn = document.querySelector('[data-page="dashboard"]');
+      if(dashBtn) dashBtn.click();
+      renderMonthlyBanner(); 
+    }, 1500);
   }
 }
 function renderMonthlyBanner(){
@@ -1063,23 +1060,17 @@ function getUPIQRLink(amount){
   if(amount) upi += `&am=${amount}&cu=INR`;
   return `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upi)}`;
 }
-
-/* PER-DAY TIME HELPERS */
 function isTuitionDay(dateISO, className){
   const cls = DB.classes[className];
   if(!cls || !cls.days || cls.days.length===0) return true;
   return cls.days.includes(new Date(dateISO).getDay());
 }
-
 function getDayTime(className, dayIndex){
   const cls = DB.classes[className];
   if(!cls) return '';
-  // Try per-day time first
   if(cls.times && cls.times[String(dayIndex)]) return cls.times[String(dayIndex)];
-  // Fallback to legacy single time
   return cls.time || '';
 }
-
 function formatDateShort(iso){
   if(!iso) return '';
   const d = new Date(iso);
@@ -1136,7 +1127,6 @@ function saveStudent(e){
 }
 function deleteStudent(id){if(!confirm('Delete this student?'))return;DB.students=DB.students.filter(x=>x.id!==id);saveToCloud();renderAll();toast('🗑️ Deleted');}
 
-/* CLASS MODAL with PER-DAY TIME */
 let editingClassDays = [];
 let editingClassTimes = {};
 let afterClassSaveCallback = null;
@@ -1152,7 +1142,6 @@ function openClassModal(origName=null, callback=null){
     document.getElementById('clsFineToggle').classList.toggle('on', !!c.fineEnabled);
     editingClassDays = [...(c.days||[])];
     editingClassTimes = {...(c.times||{})};
-    // Migrate: if legacy 'time' exists but no per-day times, copy to all active days
     if(c.time && (!c.times || Object.keys(c.times).length===0)){
       editingClassDays.forEach(d => { editingClassTimes[String(d)] = c.time; });
     }
@@ -1166,7 +1155,6 @@ function openClassModal(origName=null, callback=null){
   renderDayToggles();
   document.getElementById('classModal').classList.add('show');
 }
-
 function renderDayToggles(){
   const wrap = document.getElementById('clsDays');
   wrap.innerHTML = DAY_NAMES.map((d,i)=>{
@@ -1182,7 +1170,6 @@ function renderDayToggles(){
     </div>`;
   }).join('');
 }
-
 function toggleDayChip(i){
   if(editingClassDays.includes(i)){
     editingClassDays = editingClassDays.filter(x=>x!==i);
@@ -1193,24 +1180,19 @@ function toggleDayChip(i){
   }
   renderDayToggles();
 }
-
 function setDayTime(dayIndex, value){
   if(value) editingClassTimes[String(dayIndex)] = value;
   else delete editingClassTimes[String(dayIndex)];
 }
-
 function saveClass(){
   const name = document.getElementById('clsName').value.trim();
   if(!name){ toast('⚠️ Name required'); return; }
   const orig = document.getElementById('clsOrigName').value;
   if(orig && orig!==name){ delete DB.classes[orig]; DB.students.forEach(s=>{ if(s.class===orig) s.class=name; }); }
-  
-  // Build times object - only keep times for active days
   const times = {};
   editingClassDays.forEach(d => {
     if(editingClassTimes[String(d)]) times[String(d)] = editingClassTimes[String(d)];
   });
-  
   DB.classes[name] = {
     days: [...editingClassDays].sort((a,b)=>a-b),
     times: times,
@@ -1247,6 +1229,8 @@ function feeMessage(s){
 function photoHTML(s,lg=false){
   if(s.photo)return `<div class="photo ${lg?'lg':''}"><img src="${s.photo}"/></div>`;
   return `<div class="photo ${lg?'lg':''}">${s.name.charAt(0).toUpperCase()}</div>`;}
+
+/* ALERT BUTTONS - FIXED: icons always visible */
 function alertButtons(s){
   const msg = feeMessage(s);
   const waNum=(s.wa||s.mobile||'').replace(/\D/g,'');
@@ -1254,12 +1238,13 @@ function alertButtons(s){
   const smsLink=s.mobile?`sms:${s.mobile}?body=${encodeURIComponent(msg)}`:'#';
   const callLink=s.mobile?`tel:${s.mobile}`:'#';
   const igLink=s.ig?`https://instagram.com/${s.ig}`:'#';
-  return `<div class="action-row">
-    <a class="icon-btn wa" href="${waLink}" target="_blank" title="WhatsApp"><svg viewBox="0 0 24 24"><use href="#icon-wa"/></svg></a>
-    <a class="icon-btn sms" href="${smsLink}" title="SMS"><svg viewBox="0 0 24 24"><use href="#icon-sms"/></svg></a>
-    <a class="icon-btn call" href="${callLink}" title="Call"><svg viewBox="0 0 24 24"><use href="#icon-call"/></svg></a>
-    <a class="icon-btn ig" href="${igLink}" target="_blank" title="Instagram"><svg viewBox="0 0 24 24"><use href="#icon-ig"/></svg></a>
-  </div>`;
+  let html = '<div class="action-row">';
+  if(waNum) html += `<a class="icon-btn wa" href="${waLink}" target="_blank" title="WhatsApp Alert"><svg viewBox="0 0 24 24"><use href="#icon-wa"/></svg></a>`;
+  if(s.mobile) html += `<a class="icon-btn sms" href="${smsLink}" title="SMS"><svg viewBox="0 0 24 24"><use href="#icon-sms"/></svg></a>`;
+  if(s.mobile) html += `<a class="icon-btn call" href="${callLink}" title="Call"><svg viewBox="0 0 24 24"><use href="#icon-call"/></svg></a>`;
+  if(s.ig) html += `<a class="icon-btn ig" href="${igLink}" target="_blank" title="Instagram"><svg viewBox="0 0 24 24"><use href="#icon-ig"/></svg></a>`;
+  html += '</div>';
+  return html;
 }
 
 function renderAll(){
@@ -1300,6 +1285,15 @@ function renderDashboard(){
         <div class="actions">${alertButtons(s)}</div>
       </div>
     </div>`).join('');
+  
+  // Show/hide bulk alert button
+  const bulkBtn = document.getElementById('bulkAlertBtn');
+  if(dueStudents.length > 0){
+    bulkBtn.style.display = 'inline-flex';
+  } else {
+    bulkBtn.style.display = 'none';
+  }
+  
   document.getElementById('dashDueEmpty').style.display=dueStudents.length?'none':'block';
   document.getElementById('dashDueTbl').style.display=dueStudents.length?'':'none';
 }
@@ -1325,7 +1319,10 @@ function renderStudents(){
     <td><div class="action-row">
       <button class="icon-btn edit" onclick="openStudentModal('${s.id}')"><svg viewBox="0 0 24 24"><use href="#icon-edit"/></svg></button>
       <button class="icon-btn del" onclick="deleteStudent('${s.id}')"><svg viewBox="0 0 24 24"><use href="#icon-del"/></svg></button>
+      ${alertButtons(s)}
     </div></td></tr>`).join('');
+  
+  // Mobile cards with ALL action buttons
   const cards = document.getElementById('studentsCards');
   cards.innerHTML = list.map(s=>`<div class="m-card">
     ${photoHTML(s)}
@@ -1337,8 +1334,8 @@ function renderStudents(){
         <span>${formatDateShort(s.admission)}</span>
       </div>
       <div class="actions">
-        <button class="icon-btn edit" onclick="openStudentModal('${s.id}')"><svg viewBox="0 0 24 24"><use href="#icon-edit"/></svg></button>
-        <button class="icon-btn del" onclick="deleteStudent('${s.id}')"><svg viewBox="0 0 24 24"><use href="#icon-del"/></svg></button>
+        <button class="icon-btn edit" onclick="openStudentModal('${s.id}')" title="Edit"><svg viewBox="0 0 24 24"><use href="#icon-edit"/></svg></button>
+        <button class="icon-btn del" onclick="deleteStudent('${s.id}')" title="Delete"><svg viewBox="0 0 24 24"><use href="#icon-del"/></svg></button>
         ${alertButtons(s)}
       </div>
     </div>
@@ -1366,14 +1363,12 @@ function renderAttClassGrid(){
     </div>`;
   }).join('');
 }
-
 function showRoutinePreview(name){
   pendingRoutineClass = name;
   const c = DB.classes[name];
   const count = DB.students.filter(s=>s.class===name).length;
   document.getElementById('routineClassName').textContent = name;
   document.getElementById('routineStudentCount').textContent = `${count} student(s)`;
-  
   const list = document.getElementById('routineScheduleList');
   if(c.days && c.days.length){
     list.innerHTML = c.days.map(d=>{
@@ -1386,14 +1381,11 @@ function showRoutinePreview(name){
   } else {
     list.innerHTML = '<div style="color:var(--muted);font-size:13px;padding:10px;text-align:center">Every day (no routine set)</div>';
   }
-  
   document.getElementById('routineFineDisplay').innerHTML = c.fineEnabled 
     ? `Fine enabled: <b>₹${c.fineAmount}</b> per absent tuition day` 
     : `Fine system: <b style="color:#94a3b8">Disabled</b>`;
-  
   document.getElementById('routineModal').classList.add('show');
 }
-
 function startAttendanceFromRoutine(){
   if(!pendingRoutineClass) return;
   closeModal('routineModal');
@@ -1404,7 +1396,6 @@ function startAttendanceFromRoutine(){
   document.getElementById('attDate').value = todayISO();
   renderAttendanceDay();
 }
-
 function editRoutineClass(){
   if(!pendingRoutineClass) return;
   closeModal('routineModal');
@@ -1412,7 +1403,6 @@ function editRoutineClass(){
     setTimeout(() => showRoutinePreview(savedName), 300);
   });
 }
-
 function backToClassSelect(){
   currentAttClass=null;
   document.getElementById('attStep1').style.display='';
@@ -1420,7 +1410,6 @@ function backToClassSelect(){
   renderAttClassGrid();
 }
 function setAttToday(){ document.getElementById('attDate').value = todayISO(); renderAttendanceDay(); }
-
 function renderAttendanceDay(){
   const dateISO = document.getElementById('attDate').value;
   if(!dateISO || !currentAttClass) return;
@@ -1478,7 +1467,6 @@ function setAtt(sid,date,val){
   renderAttendanceDay();
   renderDashboard();
 }
-
 function openProfile(id, tab='info'){
   currentProfileId = id; profileMonth = new Date();
   renderProfile(); switchProfileTab(tab);
@@ -1649,7 +1637,6 @@ function unmarkPaid(sid,ym){
   s.payments = (s.payments||[]).filter(p=>p.ym!==ym);
   saveToCloud();renderProfilePay();renderAll();toast('↶ Removed');
 }
-
 function renderFees(){
   if(Object.keys(DB.classes).length===0){DB.classes['General']={days:[],times:{},fineEnabled:false,fineAmount:10};saveToCloud();}
   const cls=document.getElementById('feeClass')?.value||'';
@@ -1682,12 +1669,23 @@ function renderFees(){
       </div>
     </div>`;}).join('');
 }
-function sendBulkReminder(){if(!confirm('Send WhatsApp to all with dues?'))return;let count=0;
-  DB.students.forEach(s=>{const months=getDueMonths(s);const fine=getFineTotal(s);const total=months.length*s.fee+fine;
-    if(total<=0)return;const waNum=(s.wa||s.mobile||'').replace(/\D/g,'');
-    if(waNum){setTimeout(()=>window.open(`https://wa.me/${waNum}?text=${encodeURIComponent(feeMessage(s))}`,'_blank'),count*500);count++;}});
-  toast(`📨 ${count} reminder(s)`);}
-
+function sendBulkReminder(){
+  const dueStudents = DB.students.filter(s=>{
+    const months=getDueMonths(s);const fine=getFineTotal(s);
+    return (months.length*s.fee+fine) > 0;
+  });
+  if(dueStudents.length===0){toast('🎉 No pending dues!');return;}
+  if(!confirm(`Send WhatsApp reminder to ${dueStudents.length} student(s) with dues?`))return;
+  let count=0;
+  dueStudents.forEach(s=>{
+    const waNum=(s.wa||s.mobile||'').replace(/\D/g,'');
+    if(waNum){
+      setTimeout(()=>window.open(`https://wa.me/${waNum}?text=${encodeURIComponent(feeMessage(s))}`,'_blank'),count*600);
+      count++;
+    }
+  });
+  toast(`📨 Opening ${count} WhatsApp reminder(s)`);
+}
 function renderClasses(){
   if(Object.keys(DB.classes).length===0){DB.classes['General']={days:[],times:{},fineEnabled:false,fineAmount:10};saveToCloud();}
   const card=document.getElementById('classesCard');
@@ -1713,7 +1711,6 @@ function renderClasses(){
     </div>`;}).join('')
     +(entries.length===0?'<div class="empty-state"><div class="big">🏫</div>Add a class</div>':'');
 }
-
 function backupNow(){
   DB.settings.lastBackup=new Date().toISOString();
   saveToCloud();
@@ -1760,6 +1757,11 @@ async function emailBackup(){
     toast('✅ Emailed!');
   }catch(e){toast('❌ '+(e.text||'Failed'));}
 }
+
+/* Initialize navigation after DOM is ready */
+document.addEventListener('DOMContentLoaded', function(){
+  setupNavigation();
+});
 </script>
 </body>
 </html>
