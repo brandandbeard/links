@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 <title>TuitionPro ✨</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></scriptfunction feeMessage(s){
 <style>
 :root{--bg1:#0f0c29;--bg2:#302b63;--bg3:#24243e;--accent:#7c3aed;--accent2:#ec4899;--accent3:#06b6d4;--glass:rgba(255,255,255,.06);--glass-border:rgba(255,255,255,.12);--text:#f1f5f9;--muted:#94a3b8;--danger:#ef4444;--success:#10b981;--wa:#25D366}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -1303,32 +1303,27 @@ function feeMessage(s){
   const fine = getFineTotal(s);
   const total = months.length * s.fee + fine;
   
- function feeMessage(s){
-  const months = getDueMonths(s);
-  const fine = getFineTotal(s);
-  const total = months.length * s.fee + fine;
-  
   // Universal UPI - প্রতি ইউজারের নিজের UPI ID
   const upi = DB.settings.upi || {};
   const upiId = upi.id || '';
   const upiLink = upiId ? "upi://pay?pa=" + upiId + "&pn=Tuition&am=" + total + "&cu=INR" : '';
   
-  let msg = `নমস্কার 🙏\n\n`;
-  msg += `আপনার সন্তানের টিউশন ফি বাকি আছে।\n\n`;
-  msg += `নাম: ${s.name}\n`;
-  msg += `বাকি টাকা: ₹${total}\n`;
-  msg += `${months.length} মাসের ফি (₹${s.fee} × ${months.length})`;
-  if(fine > 0) msg += ` + Fine}`;
-  msg += `\n\n`;
+  let msg = "নমস্কার \n\n";
+  msg += "আপনার সন্তানের টিউশন ফি বাকি আছে।\n\n";
+  msg += "নাম: " + s.name + "\n";
+  msg += "বাকি টাকা: ₹" + total + "\n";
+  msg += months.length + " মাসের ফি (₹" + s.fee + " × " + months.length + ")";
+  if(fine > 0) msg += " + Fine ₹" + fine;
+  msg += "\n\n";
   
   if(upiLink){
-    msg += `নিচের লিঙ্কে ক্লিক করে পেমেন্ট করুন:\n`;
-    msg += `${upiLink}\n\n`;
+    msg += "নিচের লিঙ্কে ক্লিক করে পেমেন্ট করুন:\n";
+    msg += upiLink + "\n\n";
   }
   
-  msg += `অনুরোধ - দয়া করে টাকাটা দিয়ে দিন।`;
+  msg += "অনুরোধ - দয়া করে টাকাটা দিয়ে দিন।";
   msg += getUPIString(total);
-  msg += `\n\Thank You 🙏`;
+  msg += "\n\nThank You 🙏";
   
   return msg;
 }
