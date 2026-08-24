@@ -1303,15 +1303,33 @@ function feeMessage(s){
   const fine = getFineTotal(s);
   const total = months.length * s.fee + fine;
   
-  let msg = `নমস্কার \n\n`;
+ function feeMessage(s){
+  const months = getDueMonths(s);
+  const fine = getFineTotal(s);
+  const total = months.length * s.fee + fine;
+  
+  // Universal UPI - প্রতি ইউজারের নিজের UPI ID
+  const upi = DB.settings.upi || {};
+  const upiId = upi.id || '';
+  const upiLink = upiId ? "upi://pay?pa=" + upiId + "&pn=Tuition&am=" + total + "&cu=INR" : '';
+  
+  let msg = `নমস্কার 🙏\n\n`;
   msg += `আপনার সন্তানের টিউশন ফি বাকি আছে।\n\n`;
   msg += `নাম: ${s.name}\n`;
   msg += `বাকি টাকা: ₹${total}\n`;
   msg += `${months.length} মাসের ফি (₹${s.fee} × ${months.length})`;
-  if(fine > 0) msg += ` + Fine ₹${fine}`;
-  msg += `\n\nঅনুরোধ - দয়া করে টাকাটা দিয়ে দিন।`;
+  if(fine > 0) msg += ` + Fine}`;
+  msg += `\n\n`;
+  
+  if(upiLink){
+    msg += `নিচের লিঙ্কে ক্লিক করে পেমেন্ট করুন:\n`;
+    msg += `${upiLink}\n\n`;
+  }
+  
+  msg += `অনুরোধ - দয়া করে টাকাটা দিয়ে দিন।`;
   msg += getUPIString(total);
-  msg += `\n\nধন্যবাদ `;
+  msg += `\n\Thank You 🙏`;
+  
   return msg;
 }
 function photoHTML(s,lg=false){
