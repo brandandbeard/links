@@ -28,16 +28,10 @@ body{background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));backgro
 .login-tab{flex:1;padding:10px;border:none;background:transparent;color:var(--muted);cursor:pointer;font:600 13px 'Inter';border-radius:9px;transition:.2s}
 .login-tab.active{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff}
 
-/* ===== UNIFIED APP LAYOUT (Same for Mobile + Laptop) ===== */
-.app{
-  position:relative;
-  z-index:1;
-  min-height:100vh;
-  display:none;
-}
+.app{position:relative;z-index:1;min-height:100vh;display:none}
 .app.show{display:block}
 
-/* ===== UNIFIED SIDEBAR (Fixed position, hidden by default on ALL devices) ===== */
+/* ===== SIDEBAR — NO BLUR, SOLID BACKGROUND ===== */
 .sidebar{
   position:fixed;
   top:0;
@@ -45,27 +39,27 @@ body{background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));backgro
   width:280px;
   max-width:85vw;
   height:100vh;
-  z-index:1000;
+  z-index:1100;
   transition:left .3s cubic-bezier(.4,0,.2,1);
-  background:#0f0c29;
+  background:#0f0c29 !important;
   border-right:1px solid var(--glass-border);
-  padding:70px 18px 18px 18px;
+  padding:80px 18px 18px 18px;
   display:flex;
   flex-direction:column;
   gap:6px;
   overflow-y:auto;
   overflow-x:hidden;
-  box-shadow:4px 0 30px rgba(0,0,0,.5);
+  box-shadow:4px 0 30px rgba(0,0,0,.6);
   -webkit-overflow-scrolling:touch;
 }
 .sidebar.open{left:0}
 
-/* ===== UNIFIED MENU BUTTON (Always visible on ALL devices) ===== */
+/* ===== MENU BUTTON ===== */
 .menu-toggle{
   position:fixed;
   top:14px;
   left:14px;
-  z-index:1001;
+  z-index:1050;
   width:46px;
   height:46px;
   border-radius:12px;
@@ -85,18 +79,17 @@ body{background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));backgro
 }
 .menu-toggle:hover{background:linear-gradient(135deg,#312e81,#4338ca)}
 .menu-toggle:active{transform:scale(.92)}
+.menu-toggle.hide{display:none !important}
 
-/* ===== SIDEBAR OVERLAY (Works on ALL devices) ===== */
+/* ===== OVERLAY ===== */
 .sidebar-overlay{
   position:fixed;
   inset:0;
   background:rgba(0,0,0,.6);
-  backdrop-filter:blur(2px);
-  z-index:999;
+  z-index:1000;
   opacity:0;
   pointer-events:none;
   transition:opacity .3s;
-  -webkit-tap-highlight-color:transparent;
 }
 .sidebar-overlay.show{opacity:1;pointer-events:auto}
 
@@ -105,6 +98,7 @@ body{background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));backgro
 .logo h1{font-family:'Space Grotesk';font-size:20px;font-weight:700;letter-spacing:-.5px;color:#fff}
 .logo h1 span{background:linear-gradient(135deg,var(--accent2),var(--accent3));-webkit-background-clip:text;background-clip:text;color:transparent}
 
+/* ===== NAV BUTTONS — FULLY CLICKABLE ===== */
 .nav-btn{
   display:flex;
   align-items:center;
@@ -124,6 +118,8 @@ body{background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));backgro
   user-select:none;
   touch-action:manipulation;
   min-height:48px;
+  pointer-events:auto !important;
+  z-index:1;
 }
 .nav-btn:hover{background:rgba(255,255,255,.08);color:#fff;border-color:rgba(255,255,255,.08)}
 .nav-btn:active{background:rgba(124,58,237,.3);transform:scale(.97)}
@@ -146,13 +142,7 @@ body{background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));backgro
 .user-box .lbl{font-size:10px;color:#94a3b8;margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px;font-weight:600}
 .user-box .mail{font-size:12px;color:#fff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-bottom:10px;font-weight:500}
 
-/* ===== MAIN CONTENT (Full width, padding top for menu button) ===== */
-.main{
-  padding:clamp(16px,3vw,40px);
-  padding-top:70px;
-  overflow-y:auto;
-  min-height:100vh;
-}
+.main{padding:clamp(16px,3vw,40px);padding-top:70px;overflow-y:auto;min-height:100vh}
 .page-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:clamp(16px,3vw,28px);flex-wrap:wrap;gap:12px}
 .page-head h2{font-family:'Space Grotesk';font-size:clamp(22px,5.5vw,30px);font-weight:700;letter-spacing:-.5px}
 .page-head h2 span{background:linear-gradient(135deg,var(--accent2),var(--accent3));-webkit-background-clip:text;background-clip:text;color:transparent}
@@ -238,7 +228,7 @@ tr:hover td{background:rgba(255,255,255,.03)}
 .icon-btn.del{background:rgba(239,68,68,.15)}
 .icon-btn.del svg{fill:#fca5a5}
 
-.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);display:none;align-items:flex-end;justify-content:center;z-index:1100;padding:0}
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);display:none;align-items:flex-end;justify-content:center;z-index:1200;padding:0}
 .modal-bg.show{display:flex;animation:fade .2s}
 @keyframes fade{from{opacity:0}to{opacity:1}}
 .modal{background:linear-gradient(135deg,#1e1b4b,#312e81);border:1px solid var(--glass-border);border-radius:22px 22px 0 0;padding:clamp(20px,4vw,28px);max-width:720px;width:100%;max-height:92vh;overflow-y:auto;animation:slideUp .3s cubic-bezier(.34,1.2,.64,1)}
@@ -385,7 +375,6 @@ tr:hover td{background:rgba(255,255,255,.03)}
 .routine-day-row .day-time{font-family:'Space Grotesk';font-weight:700;font-size:15px;color:#67e8f9}
 .routine-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
 
-/* ===== MOBILE CARDS (For student lists) ===== */
 .mobile-cards{display:block;padding-bottom:20px}
 .mobile-cards .m-card{
   background:rgba(0,0,0,.25);
@@ -411,7 +400,6 @@ tr:hover td{background:rgba(255,255,255,.03)}
   border-top:1px solid rgba(255,255,255,.08);
 }
 
-/* ===== TABLE vs CARDS based on screen ===== */
 @media (max-width: 768px) {
   .tbl-wrap{display:none}
   .mobile-cards{display:block}
@@ -455,14 +443,10 @@ tr:hover td{background:rgba(255,255,255,.03)}
   </div>
 </div>
 
-<!-- UNIFIED Menu Toggle (visible on ALL devices) -->
-<button class="menu-toggle" id="menuToggle" onclick="toggleSidebar()" style="display:none">☰</button>
-
-<!-- Overlay for sidebar (works on ALL devices) -->
-<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+<button class="menu-toggle" id="menuToggle" style="display:none">☰</button>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
 
 <div class="app" id="mainApp">
-  <!-- UNIFIED Sidebar (Hidden by default, slides from left on ALL devices) -->
   <aside class="sidebar" id="sidebar">
     <div class="logo"><div class="logo-icon">🎓</div><h1>Tuition<span>Pro</span></h1></div>
     <button class="nav-btn active" data-page="dashboard"><span class="ic">📊</span> Dashboard</button>
@@ -752,7 +736,6 @@ tr:hover td{background:rgba(255,255,255,.03)}
 
 <div class="toast" id="toast"></div>
 
-<!-- SVG Icons -->
 <svg style="display:none" xmlns="http://www.w3.org/2000/svg">
   <symbol id="icon-wa" viewBox="0 0 24 24"><path fill="#25D366" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.297-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></symbol>
   <symbol id="icon-ig" viewBox="0 0 24 24"><path fill="#E1306C" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></symbol>
@@ -796,13 +779,35 @@ const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2600);}
 function closeModal(id){document.getElementById(id).classList.remove('show')}
 
-/* ===== UNIFIED SIDEBAR TOGGLE (works same on mobile + laptop) ===== */
+/* ===== SIDEBAR TOGGLE — FIXED ===== */
 function toggleSidebar(){
   const sb = document.getElementById('sidebar');
   const ov = document.getElementById('sidebarOverlay');
+  const mt = document.getElementById('menuToggle');
   sb.classList.toggle('open');
   ov.classList.toggle('show');
+  mt.classList.toggle('hide');
 }
+
+// Menu button click
+document.getElementById('menuToggle').addEventListener('click', function(e){
+  e.preventDefault();
+  e.stopPropagation();
+  toggleSidebar();
+});
+
+// Overlay click closes sidebar
+document.getElementById('sidebarOverlay').addEventListener('click', function(e){
+  e.preventDefault();
+  e.stopPropagation();
+  const sb = document.getElementById('sidebar');
+  const mt = document.getElementById('menuToggle');
+  if(sb.classList.contains('open')){
+    sb.classList.remove('open');
+    document.getElementById('sidebarOverlay').classList.remove('show');
+    mt.classList.remove('hide');
+  }
+});
 
 let authMode = 'login';
 function switchTab(mode){
@@ -830,7 +835,7 @@ auth.onAuthStateChanged(async (user) => {
     currentUser = user;
     document.getElementById('loginScreen').style.display = 'none';
     document.getElementById('mainApp').classList.add('show');
-    document.getElementById('menuToggle').style.display = '';
+    document.getElementById('menuToggle').style.display = 'grid';
     document.getElementById('userEmail').textContent = user.email;
     startCloudSync(); startAutoBackupTimer(); checkMonthlyReminder();
   } else {
@@ -883,32 +888,43 @@ function saveToCloud(){
   }, 500);
 }
 
-/* ===== UNIFIED NAVIGATION (Sidebar buttons only — click closes sidebar & opens page) ===== */
+/* ===== NAVIGATION — FIXED with direct event listeners ===== */
 function setupNavigation(){
-  document.querySelectorAll('.nav-btn').forEach(b=>{
-    b.addEventListener('click', function(e){
+  document.querySelectorAll('.nav-btn').forEach(btn => {
+    // Remove any old listener by cloning
+    const newBtn = btn.cloneNode(true);
+    btn.parentNode.replaceChild(newBtn, btn);
+    
+    newBtn.addEventListener('click', function(e){
       e.preventDefault();
       e.stopPropagation();
-      // Remove active from all, add to clicked
-      document.querySelectorAll('.nav-btn').forEach(x=>x.classList.remove('active'));
-      b.classList.add('active');
+      
+      const pageId = newBtn.getAttribute('data-page');
+      if(!pageId) return;
+      
+      // Remove active from all
+      document.querySelectorAll('.nav-btn').forEach(x => x.classList.remove('active'));
+      newBtn.classList.add('active');
+      
       // Switch page
-      document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
-      const pageId = b.getAttribute('data-page');
+      document.querySelectorAll('.page').forEach(x => x.classList.remove('active'));
       const pageEl = document.getElementById(pageId);
       if(pageEl) pageEl.classList.add('active');
+      
       // Reset attendance flow
-      if(pageId==='attendance'){ 
-        currentAttClass=null; 
-        document.getElementById('attStep1').style.display=''; 
-        document.getElementById('attStep2').style.display='none'; 
+      if(pageId === 'attendance'){ 
+        currentAttClass = null; 
+        document.getElementById('attStep1').style.display = ''; 
+        document.getElementById('attStep2').style.display = 'none'; 
         renderAttClassGrid(); 
       }
-      // ALWAYS close sidebar after navigation (mobile + laptop)
+      
+      // Close sidebar
       document.getElementById('sidebar').classList.remove('open');
       document.getElementById('sidebarOverlay').classList.remove('show');
-      // Scroll to top
-      window.scrollTo({top:0,behavior:'smooth'});
+      document.getElementById('menuToggle').classList.remove('hide');
+      
+      window.scrollTo({top:0, behavior:'smooth'});
       renderAll();
     });
   });
@@ -1697,10 +1713,23 @@ async function emailBackup(){
   }catch(e){toast('❌ '+(e.text||'Failed'));}
 }
 
-/* Initialize navigation after DOM is ready */
+// Initialize navigation after DOM is ready
 document.addEventListener('DOMContentLoaded', function(){
   setupNavigation();
 });
+
+// Re-setup navigation when app shows (for dynamically added buttons)
+const observer = new MutationObserver(function(mutations){
+  mutations.forEach(function(mutation){
+    if(mutation.attributeName === 'class'){
+      const app = document.getElementById('mainApp');
+      if(app && app.classList.contains('show')){
+        setupNavigation();
+      }
+    }
+  });
+});
+observer.observe(document.getElementById('mainApp'), { attributes: true });
 </script>
 </body>
 </html>
