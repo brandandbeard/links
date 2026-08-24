@@ -31,7 +31,6 @@ body{background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));backgro
 .app{position:relative;z-index:1;min-height:100vh;display:none}
 .app.show{display:block}
 
-/* ===== FIXED SIDEBAR - EXACT WORKING PATTERN ===== */
 .sidebar{
   position:fixed;
   top:0;
@@ -53,11 +52,8 @@ body{background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));backgro
   box-shadow:8px 0 40px rgba(0,0,0,.5);
   -webkit-overflow-scrolling:touch;
 }
-.sidebar.open{
-  transform:translateX(0);
-}
+.sidebar.open{transform:translateX(0)}
 
-/* ===== FIXED MENU TOGGLE - EXACT WORKING PATTERN ===== */
 .menu-toggle{
   position:fixed;
   top:14px;
@@ -428,11 +424,9 @@ tr:hover td{background:rgba(255,255,255,.03)}
   </div>
 </div>
 
-<!-- Menu Toggle Button -->
 <button class="menu-toggle" id="menuToggle" style="display:none">☰</button>
 
 <div class="app" id="mainApp">
-  <!-- Sidebar -->
   <aside class="sidebar" id="sidebar">
     <div class="logo"><div class="logo-icon">🎓</div><h1>Tuition<span>Pro</span></h1></div>
     <button class="nav-btn active" data-page="dashboard"><span class="ic">📊</span> Dashboard</button>
@@ -535,31 +529,58 @@ tr:hover td{background:rgba(255,255,255,.03)}
 
     <section class="page" id="backup">
       <div class="page-head"><div><h2>Backup & <span>Settings</span></h2></div></div>
+      
+      <!-- Google Sheet Backup -->
       <div class="card">
-        <h3 style="margin-bottom:12px;font-family:'Space Grotesk';font-size:clamp(15px,4vw,18px)">💾 Manual Backup</h3>
-        <p style="color:var(--muted);font-size:12px;margin-bottom:14px">Download or email your data anytime</p>
-        <div style="display:flex;gap:10px;flex-wrap:wrap">
-          <button class="btn btn-primary" onclick="backupNow()">⬇️ Download</button>
-          <label class="btn btn-ghost" style="cursor:pointer">⬆️ Restore<input type="file" accept=".json" onchange="restoreBackup(event)" style="display:none"/></label>
-          <button class="btn btn-danger" onclick="openWipeModal()">🗑️ Wipe Data</button>
+        <h3 style="margin-bottom:12px;font-family:'Space Grotesk';font-size:clamp(15px,4vw,18px)">📊 Google Sheet Backup</h3>
+        <p style="color:var(--muted);font-size:12px;margin-bottom:14px">তোমার নিজের Google Sheet-এ সরাসরি ব্যাকআপ যাবে</p>
+        <div class="form-grid">
+          <div class="field" style="grid-column:1/-1">
+            <label>Apps Script Web App URL</label>
+            <input id="sheetBackupUrl" placeholder="https://script.google.com/macros/s/.../exec"/>
+          </div>
         </div>
-        <p style="color:var(--muted);font-size:11px;margin-top:12px">Last backup: <b id="lastBackup">Never</b></p>
+        <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap">
+          <button class="btn btn-ghost" onclick="saveSheetUrl()">💾 Save URL</button>
+          <button class="btn btn-primary" onclick="backupToSheet()">📊 Backup to Sheet</button>
+          <button class="btn btn-ghost" onclick="testSheetConnection()">🔗 Test</button>
+          <button class="btn btn-ghost" onclick="openSheetGuide()">📖 কিভাবে সেটআপ করবো?</button>
+        </div>
+        <p id="sheetStatus" style="color:var(--muted);font-size:11px;margin-top:12px"></p>
       </div>
+
+      <!-- Email Backup -->
       <div class="card">
         <h3 style="margin-bottom:6px;font-family:'Space Grotesk';font-size:clamp(15px,4vw,18px)">📧 Email Backup</h3>
         <p style="color:var(--muted);font-size:12px;margin-bottom:14px">Bind email for auto backups</p>
         <div class="form-grid">
-          <div class="field"><label>Your Email</label><input id="emailTo"/></div>
-          <div class="field"><label>Service ID</label><input id="emailService"/></div>
-          <div class="field"><label>Template ID</label><input id="emailTemplate"/></div>
-          <div class="field"><label>Public Key</label><input id="emailKey"/></div>
+          <div class="field"><label>Your Email</label><input id="emailTo" value="brandandbeard@gmail.com"/></div>
+          <div class="field"><label>Service ID</label><input id="emailService" value="service_ebgbpyo"/></div>
+          <div class="field"><label>Template ID</label><input id="emailTemplate" value="template_pc8c1xp"/></div>
+          <div class="field"><label>Public Key</label><input id="emailKey" value="6ZyB3smC300Ho7HEc"/></div>
         </div>
         <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap">
           <button class="btn btn-ghost" onclick="saveEmailSettings()">💾 Save</button>
           <button class="btn btn-ghost" onclick="testEmail()">🧪 Test</button>
           <button class="btn btn-primary" onclick="emailBackup()">📧 Email Backup</button>
+          <button class="btn btn-ghost" onclick="openEmailGuide()">📖 Email Guide</button>
         </div>
       </div>
+
+      <!-- Manual Backup -->
+      <div class="card">
+        <h3 style="margin-bottom:12px;font-family:'Space Grotesk';font-size:clamp(15px,4vw,18px)">💾 Manual Backup</h3>
+        <p style="color:var(--muted);font-size:12px;margin-bottom:14px">Download or restore your data</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn btn-primary" onclick="backupNow()">⬇️ JSON Download</button>
+          <button class="btn btn-success" onclick="backupExcel()">📊 Excel Download</button>
+          <label class="btn btn-ghost" style="cursor:pointer">⬆️ Restore<input type="file" accept=".json" onchange="restoreBackup(event)" style="display:none"/></label>
+          <button class="btn btn-danger" onclick="openWipeModal()">🗑️ Wipe Data</button>
+        </div>
+        <p style="color:var(--muted);font-size:11px;margin-top:12px">Last backup: <b id="lastBackup">Never</b></p>
+      </div>
+
+      <!-- Auto Backup -->
       <div class="card">
         <h3 style="margin-bottom:12px;font-family:'Space Grotesk';font-size:clamp(15px,4vw,18px)">⏰ Auto Backup</h3>
         <div class="backup-schedule">
@@ -582,6 +603,8 @@ tr:hover td{background:rgba(255,255,255,.03)}
           </div>
         </div>
       </div>
+
+      <!-- UPI Settings -->
       <div class="card">
         <h3 style="margin-bottom:12px;font-family:'Space Grotesk';font-size:clamp(15px,4vw,18px)">💳 UPI Settings</h3>
         <div class="form-grid">
@@ -618,7 +641,7 @@ tr:hover td{background:rgba(255,255,255,.03)}
   </main>
 </div>
 
-<!-- Student Modal -->
+<!-- Modals -->
 <div class="modal-bg" id="studentModal">
   <div class="modal">
     <button class="modal-close" onclick="closeModal('studentModal')">×</button>
@@ -643,7 +666,6 @@ tr:hover td{background:rgba(255,255,255,.03)}
   </div>
 </div>
 
-<!-- Class Modal -->
 <div class="modal-bg" id="classModal">
   <div class="modal sm">
     <button class="modal-close" onclick="closeModal('classModal')">×</button>
@@ -654,7 +676,7 @@ tr:hover td{background:rgba(255,255,255,.03)}
       <div class="field"><label>Fine/Day (₹)</label><input type="number" id="clsFine" min="0" value="10"/></div>
     </div>
     <div class="field" style="margin-top:14px">
-      <label>📅 Tuition Days & Time (tap a day to enable, set its time)</label>
+      <label>📅 Tuition Days & Time</label>
       <div class="day-toggle" id="clsDays"></div>
     </div>
     <div class="field" style="margin-top:14px;display:flex;align-items:center;justify-content:space-between">
@@ -668,7 +690,6 @@ tr:hover td{background:rgba(255,255,255,.03)}
   </div>
 </div>
 
-<!-- Routine Preview Modal -->
 <div class="modal-bg" id="routineModal" style="align-items:center">
   <div class="routine-preview">
     <button class="modal-close" onclick="closeModal('routineModal')">×</button>
@@ -689,7 +710,6 @@ tr:hover td{background:rgba(255,255,255,.03)}
   </div>
 </div>
 
-<!-- Profile Modal -->
 <div class="modal-bg" id="profileModal">
   <div class="modal">
     <button class="modal-close" onclick="closeModal('profileModal')">×</button>
@@ -705,7 +725,6 @@ tr:hover td{background:rgba(255,255,255,.03)}
   </div>
 </div>
 
-<!-- Wipe Modal -->
 <div class="modal-bg" id="wipeModal">
   <div class="modal sm">
     <button class="modal-close" onclick="closeModal('wipeModal')">×</button>
@@ -750,7 +769,7 @@ const auth = firebase.auth();
 const db = firebase.firestore();
 
 let currentUser = null;
-let DB = { students:[], classes:{}, settings:{backupFreq:'daily',backupTime:'00:00',lastBackup:null,monthlyReminder:true,email:{},upi:{id:'arho065-1@okicici',phone:'9564385573'}} };
+let DB = { students:[], classes:{}, settings:{backupFreq:'daily',backupTime:'00:00',lastBackup:null,monthlyReminder:true,email:{},upi:{id:'arho065-1@okicici',phone:'9564385573'},sheetBackupUrl:''} };
 let unsubscribe = null, savingTimer = null, isSaving = false;
 let currentAttClass = null, currentProfileId = null, profileMonth = new Date(), autoBackupInterval = null;
 let pendingRoutineClass = null;
@@ -765,7 +784,6 @@ const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2600);}
 function closeModal(id){document.getElementById(id).classList.remove('show')}
 
-/* ===== SIDEBAR TOGGLE - EXACT WORKING PATTERN ===== */
 const sidebarEl = document.getElementById('sidebar');
 const menuToggleBtn = document.getElementById('menuToggle');
 
@@ -774,7 +792,6 @@ menuToggleBtn.addEventListener('click', function(e) {
   sidebarEl.classList.toggle('open');
 });
 
-// Close sidebar when clicking outside
 document.addEventListener('click', function(e) {
   if (window.innerWidth <= 768) {
     if (!sidebarEl.contains(e.target) && !menuToggleBtn.contains(e.target)) {
@@ -830,9 +847,10 @@ async function startCloudSync(){
       const data = doc.data();
       DB.students = data.students || [];
       DB.classes = data.classes || {};
-      DB.settings = Object.assign({backupFreq:'daily',backupTime:'00:00',lastBackup:null,monthlyReminder:true,email:{},upi:{id:'arho065-1@okicici',phone:'9564385573'}}, data.settings||{});
+      DB.settings = Object.assign({backupFreq:'daily',backupTime:'00:00',lastBackup:null,monthlyReminder:true,email:{},upi:{id:'arho065-1@okicici',phone:'9564385573'},sheetBackupUrl:''}, data.settings||{});
       DB.settings.email = DB.settings.email || {};
       DB.settings.upi = DB.settings.upi || {id:'arho065-1@okicici',phone:'9564385573'};
+      DB.settings.sheetBackupUrl = DB.settings.sheetBackupUrl || '';
     } else {
       DB.classes = {'General':{days:[],times:{},fineEnabled:false,fineAmount:10}};
       await userDoc().set({students:[],classes:DB.classes,settings:DB.settings});
@@ -846,10 +864,11 @@ async function startCloudSync(){
       DB.settings = Object.assign(DB.settings, data.settings||{});
       DB.settings.email = DB.settings.email || {};
       DB.settings.upi = DB.settings.upi || {id:'arho065-1@okicici',phone:'9564385573'};
+      DB.settings.sheetBackupUrl = DB.settings.sheetBackupUrl || '';
       renderAll();
     }
   });
-  renderAll(); loadUPISettings(); loadBackupSettings();
+  renderAll(); loadUPISettings(); loadBackupSettings(); loadSheetUrl();
 }
 function saveToCloud(){
   if(!currentUser) return;
@@ -862,40 +881,335 @@ function saveToCloud(){
   }, 500);
 }
 
-/* ===== NAVIGATION - FIXED ===== */
 function setupNavigation(){
   document.querySelectorAll('.nav-btn').forEach(btn => {
     btn.addEventListener('click', function(e){
       e.preventDefault();
       e.stopPropagation();
-      
       const pageId = btn.getAttribute('data-page');
       if(!pageId) return;
-      
-      // Remove active from all
       document.querySelectorAll('.nav-btn').forEach(x => x.classList.remove('active'));
       btn.classList.add('active');
-      
-      // Switch page
       document.querySelectorAll('.page').forEach(x => x.classList.remove('active'));
       const pageEl = document.getElementById(pageId);
       if(pageEl) pageEl.classList.add('active');
-      
-      // Reset attendance flow
       if(pageId === 'attendance'){ 
         currentAttClass = null; 
         document.getElementById('attStep1').style.display = ''; 
         document.getElementById('attStep2').style.display = 'none'; 
         renderAttClassGrid(); 
       }
-      
-      // Close sidebar
       sidebarEl.classList.remove('open');
-      
       window.scrollTo({top:0, behavior:'smooth'});
       renderAll();
     });
   });
+}
+
+/* ===== GOOGLE SHEET BACKUP FUNCTIONS ===== */
+function loadSheetUrl() {
+  const url = DB.settings.sheetBackupUrl || '';
+  const el = document.getElementById('sheetBackupUrl');
+  if(el) el.value = url;
+  const status = document.getElementById('sheetStatus');
+  if(!status) return;
+  if (url) {
+    status.innerHTML = '✅ URL সেভ করা আছে। <b>Backup to Sheet</b> চাপো!';
+    status.style.color = '#6ee7b7';
+  } else {
+    status.innerHTML = '⚠️ আগে Apps Script URL সেভ করো';
+    status.style.color = '#fca5a5';
+  }
+}
+
+function saveSheetUrl() {
+  const url = document.getElementById('sheetBackupUrl').value.trim();
+  if (!url) { toast('⚠️ URL দাও!'); return; }
+  if (!url.includes('script.google.com')) { 
+    toast('⚠️ সঠিক Apps Script URL দাও!'); return; 
+  }
+  DB.settings.sheetBackupUrl = url;
+  saveToCloud();
+  toast('✅ URL সেভ হয়েছে!');
+  loadSheetUrl();
+}
+
+async function testSheetConnection() {
+  const url = DB.settings.sheetBackupUrl;
+  if (!url) { toast('⚠️ আগে URL সেভ করো!'); return; }
+  const status = document.getElementById('sheetStatus');
+  status.innerHTML = '🔗 টেস্ট হচ্ছে...';
+  status.style.color = 'var(--muted)';
+  try {
+    const r = await fetch(url, { method: 'GET' });
+    const text = await r.text();
+    if (text.includes('TuitionPro') || r.ok) {
+      status.innerHTML = '✅ কানেকশন সফল! Sheet প্রস্তুত আছে।';
+      status.style.color = '#6ee7b7';
+      toast('✅ Sheet Connected!');
+    } else {
+      throw new Error('Invalid response');
+    }
+  } catch (e) {
+    status.innerHTML = '❌ কানেকশন ব্যর্থ! Apps Script deploy করেছো?';
+    status.style.color = '#fca5a5';
+    toast('❌ কানেকশন ব্যর্থ');
+  }
+}
+
+async function backupToSheet() {
+  const url = DB.settings.sheetBackupUrl;
+  if (!url) { 
+    toast('⚠️ আগে Apps Script URL সেভ করো!'); 
+    return; 
+  }
+  if (DB.students.length === 0) {
+    toast('⚠️ কোনো স্টুডেন্ট নেই!');
+    return;
+  }
+  const status = document.getElementById('sheetStatus');
+  status.innerHTML = '📤 Sheet-এ পাঠানো হচ্ছে...';
+  status.style.color = 'var(--muted)';
+  const dues = {};
+  DB.students.forEach(s => {
+    const months = getDueMonths(s);
+    const fine = getFineTotal(s);
+    dues[s.id] = { months: months.length, fine: fine, total: months.length * s.fee + fine };
+  });
+  const payload = {
+    students: DB.students.map(s => ({
+      id: s.id,
+      name: s.name,
+      class: s.class,
+      fee: s.fee,
+      admission: s.admission,
+      mobile: s.mobile || '',
+      wa: s.wa || '',
+      ig: s.ig || '',
+      payments: s.payments || []
+    })),
+    classes: DB.classes,
+    dues: dues,
+    backupTime: new Date().toISOString()
+  };
+  try {
+    const r = await fetch(url, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload)
+    });
+    DB.settings.lastBackup = new Date().toISOString();
+    saveToCloud();
+    document.getElementById('lastBackup').textContent = new Date().toLocaleString('en-IN');
+    status.innerHTML = `✅ সফল! <a href="https://docs.google.com/spreadsheets" target="_blank" style="color:#67e8f9;text-decoration:underline">Sheet খুলে দেখো →</a>`;
+    status.style.color = '#6ee7b7';
+    toast('✅ Google Sheet-এ ব্যাকআপ হয়েছে!');
+  } catch (e) {
+    status.innerHTML = '❌ ব্যর্থ! ' + e.message;
+    status.style.color = '#fca5a5';
+    toast('❌ ব্যাকআপ ব্যর্থ');
+  }
+}
+
+function openSheetGuide() {
+  const guideHtml = `
+    <div style="padding:20px;max-width:600px">
+      <h3 style="font-family:'Space Grotesk';margin-bottom:16px">📊 Google Sheet সেটআপ গাইড</h3>
+      <p style="color:var(--muted);font-size:13px;margin-bottom:20px">
+        প্রতিটা ইউজার নিজের Sheet-এ ব্যাকআপ রাখতে পারবে। একবার সেটআপ করলেই হবে!
+      </p>
+      <div style="background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.3);border-radius:12px;padding:16px;margin-bottom:16px">
+        <h4 style="margin-bottom:10px;color:#a78bfa">🎯 Step 1: Google Sheet খোলো</h4>
+        <p style="font-size:13px;color:var(--muted)">
+          <a href="https://sheets.new" target="_blank" style="color:#67e8f9;text-decoration:underline">sheets.new</a> 
+          এ গিয়ে নতুন Sheet খোলো।
+        </p>
+      </div>
+      <div style="background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.3);border-radius:12px;padding:16px;margin-bottom:16px">
+        <h4 style="margin-bottom:10px;color:#a78bfa">⚙️ Step 2: Apps Script যোগ করো</h4>
+        <ol style="font-size:13px;color:var(--muted);padding-left:20px;line-height:1.8">
+          <li>Sheet-এ গিয়ে <b>Extensions → Apps Script</b> ক্লিক করো</li>
+          <li>সব কোড মুছে দাও</li>
+          <li>নিচের বাটনে ক্লিক করে কোড কপি করো</li>
+          <li>Apps Script-এ পেস্ট করো</li>
+          <li>💾 Save বাটন চাপো</li>
+        </ol>
+        <button onclick="copyAppsScript()" class="btn btn-primary btn-sm" style="margin-top:12px">📋 Apps Script কোড কপি করো</button>
+      </div>
+      <div style="background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.3);border-radius:12px;padding:16px;margin-bottom:16px">
+        <h4 style="margin-bottom:10px;color:#a78bfa">🚀 Step 3: Deploy করো</h4>
+        <ol style="font-size:13px;color:var(--muted);padding-left:20px;line-height:1.8">
+          <li><b>Deploy → New Deployment</b> ক্লিক করো</li>
+          <li>⚙️ গিয়ার আইকনে ক্লিক করে <b>Web app</b> সিলেক্ট করো</li>
+          <li><b>Execute as:</b> Me</li>
+          <li><b>Who has access:</b> Anyone</li>
+          <li><b>Deploy</b> বাটন চাপো</li>
+          <li>Permission চাইলে: <b>Advanced → Go to (unsafe) → Allow</b></li>
+          <li>যে URL পাবে সেটা কপি করো</li>
+        </ol>
+      </div>
+      <div style="background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);border-radius:12px;padding:16px">
+        <h4 style="margin-bottom:10px;color:#6ee7b7">✅ Step 4: TuitionPro-তে পেস্ট করো</h4>
+        <p style="font-size:13px;color:var(--muted)">
+          কপি করা URL টা উপরে <b>"Apps Script Web App URL"</b> বক্সে পেস্ট করে <b>Save</b> চাপো।
+          <br><br>
+          এরপর যখন খুশি <b>Backup to Sheet</b> বাটন চাপলেই ডাটা চলে যাবে! 🎉
+        </p>
+      </div>
+      <div style="margin-top:20px;padding:12px;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.3);border-radius:10px">
+        <p style="font-size:12px;color:#fbbf24">
+          🔒 <b>Privacy:</b> তোমার ডাটা শুধু তোমার Sheet-এ যাবে। অন্য কারো সাথে mix হবে না।
+        </p>
+      </div>
+    </div>
+  `;
+  const modal = document.createElement('div');
+  modal.className = 'modal-bg show';
+  modal.style.alignItems = 'center';
+  modal.innerHTML = `
+    <div class="modal" style="max-height:85vh">
+      <button class="modal-close" onclick="this.closest('.modal-bg').remove()">×</button>
+      ${guideHtml}
+    </div>
+  `;
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal) modal.remove();
+  });
+  document.body.appendChild(modal);
+}
+
+function copyAppsScript() {
+  const script = `function doPost(e) {
+  try {
+    const data = JSON.parse(e.postData.contents);
+    const ss = SpreadsheetApp.getActiveSpreadsheet();
+    const studentsSheet = ss.getSheetByName("Sheet1") || ss.getSheets()[0];
+    studentsSheet.clear();
+    studentsSheet.appendRow(['SL', 'Name', 'Class', 'Fee', 'Admission', 'Mobile', 'WhatsApp', 'Instagram', 'Due Months', 'Fine', 'Total Due']);
+    (data.students || []).forEach((s, i) => {
+      const months = data.dues[s.id]?.months || 0;
+      const fine = data.dues[s.id]?.fine || 0;
+      const total = months * s.fee + fine;
+      studentsSheet.appendRow([i + 1, s.name, s.class, s.fee, s.admission, s.mobile || '', s.wa || '', s.ig || '', months, fine, total]);
+    });
+    let classesSheet = ss.getSheetByName("Classes");
+    if (!classesSheet) classesSheet = ss.insertSheet("Classes");
+    classesSheet.clear();
+    classesSheet.appendRow(['Class Name', 'Days', 'Fine Per Day', 'Fine Enabled', 'Students Count']);
+    Object.entries(data.classes || {}).forEach(([name, cfg]) => {
+      const days = (cfg.days || []).map(d => ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][d]).join(', ');
+      const count = (data.students || []).filter(s => s.class === name).length;
+      classesSheet.appendRow([name, days, cfg.fineAmount || 0, cfg.fineEnabled ? 'Yes' : 'No', count]);
+    });
+    let paymentsSheet = ss.getSheetByName("Payments");
+    if (!paymentsSheet) paymentsSheet = ss.insertSheet("Payments");
+    paymentsSheet.clear();
+    paymentsSheet.appendRow(['Student', 'Class', 'Month', 'Paid Date']);
+    (data.students || []).forEach(s => {
+      (s.payments || []).forEach(p => {
+        paymentsSheet.appendRow([s.name, s.class, p.ym, p.date]);
+      });
+    });
+    studentsSheet.getRange(1,1,1,11).setBackground('#f0c040').setFontWeight('bold');
+    classesSheet.getRange(1,1,1,5).setBackground('#a855f7').setFontColor('#fff').setFontWeight('bold');
+    paymentsSheet.getRange(1,1,1,4).setBackground('#10b981').setFontColor('#fff').setFontWeight('bold');
+    studentsSheet.autoResizeColumns(1,11);
+    classesSheet.autoResizeColumns(1,5);
+    paymentsSheet.autoResizeColumns(1,4);
+    return ContentService.createTextOutput(JSON.stringify({status: 'success', students: (data.students||[]).length, url: ss.getUrl()})).setMimeType(ContentService.MimeType.JSON);
+  } catch (err) {
+    return ContentService.createTextOutput(JSON.stringify({status: 'error', message: err.toString()})).setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+function doGet(e) {
+  return ContentService.createTextOutput('✅ TuitionPro Backup Active!');
+}`;
+  navigator.clipboard.writeText(script).then(() => {
+    toast('✅ কোড কপি হয়েছে! Apps Script-এ পেস্ট করো');
+  }).catch(() => {
+    const ta = document.createElement('textarea');
+    ta.value = script;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    ta.remove();
+    toast('✅ কোড কপি হয়েছে!');
+  });
+}
+
+function openEmailGuide() {
+  const guideHtml = `
+    <div style="padding:20px;max-width:600px">
+      <h3 style="font-family:'Space Grotesk';margin-bottom:16px">📧 Email Backup গাইড</h3>
+      <p style="color:var(--muted);font-size:13px;margin-bottom:20px">
+        EmailJS ব্যবহার করে সরাসরি তোমার ইমেইলে ব্যাকআপ পাঠাও
+      </p>
+      <div style="background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.3);border-radius:12px;padding:16px;margin-bottom:16px">
+        <h4 style="margin-bottom:10px;color:#a78bfa">🎯 Step 1: EmailJS Account খোলো</h4>
+        <p style="font-size:13px;color:var(--muted)">
+          <a href="https://emailjs.com" target="_blank" style="color:#67e8f9;text-decoration:underline">emailjs.com</a> 
+          এ গিয়ে free account খোলো।
+        </p>
+      </div>
+      <div style="background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.3);border-radius:12px;padding:16px;margin-bottom:16px">
+        <h4 style="margin-bottom:10px;color:#a78bfa">⚙️ Step 2: Email Service সেটআপ করো</h4>
+        <ol style="font-size:13px;color:var(--muted);padding-left:20px;line-height:1.8">
+          <li>Dashboard-এ গিয়ে <b>Email Services</b> ক্লিক করো</li>
+          <li><b>Add New Service</b> বাটন চাপো</li>
+          <li>Gmail সিলেক্ট করো</li>
+          <li>তোমার Gmail account connect করো</li>
+          <li><b>Service ID</b> কপি করো (যেমন: service_xxxxx)</li>
+        </ol>
+      </div>
+      <div style="background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.3);border-radius:12px;padding:16px;margin-bottom:16px">
+        <h4 style="margin-bottom:10px;color:#a78bfa">📝 Step 3: Email Template তৈরি করো</h4>
+        <ol style="font-size:13px;color:var(--muted);padding-left:20px;line-height:1.8">
+          <li><b>Email Templates</b> ক্লিক করো</li>
+          <li><b>Create New Template</b> বাটন চাপো</li>
+          <li>Subject: <code>{{subject}}</code></li>
+          <li>Body: <code>{{message}}</code></li>
+          <li>To Email: <code>{{to_email}}</code></li>
+          <li>Save করো</li>
+          <li><b>Template ID</b> কপি করো (যেমন: template_xxxxx)</li>
+        </ol>
+      </div>
+      <div style="background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.3);border-radius:12px;padding:16px;margin-bottom:16px">
+        <h4 style="margin-bottom:10px;color:#a78bfa">🔑 Step 4: Public Key নাও</h4>
+        <ol style="font-size:13px;color:var(--muted);padding-left:20px;line-height:1.8">
+          <li><b>Account</b> → <b>API Keys</b> এ যাও</li>
+          <li><b>Public Key</b> কপি করো</li>
+        </ol>
+      </div>
+      <div style="background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);border-radius:12px;padding:16px">
+        <h4 style="margin-bottom:10px;color:#6ee7b7">✅ Step 5: TuitionPro-তে সেভ করো</h4>
+        <p style="font-size:13px;color:var(--muted)">
+          ৪টা ফিল্ড পূরণ করো:
+          <br>• <b>Your Email</b> - তোমার Gmail
+          <br>• <b>Service ID</b> - Step 2 থেকে
+          <br>• <b>Template ID</b> - Step 3 থেকে
+          <br>• <b>Public Key</b> - Step 4 থেকে
+          <br><br>
+          <b>Save</b> চাপো, তারপর <b>Test</b> দিয়ে check করো।
+          <br>সব ঠিক থাকলে <b>Email Backup</b> বাটন চাপো! 🎉
+        </p>
+      </div>
+    </div>
+  `;
+  const modal = document.createElement('div');
+  modal.className = 'modal-bg show';
+  modal.style.alignItems = 'center';
+  modal.innerHTML = `
+    <div class="modal" style="max-height:85vh">
+      <button class="modal-close" onclick="this.closest('.modal-bg').remove()">×</button>
+      ${guideHtml}
+    </div>
+  `;
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal) modal.remove();
+  });
+  document.body.appendChild(modal);
 }
 
 function startAutoBackupTimer(){
@@ -1020,8 +1334,8 @@ function formatTime12(t){
 function openWipeModal(){ document.getElementById('wipeInput').value=''; document.getElementById('wipeConfirmBtn').disabled=true; document.getElementById('wipeModal').classList.add('show'); }
 document.getElementById('wipeInput').addEventListener('input',e=>{ document.getElementById('wipeConfirmBtn').disabled = e.target.value.trim().toLowerCase()!=='wipe out all data'; });
 function doWipe(){
-  const keepEmail=DB.settings.email, keepFreq=DB.settings.backupFreq, keepTime=DB.settings.backupTime, keepUPI=DB.settings.upi, keepMR=DB.settings.monthlyReminder;
-  DB={students:[],classes:{'General':{days:[],times:{},fineEnabled:false,fineAmount:10}},settings:{backupFreq:keepFreq,backupTime:keepTime,lastBackup:null,monthlyReminder:keepMR,email:keepEmail,upi:keepUPI}};
+  const keepEmail=DB.settings.email, keepFreq=DB.settings.backupFreq, keepTime=DB.settings.backupTime, keepUPI=DB.settings.upi, keepMR=DB.settings.monthlyReminder, keepSheet=DB.settings.sheetBackupUrl;
+  DB={students:[],classes:{'General':{days:[],times:{},fineEnabled:false,fineAmount:10}},settings:{backupFreq:keepFreq,backupTime:keepTime,lastBackup:null,monthlyReminder:keepMR,email:keepEmail,upi:keepUPI,sheetBackupUrl:keepSheet}};
   saveToCloud();renderAll();closeModal('wipeModal');toast('🗑️ Wiped');
 }
 
@@ -1180,7 +1494,7 @@ function alertButtons(s){
 }
 
 function renderAll(){
-  renderDashboard();renderStudents();renderAttClassGrid();renderFees();renderClasses();loadEmailSettings();
+  renderDashboard();renderStudents();renderAttClassGrid();renderFees();renderClasses();loadEmailSettings();loadSheetUrl();
   const classes=Object.keys(DB.classes);
   ['classFilter','feeClass'].forEach(id=>{const el=document.getElementById(id);if(!el)return;const cur=el.value;
     el.innerHTML='<option value="">All Classes</option>'+classes.map(c=>`<option ${cur===c?'selected':''}>${c}</option>`).join('');});
@@ -1643,19 +1957,56 @@ function backupNow(){
   document.getElementById('lastBackup').textContent=new Date().toLocaleString('en-IN');
   toast('💾 Downloaded');
 }
+function backupExcel(){
+  if(!DB.students.length){toast('⚠️ কোনো স্টুডেন্ট নেই!');return;}
+  let csv = '\uFEFF';
+  csv += 'SL,Name,Class,Monthly Fee,Admission Date,Mobile,WhatsApp,Instagram,Due Months,Fine,Total Due\n';
+  DB.students.forEach((s,i)=>{
+    const months = getDueMonths(s);
+    const fine = getFineTotal(s);
+    const total = months.length * s.fee + fine;
+    const name = '"'+s.name.replace(/"/g,'""')+'"';
+    const cls = '"'+s.class.replace(/"/g,'""')+'"';
+    const mob = '"'+(s.mobile||'')+'"';
+    const wa = '"'+(s.wa||'')+'"';
+    const ig = '"'+(s.ig||'')+'"';
+    csv += `${i+1},${name},${cls},${s.fee},"${s.admission}",${mob},${wa},${ig},${months.length},${fine},${total}\n`;
+  });
+  csv += '\n\n=== CLASSES ===\n';
+  csv += 'Class Name,Days,Fine Per Day,Fine Enabled\n';
+  Object.entries(DB.classes).forEach(([name,cfg])=>{
+    const days = (cfg.days||[]).map(d=>DAY_NAMES[d]).join(' ');
+    csv += `"${name}","${days}",${cfg.fineAmount||0},${cfg.fineEnabled?'Yes':'No'}\n`;
+  });
+  csv += '\n\n=== PAYMENT HISTORY ===\n';
+  csv += 'Student,Class,Month,Paid Date\n';
+  DB.students.forEach(s=>{
+    (s.payments||[]).forEach(p=>{
+      csv += `"${s.name}","${s.class}","${p.ym}","${p.date}"\n`;
+    });
+  });
+  const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `TuitionPro_Excel_${todayISO()}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+  toast('📊 Excel ডাউনলোড হয়েছে!');
+}
 function restoreBackup(e){
   const f=e.target.files[0];if(!f)return;const r=new FileReader();
   r.onload=ev=>{try{const data=JSON.parse(ev.target.result);if(!data.students)throw 0;
     if(!confirm('Replace all data?'))return;
-    DB=data;DB.settings.email=DB.settings.email||{};DB.settings.upi=DB.settings.upi||{id:'arho065-1@okicici',phone:'9564385573'};
-    saveToCloud();renderAll();loadUPISettings();loadBackupSettings();toast('✅ Restored');
+    DB=data;DB.settings.email=DB.settings.email||{};DB.settings.upi=DB.settings.upi||{id:'arho065-1@okicici',phone:'9564385573'};DB.settings.sheetBackupUrl=DB.settings.sheetBackupUrl||'';
+    saveToCloud();renderAll();loadUPISettings();loadBackupSettings();loadSheetUrl();toast('✅ Restored');
   }catch{toast('❌ Invalid') }};r.readAsText(f);
 }
 function loadEmailSettings(){const c=DB.settings.email||{};
-  document.getElementById('emailTo').value=c.toEmail||'';
-  document.getElementById('emailService').value=c.serviceId||'';
-  document.getElementById('emailTemplate').value=c.templateId||'';
-  document.getElementById('emailKey').value=c.publicKey||'';}
+  document.getElementById('emailTo').value=c.toEmail||'brandandbeard@gmail.com';
+  document.getElementById('emailService').value=c.serviceId||'service_ebgbpyo';
+  document.getElementById('emailTemplate').value=c.templateId||'template_pc8c1xp';
+  document.getElementById('emailKey').value=c.publicKey||'6ZyB3smC300Ho7HEc';}
 function saveEmailSettings(){DB.settings.email={
   toEmail:document.getElementById('emailTo').value.trim(),
   serviceId:document.getElementById('emailService').value.trim(),
@@ -1672,16 +2023,78 @@ async function emailBackup(){
   saveEmailSettings();if(!emailReady()){toast('⚠️ Bind email');return;}
   toast('📧 Preparing...');const c=DB.settings.email;
   const slim=JSON.parse(JSON.stringify(DB));slim.students.forEach(s=>s.photo='');
+  
+  let msg = '═══════════════════════════\n';
+  msg += '📊 TUITION PRO - BACKUP REPORT\n';
+  msg += '═══════════════════════════\n\n';
+  msg += '📅 Date: ' + new Date().toLocaleString('en-IN') + '\n';
+  msg += '👥 Total Students: ' + DB.students.length + '\n';
+  msg += '🏫 Total Classes: ' + Object.keys(DB.classes).length + '\n\n';
+  
+  msg += '━━━━━━━━━━━━━━━━━━━━━━━━━━━\n';
+  msg += '👥 STUDENTS LIST\n';
+  msg += '━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n';
+  
+  DB.students.forEach((s,i)=>{
+    const months = getDueMonths(s);
+    const fine = getFineTotal(s);
+    const total = months.length*s.fee + fine;
+    msg += `${i+1}. ${s.name}\n`;
+    msg += `   📚 Class: ${s.class}\n`;
+    msg += `   💰 Fee: ₹${s.fee}/month\n`;
+    msg += `   📅 Admission: ${s.admission}\n`;
+    msg += `   📱 Mobile: ${s.mobile||'—'}\n`;
+    msg += `   💬 WhatsApp: ${s.wa||'—'}\n`;
+    msg += `   📷 Instagram: ${s.ig||'—'}\n`;
+    msg += `   ⚠️ Due: ₹${total} (${months.length} months${fine?', Fine ₹'+fine:''})\n`;
+    msg += '   ─────────────────────\n';
+  });
+  
+  msg += '\n━━━━━━━━━━━━━━━━━━━━━━━━━━━\n';
+  msg += '🏫 CLASSES & ROUTINE\n';
+  msg += '━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n';
+  Object.entries(DB.classes).forEach(([name,cfg])=>{
+    const count = DB.students.filter(s=>s.class===name).length;
+    const days = (cfg.days||[]).map(d=>DAY_NAMES[d]).join(', ');
+    msg += `📌 ${name}\n`;
+    msg += `   👥 ${count} students\n`;
+    msg += `   📅 Days: ${days||'Every day'}\n`;
+    msg += `   💰 Fine: ₹${cfg.fineAmount||0}/day (${cfg.fineEnabled?'ON':'OFF'})\n\n`;
+  });
+  
+  msg += '\n━━━━━━━━━━━━━━━━━━━━━━━━━━━\n';
+  msg += '⚠️ DUE SUMMARY\n';
+  msg += '━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n';
+  let totalAllDue = 0;
+  DB.students.forEach(s=>{
+    const months = getDueMonths(s);
+    const fine = getFineTotal(s);
+    const total = months.length*s.fee + fine;
+    if(total>0){
+      totalAllDue += total;
+      msg += `• ${s.name} (${s.class}): ₹${total}\n`;
+    }
+  });
+  msg += `\n💰 TOTAL PENDING: ₹${totalAllDue}\n`;
+  
+  msg += '\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━\n';
+  msg += '🔧 RAW DATA (JSON)\n';
+  msg += '━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n';
+  msg += JSON.stringify(slim, null, 2);
+  
   try{
     emailjs.init({publicKey:c.publicKey});
-    await emailjs.send(c.serviceId,c.templateId,{to_email:c.toEmail,subject:'💾 Backup - '+new Date().toLocaleString('en-IN'),message:JSON.stringify(slim,null,2)});
+    await emailjs.send(c.serviceId, c.templateId, {
+      to_email: c.toEmail,
+      subject: '📊 TuitionPro Backup - ' + new Date().toLocaleDateString('en-IN'),
+      message: msg
+    });
     DB.settings.lastBackup=new Date().toISOString();saveToCloud();
     document.getElementById('lastBackup').textContent=new Date().toLocaleString('en-IN');
     toast('✅ Emailed!');
   }catch(e){toast('❌ '+(e.text||'Failed'));}
 }
 
-// Initialize navigation after DOM is ready
 document.addEventListener('DOMContentLoaded', function(){
   setupNavigation();
 });
