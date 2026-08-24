@@ -1129,10 +1129,10 @@ function saveUPISettings(){
 function getUPIString(amount){
   const u = DB.settings.upi || {};
   if(!u.id) return '';
-  let s = `\n\n💳 *UPI-তে টাকা পাঠান:*\n📱 UPI ID: ${u.id}\n`;
-  if(u.phone) s += `📞 ফোন নম্বর: ${u.phone}\n`;
-  if(amount) s += `💰 টাকা: ₹${amount}\n`;
-  s += `\n✅ PhonePe / Google Pay / Paytm\nযেকোনো অ্যাপ থেকে পাঠাতে পারেন।`;
+  let s = `\n\n*UPI-তে টাকা পাঠান:*\n📱 UPI ID: ${u.id}\n`;
+  if(u.phone) s += `📞  Mobile Number (UPI) : ${u.phone}\n`;
+  if(amount) s += `💰 Amount: ₹${amount}\n`;
+  s += `\n PhonePe / Google Pay / Paytm\nযেকোনো অ্যাপ থেকে পাঠাতে পারেন।`;
   return s;
 }
 function getUPIQRLink(amount){
@@ -1303,15 +1303,15 @@ function feeMessage(s){
   const fine = getFineTotal(s);
   const total = months.length * s.fee + fine;
   
-  let msg = `নমস্কার 🙏\n\n`;
+  let msg = `নমস্কার \n\n`;
   msg += `আপনার সন্তানের টিউশন ফি বাকি আছে।\n\n`;
-  msg += `👤 নাম: ${s.name}\n`;
-  msg += `💰 বাকি টাকা: ₹${total}\n`;
-  msg += `📅 ${months.length} মাসের ফি (₹${s.fee} × ${months.length})`;
-  if(fine > 0) msg += ` + জরিমানা ₹${fine}`;
+  msg += `নাম: ${s.name}\n`;
+  msg += `বাকি টাকা: ₹${total}\n`;
+  msg += `${months.length} মাসের ফি (₹${s.fee} × ${months.length})`;
+  if(fine > 0) msg += ` + Fine ₹${fine}`;
   msg += `\n\nঅনুরোধ - দয়া করে টাকাটা দিয়ে দিন।`;
   msg += getUPIString(total);
-  msg += `\n\nধন্যবাদ 🙏`;
+  msg += `\n\nধন্যবাদ `;
   return msg;
 }
 function photoHTML(s,lg=false){
