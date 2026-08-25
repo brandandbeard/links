@@ -666,10 +666,37 @@ async function handleAuth(e){
   const pass = document.getElementById('authPass').value;
   const err = document.getElementById('authError');
   err.style.display='none';
+  
   try{
-    if(authMode==='signup') await auth.createUserWithEmailAndPassword(email, pass);
-    else await auth.signInWithEmailAndPassword(email, pass);
-  }catch(e){ err.textContent = e.message.replace('Firebase: ',''); err.style.display = 'block'; }
+    if(authMode==='signup'){
+      // নতুন account বানাও
+      const cred = await auth.createUserWithEmailAndPassword(email, pass);
+      
+      // Verification email পাঠাও
+      await cred.user.sendEmailVerification();
+      
+      // Logout করো — verify না করা পর্যন্ত ঢুকতে পারবে না
+      await auth.signOut();
+      
+      alert('✅ Account তৈরি হয়েছে!\n\nতোমার email-এ একটা verification link পাঠানো হয়েছে।\n\n📧 ' + email + ' — এই email খুলে link-এ click করো।\n\nClick করার পরে আবার Login করো!');
+      switchTab('login');
+      return;
+    } else {
+      // Login
+      const cred = await auth.signInWithEmailAndPassword(email, pass);
+      
+      // Verify হয়েছে কিনা চেক করো
+      if(!cred.user.emailVerified){
+        await auth.signOut();
+        err.textContent = '⚠️ আগে email verify করো! তোমার inbox (' + email + ') চেক করো।';
+        err.style.display = 'block';
+        return;
+      }
+    }
+  }catch(e){ 
+    err.textContent = e.message.replace('Firebase: ',''); 
+    err.style.display = 'block'; 
+  }
 }
 function doLogout(){ if(confirm('Logout?')) auth.signOut(); }
 
