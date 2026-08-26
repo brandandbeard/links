@@ -69,11 +69,11 @@ body{background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));backgro
 .stat .label{font-size:clamp(10px,2.5vw,12px);color:var(--muted);text-transform:uppercase;letter-spacing:1px;font-weight:600}
 .stat .val{font-family:'Space Grotesk';font-size:clamp(22px,5.5vw,30px);font-weight:700;margin-top:8px}
 .stat .sub{font-size:clamp(10px,2.5vw,12px);color:var(--muted);margin-top:4px}
-.card{background:var(--glass);backdrop-filter:blur(14px);border:1px solid var(--glass-border);border-radius:20px;padding:clamp(16px,3vw,24px);margin-bottom:clamp(14px,3vw,20px)}
+.card{background:var(--glass);backdrop-filter:blur(14px);border:1px solid var(--glass-border);border-radius:20px;padding:clamp(16px,3vw,24px);margin-bottom:clamp(14px,3vw,20px);overflow:visible}
 .form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:clamp(10px,2.5vw,14px)}
 .field label{display:block;font-size:clamp(10px,2.5vw,12px);color:var(--muted);margin-bottom:6px;font-weight:500;text-transform:uppercase;letter-spacing:.5px}
 .field input,.field select,.field textarea{width:100%;padding:clamp(10px,2.5vw,12px) 14px;border-radius:10px;background:rgba(0,0,0,.25);border:1px solid var(--glass-border);color:var(--text);font:400 clamp(13px,3.5vw,14px) 'Inter';transition:.2s;min-height:44px}
-.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(124,58,237,.2)}
+.field input:focus,.field select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(124,58,237,.2)}
 .tbl-wrap{overflow-x:auto;border-radius:14px;margin:0 -4px;padding:0 4px}
 table{width:100%;border-collapse:collapse;font-size:clamp(11px,3vw,13px);min-width:600px}
 th{background:rgba(0,0,0,.3);padding:12px;text-align:left;font-weight:600;font-size:clamp(10px,2.5vw,11px);text-transform:uppercase;letter-spacing:1px;color:var(--muted);border-bottom:1px solid var(--glass-border)}
@@ -111,12 +111,12 @@ tr:hover td{background:rgba(255,255,255,.03)}
 .icon-btn.edit svg{fill:#a78bfa}
 .icon-btn.del{background:rgba(239,68,68,.15)}
 .icon-btn.del svg{fill:#fca5a5}
-.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);display:none;align-items:flex-end;justify-content:center;z-index:1200;padding:0}
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;z-index:2000;padding:20px}
 .modal-bg.show{display:flex;animation:fade .2s}
 @keyframes fade{from{opacity:0}to{opacity:1}}
-.modal{background:linear-gradient(135deg,#1e1b4b,#312e81);border:1px solid var(--glass-border);border-radius:22px 22px 0 0;padding:clamp(20px,4vw,28px);max-width:720px;width:100%;max-height:92vh;overflow-y:auto;animation:slideUp .3s cubic-bezier(.34,1.2,.64,1)}
+.modal{background:linear-gradient(135deg,#1e1b4b,#312e81);border:1px solid var(--glass-border);border-radius:22px;padding:clamp(20px,4vw,28px);max-width:720px;width:100%;max-height:85vh;overflow-y:auto;animation:slideUp .3s cubic-bezier(.34,1.2,.64,1);margin:auto}
 .modal.sm{max-width:480px}
-@keyframes slideUp{from{transform:translateY(100%);opacity:0}to{transform:translateY(0);opacity:1}}
+@keyframes slideUp{from{transform:translateY(50px);opacity:0}to{transform:translateY(0);opacity:1}}
 .modal h3{font-family:'Space Grotesk';margin-bottom:18px;font-size:clamp(18px,4.5vw,22px)}
 .modal-close{float:right;background:none;border:none;color:var(--muted);font-size:28px;cursor:pointer;line-height:1}
 .class-select-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:clamp(10px,2.5vw,14px);margin-bottom:24px}
@@ -236,6 +236,7 @@ tr:hover td{background:rgba(255,255,255,.03)}
 .day-time-input:disabled{opacity:.4;cursor:not-allowed}
 .upi-box{background:linear-gradient(135deg,rgba(16,185,129,.15),rgba(6,182,212,.15));border:1px solid rgba(16,185,129,.3);border-radius:16px;padding:clamp(14px,3vw,20px);margin-top:18px}
 .upi-box h4{font-family:'Space Grotesk';margin-bottom:14px;display:flex;align-items:center;gap:10px;font-size:clamp(15px,4vw,17px)}
+.upi-details{display:grid;gap:clamp(12px,3vw,20px)}
 .upi-row{display:flex;justify-content:space-between;align-items:center;padding:10px;background:rgba(0,0,0,.25);border-radius:10px;margin-bottom:8px;gap:10px;flex-wrap:wrap}
 .upi-row .lbl{font-size:clamp(9px,2.3vw,11px);color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
 .upi-row .val{font-family:'Courier New';font-weight:700;font-size:clamp(11px,3vw,14px);color:#67e8f9;word-break:break-all}
@@ -273,18 +274,24 @@ tr:hover td{background:rgba(255,255,255,.03)}
 .routine-day-row .day-name{font-weight:600;font-size:14px;color:#e9d5ff}
 .routine-day-row .day-time{font-family:'Space Grotesk';font-weight:700;font-size:15px;color:#67e8f9}
 .routine-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
-.mobile-cards{display:block;padding-bottom:20px}
-.mobile-cards .m-card{background:rgba(0,0,0,.25);border:1px solid var(--glass-border);border-radius:14px;padding:14px;margin-bottom:12px;display:flex;gap:12px;align-items:flex-start}
+.mobile-cards{display:block;padding-bottom:20px;overflow:visible}
+.mobile-cards .m-card{background:rgba(0,0,0,.25);border:1px solid var(--glass-border);border-radius:14px;padding:14px;margin-bottom:12px;display:flex;gap:12px;align-items:flex-start;overflow:visible}
 .mobile-cards .m-card .photo{width:50px;height:50px;font-size:18px;flex-shrink:0}
-.mobile-cards .m-card .body{flex:1;min-width:0}
-.mobile-cards .m-card .nm{font-weight:600;font-size:15px;margin-bottom:4px;cursor:pointer}
+.mobile-cards .m-card .body{flex:1;min-width:0;overflow:visible}
+.mobile-cards .m-card .nm{font-weight:600;font-size:15px;margin-bottom:4px;cursor:pointer;word-break:break-word}
 .mobile-cards .m-card .meta{font-size:11px;color:var(--muted);margin-bottom:8px;display:flex;flex-wrap:wrap;gap:6px}
 .mobile-cards .m-card .actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-start;margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.08)}
 @media (max-width: 768px) {
   .tbl-wrap{display:none}
-  .mobile-cards{display:block}
+  .mobile-cards{display:block;padding-bottom:20px;overflow:visible}
   .att-actions{flex:1;min-width:100%;justify-content:stretch}
   .att-btn{flex:1}
+  .card{overflow-x:auto;padding:clamp(12px,3vw,20px)}
+  .mobile-cards .m-card{padding:12px}
+  .mobile-cards .m-card .body{min-width:0}
+  .mobile-cards .m-card .nm{word-break:break-word;overflow:visible}
+  .mobile-cards .m-card .meta{word-break:break-word;overflow:visible}
+  .mobile-cards .m-card .actions{overflow:visible}
 }
 @media (min-width: 769px) {
   .tbl-wrap{display:block}
@@ -405,6 +412,13 @@ tr:hover td{background:rgba(255,255,255,.03)}
       <div class="page-head"><div><h2>Fees & <span>Dues</span></h2><p>Track payments</p></div></div>
       <div class="search-bar">
         <select id="feeClass" onchange="renderFees()"><option value="">All Classes</option></select>
+        <select id="feeSort" onchange="renderFees()">
+          <option value="">Sort: Default</option>
+          <option value="due_high">Sort: Due (High to Low)</option>
+          <option value="due_low">Sort: Due (Low to High)</option>
+          <option value="name">Sort: Name (A-Z)</option>
+          <option value="fee_high">Sort: Fee (High to Low)</option>
+        </select>
         <button class="btn btn-danger" onclick="sendBulkReminder()">📨 Remind All</button>
       </div>
       <div class="card">
@@ -502,11 +516,11 @@ tr:hover td{background:rgba(255,255,255,.03)}
         <p class="desc">Based in Beldanga, Murshidabad. Dedicated to quality education for students.</p>
         <div class="about-contacts">
           <a href="https://t.me/beldanga1" target="_blank" class="about-contact">
-            <svg viewBox="0 0 24 24" fill="#229ED9"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+            <svg viewBox="0 0 24 24" fill="#229ED9"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
             <span><b>Telegram</b><br><small>@beldanga1</small></span>
           </a>
           <a href="https://instagram.com/arifhussain.x" target="_blank" class="about-contact">
-            <svg viewBox="0 0 24 24" fill="#E1306C"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            <svg viewBox="0 0 24 24" fill="#E1306C"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
             <span><b>Instagram</b><br><small>@arifhussain.x</small></span>
           </a>
           <a href="mailto:arho065@gmail.com" class="about-contact">
@@ -563,7 +577,7 @@ tr:hover td{background:rgba(255,255,255,.03)}
       <input id="payNote" placeholder="e.g. Cash, PhonePe, etc."/>
     </div>
     <div id="payPreview" style="margin-top:14px;padding:12px;background:rgba(124,58,237,.08);border:1px solid rgba(124,58,237,.2);border-radius:10px;font-size:12px;color:var(--muted);display:none"></div>
-    <div style="display:flex;gap:10px;margin-top:20px;justify-content:flex-end">
+    <div style="display:flex;gap:10px;margin-top:20px;justify-content:flex-end;flex-wrap:wrap">
       <button class="btn btn-ghost" onclick="closeModal('paymentModal')">Cancel</button>
       <button class="btn btn-primary" onclick="confirmPayment()">💾 Save Payment</button>
     </div>
@@ -656,7 +670,7 @@ tr:hover td{background:rgba(255,255,255,.03)}
 <div class="toast" id="toast"></div>
 <svg style="display:none" xmlns="http://www.w3.org/2000/svg">
   <symbol id="icon-wa" viewBox="0 0 24 24"><path fill="#25D366" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.297-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></symbol>
-  <symbol id="icon-ig" viewBox="0 0 24 24"><path fill="#E1306C" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></symbol>
+  <symbol id="icon-ig" viewBox="0 0 24 24"><path fill="#E1306C" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></symbol>
   <symbol id="icon-sms" viewBox="0 0 24 24"><path fill="#22d3ee" d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 11H7V9h2v2zm4 0h-2V9h2v2zm4 0h-2V9h2v2z"/></symbol>
   <symbol id="icon-call" viewBox="0 0 24 24"><path fill="#a78bfa" d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></symbol>
   <symbol id="icon-edit" viewBox="0 0 24 24"><path fill="#a78bfa" d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a.996.996 0 000-1.41l-2.34-2.34a.996.996 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></symbol>
@@ -666,245 +680,177 @@ tr:hover td{background:rgba(255,255,255,.03)}
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 <script>
-const firebaseConfig = {
-  apiKey: "AIzaSyBQzKo8mH7URnwjH91MfcvD6fPCL9uB-tk",
-  authDomain: "tution-a56bc.firebaseapp.com",
-  projectId: "tution-a56bc",
-  storageBucket: "tution-a56bc.firebasestorage.app",
-  messagingSenderId: "583011986186",
-  appId: "1:583011986186:web:fb09fee46ca26a1e8fa8f3",
-  measurementId: "G-6YP7HT7VEY"
-};
+const firebaseConfig={apiKey:"AIzaSyBQzKo8mH7URnwjH91MfcvD6fPCL9uB-tk",authDomain:"tution-a56bc.firebaseapp.com",projectId:"tution-a56bc",storageBucket:"tution-a56bc.firebasestorage.app",messagingSenderId:"583011986186",appId:"1:583011986186:web:fb09fee46ca26a1e8fa8f3",measurementId:"G-6YP7HT7VEY"};
 firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
-const db = firebase.firestore();
-let currentUser = null;
-let DB = { students:[], classes:{}, settings:{backupFreq:'daily',backupTime:'00:00',lastBackup:null,monthlyReminder:true,email:{},upi:{id:'arho065-1@okicici',phone:'9564385573'},sheetBackupUrl:''} };
-let unsubscribe = null, savingTimer = null, isSaving = false;
-let currentAttClass = null, currentProfileId = null, profileMonth = new Date(), autoBackupInterval = null;
-let pendingRoutineClass = null;
-const DAY_NAMES = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-const DAY_FULL = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-const MONTH_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const auth=firebase.auth();const db=firebase.firestore();
+let currentUser=null;
+let DB={students:[],classes:{},settings:{backupFreq:'daily',backupTime:'00:00',lastBackup:null,monthlyReminder:true,email:{},upi:{id:'arho065-1@okicici',phone:'9564385573'},sheetBackupUrl:''}};
+let unsubscribe=null,savingTimer=null,isSaving=false;
+let currentAttClass=null,currentProfileId=null,profileMonth=new Date(),autoBackupInterval=null;
+let pendingRoutineClass=null;
+const DAY_NAMES=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+const DAY_FULL=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const MONTH_NAMES=['January','February','March','April','May','June','July','August','September','October','November','December'];
+const MONTH_SHORT=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 const todayISO=()=>new Date().toISOString().slice(0,10);
 const todayYM=()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`};
 const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2600);}
 function closeModal(id){document.getElementById(id).classList.remove('show')}
-const sidebarEl = document.getElementById('sidebar');
-const menuToggleBtn = document.getElementById('menuToggle');
-menuToggleBtn.addEventListener('click', function(e) {
-  e.stopPropagation();
-  sidebarEl.classList.toggle('open');
-});
-document.addEventListener('click', function(e) {
-  if (window.innerWidth <= 768) {
-    if (!sidebarEl.contains(e.target) && !menuToggleBtn.contains(e.target)) {
-      sidebarEl.classList.remove('open');
-    }
-  }
-});
-let authMode = 'login';
-function switchTab(mode){
-  authMode = mode;
-  document.querySelectorAll('.login-tab').forEach((t,i)=>t.classList.toggle('active', (mode==='login'?i===0:i===1)));
-  document.getElementById('authBtn').textContent = mode==='login' ? '🔐 Login' : '✨ Create Account';
-  document.getElementById('authError').style.display = 'none';
-}
+const sidebarEl=document.getElementById('sidebar');
+const menuToggleBtn=document.getElementById('menuToggle');
+menuToggleBtn.addEventListener('click',function(e){e.stopPropagation();sidebarEl.classList.toggle('open');});
+document.addEventListener('click',function(e){if(window.innerWidth<=768){if(!sidebarEl.contains(e.target)&&!menuToggleBtn.contains(e.target)){sidebarEl.classList.remove('open');}}});
+let authMode='login';
+function switchTab(mode){authMode=mode;document.querySelectorAll('.login-tab').forEach((t,i)=>t.classList.toggle('active',(mode==='login'?i===0:i===1)));document.getElementById('authBtn').textContent=mode==='login'?'🔐 Login':'✨ Create Account';document.getElementById('authError').style.display='none';}
 async function handleAuth(e){
   e.preventDefault();
-  const email = document.getElementById('authEmail').value.trim();
-  const pass = document.getElementById('authPass').value;
-  const err = document.getElementById('authError');
+  const email=document.getElementById('authEmail').value.trim();
+  const pass=document.getElementById('authPass').value;
+  const err=document.getElementById('authError');
   err.style.display='none';
+  auth.languageCode='bn';
   try{
     if(authMode==='signup'){
-      const cred = await auth.createUserWithEmailAndPassword(email, pass);
+      const cred=await auth.createUserWithEmailAndPassword(email,pass);
       await cred.user.sendEmailVerification();
       await auth.signOut();
-      alert('✅ Account created!\n\nCheck your email (' + email + ') for verification link.\n\n📧 Check Spam folder too!\n\nAfter clicking the link, Login again!');
+      alert('✅ Account created!\n\nCheck your email ('+email+') for verification link.\n\n📧 Check Spam folder too!\n\nAfter clicking the link, Login again!');
       switchTab('login');
       return;
-    } else {
-      const cred = await auth.signInWithEmailAndPassword(email, pass);
+    }else{
+      const cred=await auth.signInWithEmailAndPassword(email,pass);
       if(!cred.user.emailVerified){
         await auth.signOut();
-        err.textContent = '⚠️ Please verify email first! Check ' + email + ' (also Spam folder)';
-        err.style.display = 'block';
+        err.textContent='⚠️ Please verify email first! Check '+email+' (also Spam folder)';
+        err.style.display='block';
         return;
       }
     }
-  }catch(e){ 
-    err.textContent = e.message.replace('Firebase: ',''); 
-    err.style.display = 'block'; 
-  }
+  }catch(e){err.textContent=e.message.replace('Firebase: ','');err.style.display='block';}
 }
-function doLogout(){ if(confirm('Logout?')) auth.signOut(); }
-auth.onAuthStateChanged(async (user) => {
-  document.getElementById('loadingScreen').style.display = 'none';
+function doLogout(){if(confirm('Logout?'))auth.signOut();}
+auth.onAuthStateChanged(async(user)=>{
+  document.getElementById('loadingScreen').style.display='none';
   if(user){
-    currentUser = user;
-    document.getElementById('loginScreen').style.display = 'none';
+    currentUser=user;
+    document.getElementById('loginScreen').style.display='none';
     document.getElementById('mainApp').classList.add('show');
-    document.getElementById('menuToggle').style.display = 'flex';
-    document.getElementById('userEmail').textContent = user.email;
-    startCloudSync(); startAutoBackupTimer(); checkMonthlyReminder();
-  } else {
-    currentUser = null;
-    if(unsubscribe){ unsubscribe(); unsubscribe=null; }
-    if(autoBackupInterval){ clearInterval(autoBackupInterval); autoBackupInterval=null; }
-    document.getElementById('loginScreen').style.display = 'grid';
+    document.getElementById('menuToggle').style.display='flex';
+    document.getElementById('userEmail').textContent=user.email;
+    startCloudSync();startAutoBackupTimer();checkMonthlyReminder();
+  }else{
+    currentUser=null;
+    if(unsubscribe){unsubscribe();unsubscribe=null;}
+    if(autoBackupInterval){clearInterval(autoBackupInterval);autoBackupInterval=null;}
+    document.getElementById('loginScreen').style.display='grid';
     document.getElementById('mainApp').classList.remove('show');
-    document.getElementById('menuToggle').style.display = 'none';
+    document.getElementById('menuToggle').style.display='none';
   }
 });
-function userDoc(){ return db.collection('users').doc(currentUser.uid); }
+function userDoc(){return db.collection('users').doc(currentUser.uid);}
 async function startCloudSync(){
   try{
-    const doc = await userDoc().get();
+    const doc=await userDoc().get();
     if(doc.exists){
-      const data = doc.data();
-      DB.students = data.students || [];
-      DB.classes = data.classes || {};
-      DB.settings = Object.assign({backupFreq:'daily',backupTime:'00:00',lastBackup:null,monthlyReminder:true,email:{},upi:{id:'arho065-1@okicici',phone:'9564385573'},sheetBackupUrl:''}, data.settings||{});
-      DB.settings.email = DB.settings.email || {};
-      DB.settings.upi = DB.settings.upi || {id:'arho065-1@okicici',phone:'9564385573'};
-      DB.settings.sheetBackupUrl = DB.settings.sheetBackupUrl || '';
-    } else {
-      DB.classes = {'General':{days:[],times:{},fineEnabled:false,fineAmount:10}};
+      const data=doc.data();
+      DB.students=data.students||[];DB.classes=data.classes||{};
+      DB.settings=Object.assign({backupFreq:'daily',backupTime:'00:00',lastBackup:null,monthlyReminder:true,email:{},upi:{id:'arho065-1@okicici',phone:'9564385573'},sheetBackupUrl:''},data.settings||{});
+      DB.settings.email=DB.settings.email||{};DB.settings.upi=DB.settings.upi||{id:'arho065-1@okicici',phone:'9564385573'};DB.settings.sheetBackupUrl=DB.settings.sheetBackupUrl||'';
+    }else{
+      DB.classes={'General':{days:[],times:{},fineEnabled:false,fineAmount:10}};
       await userDoc().set({students:[],classes:DB.classes,settings:DB.settings});
     }
-  }catch(e){ console.error(e); }
-  unsubscribe = userDoc().onSnapshot((doc) => {
-    if(doc.exists && !isSaving){
-      const data = doc.data();
-      DB.students = data.students || [];
-      DB.classes = data.classes || DB.classes;
-      DB.settings = Object.assign(DB.settings, data.settings||{});
-      DB.settings.email = DB.settings.email || {};
-      DB.settings.upi = DB.settings.upi || {id:'arho065-1@okicici',phone:'9564385573'};
-      DB.settings.sheetBackupUrl = DB.settings.sheetBackupUrl || '';
+  }catch(e){console.error(e);}
+  unsubscribe=userDoc().onSnapshot((doc)=>{
+    if(doc.exists&&!isSaving){
+      const data=doc.data();
+      DB.students=data.students||[];DB.classes=data.classes||DB.classes;
+      DB.settings=Object.assign(DB.settings,data.settings||{});
+      DB.settings.email=DB.settings.email||{};DB.settings.upi=DB.settings.upi||{id:'arho065-1@okicici',phone:'9564385573'};DB.settings.sheetBackupUrl=DB.settings.sheetBackupUrl||'';
       renderAll();
     }
   });
-  renderAll(); loadUPISettings(); loadBackupSettings(); loadSheetUrl();
+  renderAll();loadUPISettings();loadBackupSettings();loadSheetUrl();
 }
 function saveToCloud(){
-  if(!currentUser) return;
+  if(!currentUser)return;
   clearTimeout(savingTimer);
-  savingTimer = setTimeout(async () => {
-    isSaving = true;
-    try{ await userDoc().set({students:DB.students,classes:DB.classes,settings:DB.settings}); }
-    catch(e){ toast('⚠️ Cloud save failed'); }
-    isSaving = false;
-  }, 500);
+  savingTimer=setTimeout(async()=>{
+    isSaving=true;
+    try{await userDoc().set({students:DB.students,classes:DB.classes,settings:DB.settings});}
+    catch(e){toast('⚠️ Cloud save failed');}
+    isSaving=false;
+  },500);
 }
 function setupNavigation(){
-  document.querySelectorAll('.nav-btn').forEach(btn => {
-    btn.addEventListener('click', function(e){
-      e.preventDefault();
-      e.stopPropagation();
-      const pageId = btn.getAttribute('data-page');
-      if(!pageId) return;
-      document.querySelectorAll('.nav-btn').forEach(x => x.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(btn=>{
+    btn.addEventListener('click',function(e){
+      e.preventDefault();e.stopPropagation();
+      const pageId=btn.getAttribute('data-page');
+      if(!pageId)return;
+      document.querySelectorAll('.nav-btn').forEach(x=>x.classList.remove('active'));
       btn.classList.add('active');
-      document.querySelectorAll('.page').forEach(x => x.classList.remove('active'));
-      const pageEl = document.getElementById(pageId);
-      if(pageEl) pageEl.classList.add('active');
-      if(pageId === 'attendance'){ 
-        currentAttClass = null; 
-        document.getElementById('attStep1').style.display = ''; 
-        document.getElementById('attStep2').style.display = 'none'; 
-        renderAttClassGrid(); 
-      }
+      document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+      const pageEl=document.getElementById(pageId);
+      if(pageEl)pageEl.classList.add('active');
+      if(pageId==='attendance'){currentAttClass=null;document.getElementById('attStep1').style.display='';document.getElementById('attStep2').style.display='none';renderAttClassGrid();}
       sidebarEl.classList.remove('open');
-      window.scrollTo({top:0, behavior:'smooth'});
+      window.scrollTo({top:0,behavior:'smooth'});
       renderAll();
     });
   });
 }
 function loadSheetUrl(){
-  const url = DB.settings.sheetBackupUrl || '';
-  const el = document.getElementById('sheetBackupUrl');
-  if(el) el.value = url;
-  const status = document.getElementById('sheetStatus');
-  if(!status) return;
+  const url=DB.settings.sheetBackupUrl||'';
+  const el=document.getElementById('sheetBackupUrl');if(el)el.value=url;
+  const status=document.getElementById('sheetStatus');if(!status)return;
   if(url){status.innerHTML='✅ URL saved. Click <b>Backup to Sheet</b>!';status.style.color='#6ee7b7';}
   else{status.innerHTML='⚠️ Please save your Apps Script URL first';status.style.color='#fca5a5';}
 }
 function saveSheetUrl(){
-  const url = document.getElementById('sheetBackupUrl').value.trim();
+  const url=document.getElementById('sheetBackupUrl').value.trim();
   if(!url){toast('⚠️ Please enter URL!');return;}
   if(!url.includes('script.google.com')){toast('⚠️ Please enter a valid Apps Script URL!');return;}
-  DB.settings.sheetBackupUrl = url;
-  saveToCloud();
-  toast('✅ URL saved!');
-  loadSheetUrl();
+  DB.settings.sheetBackupUrl=url;saveToCloud();toast('✅ URL saved!');loadSheetUrl();
 }
 async function testSheetConnection(){
-  const url = DB.settings.sheetBackupUrl;
+  const url=DB.settings.sheetBackupUrl;
   if(!url){toast('⚠️ Save URL first!');return;}
-  const status = document.getElementById('sheetStatus');
+  const status=document.getElementById('sheetStatus');
   status.innerHTML='🔗 Testing connection...';status.style.color='var(--muted)';
   try{
-    const r = await fetch(url,{method:'GET'});
-    const text = await r.text();
-    if(text.includes('TuitionPro')||r.ok){
-      status.innerHTML='✅ Connection successful! Sheet is ready.';status.style.color='#6ee7b7';
-      toast('✅ Sheet Connected!');
-    }else{throw new Error('Invalid response');}
-  }catch(e){
-    status.innerHTML='❌ Connection failed! Did you deploy Apps Script?';status.style.color='#fca5a5';
-    toast('❌ Connection failed');
-  }
+    const r=await fetch(url,{method:'GET'});const text=await r.text();
+    if(text.includes('TuitionPro')||r.ok){status.innerHTML='✅ Connection successful! Sheet is ready.';status.style.color='#6ee7b7';toast('✅ Sheet Connected!');}
+    else{throw new Error('Invalid response');}
+  }catch(e){status.innerHTML='❌ Connection failed! Did you deploy Apps Script?';status.style.color='#fca5a5';toast('❌ Connection failed');}
 }
 async function backupToSheet(){
-  const url = DB.settings.sheetBackupUrl;
+  const url=DB.settings.sheetBackupUrl;
   if(!url){toast('⚠️ Save Apps Script URL first!');return;}
   if(DB.students.length===0){toast('⚠️ No students yet!');return;}
-  const status = document.getElementById('sheetStatus');
+  const status=document.getElementById('sheetStatus');
   status.innerHTML='📤 Sending to Sheet...';status.style.color='var(--muted)';
-  const dues = {};
-  DB.students.forEach(s=>{
-    const ps = getPaymentStatus(s);
-    dues[s.id]={due:ps.totalDue,advance:ps.totalAdvance,totalPaid:ps.totalPaid};
-  });
-  const payload={
-    students:DB.students.map(s=>({id:s.id,name:s.name,class:s.class,fee:s.fee,admission:s.admission,mobile:s.mobile||'',wa:s.wa||'',ig:s.ig||'',payments:s.payments||[]})),
-    classes:DB.classes,dues:dues,backupTime:new Date().toISOString()
-  };
+  const dues={};
+  DB.students.forEach(s=>{const ps=getPaymentStatus(s);dues[s.id]={due:ps.totalDue,advance:ps.totalAdvance,totalPaid:ps.totalPaid};});
+  const payload={students:DB.students.map(s=>({id:s.id,name:s.name,class:s.class,fee:s.fee,admission:s.admission,mobile:s.mobile||'',wa:s.wa||'',ig:s.ig||'',payments:s.payments||[]})),classes:DB.classes,dues:dues,backupTime:new Date().toISOString()};
   try{
     await fetch(url,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)});
-    DB.settings.lastBackup = new Date().toISOString();
-    saveToCloud();
-    document.getElementById('lastBackup').textContent = new Date().toLocaleString('en-IN');
+    DB.settings.lastBackup=new Date().toISOString();saveToCloud();
+    document.getElementById('lastBackup').textContent=new Date().toLocaleString('en-IN');
     status.innerHTML='✅ Success! <a href="https://docs.google.com/spreadsheets" target="_blank" style="color:#67e8f9;text-decoration:underline">Open Sheet →</a>';
-    status.style.color='#6ee7b7';
-    toast('✅ Backup sent to Google Sheet!');
-  }catch(e){
-    status.innerHTML='❌ Failed! '+e.message;status.style.color='#fca5a5';
-    toast('❌ Backup failed');
-  }
+    status.style.color='#6ee7b7';toast('✅ Backup sent to Google Sheet!');
+  }catch(e){status.innerHTML='❌ Failed! '+e.message;status.style.color='#fca5a5';toast('❌ Backup failed');}
 }
 function openSheetGuide(){
-  const guideHtml=`<div style="padding:20px;max-width:600px">
-    <h3 style="font-family:'Space Grotesk';margin-bottom:16px">📊 Google Sheet Setup Guide</h3>
-    <p style="color:var(--muted);font-size:13px;margin-bottom:20px">One-time setup!</p>
-    <div style="background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);border-radius:12px;padding:16px">
-      <h4 style="margin-bottom:10px;color:#6ee7b7">📖 Follow steps in the guide</h4>
-    </div></div>`;
+  const guideHtml=`<div style="padding:20px;max-width:600px"><h3 style="font-family:'Space Grotesk';margin-bottom:16px">📊 Google Sheet Setup Guide</h3><p style="color:var(--muted);font-size:13px;margin-bottom:20px">One-time setup! Follow the guide to connect your Google Sheet.</p></div>`;
   const modal=document.createElement('div');modal.className='modal-bg show';modal.style.alignItems='center';
   modal.innerHTML=`<div class="modal" style="max-height:85vh"><button class="modal-close" onclick="this.closest('.modal-bg').remove()">×</button>${guideHtml}</div>`;
   modal.addEventListener('click',function(e){if(e.target===modal)modal.remove();});
   document.body.appendChild(modal);
 }
 function openEmailGuide(){
-  const guideHtml=`<div style="padding:20px;max-width:600px">
-    <h3 style="font-family:'Space Grotesk';margin-bottom:16px">📧 Email Backup Guide</h3>
-    <div style="background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);border-radius:12px;padding:16px">
-      <h4 style="margin-bottom:10px;color:#6ee7b7">✅ Fill all 4 fields, Save, Test, then Email Backup!</h4>
-    </div></div>`;
+  const guideHtml=`<div style="padding:20px;max-width:600px"><h3 style="font-family:'Space Grotesk';margin-bottom:16px">📧 Email Backup Guide</h3><div style="background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);border-radius:12px;padding:16px"><h4 style="margin-bottom:10px;color:#6ee7b7">✅ Fill all 4 fields, Save, Test, then Email Backup!</h4></div></div>`;
   const modal=document.createElement('div');modal.className='modal-bg show';modal.style.alignItems='center';
   modal.innerHTML=`<div class="modal" style="max-height:85vh"><button class="modal-close" onclick="this.closest('.modal-bg').remove()">×</button>${guideHtml}</div>`;
   modal.addEventListener('click',function(e){if(e.target===modal)modal.remove();});
@@ -920,9 +866,7 @@ function startAutoBackupTimer(){
     const last=DB.settings.lastBackup?new Date(DB.settings.lastBackup):null;
     if(now.getHours()===hh&&now.getMinutes()===mm){
       if(last){const diffH=(now-last)/(1000*60*60);
-        if(freq==='daily'&&diffH<23)return;
-        if(freq==='weekly'&&diffH<7*24-1)return;
-        if(freq==='monthly'&&diffH<30*24-1)return;}
+        if(freq==='daily'&&diffH<23)return;if(freq==='weekly'&&diffH<7*24-1)return;if(freq==='monthly'&&diffH<30*24-1)return;}
       doAutoBackup();}
   },60000);
 }
@@ -1050,98 +994,43 @@ function saveClass(){
   if(afterClassSaveCallback){afterClassSaveCallback(name);afterClassSaveCallback=null;}
 }
 function deleteClass(name){if(!confirm(`Delete "${name}"?`))return;delete DB.classes[name];saveToCloud();renderAll();}
-
-// ===== ENHANCED PAYMENT SYSTEM =====
 function getAllMonths(stu){
   const adm=new Date(stu.admission);const now=new Date();let months=[];
   let cur=new Date(adm.getFullYear(),adm.getMonth(),1);const end=new Date(now.getFullYear(),now.getMonth(),1);
   while(cur<=end){
     const ym=`${cur.getFullYear()}-${String(cur.getMonth()+1).padStart(2,'0')}`;
-    months.push({ym:ym,m:cur.getMonth(),y:cur.getFullYear(),
-      label:`${MONTH_SHORT[cur.getMonth()]} ${cur.getFullYear()}`,
-      fullLabel:`${MONTH_NAMES[cur.getMonth()]} ${cur.getFullYear()}`});
+    months.push({ym:ym,m:cur.getMonth(),y:cur.getFullYear(),label:`${MONTH_SHORT[cur.getMonth()]} ${cur.getFullYear()}`,fullLabel:`${MONTH_NAMES[cur.getMonth()]} ${cur.getFullYear()}`});
     cur.setMonth(cur.getMonth()+1);}
   return months;
 }
-
-// Build a map of which payment covers which month
 function buildPaymentDistribution(stu){
-  const months = getAllMonths(stu);
-  const payments = (stu.payments || []).slice().sort((a,b) => new Date(a.date) - new Date(b.date));
-  
-  // For each month, track: how much paid, which payments contributed, with dates
-  const monthDetails = months.map(mo => ({
-    ym: mo.ym, m: mo.m, y: mo.y, label: mo.label, fullLabel: mo.fullLabel,
-    fee: stu.fee, paid: 0, due: stu.fee, status: 'unpaid',
-    contributions: [] // [{amount, date, payId, note}]
-  }));
-  
-  let leftover = 0; // advance from previous payments
-  let advance = 0;
-  
-  payments.forEach(pay => {
-    let remaining = pay.amount + leftover;
-    leftover = 0;
-    
-    // Apply to months from oldest unpaid/partial
-    for(let i = 0; i < monthDetails.length && remaining > 0; i++){
-      const mo = monthDetails[i];
-      if(mo.paid >= mo.fee) continue; // already fully paid
-      const needed = mo.fee - mo.paid;
-      const applied = Math.min(needed, remaining);
-      mo.paid += applied;
-      mo.contributions.push({
-        amount: applied,
-        date: pay.date,
-        payId: pay.id,
-        note: pay.note || ''
-      });
-      remaining -= applied;
+  const months=getAllMonths(stu);
+  const payments=(stu.payments||[]).slice().sort((a,b)=>new Date(a.date)-new Date(b.date));
+  const monthDetails=months.map(mo=>({ym:mo.ym,m:mo.m,y:mo.y,label:mo.label,fullLabel:mo.fullLabel,fee:stu.fee,paid:0,due:stu.fee,status:'unpaid',contributions:[]}));
+  let leftover=0;let advance=0;
+  payments.forEach(pay=>{
+    let remaining=pay.amount+leftover;leftover=0;
+    for(let i=0;i<monthDetails.length&&remaining>0;i++){
+      const mo=monthDetails[i];
+      if(mo.paid>=mo.fee)continue;
+      const needed=mo.fee-mo.paid;
+      const applied=Math.min(needed,remaining);
+      mo.paid+=applied;
+      mo.contributions.push({amount:applied,date:pay.date,payId:pay.id,note:pay.note||''});
+      remaining-=applied;
     }
-    
-    // If still remaining, it's advance
-    if(remaining > 0){
-      leftover = remaining;
-    }
+    if(remaining>0){leftover=remaining;}
   });
-  
-  // Update status for each month
-  monthDetails.forEach(mo => {
-    mo.due = mo.fee - mo.paid;
-    if(mo.paid >= mo.fee) mo.status = 'paid';
-    else if(mo.paid > 0) mo.status = 'partial';
-    else mo.status = 'unpaid';
-  });
-  
-  const totalPaid = payments.reduce((s,p) => s + (p.amount || 0), 0);
-  const totalFeeDue = months.length * stu.fee;
-  advance = Math.max(0, leftover);
-  const feeDue = Math.max(0, totalFeeDue - totalPaid);
-  const fine = getFineTotal(stu);
-  
-  return {
-    months: monthDetails,
-    totalFeeDue,
-    totalPaid,
-    feeDue,
-    fine,
-    totalDue: feeDue + fine,
-    totalAdvance: advance,
-    paidMonths: monthDetails.filter(m => m.status === 'paid').length,
-    partialMonths: monthDetails.filter(m => m.status === 'partial').length,
-    unpaidMonths: monthDetails.filter(m => m.status === 'unpaid').length
-  };
+  monthDetails.forEach(mo=>{mo.due=mo.fee-mo.paid;if(mo.paid>=mo.fee)mo.status='paid';else if(mo.paid>0)mo.status='partial';else mo.status='unpaid';});
+  const totalPaid=payments.reduce((s,p)=>s+(p.amount||0),0);
+  const totalFeeDue=months.length*stu.fee;
+  advance=Math.max(0,leftover);
+  const feeDue=Math.max(0,totalFeeDue-totalPaid);
+  const fine=getFineTotal(stu);
+  return{months:monthDetails,totalFeeDue,totalPaid,feeDue,fine,totalDue:feeDue+fine,totalAdvance:advance,paidMonths:monthDetails.filter(m=>m.status==='paid').length,partialMonths:monthDetails.filter(m=>m.status==='partial').length,unpaidMonths:monthDetails.filter(m=>m.status==='unpaid').length};
 }
-
-function getPaymentStatus(stu){
-  return buildPaymentDistribution(stu);
-}
-
-function getDueMonths(stu){
-  const ps = getPaymentStatus(stu);
-  return ps.months.filter(m => m.status !== 'paid').map(m => m.ym);
-}
-
+function getPaymentStatus(stu){return buildPaymentDistribution(stu);}
+function getDueMonths(stu){const ps=getPaymentStatus(stu);return ps.months.filter(m=>m.status!=='paid').map(m=>m.ym);}
 function getFineTotal(stu){
   const cls=DB.classes[stu.class];if(!cls||!cls.fineEnabled)return 0;
   const now=new Date();const ym=todayYM();let absent=0;
@@ -1151,274 +1040,150 @@ function getFineTotal(stu){
   }
   return absent*cls.fineAmount;
 }
-
-// ===== PAYMENT MODAL =====
 function openPaymentModal(sid){
-  const s = DB.students.find(x=>x.id===sid);
-  if(!s) return;
-  document.getElementById('payStuId').value = sid;
-  document.getElementById('payStuName').textContent = s.name;
-  const ps = getPaymentStatus(s);
-  let sub = `₹${s.fee}/mo • ${ps.months.length} months • `;
-  if(ps.totalDue > 0) sub += `Due: ₹${ps.totalDue}`;
-  else if(ps.totalAdvance > 0) sub += `Advance: ₹${ps.totalAdvance}`;
-  else sub += `All Clear ✅`;
-  document.getElementById('payStuSub').textContent = sub;
-  document.getElementById('payAmount').value = '';
-  document.getElementById('payDate').value = todayISO();
-  document.getElementById('payNote').value = '';
-  document.getElementById('payPreview').style.display = 'none';
+  const s=DB.students.find(x=>x.id===sid);if(!s)return;
+  document.getElementById('payStuId').value=sid;
+  document.getElementById('payStuName').textContent=s.name;
+  const ps=getPaymentStatus(s);
+  let sub=`₹${s.fee}/mo • ${ps.months.length} months • `;
+  if(ps.totalDue>0)sub+=`Due: ₹${ps.totalDue}`;
+  else if(ps.totalAdvance>0)sub+=`Advance: ₹${ps.totalAdvance}`;
+  else sub+=`All Clear ✅`;
+  document.getElementById('payStuSub').textContent=sub;
+  document.getElementById('payAmount').value='';
+  document.getElementById('payDate').value=todayISO();
+  document.getElementById('payNote').value='';
+  document.getElementById('payPreview').style.display='none';
   document.getElementById('paymentModal').classList.add('show');
-  
-  // Live preview
-  document.getElementById('payAmount').oninput = function(){
-    const amt = +this.value || 0;
-    const preview = document.getElementById('payPreview');
-    if(amt <= 0){ preview.style.display = 'none'; return; }
-    
-    const simStu = JSON.parse(JSON.stringify(s));
-    if(!simStu.payments) simStu.payments = [];
-    simStu.payments.push({id:uid(), amount:amt, date:todayISO(), note:''});
-    const ps2 = getPaymentStatus(simStu);
-    
-    let html = '<b>💡 Payment Preview:</b><br>';
-    const newlyPaid = ps2.months.filter(m => m.status === 'paid' && 
-      !ps.months.find(pm => pm.ym === m.ym && pm.status === 'paid'));
-    const newlyPartial = ps2.months.filter(m => m.status === 'partial' && 
-      ps.months.find(pm => pm.ym === m.ym && pm.paid !== m.paid));
-    
-    if(newlyPaid.length > 0){
-      html += `✅ Fully paid: ${newlyPaid.map(m => m.label).join(', ')}<br>`;
-    }
-    if(newlyPartial.length > 0){
-      newlyPartial.forEach(m => {
-        const old = ps.months.find(pm => pm.ym === m.ym);
-        const added = m.paid - (old ? old.paid : 0);
-        html += `⚠️ ${m.label}: +₹${added} (now ₹${m.paid}/₹${m.fee})<br>`;
-      });
-    }
-    if(ps2.totalAdvance > 0){
-      html += `💰 <b>Advance balance: ₹${ps2.totalAdvance}</b>`;
-    }
-    preview.innerHTML = html;
-    preview.style.display = 'block';
+  setTimeout(()=>{const modal=document.querySelector('#paymentModal .modal');if(modal)modal.scrollTop=0;},100);
+  document.getElementById('payAmount').oninput=function(){
+    const amt=+this.value||0;const preview=document.getElementById('payPreview');
+    if(amt<=0){preview.style.display='none';return;}
+    const simStu=JSON.parse(JSON.stringify(s));
+    if(!simStu.payments)simStu.payments=[];
+    simStu.payments.push({id:uid(),amount:amt,date:todayISO(),note:''});
+    const ps2=getPaymentStatus(simStu);
+    let html='<b>💡 Payment Preview:</b><br>';
+    const newlyPaid=ps2.months.filter(m=>m.status==='paid'&&!ps.months.find(pm=>pm.ym===m.ym&&pm.status==='paid'));
+    const newlyPartial=ps2.months.filter(m=>m.status==='partial'&&ps.months.find(pm=>pm.ym===m.ym&&pm.paid!==m.paid));
+    if(newlyPaid.length>0){html+=`✅ Fully paid: ${newlyPaid.map(m=>m.label).join(', ')}<br>`;}
+    if(newlyPartial.length>0){newlyPartial.forEach(m=>{const old=ps.months.find(pm=>pm.ym===m.ym);const added=m.paid-(old?old.paid:0);html+=`⚠️ ${m.label}: +₹${added} (now ₹${m.paid}/₹${m.fee})<br>`;});}
+    if(ps2.totalAdvance>0){html+=`💰 <b>Advance balance: ₹${ps2.totalAdvance}</b>`;}
+    preview.innerHTML=html;preview.style.display='block';
   };
 }
-
 function confirmPayment(){
-  const sid = document.getElementById('payStuId').value;
-  const amount = +document.getElementById('payAmount').value;
-  const date = document.getElementById('payDate').value || todayISO();
-  const note = document.getElementById('payNote').value.trim();
-  
-  if(!amount || amount <= 0){ toast('⚠️ Enter valid amount!'); return; }
-  
-  const s = DB.students.find(x=>x.id===sid);
-  if(!s) return;
-  
-  if(!s.payments) s.payments = [];
-  s.payments.push({ id: uid(), amount, date, note });
-  
-  saveToCloud();
-  closeModal('paymentModal');
+  const sid=document.getElementById('payStuId').value;
+  const amount=+document.getElementById('payAmount').value;
+  const date=document.getElementById('payDate').value||todayISO();
+  const note=document.getElementById('payNote').value.trim();
+  if(!amount||amount<=0){toast('⚠️ Enter valid amount!');return;}
+  const s=DB.students.find(x=>x.id===sid);if(!s)return;
+  if(!s.payments)s.payments=[];
+  s.payments.push({id:uid(),amount,date,note});
+  saveToCloud();closeModal('paymentModal');
   toast(`💰 ₹${amount} payment recorded!`);
   renderAll();
-  if(document.getElementById('profileModal').classList.contains('show')){
-    renderProfilePay();
-  }
+  if(document.getElementById('profileModal').classList.contains('show')){renderProfilePay();}
 }
-
-function deletePayment(sid, payId){
-  if(!confirm('Delete this payment record?')) return;
-  const s = DB.students.find(x=>x.id===sid);
-  if(!s) return;
-  s.payments = (s.payments || []).filter(p => p.id !== payId);
-  saveToCloud();
-  toast('🗑️ Payment deleted');
-  renderAll();
-  if(document.getElementById('profileModal').classList.contains('show')){
-    renderProfilePay();
-  }
+function deletePayment(sid,payId){
+  if(!confirm('Delete this payment record?'))return;
+  const s=DB.students.find(x=>x.id===sid);if(!s)return;
+  s.payments=(s.payments||[]).filter(p=>p.id!==payId);
+  saveToCloud();toast('🗑️ Payment deleted');renderAll();
+  if(document.getElementById('profileModal').classList.contains('show')){renderProfilePay();}
 }
-
-// ===== NEW: Quick mark month as paid (tick mark) =====
-function quickMarkMonthPaid(sid, ym){
-  const s = DB.students.find(x=>x.id===sid);
-  if(!s) return;
-  const ps = getPaymentStatus(s);
-  const monthInfo = ps.months.find(m => m.ym === ym);
-  if(!monthInfo) return;
-  
-  if(monthInfo.status === 'paid'){
-    // Already paid - ask to delete instead
-    openDeleteMonthPayment(sid, ym);
-    return;
-  }
-  
-  // Calculate how much is needed to fully pay this month
-  const needed = monthInfo.fee - monthInfo.paid;
-  
-  if(!s.payments) s.payments = [];
-  s.payments.push({
-    id: uid(),
-    amount: needed,
-    date: todayISO(),
-    note: `Quick pay: ${monthInfo.label}`
-  });
-  
-  saveToCloud();
-  toast(`✅ ${monthInfo.label} marked as paid!`);
-  renderAll();
-  if(document.getElementById('profileModal').classList.contains('show')){
-    renderProfilePay();
-  }
+function quickMarkMonthPaid(sid,ym){
+  const s=DB.students.find(x=>x.id===sid);if(!s)return;
+  const ps=getPaymentStatus(s);
+  const monthInfo=ps.months.find(m=>m.ym===ym);if(!monthInfo)return;
+  if(monthInfo.status==='paid'){openDeleteMonthPayment(sid,ym);return;}
+  const needed=monthInfo.fee-monthInfo.paid;
+  if(!s.payments)s.payments=[];
+  s.payments.push({id:uid(),amount:needed,date:todayISO(),note:`Quick pay: ${monthInfo.label}`});
+  saveToCloud();toast(`✅ ${monthInfo.label} marked as paid!`);renderAll();
+  if(document.getElementById('profileModal').classList.contains('show')){renderProfilePay();}
 }
-
-// ===== NEW: Delete specific month's payment with confirmation =====
-function openDeleteMonthPayment(sid, ym){
-  const s = DB.students.find(x=>x.id===sid);
-  if(!s) return;
-  const ps = getPaymentStatus(s);
-  const monthInfo = ps.months.find(m => m.ym === ym);
-  if(!monthInfo) return;
-  
-  document.getElementById('deletePayStuId').value = sid;
-  document.getElementById('deletePayYm').value = ym;
-  document.getElementById('deletePayInput').value = '';
-  document.getElementById('deletePayConfirmBtn').disabled = true;
-  document.getElementById('deletePayMsg').innerHTML = `
-    <b>${monthInfo.fullLabel}</b> এর payment remove করতে চাও?<br>
-    নিচে <b>"delete"</b> type করো confirm করতে:
-  `;
+function openDeleteMonthPayment(sid,ym){
+  const s=DB.students.find(x=>x.id===sid);if(!s)return;
+  const ps=getPaymentStatus(s);
+  const monthInfo=ps.months.find(m=>m.ym===ym);if(!monthInfo)return;
+  document.getElementById('deletePayStuId').value=sid;
+  document.getElementById('deletePayYm').value=ym;
+  document.getElementById('deletePayInput').value='';
+  document.getElementById('deletePayConfirmBtn').disabled=true;
+  document.getElementById('deletePayMsg').innerHTML=`<b>${monthInfo.fullLabel}</b> এর payment remove করতে চাও?<br>নিচে <b>"delete"</b> type করো confirm করতে:`;
   document.getElementById('deletePayModal').classList.add('show');
 }
-
-document.getElementById('deletePayInput').addEventListener('input', function(e){
-  document.getElementById('deletePayConfirmBtn').disabled = 
-    e.target.value.trim().toLowerCase() !== 'delete';
+document.getElementById('deletePayInput').addEventListener('input',function(e){
+  document.getElementById('deletePayConfirmBtn').disabled=e.target.value.trim().toLowerCase()!=='delete';
 });
-
 function confirmDeleteMonthPayment(){
-  const sid = document.getElementById('deletePayStuId').value;
-  const ym = document.getElementById('deletePayYm').value;
-  const s = DB.students.find(x=>x.id===sid);
-  if(!s) return;
-  
-  // Find payments that contributed to this month and remove them
-  const ps = getPaymentStatus(s);
-  const monthInfo = ps.months.find(m => m.ym === ym);
-  if(!monthInfo) return;
-  
-  // Collect all payIds that contributed to this month
-  const payIdsToRemove = new Set(monthInfo.contributions.map(c => c.payId));
-  
-  // For each payment that contributed, we need to remove or adjust it
-  // Strategy: Remove the payments that ONLY contributed to this month
-  // If a payment contributed to multiple months, we need to reduce its amount
-  
-  const newPayments = [];
-  (s.payments || []).forEach(pay => {
-    if(!payIdsToRemove.has(pay.id)){
-      newPayments.push(pay);
-      return;
-    }
-    // This payment contributed to this month - calculate how much
-    const contributionToThisMonth = monthInfo.contributions
-      .filter(c => c.payId === pay.id)
-      .reduce((s,c) => s + c.amount, 0);
-    
-    const remainingAmount = pay.amount - contributionToThisMonth;
-    if(remainingAmount > 0){
-      newPayments.push({...pay, amount: remainingAmount, note: (pay.note || '') + ' (adjusted)'});
-    }
-    // If remainingAmount is 0, payment is fully removed
+  const sid=document.getElementById('deletePayStuId').value;
+  const ym=document.getElementById('deletePayYm').value;
+  const s=DB.students.find(x=>x.id===sid);if(!s)return;
+  const ps=getPaymentStatus(s);
+  const monthInfo=ps.months.find(m=>m.ym===ym);if(!monthInfo)return;
+  const payIdsToRemove=new Set(monthInfo.contributions.map(c=>c.payId));
+  const newPayments=[];
+  (s.payments||[]).forEach(pay=>{
+    if(!payIdsToRemove.has(pay.id)){newPayments.push(pay);return;}
+    const contributionToThisMonth=monthInfo.contributions.filter(c=>c.payId===pay.id).reduce((s,c)=>s+c.amount,0);
+    const remainingAmount=pay.amount-contributionToThisMonth;
+    if(remainingAmount>0){newPayments.push({...pay,amount:remainingAmount,note:(pay.note||'')+' (adjusted)'});}
   });
-  
-  s.payments = newPayments;
-  saveToCloud();
-  closeModal('deletePayModal');
+  s.payments=newPayments;
+  saveToCloud();closeModal('deletePayModal');
   toast(`🗑️ ${monthInfo.label} payment removed!`);
   renderAll();
-  if(document.getElementById('profileModal').classList.contains('show')){
-    renderProfilePay();
-  }
+  if(document.getElementById('profileModal').classList.contains('show')){renderProfilePay();}
 }
-
-// ===== FEE MESSAGE (WhatsApp) =====
 function feeMessage(s){
-  const ps = getPaymentStatus(s);
-  const total = ps.totalDue;
-  const upi = DB.settings.upi || {};
-  const upiId = upi.id || '';
-  const upiLink = upiId ? "upi://pay?pa=" + upiId + "&pn=Tuition&am=" + total + "&cu=INR" : '';
-  
-  let msg = "*নমস্কার।*\n\n";
-  msg += "আপনার সন্তানের টিউশন ফি-র হিসাব:\n\n";
-  msg += "*নাম:* " + s.name + "\n";
-  msg += "*Class:* " + s.class + "\n";
-  msg += "*Monthly Fee:* ₹" + s.fee + "\n\n";
-  
-  msg += "📊 *মাস-অনুযায়ী হিসাব:*\n";
-  msg += "━━━━━━━━━━━━━━━━━━\n";
-  
-  ps.months.forEach(m => {
-    let statusIcon = '';
-    if(m.status === 'paid') statusIcon = '✅';
-    else if(m.status === 'partial') statusIcon = '⚠️';
-    else statusIcon = '❌';
-    
-    let line = `${statusIcon} *${m.label}*: `;
-    if(m.status === 'paid'){
-      // Find the payment date for this month
-      const payDate = m.contributions.length > 0 ? formatDateShort(m.contributions[0].date) : '';
-      line += `Paid ${payDate ? '(' + payDate + ')' : ''} ✓`;
-    } else if(m.status === 'partial'){
-      line += `₹${m.paid} paid, *₹${m.due} বাকি*`;
-    } else {
-      line += `*₹${m.fee} বাকি*`;
-    }
-    msg += line + '\n';
+  const ps=getPaymentStatus(s);const total=ps.totalDue;
+  const upi=DB.settings.upi||{};const upiId=upi.id||'';
+  const upiLink=upiId?"upi://pay?pa="+upiId+"&pn=Tuition&am="+total+"&cu=INR":'';
+  let msg="*নমস্কার।*\n\n";
+  msg+="আপনার সন্তানের টিউশন ফি-র হিসাব:\n\n";
+  msg+="*নাম:* "+s.name+"\n";
+  msg+="*Class:* "+s.class+"\n";
+  msg+="*Monthly Fee:* ₹"+s.fee+"\n\n";
+  msg+="📊 *মাস-অনুযায়ী হিসাব:*\n";
+  msg+="━━━━━━━━━━━━━━━━━━\n";
+  ps.months.forEach(m=>{
+    let statusIcon='';
+    if(m.status==='paid')statusIcon='✅';
+    else if(m.status==='partial')statusIcon='⚠️';
+    else statusIcon='❌';
+    let line=`${statusIcon} *${m.label}*: `;
+    if(m.status==='paid'){const payDate=m.contributions.length>0?formatDateShort(m.contributions[0].date):'';line+=`Paid ${payDate?'('+payDate+')':''} ✓`;}
+    else if(m.status==='partial'){line+=`₹${m.paid} paid, *₹${m.due} বাকি*`;}
+    else{line+=`*₹${m.fee} বাকি*`;}
+    msg+=line+'\n';
   });
-  
-  msg += "━━━━━━━━━━━━━━━━━━\n\n";
-  
-  if(ps.fine > 0) msg += `*Fine (Attendance):* ₹${ps.fine}\n`;
-  
-  if(ps.totalAdvance > 0){
-    msg += `\n💰 *Advance Balance:* ₹${ps.totalAdvance}\n`;
-    msg += `(এই টাকা পরের মাসের fee-তে adjust হবে)\n`;
-  } else if(ps.feeDue > 0){
-    msg += `\n❗ *Net Due:* ₹${ps.feeDue}`;
-    if(ps.fine > 0) msg += ` + Fine ₹${ps.fine} = *₹${total}*`;
-    msg += '\n';
+  msg+="━━━━━━━━━━━━━━━━━━\n\n";
+  if(ps.fine>0)msg+=`*Fine (Attendance):* ₹${ps.fine}\n`;
+  if(ps.totalAdvance>0){msg+=`\n💰 *Advance Balance:* ₹${ps.totalAdvance}\n(এই টাকা পরের মাসের fee-তে adjust হবে)\n`;}
+  else if(ps.feeDue>0){msg+=`\n❗ *Net Due:* ₹${ps.feeDue}`;if(ps.fine>0)msg+=` + Fine ₹${ps.fine} = *₹${total}*`;msg+='\n';}
+  msg+="\nঅনুগ্রহ করে দ্রুত বাকি টাকা জমা দিয়ে দিন।\n";
+  if(upiId&&total>0){
+    msg+="\n-------------------------\n";
+    msg+="*💳 পেমেন্ট করার জন্য:*\n";
+    msg+="UPI ID: "+upiId+"\n";
+    if(upi.phone)msg+="ফোন নম্বর: "+upi.phone+"\n";
+    msg+="টাকা: *₹"+total+"*\n\n";
+    if(upiLink){msg+="সরাসরি পেমেন্ট করতে ক্লিক করুন:\n"+upiLink+"\n";}
+    msg+="-------------------------\n";
   }
-  
-  msg += "\nঅনুগ্রহ করে দ্রুত বাকি টাকা জমা দিয়ে দিন।\n";
-  
-  if(upiId && total > 0){
-    msg += "\n-------------------------\n";
-    msg += "*💳 পেমেন্ট করার জন্য:*\n";
-    msg += "UPI ID: " + upiId + "\n";
-    if(upi.phone) msg += "ফোন নম্বর: " + upi.phone + "\n";
-    msg += "টাকা: *₹" + total + "*\n\n";
-    if(upiLink){
-      msg += "সরাসরি পেমেন্ট করতে ক্লিক করুন:\n" + upiLink + "\n";
-    }
-    msg += "-------------------------\n";
-  }
-  
-  msg += "\nধন্যবাদ।";
+  msg+="\nধন্যবাদ।";
   return msg;
 }
-
 function photoHTML(s,lg=false,clickable=true){
-  const clickAttr = clickable ? `onclick="openProfile('${s.id}')"` : '';
+  const clickAttr=clickable?`onclick="openProfile('${s.id}')"`:'';
   if(s.photo)return `<div class="photo ${lg?'lg':''}" ${clickAttr}><img src="${s.photo}"/></div>`;
   return `<div class="photo ${lg?'lg':''}" ${clickAttr}>${s.name.charAt(0).toUpperCase()}</div>`;
 }
-
 function alertButtons(s){
-  const msg = feeMessage(s);
+  const msg=feeMessage(s);
   const waNum=(s.wa||s.mobile||'').replace(/\D/g,'');
   const waLink=waNum?`https://wa.me/${waNum}?text=${encodeURIComponent(msg)}`:'#';
   const smsLink=s.mobile?`sms:${s.mobile}?body=${encodeURIComponent(msg)}`:'#';
@@ -1431,7 +1196,6 @@ function alertButtons(s){
   if(s.ig)html+=`<a class="icon-btn ig" href="${igLink}" target="_blank" title="Instagram"><svg viewBox="0 0 24 24"><use href="#icon-ig"/></svg></a>`;
   html+='</div>';return html;
 }
-
 function renderAll(){
   renderDashboard();renderStudents();renderAttClassGrid();renderFees();renderClasses();loadEmailSettings();loadSheetUrl();
   const classes=Object.keys(DB.classes);
@@ -1439,7 +1203,6 @@ function renderAll(){
     el.innerHTML='<option value="">All Classes</option>'+classes.map(c=>`<option ${cur===c?'selected':''}>${c}</option>`).join('');});
   if(document.getElementById('attStep2').style.display!=='none'&&currentAttClass)renderAttendanceDay();
 }
-
 function renderDashboard(){
   document.getElementById('todayDate').textContent=new Date().toLocaleDateString('en-IN',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
   document.getElementById('sTotal').textContent=DB.students.length;
@@ -1468,7 +1231,6 @@ function renderDashboard(){
   document.getElementById('dashDueEmpty').style.display=dueStudents.length?'none':'block';
   document.getElementById('dashDueTbl').style.display=dueStudents.length?'':'none';
 }
-
 function renderStudents(){
   if(Object.keys(DB.classes).length===0){DB.classes['General']={days:[],times:{},fineEnabled:false,fineAmount:10};saveToCloud();}
   const q=(document.getElementById('searchInput')?.value||'').toLowerCase();
@@ -1496,7 +1258,6 @@ function renderStudents(){
   cards.innerHTML=list.map(s=>`<div class="m-card">${photoHTML(s,false,true)}<div class="body"><div class="nm" onclick="openProfile('${s.id}')">${s.name}</div><div class="meta"><span class="badge badge-class">${s.class}</span><span>₹${s.fee}/mo</span><span>${formatDateShort(s.admission)}</span></div><div class="actions"><button class="icon-btn edit" onclick="openStudentModal('${s.id}')" title="Edit"><svg viewBox="0 0 24 24"><use href="#icon-edit"/></svg></button><button class="icon-btn del" onclick="deleteStudent('${s.id}')" title="Delete"><svg viewBox="0 0 24 24"><use href="#icon-del"/></svg></button>${alertButtons(s)}</div></div></div>`).join('');
   document.getElementById('stuEmpty').style.display=list.length?'none':'block';
 }
-
 function renderAttClassGrid(){
   const grid=document.getElementById('attClassGrid');const classes=Object.keys(DB.classes);
   if(!classes.length){grid.innerHTML='<div class="empty-state"><div class="big">🏫</div>No classes yet!</div>';return;}
@@ -1557,26 +1318,17 @@ function setAtt(sid,date,val){
   if(val===null)delete s.attendance[date];else s.attendance[date]=val;
   saveToCloud();renderAttendanceDay();renderDashboard();
 }
-
-// ===== PROFILE =====
-function openProfile(id, tab='info'){
-  currentProfileId = id; profileMonth = new Date();
-  renderProfile(); switchProfileTab(tab);
+function openProfile(id,tab='info'){
+  currentProfileId=id;profileMonth=new Date();
+  renderProfile();switchProfileTab(tab);
   document.getElementById('profileModal').classList.add('show');
 }
-
 function openProfileAndRecordPayment(id){
-  // Open profile and directly switch to Pay tab + open payment modal
-  currentProfileId = id; profileMonth = new Date();
-  renderProfile();
-  switchProfileTab('pay');
+  currentProfileId=id;profileMonth=new Date();
+  renderProfile();switchProfileTab('pay');
   document.getElementById('profileModal').classList.add('show');
-  // Small delay then open payment modal
-  setTimeout(() => {
-    openPaymentModal(id);
-  }, 300);
+  setTimeout(()=>{openPaymentModal(id);},300);
 }
-
 function switchProfileTab(tab){
   document.querySelectorAll('.profile-tab').forEach(t=>t.classList.toggle('active',t.dataset.tab===tab));
   document.querySelectorAll('.profile-pane').forEach(p=>p.classList.remove('active'));
@@ -1672,12 +1424,9 @@ function toggleProfileAtt(key){
   saveToCloud();renderProfileAtt();renderDashboard();
   if(document.getElementById('attStep2').style.display!=='none')renderAttendanceDay();
 }
-
-// ===== ENHANCED PAYMENT PROFILE VIEW =====
 function renderProfilePay(){
   const s=DB.students.find(x=>x.id===currentProfileId);if(!s)return;
   const ps=getPaymentStatus(s);
-  
   let html=`
     <div class="payment-summary">
       <div class="pay-sum-box fee"><div class="sum-label">Monthly Fee</div><div class="sum-val">₹${s.fee}</div></div>
@@ -1685,56 +1434,39 @@ function renderProfilePay(){
       <div class="pay-sum-box due"><div class="sum-label">Total Due</div><div class="sum-val">₹${ps.totalDue.toLocaleString('en-IN')}</div></div>
       ${ps.totalAdvance>0?`<div class="pay-sum-box advance"><div class="sum-label">Advance</div><div class="sum-val">₹${ps.totalAdvance.toLocaleString('en-IN')}</div></div>`:''}
     </div>
-    <button class="btn btn-primary" style="width:100%;margin-bottom:18px" onclick="openPaymentModal('${s.id}')">
-      💰 Record New Payment
-    </button>
+    <button class="btn btn-primary" style="width:100%;margin-bottom:18px" onclick="openPaymentModal('${s.id}')">💰 Record New Payment</button>
   `;
-  
   if(ps.totalAdvance>0){
     html+=`<div class="advance-banner"><div class="adv-icon">💰</div><div class="adv-info"><div class="adv-label">Advance Balance</div><div class="adv-amt">₹${ps.totalAdvance.toLocaleString('en-IN')}</div><div class="adv-desc">Will auto-apply to next month's fee</div></div></div>`;
   }
-  
   html+=`<h4 style="font-family:'Space Grotesk';margin:14px 0 10px;font-size:15px">📅 Month-by-Month Status</h4>
     <p style="font-size:11px;color:var(--muted);margin-bottom:12px">💡 Click tick ✓ to mark as paid, click trash 🗑️ to remove payment</p>`;
-  
   const monthsReversed=[...ps.months].reverse();
   monthsReversed.forEach(m=>{
     let statusClass='status-'+m.status;
-    let statusInfo='';
-    let tickClass='unpaid';
-    let tickIcon='○';
-    
+    let statusInfo='';let tickClass='unpaid';let tickIcon='○';
     if(m.status==='paid'){
-      // Find the earliest payment date for this month
-      const payDate = m.contributions.length > 0 ? formatDateShort(m.contributions[0].date) : '';
+      const payDate=m.contributions.length>0?formatDateShort(m.contributions[0].date):'';
       statusInfo=`<span class="badge badge-ok">✅ ₹${m.fee} PAID</span>${payDate?`<span class="pay-date-tag">📅 ${payDate}</span>`:''}`;
-      tickClass='paid';
-      tickIcon='✓';
+      tickClass='paid';tickIcon='✓';
     }else if(m.status==='partial'){
       statusInfo=`<span class="badge badge-partial">⚠️ ₹${m.paid}/₹${m.fee}</span><span class="pay-due-tag">₹${m.due} বাকি</span>`;
-      tickClass='unpaid';
-      tickIcon='○';
+      tickClass='unpaid';tickIcon='○';
     }else{
       statusInfo=`<span class="badge badge-due">❌ ₹${m.fee} বাকি</span>`;
-      tickClass='unpaid';
-      tickIcon='○';
+      tickClass='unpaid';tickIcon='○';
     }
-    
-    const delBtn = m.status !== 'unpaid' ? 
-      `<button class="month-del-btn" onclick="event.stopPropagation();openDeleteMonthPayment('${s.id}','${m.ym}')" title="Delete payment">🗑️</button>` : '';
-    
+    const delBtn=m.status!=='unpaid'?
+      `<button class="month-del-btn" onclick="event.stopPropagation();openDeleteMonthPayment('${s.id}','${m.ym}')" title="Delete payment">🗑️</button>`:'';
     html+=`<div class="pay-month-row ${statusClass}" onclick="quickMarkMonthPaid('${s.id}','${m.ym}')" style="cursor:pointer">
       <div class="ym">${m.label}</div>
       <div class="status-info">${statusInfo}</div>
       <div class="month-actions">
-        <button class="month-tick-btn ${tickClass}" onclick="event.stopPropagation();quickMarkMonthPaid('${s.id}','${m.ym}')" title="${m.status==='paid'?'Click to delete':'Click to mark paid'}">
-          ${tickIcon}
-        </button>
+        <button class="month-tick-btn ${tickClass}" onclick="event.stopPropagation();quickMarkMonthPaid('${s.id}','${m.ym}')" title="${m.status==='paid'?'Click to delete':'Click to mark paid'}">${tickIcon}</button>
         ${delBtn}
       </div>
     </div>`;
   });
-  
   const payments=(s.payments||[]).slice().reverse();
   if(payments.length>0){
     html+=`<h4 style="font-family:'Space Grotesk';margin:20px 0 10px;font-size:15px">💳 Payment History (${payments.length})</h4>`;
@@ -1753,14 +1485,17 @@ function renderProfilePay(){
   }else{
     html+=`<div style="text-align:center;padding:20px;color:var(--muted);font-size:12px;margin-top:20px">💳 No payments recorded yet</div>`;
   }
-  
   document.getElementById('pane-pay').innerHTML=html;
 }
-
 function renderFees(){
   if(Object.keys(DB.classes).length===0){DB.classes['General']={days:[],times:{},fineEnabled:false,fineAmount:10};saveToCloud();}
   const cls=document.getElementById('feeClass')?.value||'';
-  const list=DB.students.filter(s=>!cls||s.class===cls);
+  const sortOpt=document.getElementById('feeSort')?.value||'';
+  let list=DB.students.filter(s=>!cls||s.class===cls);
+  if(sortOpt==='due_high'){list.sort((a,b)=>getPaymentStatus(b).totalDue-getPaymentStatus(a).totalDue);}
+  else if(sortOpt==='due_low'){list.sort((a,b)=>getPaymentStatus(a).totalDue-getPaymentStatus(b).totalDue);}
+  else if(sortOpt==='name'){list.sort((a,b)=>a.name.localeCompare(b.name));}
+  else if(sortOpt==='fee_high'){list.sort((a,b)=>b.fee-a.fee);}
   const tbody=document.querySelector('#feesTbl tbody');
   tbody.innerHTML=list.map(s=>{
     const ps=getPaymentStatus(s);const isDue=ps.totalDue>0;const hasAdvance=ps.totalAdvance>0;
@@ -1773,7 +1508,7 @@ function renderFees(){
     if(ps.partialMonths>0)breakdown+=` • ${ps.partialMonths} partial`;
     if(ps.unpaidMonths>0)breakdown+=` • ${ps.unpaidMonths} due`;
     return`<tr>
-      <td><div style="display:flex;align-items:center;gap:10px">${photoHTML(s,false,true)}<b style="cursor:pointer" onclick="openProfile('${s.id}','pay')">${s.name}</b></div></td>
+      <td><div style="display:flex;align-items:center;gap:10px">${photoHTML(s,false,true)}<b style="cursor:pointer" onclick="openProfileAndRecordPayment('${s.id}')">${s.name}</b></div></td>
       <td><span class="badge badge-class">${s.class}</span></td>
       <td>₹${s.fee}</td>
       <td>${statusBadge}</td>
@@ -1788,7 +1523,7 @@ function renderFees(){
     else if(ps.unpaidMonths>0)statusBadge=`<span class="badge badge-due">${ps.unpaidMonths} mo due</span>`;
     else if(ps.partialMonths>0)statusBadge=`<span class="badge badge-partial">${ps.partialMonths} partial</span>`;
     else statusBadge=`<span class="badge badge-ok">✅ Clear</span>`;
-    return`<div class="m-card">${photoHTML(s,false,true)}<div class="body" style="flex:1"><div class="nm" onclick="openProfile('${s.id}','pay')">${s.name}</div><div class="meta"><span class="badge badge-class">${s.class}</span>${statusBadge}</div><div style="margin:8px 0;font-size:11px;color:var(--muted)">Paid: ${ps.paidMonths} • Partial: ${ps.partialMonths} • Due: ${ps.unpaidMonths}${ps.fine>0?` • Fine ₹${ps.fine}`:''}</div><div style="font-family:'Space Grotesk';font-weight:700;font-size:18px;color:${isDue?'#fca5a5':'#6ee7b7'}">₹${ps.totalDue.toLocaleString('en-IN')}</div><div class="actions" style="margin-top:8px">${alertButtons(s)}</div></div></div>`;}).join('');
+    return`<div class="m-card">${photoHTML(s,false,true)}<div class="body" style="flex:1"><div class="nm" onclick="openProfileAndRecordPayment('${s.id}')">${s.name}</div><div class="meta"><span class="badge badge-class">${s.class}</span>${statusBadge}</div><div style="margin:8px 0;font-size:11px;color:var(--muted)">Paid: ${ps.paidMonths} • Partial: ${ps.partialMonths} • Due: ${ps.unpaidMonths}${ps.fine>0?` • Fine ₹${ps.fine}`:''}</div><div style="font-family:'Space Grotesk';font-weight:700;font-size:18px;color:${isDue?'#fca5a5':'#6ee7b7'}">₹${ps.totalDue.toLocaleString('en-IN')}</div><div class="actions" style="margin-top:8px">${alertButtons(s)}</div></div></div>`;}).join('');
 }
 function sendBulkReminder(){
   const dueStudents=DB.students.filter(s=>{const ps=getPaymentStatus(s);return ps.totalDue>0;});
