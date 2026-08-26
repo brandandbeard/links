@@ -1194,7 +1194,7 @@ function feeMessage(s){
   const upiId = upi.id || '';
   
   let msg = "*নমস্কার।*\n\n";
-  msg += "আপনার সন্তানের টিউশন ফি বাকি আছে। অনুগ্রহ করে দ্রুত বাকি টাকা জমা দিয়ে দিন।\n\n";
+  msg += "আপনার সন্তানের টিউশন ফি বাকি আছে। অনুগ্রহ করে দ্রুত বাকি টাকা জমা দিয়ে দিন।:\n\n";
   msg += "*নাম:* " + s.name + "\n";
   msg += "*Class:* " + s.class + "\n";
   msg += "*Monthly Fee:* ₹" + s.fee + "\n\n";
@@ -1237,26 +1237,15 @@ function feeMessage(s){
     if(ps.fine > 0) msg += ` + Fine ₹${ps.fine} = *₹${total}*`;
     msg += '\n';
   }
-  
   if(upiId && total > 0){
-    msg += "\n━━━━━━━━━━━━━━━━━━\n";
+    msg += "\n-------------------------\n";
     msg += "*💳 পেমেন্ট করার জন্য:*\n\n";
-    
-    // 🆕 UPI ID in code block format — easy to copy!
-    msg += "📱 *UPI ID:*\n";
-    msg += "```" + upiId + "```\n";
-    msg += "_↑ Long press করে Copy করুন_\n\n";
-    
-    if(upi.phone) {
-      msg += "📞 *Phone:*\n";
-      msg += "```" + upi.phone + "```\n";
-      msg += "_↑ Long press করে Copy করুন_\n\n";
-    }
-    
+    msg += "📱 *UPI ID:* " + upiId + "\n";
+    if(upi.phone) msg += "📞 *Phone:* " + upi.phone + "\n";
     msg += "💰 *Amount:* ₹" + total + "\n\n";
     msg += "🔹 PhonePe / Google Pay / Paytm যেকোনো অ্যাপে\n";
     msg += "   UPI ID কপি করে পেমেন্ট করুন\n";
-    msg += "━━━━━━━━━━━━━━━━━━\n";
+    msg += "-------------------------\n";
   }
   
   msg += "\nধন্যবাদ।";
