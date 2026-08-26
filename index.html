@@ -1276,42 +1276,109 @@ function alertButtons(s){
   html += '</div>';
   return html;
 }
-  function sendQRViaWhatsApp(sid){
+  async function sendQRViaWhatsApp(sid){
   const s = DB.students.find(x => x.id === sid);
   if(!s) return;
   
   const waNum = (s.wa || s.mobile || '').replace(/\D/g,'');
-  if(!waNum){
-    toast('⚠️ No WhatsApp/Mobile number saved!');
-    return;
-  }
+  if(!waNum){ toast('⚠️ No WhatsApp number!'); return; }
   
   const ps = getPaymentStatus(s);
   const upi = DB.settings.upi || {};
   const upiId = upi.id || '';
+  const upiPhone = upi.phone || '';
   
-  if(!upiId){
-    toast('⚠️ UPI ID not set in settings!');
-    return;
-  }
+  if(!upiId){ toast('⚠️ UPI ID not set!'); return; }
+  
+  toast('📱 QR তৈরি হচ্ছে...');
   
   const qrUrl = getUPIQRLink(ps.totalDue);
   
-  let msg = `📱 *QR Code - Tuition Fee*\n\n`;
-  msg += `*ছাত্রের নাম:* ${s.name}\n`;
-  msg += `*Class:* ${s.class}\n`;
-  msg += `*Amount:* ₹${ps.totalDue}\n\n`;
-  msg += `👇 *QR Code Link:*\n`;
-  msg += qrUrl + `\n\n`;
-  msg += `━━━━━━━━━━━━━━━━━━\n`;
-  msg += `📱 *UPI ID:* ${upiId}\n`;
-  if(upi.phone) msg += `📞 *Phone:* ${upi.phone}\n`;
-  msg += `━━━━━━━━━━━━━━━━━━\n\n`;
-  msg += `(QR লিংকটি ক্লিক করে QR ছবি দেখুন, তারপর screenshot নিয়ে যেকোনো UPI অ্যাপে স্ক্যান করুন)`;
+  try{
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.src = qrUrl;
+    await new Promise((res, rej) => { img.onload = res; img.onerror = rej; });
+    
+    const canvas = document.createElement('canvas');
+    const W = 420;
+    const headerH = 110;
+    const footerH = 50;
+    canvas.width = W;
+    canvas.height = headerH + img.height + footerH;
+    const ctx = canvas.getContext('2d');
+    
+    // White background
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, W, canvas.height);
+    
+    // Purple header
+    ctx.fillStyle = '#7c3aed';
+    ctx.fillRect(0, 0, W, headerH);
+    
+    // Header text
+    ctx.fillStyle = '#ffffff';
+    ctx.textAlign = 'center';
+    ctx.font = 'bold 20px Arial, sans-serif';
+    ctx.fillText('Scan & Pay ₹' + ps.totalDue, W/2, 30);
+    
+    ctx.font = 'bold 15px Arial, sans-serif';
+    ctx.fillText('UPI: ' + upiId, W/2, 58);
+    
+    if(upiPhone){
+      ctx.font = '14px Arial, sans-serif';
+      ctx.fillText('Ph: ' + upiPhone, W/2, 82);
+    }
+    
+    ctx.font = '12px Arial, sans-serif';
+    ctx.fillText('PhonePe / GPay / Paytm', W/2, 102);
+    
+    // QR image center
+    ctx.drawImage(img, (W - img.width)/2, headerH);
+    
+    // Footer
+    ctx.fillStyle = '#f5f5f5';
+    ctx.fillRect(0, headerH + img.height, W, footerH);
+    ctx.fillStyle = '#666666';
+    ctx.font = '12px Arial, sans-serif';
+    ctx.fillText('TuitionPro • ' + s.name, W/2, headerH + img.height + 30);
+    
+    canvas.toBlob(async (blob) => {
+      const file = new File([blob], s.name + '_QR.png', {type:'image/png'});
+      
+      if(navigator.share && navigator.canShare && navigator.canShare({files:[file]})){
+        try{
+          await navigator.share({ files:[file], title: s.name + ' QR' });
+          toast('✅ QR পাঠানো হয়েছে!');
+          return;
+        }catch(e){ /* user cancelled */ }
+      }
+      qrFallback(blob, s, waNum, ps, upiId, upiPhone);
+    }, 'image/png');
+    
+  }catch(e){
+    toast('❌ QR তৈরি ব্যর্থ!');
+  }
+}
+
+function qrFallback(blob, s, waNum, ps, upiId, upiPhone){
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = s.name + '_QR.png';
+  a.click();
+  URL.revokeObjectURL(url);
   
-  const waLink = `https://wa.me/${waNum}?text=${encodeURIComponent(msg)}`;
-  window.open(waLink, '_blank');
-  toast('📱 QR মেসেজ পাঠানো হচ্ছে...');
+  let msg = '📱 *' + s.name + ' Payment QR*\n\n';
+  msg += 'UPI: ' + upiId + '\n';
+  if(upiPhone) msg += 'Ph: ' + upiPhone + '\n';
+  msg += 'Amount: ₹' + ps.totalDue + '\n\n';
+  msg += '👆 QR image download হয়েছে।\nWhatsApp-এ attach করে পাঠান।';
+  
+  setTimeout(() => {
+    window.open('https://wa.me/' + waNum + '?text=' + encodeURIComponent(msg), '_blank');
+  }, 500);
+  toast('📥 QR Downloaded! WhatsApp-এ attach করুন');
 }
 function renderAll(){
   renderDashboard();renderStudents();renderAttClassGrid();renderFees();renderClasses();loadEmailSettings();loadSheetUrl();
