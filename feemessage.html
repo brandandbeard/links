@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Pay Tuition Fee</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+body{min-height:100vh;background:linear-gradient(135deg,#667eea,#764ba2);display:flex;align-items:center;justify-content:center;padding:20px}
+.card{background:#fff;border-radius:20px;padding:30px;max-width:400px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.3);text-align:center}
+h1{color:#333;margin-bottom:10px;font-size:22px}
+.amount{font-size:36px;color:#7c3aed;font-weight:800;margin:20px 0}
+.info-box{background:#f3f4f6;border-radius:12px;padding:18px;margin:15px 0;border:2px dashed #7c3aed}
+.info-box .label{font-size:12px;color:#666;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.info-box .value{font-size:18px;font-weight:700;color:#1f2937;font-family:'Courier New',monospace;word-break:break-all}
+.copy-btn{background:linear-gradient(135deg,#7c3aed,#ec4899);color:#fff;border:none;padding:14px 30px;border-radius:12px;font-size:16px;font-weight:600;cursor:pointer;margin:10px 5px;transition:.3s;display:inline-flex;align-items:center;gap:8px}
+.copy-btn:hover{transform:translateY(-2px);box-shadow:0 10px 25px rgba(124,58,237,.4)}
+.copy-btn:active{transform:scale(.95)}
+.success{color:#10b981;font-weight:600;margin-top:15px;display:none}
+.apps{margin-top:20px;padding-top:20px;border-top:1px solid #e5e7eb;font-size:13px;color:#666}
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>💳 Tuition Fee Payment</h1>
+  <div class="amount" id="amountDisplay">₹0</div>
+  
+  <div class="info-box">
+    <div class="label">UPI ID</div>
+    <div class="value" id="upiDisplay">Loading...</div>
+  </div>
+  
+  <div class="info-box" id="phoneBox" style="display:none">
+    <div class="label">Phone Number</div>
+    <div class="value" id="phoneDisplay"></div>
+  </div>
+  
+  <button class="copy-btn" onclick="copyUPI()">📋 Copy UPI ID</button>
+  <button class="copy-btn" onclick="copyPhone()" id="phoneBtn" style="display:none">📞 Copy Phone</button>
+  
+  <div class="success" id="successMsg">✅ Copied! এখন UPI অ্যাপে Paste করুন</div>
+  
+  <div class="apps">
+    🔹 PhonePe • Google Pay • Paytm<br/>
+    যেকোনো UPI অ্যাপে Open করে Paste করুন
+  </div>
+</div>
+
+<script>
+// URL থেকে ডাটা নাও
+const params = new URLSearchParams(window.location.search);
+const upiId = params.get('upi') || '';
+const phone = params.get('phone') || '';
+const amount = params.get('amount') || '0';
+
+document.getElementById('upiDisplay').textContent = upiId || 'N/A';
+document.getElementById('amountDisplay').textContent = '₹' + amount;
+
+if(phone){
+  document.getElementById('phoneDisplay').textContent = phone;
+  document.getElementById('phoneBox').style.display = 'block';
+  document.getElementById('phoneBtn').style.display = 'inline-flex';
+}
+
+function copyText(text){
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(showSuccess).catch(fallbackCopy);
+  } else {
+    fallbackCopy();
+  }
+}
+
+function fallbackCopy(){
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.position = 'fixed';
+  ta.style.opacity = '0';
+  document.body.appendChild(ta);
+  ta.select();
+  try{ document.execCommand('copy'); showSuccess(); }catch(e){ alert('Copy failed: ' + text); }
+  document.body.removeChild(ta);
+}
+
+function showSuccess(){
+  const msg = document.getElementById('successMsg');
+  msg.style.display = 'block';
+  setTimeout(() => { msg.style.display = 'none'; }, 3000);
+}
+
+function copyUPI(){ copyText(upiId); }
+function copyPhone(){ copyText(phone); }
+</script>
+</body>
+</html>
