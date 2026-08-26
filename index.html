@@ -17,7 +17,6 @@ body{background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));backgro
 .orb2{width:350px;height:350px;background:#ec4899;bottom:-80px;right:-80px;animation:float 18s infinite reverse}
 .orb3{width:300px;height:300px;background:#06b6d4;top:40%;left:50%;animation:float 22s infinite}
 @keyframes float{0%,100%{transform:translate(0,0)}50%{transform:translate(60px,-40px)}}
-
 .login-wrap{position:relative;z-index:1;min-height:100vh;display:grid;place-items:center;padding:20px}
 .login-card{background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--glass-border);border-radius:24px;padding:clamp(24px,5vw,40px);max-width:420px;width:100%;animation:pop .5s}
 @keyframes pop{from{transform:scale(.95);opacity:0}to{transform:scale(1);opacity:1}}
@@ -27,38 +26,30 @@ body{background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));backgro
 .login-tabs{display:flex;background:rgba(0,0,0,.3);border-radius:12px;padding:4px;margin-bottom:20px}
 .login-tab{flex:1;padding:10px;border:none;background:transparent;color:var(--muted);cursor:pointer;font:600 13px 'Inter';border-radius:9px;transition:.2s}
 .login-tab.active{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff}
-
 .app{position:relative;z-index:1;min-height:100vh;display:none}
 .app.show{display:block}
-
 .sidebar{position:fixed;top:0;left:0;bottom:0;width:280px;max-width:85vw;transform:translateX(-100%);transition:transform .4s cubic-bezier(.4,0,.2,1);background:rgba(15,12,41,0.98);border-right:1px solid var(--glass-border);padding:70px 18px 18px 18px;display:flex;flex-direction:column;gap:6px;overflow-y:auto;overflow-x:hidden;z-index:240;box-shadow:8px 0 40px rgba(0,0,0,.5);-webkit-overflow-scrolling:touch}
 .sidebar.open{transform:translateX(0)}
-
 .menu-toggle{position:fixed;top:14px;left:14px;z-index:250;width:46px;height:46px;border-radius:12px;background:rgba(30,27,75,0.95);border:1px solid var(--glass-border);display:flex;align-items:center;justify-content:center;cursor:pointer;color:#fff;font-size:22px;box-shadow:0 4px 16px rgba(0,0,0,.4);font-weight:700;transition:.3s;-webkit-user-select:none;user-select:none}
 .menu-toggle:hover{background:rgba(49,46,129,0.95)}
 .menu-toggle:active{transform:scale(.92)}
-
 .logo{display:flex;align-items:center;gap:10px;padding:8px 10px 22px;border-bottom:1px solid var(--glass-border);margin-bottom:14px}
 .logo-icon{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:grid;place-items:center;font-size:22px;box-shadow:0 8px 24px rgba(124,58,237,.4);flex-shrink:0}
 .logo h1{font-family:'Space Grotesk';font-size:20px;font-weight:700;letter-spacing:-.5px;color:#fff}
 .logo h1 span{background:linear-gradient(135deg,var(--accent2),var(--accent3));-webkit-background-clip:text;background-clip:text;color:transparent}
-
 .nav-btn{display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:12px;background:transparent;border:1px solid transparent;color:#e2e8f0;font:600 14px 'Inter';cursor:pointer;transition:.15s;text-align:left;width:100%;-webkit-user-select:none;user-select:none;min-height:48px}
 .nav-btn:hover{background:rgba(255,255,255,.08);color:#fff;border-color:rgba(255,255,255,.08)}
 .nav-btn:active{background:rgba(124,58,237,.3);transform:scale(.97)}
 .nav-btn.active{background:linear-gradient(135deg,rgba(124,58,237,.45),rgba(236,72,153,.35));color:#fff;border-color:rgba(236,72,153,.5);box-shadow:0 4px 12px rgba(124,58,237,.3)}
 .nav-btn .ic{font-size:18px}
-
 .user-box{margin-top:auto;padding:14px;background:rgba(255,255,255,.05);border-radius:12px;border:1px solid var(--glass-border);flex-shrink:0}
 .user-box .lbl{font-size:10px;color:#94a3b8;margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px;font-weight:600}
 .user-box .mail{font-size:12px;color:#fff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-bottom:10px;font-weight:500}
-
 .main{padding:clamp(16px,3vw,40px);padding-top:70px;overflow-y:auto;min-height:100vh}
 .page-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:clamp(16px,3vw,28px);flex-wrap:wrap;gap:12px}
 .page-head h2{font-family:'Space Grotesk';font-size:clamp(22px,5.5vw,30px);font-weight:700;letter-spacing:-.5px}
 .page-head h2 span{background:linear-gradient(135deg,var(--accent2),var(--accent3));-webkit-background-clip:text;background-clip:text;color:transparent}
 .page-head p{color:var(--muted);font-size:clamp(11px,3vw,13px);margin-top:4px}
-
 .btn{padding:clamp(9px,2.5vw,12px) clamp(14px,4vw,18px);border-radius:11px;border:none;cursor:pointer;font:600 clamp(11px,3vw,13px) 'Inter';transition:.2s;display:inline-flex;align-items:center;gap:8px;min-height:40px;justify-content:center;white-space:nowrap}
 .btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 6px 20px rgba(124,58,237,.4)}
 .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(124,58,237,.6)}
@@ -71,7 +62,6 @@ body{background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));backgro
 .btn-wa:hover{background:rgba(37,211,102,.25)}
 .btn-sm{padding:8px 12px;font-size:11px;border-radius:8px;min-height:34px}
 .btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
-
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:clamp(10px,2vw,16px);margin-bottom:clamp(16px,3vw,28px)}
 .stat{background:var(--glass);backdrop-filter:blur(14px);border:1px solid var(--glass-border);border-radius:18px;padding:clamp(14px,3vw,20px);position:relative;overflow:hidden;transition:.3s}
 .stat:hover{transform:translateY(-4px);border-color:rgba(255,255,255,.2)}
@@ -79,37 +69,31 @@ body{background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));backgro
 .stat .label{font-size:clamp(10px,2.5vw,12px);color:var(--muted);text-transform:uppercase;letter-spacing:1px;font-weight:600}
 .stat .val{font-family:'Space Grotesk';font-size:clamp(22px,5.5vw,30px);font-weight:700;margin-top:8px}
 .stat .sub{font-size:clamp(10px,2.5vw,12px);color:var(--muted);margin-top:4px}
-
 .card{background:var(--glass);backdrop-filter:blur(14px);border:1px solid var(--glass-border);border-radius:20px;padding:clamp(16px,3vw,24px);margin-bottom:clamp(14px,3vw,20px)}
-
 .form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:clamp(10px,2.5vw,14px)}
 .field label{display:block;font-size:clamp(10px,2.5vw,12px);color:var(--muted);margin-bottom:6px;font-weight:500;text-transform:uppercase;letter-spacing:.5px}
 .field input,.field select,.field textarea{width:100%;padding:clamp(10px,2.5vw,12px) 14px;border-radius:10px;background:rgba(0,0,0,.25);border:1px solid var(--glass-border);color:var(--text);font:400 clamp(13px,3.5vw,14px) 'Inter';transition:.2s;min-height:44px}
-.field input:focus,.field select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(124,58,237,.2)}
-
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(124,58,237,.2)}
 .tbl-wrap{overflow-x:auto;border-radius:14px;margin:0 -4px;padding:0 4px}
 table{width:100%;border-collapse:collapse;font-size:clamp(11px,3vw,13px);min-width:600px}
 th{background:rgba(0,0,0,.3);padding:12px;text-align:left;font-weight:600;font-size:clamp(10px,2.5vw,11px);text-transform:uppercase;letter-spacing:1px;color:var(--muted);border-bottom:1px solid var(--glass-border)}
 td{padding:12px;border-bottom:1px solid rgba(255,255,255,.05);vertical-align:middle}
 tr:hover td{background:rgba(255,255,255,.03)}
-
 .photo{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:grid;place-items:center;font-weight:700;color:#fff;font-size:14px;flex-shrink:0}
 .photo.lg{width:70px;height:70px;font-size:24px}
 .photo img{width:100%;height:100%;border-radius:50%;object-fit:cover}
-
 .badge{padding:3px 10px;border-radius:20px;font-size:clamp(9px,2.5vw,11px);font-weight:600;display:inline-block}
 .badge-ok{background:rgba(16,185,129,.15);color:#6ee7b7;border:1px solid rgba(16,185,129,.3)}
 .badge-due{background:rgba(239,68,68,.18);color:#fca5a5;border:1px solid rgba(239,68,68,.4);animation:pulse 2s infinite}
+.badge-partial{background:rgba(245,158,11,.18);color:#fbbf24;border:1px solid rgba(245,158,11,.4)}
+.badge-advance{background:rgba(59,130,246,.18);color:#93c5fd;border:1px solid rgba(59,130,246,.4)}
 .badge-class{background:rgba(6,182,212,.15);color:#67e8f9;border:1px solid rgba(6,182,212,.3)}
 .badge-tuition{background:linear-gradient(135deg,rgba(124,58,237,.25),rgba(236,72,153,.25));color:#e9d5ff;border:1px solid rgba(236,72,153,.4)}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.7}}
-
 .due-cell{display:flex;flex-direction:column;gap:4px}
 .due-formula{font-size:clamp(9px,2.3vw,11px);color:var(--muted);font-family:'Courier New',monospace;background:rgba(0,0,0,.25);padding:3px 7px;border-radius:6px;word-break:break-word}
 .due-total{font-weight:700;color:#fca5a5;font-size:clamp(13px,3.5vw,15px)}
-
 .action-row{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
-
 .icon-btn{width:40px;height:40px;border-radius:10px;border:none;cursor:pointer;display:grid;place-items:center;transition:.2s;text-decoration:none;flex-shrink:0;background:rgba(255,255,255,.08)}
 .icon-btn:hover{transform:translateY(-2px) scale(1.05)}
 .icon-btn:active{transform:scale(.92)}
@@ -126,7 +110,6 @@ tr:hover td{background:rgba(255,255,255,.03)}
 .icon-btn.edit svg{fill:#a78bfa}
 .icon-btn.del{background:rgba(239,68,68,.15)}
 .icon-btn.del svg{fill:#fca5a5}
-
 .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);display:none;align-items:flex-end;justify-content:center;z-index:1200;padding:0}
 .modal-bg.show{display:flex;animation:fade .2s}
 @keyframes fade{from{opacity:0}to{opacity:1}}
@@ -135,7 +118,6 @@ tr:hover td{background:rgba(255,255,255,.03)}
 @keyframes slideUp{from{transform:translateY(100%);opacity:0}to{transform:translateY(0);opacity:1}}
 .modal h3{font-family:'Space Grotesk';margin-bottom:18px;font-size:clamp(18px,4.5vw,22px)}
 .modal-close{float:right;background:none;border:none;color:var(--muted);font-size:28px;cursor:pointer;line-height:1}
-
 .class-select-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:clamp(10px,2.5vw,14px);margin-bottom:24px}
 .class-pick-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:16px;padding:clamp(14px,3vw,20px);cursor:pointer;transition:.25s;text-align:center;position:relative}
 .class-pick-card:hover{transform:translateY(-3px);border-color:var(--accent)}
@@ -143,11 +125,9 @@ tr:hover td{background:rgba(255,255,255,.03)}
 .class-pick-card .nm{font-family:'Space Grotesk';font-size:clamp(15px,4vw,18px);font-weight:700;margin-bottom:4px}
 .class-pick-card .info{font-size:clamp(10px,2.5vw,11px);color:var(--muted);margin-top:2px}
 .class-pick-card .count{font-size:12px;color:#67e8f9;margin-top:6px}
-
 .tuition-day-banner{background:linear-gradient(135deg,rgba(124,58,237,.2),rgba(236,72,153,.2));border:1px solid rgba(236,72,153,.4);border-radius:14px;padding:clamp(12px,3vw,16px);margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
 .tuition-day-banner.off{background:rgba(0,0,0,.25);border:1px solid var(--glass-border)}
 .tuition-day-banner .txt{font-weight:600;display:flex;align-items:center;gap:10px;font-size:clamp(12px,3.2vw,14px)}
-
 .stu-att-row{background:rgba(0,0,0,.2);border:1px solid var(--glass-border);border-radius:14px;padding:clamp(10px,2.5vw,14px);margin-bottom:10px;display:flex;align-items:center;gap:clamp(10px,2.5vw,14px);flex-wrap:wrap;transition:.2s}
 .stu-att-row:hover{border-color:var(--accent)}
 .stu-att-row .info{flex:1;min-width:140px;cursor:pointer}
@@ -160,7 +140,6 @@ tr:hover td{background:rgba(255,255,255,.03)}
 .att-btn.none{background:rgba(255,255,255,.05);color:var(--muted);border:1px solid var(--glass-border)}
 .att-btn.active.present{background:#10b981;color:#fff;box-shadow:0 0 0 2px rgba(16,185,129,.5)}
 .att-btn.active.absent{background:#ef4444;color:#fff;box-shadow:0 0 0 2px rgba(239,68,68,.5)}
-
 .profile-header{display:flex;gap:18px;align-items:center;margin-bottom:18px;padding-bottom:18px;border-bottom:1px solid var(--glass-border);flex-wrap:wrap}
 .profile-header .info{flex:1;min-width:140px}
 .profile-header .info h3{margin-bottom:4px;font-size:clamp(18px,4.5vw,22px)}
@@ -171,17 +150,14 @@ tr:hover td{background:rgba(255,255,255,.03)}
 .profile-pane{display:none}
 .profile-pane.active{display:block;animation:slideIn .3s}
 @keyframes slideIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-
 .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:clamp(8px,2vw,14px)}
 .info-item{background:rgba(0,0,0,.25);border-radius:10px;padding:clamp(10px,2.5vw,12px)}
 .info-item .lbl{font-size:clamp(9px,2.3vw,11px);color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
 .info-item .val{font-weight:600;font-size:clamp(12px,3.2vw,14px);word-break:break-word}
-
 .month-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;background:rgba(0,0,0,.25);border-radius:12px;padding:10px 14px;gap:8px}
 .month-nav button{background:rgba(255,255,255,.08);border:1px solid var(--glass-border);color:var(--text);padding:8px 12px;border-radius:8px;cursor:pointer;font-weight:600;min-width:40px;min-height:40px}
 .month-nav button:hover{background:rgba(255,255,255,.15)}
 .month-nav .mn-label{font-family:'Space Grotesk';font-size:clamp(13px,3.5vw,16px);font-weight:700}
-
 .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:clamp(4px,1vw,6px)}
 .cal-head{font-size:clamp(9px,2.3vw,10px);color:var(--muted);text-align:center;font-weight:700;text-transform:uppercase;padding:6px 0}
 .cal-day{aspect-ratio:1;border-radius:8px;display:grid;place-items:center;background:rgba(255,255,255,.04);font-size:clamp(10px,2.8vw,12px);cursor:pointer;transition:.2s;border:1px solid transparent;position:relative}
@@ -193,36 +169,57 @@ tr:hover td{background:rgba(255,255,255,.03)}
 .cal-day.empty{visibility:hidden}
 .cal-day.future{opacity:.4;cursor:not-allowed}
 
-.pay-month-row{background:rgba(0,0,0,.25);border-radius:12px;padding:clamp(10px,2.5vw,14px);margin-bottom:8px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+/* ===== PAYMENT SYSTEM NEW STYLES ===== */
+.pay-month-row{background:rgba(0,0,0,.25);border-radius:12px;padding:clamp(10px,2.5vw,14px);margin-bottom:8px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;border-left:4px solid var(--glass-border)}
+.pay-month-row.status-paid{border-left-color:#10b981;background:rgba(16,185,129,.08)}
+.pay-month-row.status-partial{border-left-color:#f59e0b;background:rgba(245,158,11,.08)}
+.pay-month-row.status-unpaid{border-left-color:#ef4444;background:rgba(239,68,68,.08)}
 .pay-month-row .ym{font-weight:700;font-size:clamp(12px,3.2vw,14px);min-width:90px}
 .pay-month-row .amt{font-family:'Space Grotesk';font-weight:700;font-size:clamp(13px,3.5vw,15px)}
+.pay-month-row .status-info{flex:1;min-width:120px;font-size:11px;color:var(--muted)}
+.pay-month-row .status-info b{color:var(--text)}
+.pay-history-item{background:rgba(0,0,0,.25);border-radius:12px;padding:12px 14px;margin-bottom:8px;display:flex;align-items:center;gap:12px;border:1px solid var(--glass-border);transition:.2s}
+.pay-history-item:hover{border-color:var(--accent);transform:translateX(2px)}
+.pay-history-item .pay-amt{font-family:'Space Grotesk';font-size:clamp(16px,4vw,20px);font-weight:700;color:#6ee7b7;min-width:80px}
+.pay-history-item .pay-info{flex:1;min-width:0}
+.pay-history-item .pay-info .pay-date{font-size:12px;color:var(--text);font-weight:600;margin-bottom:2px}
+.pay-history-item .pay-info .pay-note{font-size:11px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pay-history-item .pay-del{width:32px;height:32px;border-radius:8px;background:rgba(239,68,68,.15);border:none;cursor:pointer;color:#fca5a5;display:grid;place-items:center;transition:.2s;flex-shrink:0}
+.pay-history-item .pay-del:hover{background:rgba(239,68,68,.3)}
+.advance-banner{background:linear-gradient(135deg,rgba(59,130,246,.15),rgba(6,182,212,.15));border:1px solid rgba(59,130,246,.4);border-radius:12px;padding:14px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.advance-banner .adv-icon{font-size:24px}
+.advance-banner .adv-info{flex:1;min-width:120px}
+.advance-banner .adv-info .adv-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+.advance-banner .adv-info .adv-amt{font-family:'Space Grotesk';font-size:clamp(18px,4.5vw,22px);font-weight:700;color:#93c5fd}
+.advance-banner .adv-info .adv-desc{font-size:11px;color:var(--muted);margin-top:2px}
+.payment-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:14px}
+.pay-sum-box{background:rgba(0,0,0,.25);border-radius:10px;padding:12px;text-align:center}
+.pay-sum-box .sum-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.pay-sum-box .sum-val{font-family:'Space Grotesk';font-size:clamp(16px,4vw,20px);font-weight:700}
+.pay-sum-box.due .sum-val{color:#fca5a5}
+.pay-sum-box.paid .sum-val{color:#6ee7b7}
+.pay-sum-box.advance .sum-val{color:#93c5fd}
+.pay-sum-box.fee .sum-val{color:var(--text)}
+/* ===== END PAYMENT SYSTEM STYLES ===== */
 
 .toggle{position:relative;width:44px;height:24px;background:rgba(255,255,255,.1);border-radius:12px;cursor:pointer;transition:.2s;display:inline-block;flex-shrink:0}
 .toggle.on{background:linear-gradient(135deg,var(--accent),var(--accent2))}
 .toggle::after{content:'';position:absolute;width:18px;height:18px;background:#fff;border-radius:50%;top:3px;left:3px;transition:.2s}
 .toggle.on::after{left:23px}
-
 .search-bar{display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap}
 .search-bar input,.search-bar select{padding:clamp(10px,2.5vw,12px) 14px;border-radius:10px;background:rgba(0,0,0,.25);border:1px solid var(--glass-border);color:var(--text);font:400 clamp(12px,3.2vw,13px) 'Inter';min-height:44px;flex:1;min-width:120px}
-
 .page{display:none;animation:slideIn .4s}
 .page.active{display:block}
-
 .empty-state{text-align:center;padding:clamp(30px,8vw,60px) 20px;color:var(--muted)}
 .empty-state .big{font-size:clamp(40px,12vw,60px);margin-bottom:14px;opacity:.3}
-
 .toast{position:fixed;bottom:40px;left:50%;transform:translateX(-50%);padding:12px 20px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;font-weight:500;font-size:13px;z-index:2000;box-shadow:0 10px 30px rgba(0,0,0,.3);animation:toastIn .3s;display:none;max-width:90%;text-align:center}
 .toast.show{display:block}
 @keyframes toastIn{from{transform:translate(-50%,20px);opacity:0}to{transform:translate(-50%,0);opacity:1}}
-
 .class-card{background:rgba(0,0,0,.2);border:1px solid var(--glass-border);border-radius:14px;padding:clamp(12px,3vw,16px);margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-
 .code-box{background:rgba(0,0,0,.35);border:1px solid var(--glass-border);border-radius:10px;padding:10px;font-family:'Courier New',monospace;font-size:clamp(10px,2.5vw,12px);color:#67e8f9;white-space:pre-wrap;word-break:break-all;margin:8px 0}
-
 .loading-screen{position:fixed;inset:0;background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));display:grid;place-items:center;z-index:999}
 .spinner{width:50px;height:50px;border:3px solid rgba(255,255,255,.1);border-top-color:var(--accent);border-radius:50%;animation:spin 1s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-
 .day-toggle{display:flex;flex-direction:column;gap:8px;margin-top:8px;width:100%}
 .day-item{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:10px;background:rgba(0,0,0,.25);border-radius:12px;border:1px solid var(--glass-border);transition:.2s}
 .day-item.active{background:linear-gradient(135deg,rgba(124,58,237,.2),rgba(236,72,153,.15));border-color:rgba(236,72,153,.4)}
@@ -230,7 +227,6 @@ tr:hover td{background:rgba(255,255,255,.03)}
 .day-chip.on{background:linear-gradient(135deg,var(--accent),var(--accent2));border-color:transparent;color:#fff;box-shadow:0 2px 8px rgba(124,58,237,.4)}
 .day-time-input{padding:8px 12px;border-radius:8px;background:rgba(0,0,0,.4);border:1px solid var(--glass-border);color:var(--text);font:500 13px 'Inter';min-height:38px;width:120px}
 .day-time-input:disabled{opacity:.4;cursor:not-allowed}
-
 .upi-box{background:linear-gradient(135deg,rgba(16,185,129,.15),rgba(6,182,212,.15));border:1px solid rgba(16,185,129,.3);border-radius:16px;padding:clamp(14px,3vw,20px);margin-top:18px}
 .upi-box h4{font-family:'Space Grotesk';margin-bottom:14px;display:flex;align-items:center;gap:10px;font-size:clamp(15px,4vw,17px)}
 .upi-details{display:grid;gap:clamp(12px,3vw,20px)}
@@ -240,7 +236,6 @@ tr:hover td{background:rgba(255,255,255,.03)}
 .upi-qr{text-align:center;background:#fff;padding:20px;border-radius:16px;margin:16px 0}
 .upi-qr img{display:block;width:220px;height:220px;margin:0 auto}
 .upi-qr-label{margin-top:10px;font-size:13px;color:#333;font-weight:600}
-
 .about-section{background:var(--glass);backdrop-filter:blur(14px);border:1px solid var(--glass-border);border-radius:24px;padding:clamp(20px,5vw,40px);text-align:center}
 .about-avatar{width:clamp(80px,20vw,120px);height:clamp(80px,20vw,120px);border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:grid;place-items:center;margin:0 auto 20px;font-size:clamp(28px,8vw,40px);font-weight:700;box-shadow:0 8px 32px rgba(124,58,237,.4);overflow:hidden}
 .about-avatar img{width:100%;height:100%;object-fit:cover}
@@ -251,18 +246,15 @@ tr:hover td{background:rgba(255,255,255,.03)}
 .about-contact{display:flex;align-items:center;gap:12px;padding:clamp(12px,3vw,14px) clamp(14px,3.5vw,18px);background:rgba(0,0,0,.3);border:1px solid var(--glass-border);border-radius:14px;text-decoration:none;color:var(--text);transition:.25s;font-size:clamp(11px,3vw,13px);justify-content:center;min-height:56px}
 .about-contact:hover{transform:translateY(-3px);border-color:var(--accent);background:rgba(0,0,0,.4)}
 .about-contact svg{flex-shrink:0;width:20px;height:20px}
-
 .backup-schedule{background:rgba(0,0,0,.2);border:1px solid var(--glass-border);border-radius:14px;padding:clamp(12px,3vw,18px);margin-top:14px}
 .schedule-row{display:flex;align-items:center;justify-content:space-between;padding:clamp(10px,2.5vw,14px);background:rgba(0,0,0,.2);border-radius:12px;margin-bottom:10px;flex-wrap:wrap;gap:12px}
 .schedule-row:last-child{margin-bottom:0}
 .schedule-row .lbl{font-weight:600;font-size:clamp(12px,3.2vw,14px);margin-bottom:2px}
 .schedule-row .sub{font-size:clamp(10px,2.5vw,11px);color:var(--muted)}
 .schedule-row select,.schedule-row input[type="time"]{padding:8px 12px;border-radius:8px;background:rgba(0,0,0,.3);border:1px solid var(--glass-border);color:var(--text);font:500 clamp(11px,3vw,13px) 'Inter';min-height:40px}
-
 .monthly-banner{background:linear-gradient(135deg,rgba(245,158,11,.2),rgba(236,72,153,.15));border:1px solid rgba(245,158,11,.4);border-radius:14px;padding:clamp(12px,3vw,18px);margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
 .monthly-banner h4{font-family:'Space Grotesk';margin-bottom:4px;font-size:clamp(13px,3.5vw,15px)}
 .monthly-banner p{font-size:clamp(10px,2.5vw,12px);color:var(--muted)}
-
 .routine-preview{background:linear-gradient(135deg,#1e1b4b,#312e81);border:1px solid var(--glass-border);border-radius:22px;padding:clamp(20px,4vw,28px);max-width:480px;width:100%;animation:pop .3s cubic-bezier(.34,1.56,.64,1)}
 .routine-preview h3{font-family:'Space Grotesk';margin-bottom:6px;font-size:clamp(18px,4.5vw,22px)}
 .routine-preview .class-sub{color:var(--muted);font-size:12px;margin-bottom:18px}
@@ -275,7 +267,6 @@ tr:hover td{background:rgba(255,255,255,.03)}
 .routine-day-row .day-name{font-weight:600;font-size:14px;color:#e9d5ff}
 .routine-day-row .day-time{font-family:'Space Grotesk';font-weight:700;font-size:15px;color:#67e8f9}
 .routine-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
-
 .mobile-cards{display:block;padding-bottom:20px}
 .mobile-cards .m-card{background:rgba(0,0,0,.25);border:1px solid var(--glass-border);border-radius:14px;padding:14px;margin-bottom:12px;display:flex;gap:12px;align-items:flex-start}
 .mobile-cards .m-card .photo{width:50px;height:50px;font-size:18px;flex-shrink:0}
@@ -283,7 +274,6 @@ tr:hover td{background:rgba(255,255,255,.03)}
 .mobile-cards .m-card .nm{font-weight:600;font-size:15px;margin-bottom:4px;cursor:pointer}
 .mobile-cards .m-card .meta{font-size:11px;color:var(--muted);margin-bottom:8px;display:flex;flex-wrap:wrap;gap:6px}
 .mobile-cards .m-card .actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-start;margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.08)}
-
 @media (max-width: 768px) {
   .tbl-wrap{display:none}
   .mobile-cards{display:block}
@@ -294,7 +284,6 @@ tr:hover td{background:rgba(255,255,255,.03)}
   .tbl-wrap{display:block}
   .mobile-cards{display:none}
 }
-
 @media (max-width: 380px) {
   .main{padding:12px;padding-top:60px}
   .stat{padding:12px}
@@ -356,6 +345,7 @@ tr:hover td{background:rgba(255,255,255,.03)}
       <div class="stats">
         <div class="stat"><div class="label">Students</div><div class="val" id="sTotal">0</div><div class="sub">All classes</div></div>
         <div class="stat"><div class="label">Total Dues</div><div class="val" id="sDues">₹0</div><div class="sub" id="sDuesSub">No pending fees</div></div>
+        <div class="stat"><div class="label">Total Advance</div><div class="val" id="sAdvance">₹0</div><div class="sub" id="sAdvSub">Extra payments</div></div>
         <div class="stat"><div class="label">Today Att.</div><div class="val" id="sAtt">0%</div><div class="sub" id="sAttSub">Mark attendance</div></div>
         <div class="stat"><div class="label">Classes</div><div class="val" id="sClass">0</div><div class="sub">Active batches</div></div>
       </div>
@@ -414,13 +404,13 @@ tr:hover td{background:rgba(255,255,255,.03)}
     </section>
 
     <section class="page" id="fees">
-      <div class="page-head"><div><h2>Fees & <span>Dues</span></h2><p>Track payments</p></div></div>
+      <div class="page-head"><div><h2>Fees & <span>Dues</span></h2><p>Track payments with partial & advance support</p></div></div>
       <div class="search-bar">
         <select id="feeClass" onchange="renderFees()"><option value="">All Classes</option></select>
         <button class="btn btn-danger" onclick="sendBulkReminder()">📨 Remind All</button>
       </div>
       <div class="card">
-        <div class="tbl-wrap"><table id="feesTbl"><thead><tr><th>Student</th><th>Class</th><th>Fee</th><th>Due Months</th><th>Breakdown</th><th>Total</th><th>Alert</th></tr></thead><tbody></tbody></table></div>
+        <div class="tbl-wrap"><table id="feesTbl"><thead><tr><th>Student</th><th>Class</th><th>Fee</th><th>Status</th><th>Breakdown</th><th>Total</th><th>Alert</th></tr></thead><tbody></tbody></table></div>
         <div class="mobile-cards" id="feesCards"></div>
       </div>
     </section>
@@ -435,7 +425,7 @@ tr:hover td{background:rgba(255,255,255,.03)}
       
       <div class="card">
         <h3 style="margin-bottom:12px;font-family:'Space Grotesk';font-size:clamp(15px,4vw,18px)">📊 Google Sheet Backup</h3>
-        <p style="color:var(--muted);font-size:12px;margin-bottom:14px">তোমার নিজের Google Sheet-এ সরাসরি ব্যাকআপ যাবে</p>
+        <p style="color:var(--muted);font-size:12px;margin-bottom:14px">Backup directly to your Google Sheet</p>
         <div class="form-grid">
           <div class="field" style="grid-column:1/-1">
             <label>Apps Script Web App URL</label>
@@ -446,7 +436,7 @@ tr:hover td{background:rgba(255,255,255,.03)}
           <button class="btn btn-ghost" onclick="saveSheetUrl()">💾 Save URL</button>
           <button class="btn btn-primary" onclick="backupToSheet()">📊 Backup to Sheet</button>
           <button class="btn btn-ghost" onclick="testSheetConnection()">🔗 Test</button>
-          <button class="btn btn-ghost" onclick="openSheetGuide()">📖 কিভাবে সেটআপ করবো?</button>
+          <button class="btn btn-ghost" onclick="openSheetGuide()">📖 Setup Guide</button>
         </div>
         <p id="sheetStatus" style="color:var(--muted);font-size:11px;margin-top:12px"></p>
       </div>
@@ -563,6 +553,37 @@ tr:hover td{background:rgba(255,255,255,.03)}
   </div>
 </div>
 
+<!-- ===== NEW PAYMENT MODAL ===== -->
+<div class="modal-bg" id="paymentModal">
+  <div class="modal sm">
+    <button class="modal-close" onclick="closeModal('paymentModal')">×</button>
+    <h3>💰 Record Payment</h3>
+    <input type="hidden" id="payStuId"/>
+    <div id="payStuInfo" style="margin-bottom:14px;padding:12px;background:rgba(0,0,0,.25);border-radius:10px">
+      <div style="font-weight:700;font-size:clamp(15px,4vw,18px)" id="payStuName"></div>
+      <div style="font-size:12px;color:var(--muted)" id="payStuSub"></div>
+    </div>
+    <div class="field">
+      <label>Amount Paid (₹) *</label>
+      <input type="number" id="payAmount" min="1" required placeholder="Enter amount"/>
+    </div>
+    <div class="field" style="margin-top:10px">
+      <label>Payment Date</label>
+      <input type="date" id="payDate"/>
+    </div>
+    <div class="field" style="margin-top:10px">
+      <label>Note (optional)</label>
+      <input id="payNote" placeholder="e.g. Cash, PhonePe, etc."/>
+    </div>
+    <div id="payPreview" style="margin-top:14px;padding:12px;background:rgba(124,58,237,.08);border:1px solid rgba(124,58,237,.2);border-radius:10px;font-size:12px;color:var(--muted);display:none"></div>
+    <div style="display:flex;gap:10px;margin-top:20px;justify-content:flex-end">
+      <button class="btn btn-ghost" onclick="closeModal('paymentModal')">Cancel</button>
+      <button class="btn btn-primary" onclick="confirmPayment()">💾 Save Payment</button>
+    </div>
+  </div>
+</div>
+<!-- ===== END PAYMENT MODAL ===== -->
+
 <div class="modal-bg" id="classModal">
   <div class="modal sm">
     <button class="modal-close" onclick="closeModal('classModal')">×</button>
@@ -650,7 +671,6 @@ tr:hover td{background:rgba(255,255,255,.03)}
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
-
 <script>
 const firebaseConfig = {
   apiKey: "AIzaSyBQzKo8mH7URnwjH91MfcvD6fPCL9uB-tk",
@@ -710,36 +730,137 @@ async function handleAuth(e){
   const pass = document.getElementById('authPass').value;
   const err = document.getElementById('authError');
   err.style.display='none';
-  
+  err.textContent='';
+  auth.languageCode = 'bn';
   try{
     if(authMode==='signup'){
       const cred = await auth.createUserWithEmailAndPassword(email, pass);
       await cred.user.sendEmailVerification();
       await auth.signOut();
-      alert('✅ Account তৈরি হয়েছে!\n\nতোমার email-এ একটা verification link পাঠানো হয়েছে।\n\n📧 ' + email + ' — এই email খুলে link-এ click করো।\n\nClick করার পরে আবার Login করো!');
-      switchTab('login');
+      showVerificationPending(email);
       return;
     } else {
       const cred = await auth.signInWithEmailAndPassword(email, pass);
       if(!cred.user.emailVerified){
         await auth.signOut();
-        err.textContent = '⚠️ আগে email verify করো! তোমার inbox (' + email + ') চেক করো।';
-        err.style.display = 'block';
+        showVerificationPending(email);
         return;
       }
     }
-  }catch(e){ 
-    err.textContent = e.message.replace('Firebase: ',''); 
-    err.style.display = 'block'; 
+  }catch(e){
+    err.textContent='⚠️ '+e.message.replace('Firebase: ','').replace(/\(auth.*\)/, '').trim();
+    err.style.display = 'block';
   }
 }
+
+function showVerificationPending(email){
+  document.getElementById('loginScreen').style.display='none';
+  document.getElementById('mainApp').classList.remove('show');
+  document.getElementById('menuToggle').style.display='none';
+  let pending = document.getElementById('verifyPendingScreen');
+  if(!pending){
+    pending = document.createElement('div');
+    pending.id = 'verifyPendingScreen';
+    pending.className = 'login-wrap';
+    document.body.appendChild(pending);
+  }
+  pending.innerHTML = `
+    <div class="login-card" style="max-width:480px">
+      <div style="text-align:center;font-size:64px;margin-bottom:12px">📧</div>
+      <h2 style="color:var(--text)">Verify Your <span>Email</span></h2>
+      <p style="margin-bottom:8px">তোমার email-এ একটা verification link পাঠানো হয়েছে।</p>
+      <div style="background:rgba(240,192,64,0.1);border:1px solid rgba(240,192,64,0.3);border-radius:12px;padding:14px;margin:16px 0;text-align:left">
+        <div style="font-size:11px;color:var(--muted);margin-bottom:4px">📩 Email পাঠানো হয়েছে:</div>
+        <div style="font-weight:700;color:var(--accent);font-size:14px;word-break:break-all">${email}</div>
+      </div>
+      <div style="background:rgba(0,0,0,0.2);border-radius:12px;padding:14px;margin-bottom:18px;text-align:left;font-size:13px;line-height:1.8;color:var(--text)">
+        <b>📌 এখন কি করবে:</b>
+        <ol style="padding-left:20px;margin-top:6px">
+          <li>তোমার Gmail / Email inbox খোলো</li>
+          <li><b>"TuitionPro"</b> থেকে আসা email-টা খুঁজো</li>
+          <li>সেই email-এ <b>"Verify Email"</b> button-এ click করো</li>
+          <li>এরপর নিচের বাটনে click করো</li>
+        </ol>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn btn-primary" style="flex:1" onclick="checkVerification()">✅ Verify করেছি — Login করো</button>
+      </div>
+      <div style="display:flex;gap:10px;margin-top:10px;flex-wrap:wrap">
+        <button class="btn btn-ghost" style="flex:1" onclick="resendVerification('${email}')">📤 আবার email পাঠাও</button>
+        <button class="btn btn-danger btn-sm" style="flex:1" onclick="backToLogin()">← Login এ ফিরে যাও</button>
+      </div>
+      <p id="verifyStatus" style="color:var(--muted);font-size:11px;text-align:center;margin-top:12px;display:none"></p>
+      <div style="margin-top:18px;padding:14px;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:10px;font-size:11px;color:#fca5a5;text-align:left">
+        <b>💡 Email পাচ্ছো না?</b>
+        <ul style="padding-left:18px;margin-top:4px;line-height:1.7">
+          <li><b>Spam / Junk</b> folder চেক করো</li>
+          <li>Email address টা ঠিকমতো লিখেছো কিনা দেখো</li>
+          <li>১-২ মিনিট অপেক্ষা করো</li>
+        </ul>
+      </div>
+    </div>
+  `;
+  pending.style.display = 'grid';
+}
+
+async function checkVerification(){
+  const status = document.getElementById('verifyStatus');
+  status.style.display = 'block';
+  status.innerHTML = '🔄 Checking...';
+  status.style.color = 'var(--muted)';
+  try{
+    const email = document.getElementById('authEmail').value.trim();
+    const pass = document.getElementById('authPass').value;
+    const cred = await auth.signInWithEmailAndPassword(email, pass);
+    if(cred.user.emailVerified){
+      status.innerHTML = '✅ Verified! App খুলছে...';
+      status.style.color = '#6ee7b7';
+      setTimeout(()=>{const p=document.getElementById('verifyPendingScreen');if(p)p.style.display='none';},500);
+    } else {
+      await auth.signOut();
+      status.innerHTML = '❌ এখনো verify হয়নি! Email-এ গিয়ে link-এ click করো।';
+      status.style.color = '#fca5a5';
+    }
+  }catch(e){
+    status.innerHTML = '❌ ' + e.message.replace('Firebase: ', '').trim();
+    status.style.color = '#fca5a5';
+  }
+}
+
+async function resendVerification(email){
+  const status = document.getElementById('verifyStatus');
+  status.style.display = 'block';
+  status.innerHTML = '📤 আবার পাঠানো হচ্ছে...';
+  status.style.color = 'var(--muted)';
+  try{
+    const pass = document.getElementById('authPass').value;
+    const cred = await auth.signInWithEmailAndPassword(email, pass);
+    await cred.user.sendEmailVerification();
+    await auth.signOut();
+    status.innerHTML = '✅ নতুন email পাঠানো হয়েছে!';
+    status.style.color = '#6ee7b7';
+    toast('✅ Verification email sent!');
+  }catch(e){
+    status.innerHTML = '❌ ' + e.message.replace('Firebase: ', '').trim();
+    status.style.color = '#fca5a5';
+  }
+}
+
+function backToLogin(){
+  const p = document.getElementById('verifyPendingScreen');
+  if(p) p.style.display = 'none';
+  document.getElementById('loginScreen').style.display = 'grid';
+}
+
 function doLogout(){ if(confirm('Logout?')) auth.signOut(); }
 
 auth.onAuthStateChanged(async (user) => {
   document.getElementById('loadingScreen').style.display = 'none';
-  if(user){
+  if(user && user.emailVerified){
     currentUser = user;
     document.getElementById('loginScreen').style.display = 'none';
+    const p = document.getElementById('verifyPendingScreen');
+    if(p) p.style.display = 'none';
     document.getElementById('mainApp').classList.add('show');
     document.getElementById('menuToggle').style.display = 'flex';
     document.getElementById('userEmail').textContent = user.email;
@@ -748,7 +869,9 @@ auth.onAuthStateChanged(async (user) => {
     currentUser = null;
     if(unsubscribe){ unsubscribe(); unsubscribe=null; }
     if(autoBackupInterval){ clearInterval(autoBackupInterval); autoBackupInterval=null; }
-    document.getElementById('loginScreen').style.display = 'grid';
+    if(!document.getElementById('verifyPendingScreen') || document.getElementById('verifyPendingScreen').style.display === 'none'){
+      document.getElementById('loginScreen').style.display = 'grid';
+    }
     document.getElementById('mainApp').classList.remove('show');
     document.getElementById('menuToggle').style.display = 'none';
   }
@@ -880,9 +1003,8 @@ async function backupToSheet() {
   status.style.color = 'var(--muted)';
   const dues = {};
   DB.students.forEach(s => {
-    const months = getDueMonths(s);
-    const fine = getFineTotal(s);
-    dues[s.id] = { months: months.length, fine: fine, total: months.length * s.fee + fine };
+    const ps = getPaymentStatus(s);
+    dues[s.id] = { due: ps.totalDue, advance: ps.totalAdvance, totalPaid: ps.totalPaid };
   });
   const payload = {
     students: DB.students.map(s => ({
@@ -914,40 +1036,37 @@ function openSheetGuide() {
   const guideHtml = `
     <div style="padding:20px;max-width:600px">
       <h3 style="font-family:'Space Grotesk';margin-bottom:16px">📊 Google Sheet Setup Guide</h3>
-      <p style="color:var(--muted);font-size:13px;margin-bottom:20px">তোমার নিজের Google Sheet-এ ব্যাকআপ। একবার সেটআপ করলেই হবে!</p>
+      <p style="color:var(--muted);font-size:13px;margin-bottom:20px">Every user can backup to their own Google Sheet. One-time setup!</p>
       <div style="background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.3);border-radius:12px;padding:16px;margin-bottom:16px">
-        <h4 style="margin-bottom:10px;color:#a78bfa">🎯 Step 1: Google Sheet খোলো</h4>
-        <p style="font-size:13px;color:var(--muted)"><a href="https://sheets.new" target="_blank" style="color:#67e8f9;text-decoration:underline">sheets.new</a> এ গিয়ে নতুন Sheet বানাও।</p>
+        <h4 style="margin-bottom:10px;color:#a78bfa">🎯 Step 1: Open Google Sheet</h4>
+        <p style="font-size:13px;color:var(--muted)">Go to <a href="https://sheets.new" target="_blank" style="color:#67e8f9;text-decoration:underline">sheets.new</a> to create a new Sheet.</p>
       </div>
       <div style="background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.3);border-radius:12px;padding:16px;margin-bottom:16px">
-        <h4 style="margin-bottom:10px;color:#a78bfa">⚙️ Step 2: Apps Script যোগ করো</h4>
+        <h4 style="margin-bottom:10px;color:#a78bfa">⚙️ Step 2: Add Apps Script</h4>
         <ol style="font-size:13px;color:var(--muted);padding-left:20px;line-height:1.8">
-          <li>Sheet-এ <b>Extensions → Apps Script</b> click করো</li>
-          <li>আগের সব কোড delete করো</li>
-          <li>নিচের button-এ click করে কোড copy করো</li>
-          <li>Apps Script-এ paste করো</li>
-          <li>💾 Save click করো</li>
+          <li>In Sheet, click <b>Extensions → Apps Script</b></li>
+          <li>Delete all existing code</li>
+          <li>Click the button below to copy the code</li>
+          <li>Paste it in Apps Script</li>
+          <li>Click 💾 Save</li>
         </ol>
-        <button onclick="copyAppsScript()" class="btn btn-primary btn-sm" style="margin-top:12px">📋 Apps Script কোড copy করো</button>
+        <button onclick="copyAppsScript()" class="btn btn-primary btn-sm" style="margin-top:12px">📋 Copy Apps Script Code</button>
       </div>
       <div style="background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.3);border-radius:12px;padding:16px;margin-bottom:16px">
-        <h4 style="margin-bottom:10px;color:#a78bfa">🚀 Step 3: Deploy করো</h4>
+        <h4 style="margin-bottom:10px;color:#a78bfa">🚀 Step 3: Deploy</h4>
         <ol style="font-size:13px;color:var(--muted);padding-left:20px;line-height:1.8">
-          <li><b>Deploy → New Deployment</b> click করো</li>
-          <li>⚙️ gear icon click করে <b>Web app</b> select করো</li>
+          <li>Click <b>Deploy → New Deployment</b></li>
+          <li>Click ⚙️ gear icon and select <b>Web app</b></li>
           <li><b>Execute as:</b> Me</li>
           <li><b>Who has access:</b> Anyone</li>
-          <li><b>Deploy</b> click করো</li>
-          <li>Permission warning এলে: <b>Advanced → Go to (unsafe) → Allow</b></li>
-          <li>যে URL পাবে সেটা copy করো</li>
+          <li>Click <b>Deploy</b></li>
+          <li>If permission warning: <b>Advanced → Go to (unsafe) → Allow</b></li>
+          <li>Copy the URL you get</li>
         </ol>
       </div>
       <div style="background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);border-radius:12px;padding:16px">
-        <h4 style="margin-bottom:10px;color:#6ee7b7">✅ Step 4: TuitionPro-তে Paste করো</h4>
-        <p style="font-size:13px;color:var(--muted)">Copy করা URL টা <b>"Apps Script Web App URL"</b> box-এ paste করো এবং <b>Save</b> click করো।<br><br>তারপর যখনই ইচ্ছা <b>Backup to Sheet</b> click করে backup নাও! 🎉</p>
-      </div>
-      <div style="margin-top:20px;padding:12px;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.3);border-radius:10px">
-        <p style="font-size:12px;color:#fbbf24">🔒 <b>Privacy:</b> তোমার data শুধু তোমার Sheet-এ যাবে। অন্য কারো সাথে মিশবে না।</p>
+        <h4 style="margin-bottom:10px;color:#6ee7b7">✅ Step 4: Paste in TuitionPro</h4>
+        <p style="font-size:13px;color:var(--muted)">Paste the copied URL in the <b>"Apps Script Web App URL"</b> box above and click <b>Save</b>.<br><br>Then click <b>Backup to Sheet</b> anytime! 🎉</p>
       </div>
     </div>`;
   const modal = document.createElement('div');
@@ -965,12 +1084,12 @@ function copyAppsScript() {
     const ss = SpreadsheetApp.getActiveSpreadsheet();
     const studentsSheet = ss.getSheetByName("Sheet1") || ss.getSheets()[0];
     studentsSheet.clear();
-    studentsSheet.appendRow(['SL', 'Name', 'Class', 'Fee', 'Admission', 'Mobile', 'WhatsApp', 'Instagram', 'Due Months', 'Fine', 'Total Due']);
+    studentsSheet.appendRow(['SL', 'Name', 'Class', 'Fee', 'Admission', 'Mobile', 'WhatsApp', 'Instagram', 'Total Due', 'Advance', 'Total Paid']);
     (data.students || []).forEach((s, i) => {
-      const months = data.dues[s.id]?.months || 0;
-      const fine = data.dues[s.id]?.fine || 0;
-      const total = months * s.fee + fine;
-      studentsSheet.appendRow([i + 1, s.name, s.class, s.fee, s.admission, s.mobile || '', s.wa || '', s.ig || '', months, fine, total]);
+      const due = data.dues[s.id]?.due || 0;
+      const adv = data.dues[s.id]?.advance || 0;
+      const paid = data.dues[s.id]?.totalPaid || 0;
+      studentsSheet.appendRow([i + 1, s.name, s.class, s.fee, s.admission, s.mobile || '', s.wa || '', s.ig || '', due, adv, paid]);
     });
     let classesSheet = ss.getSheetByName("Classes");
     if (!classesSheet) classesSheet = ss.insertSheet("Classes");
@@ -984,18 +1103,18 @@ function copyAppsScript() {
     let paymentsSheet = ss.getSheetByName("Payments");
     if (!paymentsSheet) paymentsSheet = ss.insertSheet("Payments");
     paymentsSheet.clear();
-    paymentsSheet.appendRow(['Student', 'Class', 'Month', 'Paid Date']);
+    paymentsSheet.appendRow(['Student', 'Class', 'Amount', 'Date', 'Note']);
     (data.students || []).forEach(s => {
       (s.payments || []).forEach(p => {
-        paymentsSheet.appendRow([s.name, s.class, p.ym, p.date]);
+        paymentsSheet.appendRow([s.name, s.class, p.amount, p.date, p.note || '']);
       });
     });
     studentsSheet.getRange(1,1,1,11).setBackground('#f0c040').setFontWeight('bold');
     classesSheet.getRange(1,1,1,5).setBackground('#a855f7').setFontColor('#fff').setFontWeight('bold');
-    paymentsSheet.getRange(1,1,1,4).setBackground('#10b981').setFontColor('#fff').setFontWeight('bold');
+    paymentsSheet.getRange(1,1,1,5).setBackground('#10b981').setFontColor('#fff').setFontWeight('bold');
     studentsSheet.autoResizeColumns(1,11);
     classesSheet.autoResizeColumns(1,5);
-    paymentsSheet.autoResizeColumns(1,4);
+    paymentsSheet.autoResizeColumns(1,5);
     return ContentService.createTextOutput(JSON.stringify({status: 'success', students: (data.students||[]).length, url: ss.getUrl()})).setMimeType(ContentService.MimeType.JSON);
   } catch (err) {
     return ContentService.createTextOutput(JSON.stringify({status: 'error', message: err.toString()})).setMimeType(ContentService.MimeType.JSON);
@@ -1003,7 +1122,7 @@ function copyAppsScript() {
 }
 function doGet(e) { return ContentService.createTextOutput('✅ TuitionPro Backup Active!'); }`;
   navigator.clipboard.writeText(script).then(() => {
-    toast('✅ Code copied! Apps Script-এ paste করো');
+    toast('✅ Code copied! Paste in Apps Script');
   }).catch(() => {
     const ta = document.createElement('textarea');
     ta.value = script;
@@ -1019,43 +1138,9 @@ function openEmailGuide() {
   const guideHtml = `
     <div style="padding:20px;max-width:600px">
       <h3 style="font-family:'Space Grotesk';margin-bottom:16px">📧 Email Backup Guide</h3>
-      <p style="color:var(--muted);font-size:13px;margin-bottom:20px">EmailJS ব্যবহার করে সরাসরি তোমার email-এ backup পাঠাও</p>
-      <div style="background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.3);border-radius:12px;padding:16px;margin-bottom:16px">
-        <h4 style="margin-bottom:10px;color:#a78bfa">🎯 Step 1: EmailJS Account বানাও</h4>
-        <p style="font-size:13px;color:var(--muted)"><a href="https://emailjs.com" target="_blank" style="color:#67e8f9;text-decoration:underline">emailjs.com</a> এ গিয়ে free account বানাও।</p>
-      </div>
-      <div style="background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.3);border-radius:12px;padding:16px;margin-bottom:16px">
-        <h4 style="margin-bottom:10px;color:#a78bfa">⚙️ Step 2: Email Service Setup</h4>
-        <ol style="font-size:13px;color:var(--muted);padding-left:20px;line-height:1.8">
-          <li>Dashboard → <b>Email Services</b> যাও</li>
-          <li><b>Add New Service</b> click করো</li>
-          <li>Gmail select করো</li>
-          <li>তোমার Gmail account connect করো</li>
-          <li><b>Service ID</b> copy করো (যেমন: service_xxxxx)</li>
-        </ol>
-      </div>
-      <div style="background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.3);border-radius:12px;padding:16px;margin-bottom:16px">
-        <h4 style="margin-bottom:10px;color:#a78bfa">📝 Step 3: Email Template বানাও</h4>
-        <ol style="font-size:13px;color:var(--muted);padding-left:20px;line-height:1.8">
-          <li><b>Email Templates</b> click করো</li>
-          <li><b>Create New Template</b> click করো</li>
-          <li>Subject: <code>{{subject}}</code></li>
-          <li>Body: <code>{{message}}</code></li>
-          <li>To Email: <code>{{to_email}}</code></li>
-          <li>Save করো</li>
-          <li><b>Template ID</b> copy করো (যেমন: template_xxxxx)</li>
-        </ol>
-      </div>
-      <div style="background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.3);border-radius:12px;padding:16px;margin-bottom:16px">
-        <h4 style="margin-bottom:10px;color:#a78bfa">🔑 Step 4: Public Key নাও</h4>
-        <ol style="font-size:13px;color:var(--muted);padding-left:20px;line-height:1.8">
-          <li><b>Account</b> → <b>API Keys</b> যাও</li>
-          <li><b>Public Key</b> copy করো</li>
-        </ol>
-      </div>
+      <p style="color:var(--muted);font-size:13px;margin-bottom:20px">Use EmailJS to send backups directly to your email</p>
       <div style="background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);border-radius:12px;padding:16px">
-        <h4 style="margin-bottom:10px;color:#6ee7b7">✅ Step 5: TuitionPro-তে Save করো</h4>
-        <p style="font-size:13px;color:var(--muted)">চারটা field fill করো:<br>• <b>Your Email</b> - তোমার Gmail<br>• <b>Service ID</b> - Step 2 থেকে<br>• <b>Template ID</b> - Step 3 থেকে<br>• <b>Public Key</b> - Step 4 থেকে<br><br><b>Save</b> click করো, তারপর <b>Test</b> করো verify করতে।<br>সব ঠিক থাকলে <b>Email Backup</b> click করো! 🎉</p>
+        <h4 style="margin-bottom:10px;color:#6ee7b7">✅ Fill in all 4 fields, Save, Test, then Email Backup!</h4>
       </div>
     </div>`;
   const modal = document.createElement('div');
@@ -1148,10 +1233,10 @@ function saveUPISettings(){
 function getUPIString(amount){
   const u = DB.settings.upi || {};
   if(!u.id) return '';
-  let s = `\n\nUPI-তে টাকা পাঠান:\nUPI ID: ${u.id}\n`;
-  if(u.phone) s += `ফোন নম্বর: ${u.phone}\n`;
-  if(amount) s += `টাকা: ₹${amount}\n`;
-  s += `\nPhonePe / Google Pay / Paytm\nযেকোনো অ্যাপ থেকে পাঠাতে পারেন।`;
+  let s = `\n\n💳 *Pay via UPI:*\n📱 UPI ID: ${u.id}\n`;
+  if(u.phone) s += `📞 Phone: ${u.phone}\n`;
+  if(amount) s += `💰 Amount: ₹${amount}\n`;
+  s += `\n✅ PhonePe / Google Pay / Paytm\nYou can pay from any app.`;
   return s;
 }
 function getUPIQRLink(amount){
@@ -1301,13 +1386,78 @@ function saveClass(){
 }
 function deleteClass(name){ if(!confirm(`Delete "${name}"?`))return; delete DB.classes[name]; saveToCloud();renderAll(); }
 
-function getDueMonths(stu){
-  const adm=new Date(stu.admission);const now=new Date();let months=[];
-  let cur=new Date(adm.getFullYear(),adm.getMonth(),1);const end=new Date(now.getFullYear(),now.getMonth(),1);
-  while(cur<=end){const ym=`${cur.getFullYear()}-${String(cur.getMonth()+1).padStart(2,'0')}`;
-    const paid=(stu.payments||[]).some(p=>p.ym===ym);if(!paid)months.push(ym);cur.setMonth(cur.getMonth()+1);}
+// ===== NEW PAYMENT STATUS SYSTEM =====
+// Returns all months from admission to current month
+function getAllMonths(stu){
+  const adm = new Date(stu.admission);
+  const now = new Date();
+  let months = [];
+  let cur = new Date(adm.getFullYear(), adm.getMonth(), 1);
+  const end = new Date(now.getFullYear(), now.getMonth(), 1);
+  while(cur <= end){
+    const ym = `${cur.getFullYear()}-${String(cur.getMonth()+1).padStart(2,'0')}`;
+    months.push({
+      ym: ym,
+      m: cur.getMonth(),
+      y: cur.getFullYear(),
+      label: `${MONTH_NAMES[cur.getMonth()].slice(0,3)} ${cur.getFullYear()}`
+    });
+    cur.setMonth(cur.getMonth()+1);
+  }
   return months;
 }
+
+// Main calculation: distributes payments across months (FIFO - oldest first)
+function getPaymentStatus(stu){
+  const months = getAllMonths(stu);
+  const totalFeeDue = months.length * stu.fee;
+  const totalPaid = (stu.payments || []).reduce((sum, p) => sum + (p.amount || 0), 0);
+  const fine = getFineTotal(stu);
+  
+  // Distribute payments to months from oldest to newest (FIFO)
+  let remaining = totalPaid;
+  const monthStatus = months.map(mo => {
+    const paid = Math.min(stu.fee, remaining);
+    remaining -= paid;
+    return {
+      ym: mo.ym,
+      m: mo.m,
+      y: mo.y,
+      label: mo.label,
+      fee: stu.fee,
+      paid: paid,
+      due: stu.fee - paid,
+      status: paid >= stu.fee ? 'paid' : paid > 0 ? 'partial' : 'unpaid'
+    };
+  });
+  
+  // Advance = extra money after all months paid
+  const advance = Math.max(0, totalPaid - totalFeeDue);
+  // Actual due (fee only, not including fine which is separate)
+  const feeDue = Math.max(0, totalFeeDue - totalPaid);
+  // Total due including fine
+  const totalDue = feeDue + fine;
+  
+  return {
+    months: monthStatus,
+    totalFeeDue: totalFeeDue,
+    totalPaid: totalPaid,
+    feeDue: feeDue,
+    fine: fine,
+    totalDue: totalDue,
+    totalAdvance: advance,
+    paidMonths: monthStatus.filter(m => m.status === 'paid').length,
+    partialMonths: monthStatus.filter(m => m.status === 'partial').length,
+    unpaidMonths: monthStatus.filter(m => m.status === 'unpaid').length
+  };
+}
+
+// Backward compatibility - get due months for old code paths
+function getDueMonths(stu){
+  const ps = getPaymentStatus(stu);
+  return ps.months.filter(m => m.status !== 'paid').map(m => m.ym);
+}
+
 function getFineTotal(stu){
   const cls=DB.classes[stu.class];if(!cls||!cls.fineEnabled)return 0;
   const now=new Date();const ym=todayYM();let absent=0;
@@ -1317,30 +1467,166 @@ function getFineTotal(stu){
   }
   return absent*cls.fineAmount;
 }
+
+// ===== PAYMENT MODAL FUNCTIONS =====
+function openPaymentModal(sid){
+  const s = DB.students.find(x=>x.id===sid);
+  if(!s) return;
+  document.getElementById('payStuId').value = sid;
+  document.getElementById('payStuName').textContent = s.name;
+  const ps = getPaymentStatus(s);
+  let sub = `₹${s.fee}/mo • ${ps.months.length} months • `;
+  if(ps.totalDue > 0) sub += `Due: ₹${ps.totalDue}`;
+  else if(ps.totalAdvance > 0) sub += `Advance: ₹${ps.totalAdvance}`;
+  else sub += `All Clear ✅`;
+  document.getElementById('payStuSub').textContent = sub;
+  document.getElementById('payAmount').value = '';
+  document.getElementById('payDate').value = todayISO();
+  document.getElementById('payNote').value = '';
+  document.getElementById('payPreview').style.display = 'none';
+  document.getElementById('paymentModal').classList.add('show');
+  
+  // Live preview
+  document.getElementById('payAmount').oninput = function(){
+    const amt = +this.value || 0;
+    const preview = document.getElementById('payPreview');
+    if(amt <= 0){
+      preview.style.display = 'none';
+      return;
+    }
+    // Simulate payment
+    const simStu = JSON.parse(JSON.stringify(s));
+    if(!simStu.payments) simStu.payments = [];
+    simStu.payments.push({id:uid(), amount:amt, date:todayISO(), note:''});
+    const ps2 = getPaymentStatus(simStu);
+    
+    let html = '<b>💡 Payment Preview:</b><br>';
+    const paidMonths = ps2.months.filter(m => m.status === 'paid' && 
+      !ps.months.find(pm => pm.ym === m.ym && pm.status === 'paid'));
+    const partialMonths = ps2.months.filter(m => m.status === 'partial' && 
+      ps.months.find(pm => pm.ym === m.ym && pm.paid !== m.paid));
+    
+    if(paidMonths.length > 0){
+      html += `✅ Fully paid: ${paidMonths.map(m => m.label).join(', ')}<br>`;
+    }
+    if(partialMonths.length > 0){
+      partialMonths.forEach(m => {
+        const old = ps.months.find(pm => pm.ym === m.ym);
+        const added = m.paid - (old ? old.paid : 0);
+        html += `⚠️ ${m.label}: +₹${added} (now ₹${m.paid}/₹${m.fee})<br>`;
+      });
+    }
+    if(ps2.totalAdvance > 0){
+      html += `💰 <b>Advance balance: ₹${ps2.totalAdvance}</b> (will apply to next months)`;
+    }
+    preview.innerHTML = html;
+    preview.style.display = 'block';
+  };
+}
+
+function confirmPayment(){
+  const sid = document.getElementById('payStuId').value;
+  const amount = +document.getElementById('payAmount').value;
+  const date = document.getElementById('payDate').value || todayISO();
+  const note = document.getElementById('payNote').value.trim();
+  
+  if(!amount || amount <= 0){
+    toast('⚠️ Enter valid amount!');
+    return;
+  }
+  
+  const s = DB.students.find(x=>x.id===sid);
+  if(!s) return;
+  
+  if(!s.payments) s.payments = [];
+  s.payments.push({
+    id: uid(),
+    amount: amount,
+    date: date,
+    note: note
+  });
+  
+  saveToCloud();
+  closeModal('paymentModal');
+  toast(`💰 ₹${amount} payment recorded!`);
+  renderAll();
+  if(document.getElementById('profileModal').classList.contains('show')){
+    renderProfilePay();
+  }
+}
+
+function deletePayment(sid, payId){
+  if(!confirm('Delete this payment record?')) return;
+  const s = DB.students.find(x=>x.id===sid);
+  if(!s) return;
+  s.payments = (s.payments || []).filter(p => p.id !== payId);
+  saveToCloud();
+  toast('🗑️ Payment deleted');
+  renderAll();
+  if(document.getElementById('profileModal').classList.contains('show')){
+    renderProfilePay();
+  }
+}
+// ===== END PAYMENT MODAL =====
+
+// ===== NEW FEE MESSAGE WITH DETAILED BREAKDOWN =====
 function feeMessage(s){
-  const months = getDueMonths(s);
-  const fine = getFineTotal(s);
-  const total = months.length * s.fee + fine;
+  const ps = getPaymentStatus(s);
+  const total = ps.totalDue;
   
   const upi = DB.settings.upi || {};
   const upiId = upi.id || '';
   const upiLink = upiId ? "upi://pay?pa=" + upiId + "&pn=Tuition&am=" + total + "&cu=INR" : '';
   
   let msg = "*নমস্কার।*\n\n";
-  msg += "আপনার সন্তানের টিউশন ফি বাকি আছে।\n\n";
+  msg += "আপনার সন্তানের টিউশন ফি-র হিসাব:\n\n";
   msg += "*নাম:* " + s.name + "\n";
-  msg += "*বাকি টাকা:* " + total + " টাকা\n";
-  msg += "*হিসাব:* " + months.length + " মাসের ফি (" + s.fee + " x " + months.length + ")";
-  if(fine > 0) msg += " + জরিমানা " + fine + " টাকা";
-  msg += "\n\n";
-  msg += "অনুগ্রহ করে দ্রুত টাকাটা জমা দিয়ে দিন।\n\n";
+  msg += "*Class:* " + s.class + "\n";
+  msg += "*Monthly Fee:* ₹" + s.fee + "\n\n";
   
-  if(upiId){
-    msg += "-------------------------\n";
-    msg += "*পেমেন্ট করার জন্য:*\n";
+  msg += "📊 *মাস-অনুযায়ী হিসাব:*\n";
+  msg += "━━━━━━━━━━━━━━━━━━\n";
+  
+  // Show each month's status
+  ps.months.forEach(m => {
+    let statusIcon = '';
+    if(m.status === 'paid') statusIcon = '✅';
+    else if(m.status === 'partial') statusIcon = '⚠️';
+    else statusIcon = '❌';
+    
+    let line = `${statusIcon} *${m.label}*: `;
+    if(m.status === 'paid') line += `Paid ✓`;
+    else if(m.status === 'partial') line += `₹${m.paid} paid, *₹${m.due} বাকি*`;
+    else line += `*₹${m.fee} বাকি*`;
+    msg += line + '\n';
+  });
+  
+  msg += "━━━━━━━━━━━━━━━━━━\n\n";
+  
+  msg += `*Total Fee Due:* ₹${ps.totalFeeDue}\n`;
+  msg += `*Total Paid:* ₹${ps.totalPaid}\n`;
+  
+  if(ps.fine > 0){
+    msg += `*Fine (Attendance):* ₹${ps.fine}\n`;
+  }
+  
+  if(ps.totalAdvance > 0){
+    msg += `\n💰 *Advance Balance:* ₹${ps.totalAdvance}\n`;
+    msg += `(এই টাকা পরের মাসের fee-তে adjust হবে)\n`;
+  } else if(ps.feeDue > 0){
+    msg += `\n❗ *Net Due:* ₹${ps.feeDue}`;
+    if(ps.fine > 0) msg += ` + Fine ₹${ps.fine} = *₹${total}*`;
+    msg += '\n';
+  }
+  
+  msg += "\nঅনুগ্রহ করে দ্রুত বাকি টাকা জমা দিয়ে দিন।\n";
+  
+  if(upiId && total > 0){
+    msg += "\n-------------------------\n";
+    msg += "*💳 পেমেন্ট করার জন্য:*\n";
     msg += "UPI ID: " + upiId + "\n";
     if(upi.phone) msg += "ফোন নম্বর: " + upi.phone + "\n";
-    msg += "টাকা: " + total + " টাকা\n\n";
+    msg += "টাকা: *₹" + total + "*\n\n";
     if(upiLink){
       msg += "সরাসরি পেমেন্ট করতে নিচের লিঙ্কে ক্লিক করুন:\n";
       msg += upiLink + "\n";
@@ -1351,6 +1637,7 @@ function feeMessage(s){
   msg += "\nধন্যবাদ।";
   return msg;
 }
+
 function photoHTML(s,lg=false){
   if(s.photo)return `<div class="photo ${lg?'lg':''}"><img src="${s.photo}"/></div>`;
   return `<div class="photo ${lg?'lg':''}">${s.name.charAt(0).toUpperCase()}</div>`;}
@@ -1383,29 +1670,45 @@ function renderDashboard(){
   document.getElementById('todayDate').textContent=new Date().toLocaleDateString('en-IN',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
   document.getElementById('sTotal').textContent=DB.students.length;
   document.getElementById('sClass').textContent=new Set(DB.students.map(s=>s.class)).size;
-  let totalDue=0,dueStudents=[];
-  DB.students.forEach(s=>{const months=getDueMonths(s);const fine=getFineTotal(s);const due=months.length*s.fee+fine;
-    if(due>0){totalDue+=due;dueStudents.push({s,due});}});
+  
+  let totalDue=0, totalAdvance=0, dueStudents=[];
+  DB.students.forEach(s=>{
+    const ps = getPaymentStatus(s);
+    if(ps.totalDue > 0){
+      totalDue += ps.totalDue;
+      dueStudents.push({s, ps});
+    }
+    if(ps.totalAdvance > 0){
+      totalAdvance += ps.totalAdvance;
+    }
+  });
+  
   document.getElementById('sDues').textContent='₹'+totalDue.toLocaleString('en-IN');
   document.getElementById('sDuesSub').textContent=dueStudents.length+' pending';
+  document.getElementById('sAdvance').textContent='₹'+totalAdvance.toLocaleString('en-IN');
+  document.getElementById('sAdvSub').textContent=DB.students.filter(s=>getPaymentStatus(s).totalAdvance>0).length+' students';
+  
   const t=todayISO();let present=0,marked=0;
   DB.students.forEach(s=>{
     if(s.attendance[t]!==undefined && isTuitionDay(t,s.class)){marked++;if(s.attendance[t])present++;}
   });
   document.getElementById('sAtt').textContent=(marked?Math.round(present/marked*100):0)+'%';
   document.getElementById('sAttSub').textContent=marked?`${present}/${marked} present`:'Not marked';
+  
   const tbody=document.querySelector('#dashDueTbl tbody');tbody.innerHTML='';
-  dueStudents.sort((a,b)=>b.due-a.due).slice(0,10).forEach(({s,due})=>{
+  dueStudents.sort((a,b)=>b.ps.totalDue-a.ps.totalDue).slice(0,10).forEach(({s,ps})=>{
     tbody.innerHTML+=`<tr><td><div style="display:flex;align-items:center;gap:10px">${photoHTML(s)}<b style="cursor:pointer" onclick="openProfile('${s.id}')">${s.name}</b></div></td>
-    <td><span class="badge badge-class">${s.class}</span></td><td><span class="badge badge-due">₹${due.toLocaleString('en-IN')}</span></td>
-    <td>${alertButtons(s)}</td></tr>`;});
+    <td><span class="badge badge-class">${s.class}</span></td>
+    <td><span class="badge badge-due">₹${ps.totalDue.toLocaleString('en-IN')}</span>${ps.fine>0?`<div style="font-size:10px;color:var(--muted);margin-top:2px">incl. ₹${ps.fine} fine</div>`:''}</td>
+    <td>${alertButtons(s)}</td></tr>`;
+  });
   const cards = document.getElementById('dashDueCards');
-  cards.innerHTML = dueStudents.sort((a,b)=>b.due-a.due).slice(0,10).map(({s,due})=>`
+  cards.innerHTML = dueStudents.sort((a,b)=>b.ps.totalDue-a.ps.totalDue).slice(0,10).map(({s,ps})=>`
     <div class="m-card">
       ${photoHTML(s)}
       <div class="body">
         <div class="nm" onclick="openProfile('${s.id}')">${s.name}</div>
-        <div class="meta"><span class="badge badge-class">${s.class}</span><span class="badge badge-due">₹${due.toLocaleString('en-IN')} due</span></div>
+        <div class="meta"><span class="badge badge-class">${s.class}</span><span class="badge badge-due">₹${ps.totalDue.toLocaleString('en-IN')} due</span></div>
         <div class="actions">${alertButtons(s)}</div>
       </div>
     </div>`).join('');
@@ -1424,7 +1727,7 @@ function renderStudents(){
   if(sort==='name')list.sort((a,b)=>a.name.localeCompare(b.name));
   if(sort==='class')list.sort((a,b)=>a.class.localeCompare(b.class));
   if(sort==='admission')list.sort((a,b)=>new Date(a.admission)-new Date(b.admission));
-  if(sort==='due')list.sort((a,b)=>(getDueMonths(b).length*b.fee+getFineTotal(b))-(getDueMonths(a).length*a.fee+getFineTotal(a)));
+  if(sort==='due')list.sort((a,b)=>getPaymentStatus(b).totalDue-getPaymentStatus(a).totalDue);
   const tbody=document.querySelector('#studentsTbl tbody');
   tbody.innerHTML=list.map(s=>`<tr>
     <td>${photoHTML(s)}</td>
@@ -1605,10 +1908,10 @@ function renderProfile(){
 }
 function renderProfileInfo(){
   const s = DB.students.find(x=>x.id===currentProfileId);if(!s)return;
-  const months = getDueMonths(s); const fine = getFineTotal(s); const total = months.length*s.fee + fine;
+  const ps = getPaymentStatus(s);
   const cls = DB.classes[s.class] || {};
   const upi = DB.settings.upi || {};
-  const qrUrl = getUPIQRLink(total);
+  const qrUrl = getUPIQRLink(ps.totalDue);
   
   let daysText = 'Every day';
   if(cls.days && cls.days.length){
@@ -1634,8 +1937,9 @@ function renderProfileInfo(){
       <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
         <div>
           <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px">Total Due</div>
-          <div style="font-family:'Space Grotesk';font-size:clamp(20px,5.5vw,24px);font-weight:700;color:#fca5a5">₹${total.toLocaleString('en-IN')}</div>
-          <div style="font-size:11px;color:var(--muted);margin-top:2px">${months.length} x ₹${s.fee}${fine?` + ₹${fine}`:''}</div>
+          <div style="font-family:'Space Grotesk';font-size:clamp(20px,5.5vw,24px);font-weight:700;color:#fca5a5">₹${ps.totalDue.toLocaleString('en-IN')}</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:2px">Fee: ₹${ps.feeDue}${ps.fine>0?` + Fine: ₹${ps.fine}`:''}</div>
+          ${ps.totalAdvance>0?`<div style="font-size:11px;color:#93c5fd;margin-top:2px">💰 Advance: ₹${ps.totalAdvance}</div>`:''}
         </div>
         <button class="btn btn-danger" onclick="alertParents('${s.id}')">📨 Remind</button>
       </div>
@@ -1648,21 +1952,21 @@ function renderProfileInfo(){
       
       <div class="upi-qr">
         <img src="${qrUrl}" alt="UPI QR"/>
-        <div class="upi-qr-label">₹${total.toLocaleString('en-IN')} — Scan QR to pay</div>
+        <div class="upi-qr-label">₹${ps.totalDue.toLocaleString('en-IN')} — Scan QR to pay</div>
       </div>
       
       <div style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap">
         <button class="btn btn-primary" style="flex:1" onclick="downloadQR('${qrUrl}', '${s.name.replace(/'/g,"\\'")}')">
           ⬇️ Download QR
         </button>
-        <button class="btn btn-success" style="flex:1" onclick="shareQR('${qrUrl}', '${s.name.replace(/'/g,"\\'")}', ${total})">
+        <button class="btn btn-success" style="flex:1" onclick="shareQR('${qrUrl}', '${s.name.replace(/'/g,"\\'")}', ${ps.totalDue})">
           📤 Share QR
         </button>
       </div>
       
       <div class="upi-row"><div class="lbl">UPI ID</div><div class="val">${upi.id}</div></div>
       ${upi.phone ? `<div class="upi-row"><div class="lbl">Phone</div><div class="val">${upi.phone}</div></div>` : ''}
-      <div class="upi-row"><div class="lbl">Amount</div><div class="val" style="color:#fca5a5">₹${total.toLocaleString('en-IN')}</div></div>
+      <div class="upi-row"><div class="lbl">Amount</div><div class="val" style="color:#fca5a5">₹${ps.totalDue.toLocaleString('en-IN')}</div></div>
     </div>
     ` : ''}
     
@@ -1709,11 +2013,11 @@ async function shareQR(qrUrl, studentName, amount) {
 }
 
 function shareQRViaWhatsApp(qrUrl, studentName, amount) {
-  const msg = `*${studentName} UPI QR Code*\n\n`;
-  msg += `Amount: ₹${amount}\n\n`;
-  msg += `QR Link (click to open):\n${qrUrl}\n\n`;
-  msg += `Or UPI ID: ${DB.settings.upi?.id || ''}\n\n`;
-  msg += `Thank you`;
+  const msg = `📱 *${studentName} UPI QR Code*\n\n`;
+  msg += `💰 Amount: ₹${amount}\n\n`;
+  msg += `🔗 QR Link (click to open):\n${qrUrl}\n\n`;
+  msg += `📱 Or UPI ID: ${DB.settings.upi?.id || ''}\n`;
+  msg += `🙏 Thank you`;
   
   const waUrl = `https://wa.me/?text=${encodeURIComponent(msg)}`;
   window.open(waUrl, '_blank');
@@ -1777,86 +2081,182 @@ function toggleProfileAtt(key){
   renderProfileAtt(); renderDashboard();
   if(document.getElementById('attStep2').style.display!=='none') renderAttendanceDay();
 }
+
+// ===== NEW PAYMENT PROFILE VIEW =====
 function renderProfilePay(){
   const s = DB.students.find(x=>x.id===currentProfileId);if(!s)return;
-  const adm = new Date(s.admission); const now = new Date();
-  let rows = [];
-  let cur = new Date(adm.getFullYear(), adm.getMonth(), 1);
-  const end = new Date(now.getFullYear(), now.getMonth(), 1);
-  let totalDue = 0;
-  while(cur <= end){
-    const ym = `${cur.getFullYear()}-${String(cur.getMonth()+1).padStart(2,'0')}`;
-    const payment = (s.payments||[]).find(p=>p.ym===ym);
-    const paid = !!payment;
-    if(!paid) totalDue += s.fee;
-    rows.push({ym, paid, date: payment?.date, m:cur.getMonth(), y:cur.getFullYear()});
-    cur.setMonth(cur.getMonth()+1);
-  }
-  rows.reverse();
-  const fine = getFineTotal(s);
-  const grand = totalDue + fine;
-  document.getElementById('pane-pay').innerHTML = `
-    <div style="background:linear-gradient(135deg,rgba(124,58,237,.2),rgba(236,72,153,.2));border:1px solid rgba(236,72,153,.3);border-radius:14px;padding:14px;margin-bottom:16px">
-      <div><div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px">Total Outstanding</div>
-      <div style="font-family:'Space Grotesk';font-size:clamp(22px,6vw,28px);font-weight:700">₹${grand.toLocaleString('en-IN')}</div>
-      <div style="font-size:11px;color:var(--muted)">Fee ₹${totalDue} ${fine?`+ Fine ₹${fine}`:''}</div></div>
+  const ps = getPaymentStatus(s);
+  
+  // Summary boxes
+  let html = `
+    <div class="payment-summary">
+      <div class="pay-sum-box fee">
+        <div class="sum-label">Monthly Fee</div>
+        <div class="sum-val">₹${s.fee}</div>
+      </div>
+      <div class="pay-sum-box paid">
+        <div class="sum-label">Total Paid</div>
+        <div class="sum-val">₹${ps.totalPaid.toLocaleString('en-IN')}</div>
+      </div>
+      <div class="pay-sum-box due">
+        <div class="sum-label">Total Due</div>
+        <div class="sum-val">₹${ps.totalDue.toLocaleString('en-IN')}</div>
+      </div>
+      ${ps.totalAdvance > 0 ? `
+      <div class="pay-sum-box advance">
+        <div class="sum-label">Advance</div>
+        <div class="sum-val">₹${ps.totalAdvance.toLocaleString('en-IN')}</div>
+      </div>` : ''}
     </div>
-    <h4 style="font-family:'Space Grotesk';margin-bottom:10px;font-size:15px">Payment History</h4>
-    ${rows.map(r=>`
-      <div class="pay-month-row">
-        <div class="ym">${MONTH_NAMES[r.m].slice(0,3)} ${r.y}</div>
-        <div style="flex:1;font-size:11px;color:var(--muted)">${r.paid?'Paid '+formatDateShort(r.date):'Unpaid'}</div>
-        <div class="amt" style="color:${r.paid?'#6ee7b7':'#fca5a5'}">₹${s.fee}</div>
-        ${r.paid?`<button class="btn btn-sm btn-ghost" onclick="unmarkPaid('${s.id}','${r.ym}')">↶</button>`:`<button class="btn btn-sm btn-success" onclick="markPaidMonth('${s.id}','${r.ym}')">✓</button>`}
-      </div>`).join('')}`;
+  `;
+  
+  // Add payment button
+  html += `
+    <button class="btn btn-primary" style="width:100%;margin-bottom:18px" onclick="openPaymentModal('${s.id}')">
+      💰 Record New Payment
+    </button>
+  `;
+  
+  // Advance banner if exists
+  if(ps.totalAdvance > 0){
+    html += `
+      <div class="advance-banner">
+        <div class="adv-icon">💰</div>
+        <div class="adv-info">
+          <div class="adv-label">Advance Balance</div>
+          <div class="adv-amt">₹${ps.totalAdvance.toLocaleString('en-IN')}</div>
+          <div class="adv-desc">This will automatically apply to next month's fee</div>
+        </div>
+      </div>
+    `;
+  }
+  
+  // Month-by-month status
+  html += `<h4 style="font-family:'Space Grotesk';margin:14px 0 10px;font-size:15px">📅 Month-by-Month Status</h4>`;
+  
+  // Reverse to show newest first
+  const monthsReversed = [...ps.months].reverse();
+  monthsReversed.forEach(m => {
+    let statusClass = 'status-' + m.status;
+    let statusInfo = '';
+    if(m.status === 'paid'){
+      statusInfo = `<span class="badge badge-ok">✅ Paid</span>`;
+    } else if(m.status === 'partial'){
+      statusInfo = `<span class="badge badge-partial">⚠️ ₹${m.paid}/₹${m.fee}</span> <span style="color:#fbbf24">₹${m.due} due</span>`;
+    } else {
+      statusInfo = `<span class="badge badge-due">❌ ₹${m.fee} due</span>`;
+    }
+    
+    html += `
+      <div class="pay-month-row ${statusClass}">
+        <div class="ym">${m.label}</div>
+        <div class="status-info">${statusInfo}</div>
+        <div class="amt">₹${m.fee}</div>
+      </div>
+    `;
+  });
+  
+  // Payment history
+  const payments = (s.payments || []).slice().reverse();
+  if(payments.length > 0){
+    html += `<h4 style="font-family:'Space Grotesk';margin:20px 0 10px;font-size:15px">💳 Payment History (${payments.length})</h4>`;
+    payments.forEach(p => {
+      html += `
+        <div class="pay-history-item">
+          <div class="pay-amt">₹${p.amount.toLocaleString('en-IN')}</div>
+          <div class="pay-info">
+            <div class="pay-date">📅 ${formatDateShort(p.date)}</div>
+            <div class="pay-note">${p.note ? '📝 ' + p.note : '—'}</div>
+          </div>
+          <button class="pay-del" onclick="deletePayment('${s.id}','${p.id}')" title="Delete">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><use href="#icon-del"/></svg>
+          </button>
+        </div>
+      `;
+    });
+  } else {
+    html += `
+      <div style="text-align:center;padding:20px;color:var(--muted);font-size:12px;margin-top:20px">
+        💳 No payments recorded yet
+      </div>
+    `;
+  }
+  
+  document.getElementById('pane-pay').innerHTML = html;
 }
-function markPaidMonth(sid,ym){
-  const s = DB.students.find(x=>x.id===sid);if(!s)return;
-  if(!s.payments) s.payments=[];
-  if(!s.payments.some(p=>p.ym===ym)){ s.payments.push({ym,date:todayISO()}); saveToCloud(); renderProfilePay(); renderAll(); toast('💰 Paid'); }
-}
-function unmarkPaid(sid,ym){
-  const s = DB.students.find(x=>x.id===sid);if(!s)return;
-  if(!confirm('Remove '+ym+' payment?')) return;
-  s.payments = (s.payments||[]).filter(p=>p.ym!==ym);
-  saveToCloud();renderProfilePay();renderAll();toast('↶ Removed');
-}
+
 function renderFees(){
   if(Object.keys(DB.classes).length===0){DB.classes['General']={days:[],times:{},fineEnabled:false,fineAmount:10};saveToCloud();}
   const cls=document.getElementById('feeClass')?.value||'';
   const list=DB.students.filter(s=>!cls||s.class===cls);
   const tbody=document.querySelector('#feesTbl tbody');
-  tbody.innerHTML=list.map(s=>{const months=getDueMonths(s);const fine=getFineTotal(s);const total=months.length*s.fee+fine;
-    const isDue=total>0;
+  tbody.innerHTML=list.map(s=>{
+    const ps = getPaymentStatus(s);
+    const isDue=ps.totalDue>0;
+    const hasAdvance=ps.totalAdvance>0;
+    
+    let statusBadge = '';
+    if(hasAdvance){
+      statusBadge = `<span class="badge badge-advance">💰 ₹${ps.totalAdvance} adv</span>`;
+    } else if(ps.unpaidMonths > 0){
+      statusBadge = `<span class="badge badge-due">${ps.unpaidMonths} mo due</span>`;
+    } else if(ps.partialMonths > 0){
+      statusBadge = `<span class="badge badge-partial">${ps.partialMonths} partial</span>`;
+    } else {
+      statusBadge = `<span class="badge badge-ok">✅ Clear</span>`;
+    }
+    
+    let breakdown = `${ps.paidMonths} paid`;
+    if(ps.partialMonths > 0) breakdown += ` • ${ps.partialMonths} partial`;
+    if(ps.unpaidMonths > 0) breakdown += ` • ${ps.unpaidMonths} due`;
+    
     return `<tr>
       <td><div style="display:flex;align-items:center;gap:10px">${photoHTML(s)}<b style="cursor:pointer" onclick="openProfile('${s.id}','pay')">${s.name}</b></div></td>
       <td><span class="badge badge-class">${s.class}</span></td>
       <td>₹${s.fee}</td>
-      <td>${isDue?`<span class="badge badge-due">${months.length} mo</span>`:`<span class="badge badge-ok">Clear</span>`}</td>
-      <td class="due-cell"><span class="due-formula">${months.length} x ₹${s.fee}${fine?` + ₹${fine}`:''}</span></td>
-      <td><span class="due-total" style="color:${isDue?'#fca5a5':'#6ee7b7'}">₹${total.toLocaleString('en-IN')}</span></td>
-      <td>${alertButtons(s)}</td></tr>`;}).join('');
+      <td>${statusBadge}</td>
+      <td class="due-cell"><span class="due-formula">${breakdown}${ps.fine>0?` • Fine ₹${ps.fine}`:''}</span></td>
+      <td><span class="due-total" style="color:${isDue?'#fca5a5':'#6ee7b7'}">₹${ps.totalDue.toLocaleString('en-IN')}</span></td>
+      <td>${alertButtons(s)}</td></tr>`;
+  }).join('');
   const cards = document.getElementById('feesCards');
-  cards.innerHTML = list.map(s=>{const months=getDueMonths(s);const fine=getFineTotal(s);const total=months.length*s.fee+fine;
-    const isDue=total>0;
+  cards.innerHTML = list.map(s=>{
+    const ps = getPaymentStatus(s);
+    const isDue=ps.totalDue>0;
+    const hasAdvance=ps.totalAdvance>0;
+    
+    let statusBadge = '';
+    if(hasAdvance){
+      statusBadge = `<span class="badge badge-advance">💰 ₹${ps.totalAdvance} adv</span>`;
+    } else if(ps.unpaidMonths > 0){
+      statusBadge = `<span class="badge badge-due">${ps.unpaidMonths} mo due</span>`;
+    } else if(ps.partialMonths > 0){
+      statusBadge = `<span class="badge badge-partial">${ps.partialMonths} partial</span>`;
+    } else {
+      statusBadge = `<span class="badge badge-ok">✅ Clear</span>`;
+    }
+    
     return `<div class="m-card">
       ${photoHTML(s)}
       <div class="body" style="flex:1">
         <div class="nm" onclick="openProfile('${s.id}','pay')">${s.name}</div>
         <div class="meta">
           <span class="badge badge-class">${s.class}</span>
-          ${isDue?`<span class="badge badge-due">${months.length} mo due</span>`:`<span class="badge badge-ok">Clear</span>`}
+          ${statusBadge}
         </div>
-        <div style="margin:8px 0"><span class="due-formula">${months.length} x ₹${s.fee}${fine?` + ₹${fine}`:''}</span></div>
-        <div style="font-family:'Space Grotesk';font-weight:700;font-size:18px;color:${isDue?'#fca5a5':'#6ee7b7'}">₹${total.toLocaleString('en-IN')}</div>
+        <div style="margin:8px 0;font-size:11px;color:var(--muted)">
+          Paid: ${ps.paidMonths} • Partial: ${ps.partialMonths} • Due: ${ps.unpaidMonths}${ps.fine>0?` • Fine ₹${ps.fine}`:''}
+        </div>
+        <div style="font-family:'Space Grotesk';font-weight:700;font-size:18px;color:${isDue?'#fca5a5':'#6ee7b7'}">₹${ps.totalDue.toLocaleString('en-IN')}</div>
         <div class="actions" style="margin-top:8px">${alertButtons(s)}</div>
       </div>
-    </div>`;}).join('');
+    </div>`;
+  }).join('');
 }
 function sendBulkReminder(){
   const dueStudents = DB.students.filter(s=>{
-    const months=getDueMonths(s);const fine=getFineTotal(s);
-    return (months.length*s.fee+fine) > 0;
+    const ps = getPaymentStatus(s);
+    return ps.totalDue > 0;
   });
   if(dueStudents.length===0){toast('🎉 No pending dues!');return;}
   if(!confirm(`Send WhatsApp reminder to ${dueStudents.length} student(s) with dues?`))return;
@@ -1907,17 +2307,15 @@ function backupNow(){
 function backupExcel(){
   if(!DB.students.length){toast('⚠️ No students yet!');return;}
   let csv = '\uFEFF';
-  csv += 'SL,Name,Class,Monthly Fee,Admission Date,Mobile,WhatsApp,Instagram,Due Months,Fine,Total Due\n';
+  csv += 'SL,Name,Class,Monthly Fee,Admission Date,Mobile,WhatsApp,Instagram,Total Fee Due,Total Paid,Fee Due,Advance,Fine,Total Due\n';
   DB.students.forEach((s,i)=>{
-    const months = getDueMonths(s);
-    const fine = getFineTotal(s);
-    const total = months.length * s.fee + fine;
+    const ps = getPaymentStatus(s);
     const name = '"'+s.name.replace(/"/g,'""')+'"';
     const cls = '"'+s.class.replace(/"/g,'""')+'"';
     const mob = '"'+(s.mobile||'')+'"';
     const wa = '"'+(s.wa||'')+'"';
     const ig = '"'+(s.ig||'')+'"';
-    csv += `${i+1},${name},${cls},${s.fee},"${s.admission}",${mob},${wa},${ig},${months.length},${fine},${total}\n`;
+    csv += `${i+1},${name},${cls},${s.fee},"${s.admission}",${mob},${wa},${ig},${ps.totalFeeDue},${ps.totalPaid},${ps.feeDue},${ps.totalAdvance},${ps.fine},${ps.totalDue}\n`;
   });
   csv += '\n\n=== CLASSES ===\n';
   csv += 'Class Name,Days,Fine Per Day,Fine Enabled\n';
@@ -1926,10 +2324,10 @@ function backupExcel(){
     csv += `"${name}","${days}",${cfg.fineAmount||0},${cfg.fineEnabled?'Yes':'No'}\n`;
   });
   csv += '\n\n=== PAYMENT HISTORY ===\n';
-  csv += 'Student,Class,Month,Paid Date\n';
+  csv += 'Student,Class,Amount,Date,Note\n';
   DB.students.forEach(s=>{
     (s.payments||[]).forEach(p=>{
-      csv += `"${s.name}","${s.class}","${p.ym}","${p.date}"\n`;
+      csv += `"${s.name}","${s.class}",${p.amount},"${p.date}","${(p.note||'').replace(/"/g,'""')}"\n`;
     });
   });
   const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
@@ -1943,11 +2341,40 @@ function backupExcel(){
 }
 function restoreBackup(e){
   const f=e.target.files[0];if(!f)return;const r=new FileReader();
-  r.onload=ev=>{try{const data=JSON.parse(ev.target.result);if(!data.students)throw 0;
-    if(!confirm('Replace all data?'))return;
-    DB=data;DB.settings.email=DB.settings.email||{};DB.settings.upi=DB.settings.upi||{id:'arho065-1@okicici',phone:'9564385573'};DB.settings.sheetBackupUrl=DB.settings.sheetBackupUrl||'';
-    saveToCloud();renderAll();loadUPISettings();loadBackupSettings();loadSheetUrl();toast('✅ Restored');
-  }catch{toast('❌ Invalid') }};r.readAsText(f);
+  r.onload=ev=>{
+    try{
+      const data=JSON.parse(ev.target.result);if(!data.students)throw 0;
+      if(!confirm('Replace all data?'))return;
+      DB=data;
+      DB.settings.email=DB.settings.email||{};
+      DB.settings.upi=DB.settings.upi||{id:'arho065-1@okicici',phone:'9564385573'};
+      DB.settings.sheetBackupUrl=DB.settings.sheetBackupUrl||'';
+      
+      // Migrate old payment format (if any) to new format
+      DB.students.forEach(s => {
+        if(Array.isArray(s.payments)){
+          s.payments = s.payments.map(p => {
+            // Old format was {ym, date} - convert to new {id, amount, date, note}
+            if(p.ym && !p.amount){
+              return {
+                id: uid(),
+                amount: s.fee,
+                date: p.date || todayISO(),
+                note: 'Migrated: ' + p.ym
+              };
+            }
+            // New format already - ensure has id
+            if(!p.id) p.id = uid();
+            return p;
+          });
+        } else {
+          s.payments = [];
+        }
+      });
+      
+      saveToCloud();renderAll();loadUPISettings();loadBackupSettings();loadSheetUrl();toast('✅ Restored');
+    }catch{toast('❌ Invalid')}
+  };r.readAsText(f);
 }
 function loadEmailSettings(){const c=DB.settings.email||{};
   document.getElementById('emailTo').value=c.toEmail||'brandandbeard@gmail.com';
@@ -1983,9 +2410,7 @@ async function emailBackup(){
   msg += '━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n';
   
   DB.students.forEach((s,i)=>{
-    const months = getDueMonths(s);
-    const fine = getFineTotal(s);
-    const total = months.length*s.fee + fine;
+    const ps = getPaymentStatus(s);
     msg += `${i+1}. ${s.name}\n`;
     msg += `   📚 Class: ${s.class}\n`;
     msg += `   💰 Fee: ₹${s.fee}/month\n`;
@@ -1993,7 +2418,10 @@ async function emailBackup(){
     msg += `   📱 Mobile: ${s.mobile||'—'}\n`;
     msg += `   💬 WhatsApp: ${s.wa||'—'}\n`;
     msg += `   📷 Instagram: ${s.ig||'—'}\n`;
-    msg += `   ⚠️ Due: ₹${total} (${months.length} months${fine?', Fine ₹'+fine:''})\n`;
+    msg += `   💳 Total Paid: ₹${ps.totalPaid}\n`;
+    msg += `   ⚠️ Due: ₹${ps.totalDue} (Fee: ₹${ps.feeDue}${ps.fine>0?', Fine: ₹'+ps.fine:''})\n`;
+    if(ps.totalAdvance > 0) msg += `   💰 Advance: ₹${ps.totalAdvance}\n`;
+    msg += `   📊 Status: ${ps.paidMonths} paid, ${ps.partialMonths} partial, ${ps.unpaidMonths} unpaid\n`;
     msg += '   ─────────────────────\n';
   });
   
@@ -2012,17 +2440,17 @@ async function emailBackup(){
   msg += '\n━━━━━━━━━━━━━━━━━━━━━━━━━━━\n';
   msg += '⚠️ DUE SUMMARY\n';
   msg += '━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n';
-  let totalAllDue = 0;
+  let totalAllDue = 0, totalAllAdvance = 0;
   DB.students.forEach(s=>{
-    const months = getDueMonths(s);
-    const fine = getFineTotal(s);
-    const total = months.length*s.fee + fine;
-    if(total>0){
-      totalAllDue += total;
-      msg += `• ${s.name} (${s.class}): ₹${total}\n`;
+    const ps = getPaymentStatus(s);
+    totalAllDue += ps.totalDue;
+    totalAllAdvance += ps.totalAdvance;
+    if(ps.totalDue>0){
+      msg += `• ${s.name} (${s.class}): ₹${ps.totalDue}\n`;
     }
   });
   msg += `\n💰 TOTAL PENDING: ₹${totalAllDue}\n`;
+  msg += `💰 TOTAL ADVANCE: ₹${totalAllAdvance}\n`;
   
   msg += '\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━\n';
   msg += '🔧 RAW DATA (JSON)\n';
