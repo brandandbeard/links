@@ -305,6 +305,9 @@ tr:hover td{background:rgba(255,255,255,.03)}
   .stat{padding:12px}
   .stu-att-row{padding:10px;gap:8px}
 }
+.icon-btn.qr-btn{background:rgba(124,58,237,.15)}
+.icon-btn.qr-btn svg{fill:#a78bfa}
+.icon-btn.qr-btn:hover{background:rgba(124,58,237,.25)}
 </style>
 </head>
 <body>
@@ -699,6 +702,9 @@ tr:hover td{background:rgba(255,255,255,.03)}
   <symbol id="icon-call" viewBox="0 0 24 24"><path fill="#a78bfa" d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></symbol>
   <symbol id="icon-edit" viewBox="0 0 24 24"><path fill="#a78bfa" d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a.996.996 0 000-1.41l-2.34-2.34a.996.996 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></symbol>
   <symbol id="icon-del" viewBox="0 0 24 24"><path fill="#fca5a5" d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></symbol>
+  <symbol id="icon-qr" viewBox="0 0 24 24">
+  <path d="M3 11h8V3H3v8zm2-6h4v4H5V5zM3 21h8v-8H3v8zm2-6h4v4H5v-4zM13 3v8h8V3h-8zm6 6h-4V5h4v4zM13 13h2v2h-2zM15 15h2v2h-2zM13 17h2v2h-2zM17 13h2v2h-2zM19 15h2v2h-2zM15 19h2v2h-2zM17 17h2v2h-2zM19 19h2v2h-2z"/>
+</symbol>
 </svg>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
@@ -1182,42 +1188,70 @@ function confirmDeleteMonthPayment(){
   if(document.getElementById('profileModal').classList.contains('show')){renderProfilePay();}
 }
 function feeMessage(s){
-  const ps=getPaymentStatus(s);const total=ps.totalDue;
-  const upi=DB.settings.upi||{};const upiId=upi.id||'';
-  const upiLink=upiId?"upi://pay?pa="+upiId+"&pn=Tuition&am="+total+"&cu=INR":'';
-  let msg="*নমস্কার।*\n\n";
-  msg+="আপনার সন্তানের টিউশন ফি-র হিসাব:\n\n";
-  msg+="*নাম:* "+s.name+"\n";
-  msg+="*Class:* "+s.class+"\n";
-  msg+="*Monthly Fee:* ₹"+s.fee+"\n\n";
-  msg+="📊 *মাস-অনুযায়ী হিসাব:*\n";
-  msg+="━━━━━━━━━━━━━━━━━━\n";
-  ps.months.forEach(m=>{
-    let statusIcon='';
-    if(m.status==='paid')statusIcon='✅';
-    else if(m.status==='partial')statusIcon='⚠️';
-    else statusIcon='❌';
-    let line=`${statusIcon} *${m.label}*: `;
-    if(m.status==='paid'){const payDate=m.contributions.length>0?formatDateShort(m.contributions[0].date):'';line+=`Paid ${payDate?'('+payDate+')':''} ✓`;}
-    else if(m.status==='partial'){line+=`₹${m.paid} paid, *₹${m.due} বাকি*`;}
-    else{line+=`*₹${m.fee} বাকি*`;}
-    msg+=line+'\n';
+  const ps = getPaymentStatus(s);
+  const total = ps.totalDue;
+  const upi = DB.settings.upi || {};
+  const upiId = upi.id || '';
+  
+  let msg = "*নমস্কার।*\n\n";
+  msg += "আপনার সন্তানের টিউশন ফি-র হিসাব:\n\n";
+  msg += "*নাম:* " + s.name + "\n";
+  msg += "*Class:* " + s.class + "\n";
+  msg += "*Monthly Fee:* ₹" + s.fee + "\n\n";
+  
+  msg += "📊 *মাস-অনুযায়ী হিসাব:*\n";
+  msg += "━━━━━━━━━━━━━━━━━━\n";
+  
+  ps.months.forEach(m => {
+    let statusIcon = '';
+    if(m.status === 'paid') statusIcon = '✅';
+    else if(m.status === 'partial') statusIcon = '⚠️';
+    else statusIcon = '❌';
+    
+    let line = `${statusIcon} *${m.label}*: `;
+    if(m.status === 'paid'){
+      const payDate = m.contributions.length > 0 ? formatDateShort(m.contributions[0].date) : '';
+      line += `Paid ${payDate ? '(' + payDate + ')' : ''} ✓`;
+    } else if(m.status === 'partial'){
+      line += `₹${m.paid} paid, *₹${m.due} বাকি*`;
+    } else {
+      line += `*₹${m.fee} বাকি*`;
+    }
+    msg += line + '\n';
   });
-  msg+="━━━━━━━━━━━━━━━━━━\n\n";
-  if(ps.fine>0)msg+=`*Fine (Attendance):* ₹${ps.fine}\n`;
-  if(ps.totalAdvance>0){msg+=`\n💰 *Advance Balance:* ₹${ps.totalAdvance}\n(এই টাকা পরের মাসের fee-তে adjust হবে)\n`;}
-  else if(ps.feeDue>0){msg+=`\n❗ *Net Due:* ₹${ps.feeDue}`;if(ps.fine>0)msg+=` + Fine ₹${ps.fine} = *₹${total}*`;msg+='\n';}
-  msg+="\nঅনুগ্রহ করে দ্রুত বাকি টাকা জমা দিয়ে দিন।\n";
-  if(upiId&&total>0){
-    msg+="\n-------------------------\n";
-    msg+="*💳 পেমেন্ট করার জন্য:*\n";
-    msg+="UPI ID: "+upiId+"\n";
-    if(upi.phone)msg+="ফোন নম্বর: "+upi.phone+"\n";
-    msg+="টাকা: *₹"+total+"*\n\n";
-    if(upiLink){msg+="সরাসরি পেমেন্ট করতে ক্লিক করুন:\n"+upiLink+"\n";}
-    msg+="-------------------------\n";
+  
+  msg += "━━━━━━━━━━━━━━━━━━\n\n";
+  
+  msg += `*Total Fee Due:* ₹${ps.totalFeeDue}\n`;
+  msg += `*Total Paid:* ₹${ps.totalPaid}\n`;
+  
+  if(ps.fine > 0){
+    msg += `*Fine (Attendance):* ₹${ps.fine}\n`;
   }
-  msg+="\nধন্যবাদ।";
+  
+  if(ps.totalAdvance > 0){
+    msg += `\n💰 *Advance Balance:* ₹${ps.totalAdvance}\n`;
+    msg += `(এই টাকা পরের মাসের fee-তে adjust হবে)\n`;
+  } else if(ps.feeDue > 0){
+    msg += `\n❗ *Net Due:* ₹${ps.feeDue}`;
+    if(ps.fine > 0) msg += ` + Fine ₹${ps.fine} = *₹${total}*`;
+    msg += '\n';
+  }
+  
+  msg += "\nঅনুগ্রহ করে দ্রুত বাকি টাকা জমা দিয়ে দিন।\n";
+  
+  if(upiId && total > 0){
+    msg += "\n-------------------------\n";
+    msg += "*💳 পেমেন্ট করার জন্য:*\n\n";
+    msg += "📱 *UPI ID:* " + upiId + "\n";
+    if(upi.phone) msg += "📞 *Phone:* " + upi.phone + "\n";
+    msg += "💰 *Amount:* ₹" + total + "\n\n";
+    msg += "🔹 PhonePe / Google Pay / Paytm যেকোনো অ্যাপে\n";
+    msg += "   UPI ID কপি করে পেমেন্ট করুন\n";
+    msg += "-------------------------\n";
+  }
+  
+  msg += "\nধন্যবাদ।";
   return msg;
 }
 function photoHTML(s,lg=false,clickable=true){
@@ -1226,18 +1260,58 @@ function photoHTML(s,lg=false,clickable=true){
   return `<div class="photo ${lg?'lg':''}" ${clickAttr}>${s.name.charAt(0).toUpperCase()}</div>`;
 }
 function alertButtons(s){
-  const msg=feeMessage(s);
-  const waNum=(s.wa||s.mobile||'').replace(/\D/g,'');
-  const waLink=waNum?`https://wa.me/${waNum}?text=${encodeURIComponent(msg)}`:'#';
-  const smsLink=s.mobile?`sms:${s.mobile}?body=${encodeURIComponent(msg)}`:'#';
-  const callLink=s.mobile?`tel:${s.mobile}`:'#';
-  const igLink=s.ig?`https://instagram.com/${s.ig}`:'#';
-  let html='<div class="action-row">';
-  if(waNum)html+=`<a class="icon-btn wa" href="${waLink}" target="_blank" title="WhatsApp Alert"><svg viewBox="0 0 24 24"><use href="#icon-wa"/></svg></a>`;
-  if(s.mobile)html+=`<a class="icon-btn sms" href="${smsLink}" title="SMS"><svg viewBox="0 0 24 24"><use href="#icon-sms"/></svg></a>`;
-  if(s.mobile)html+=`<a class="icon-btn call" href="${callLink}" title="Call"><svg viewBox="0 0 24 24"><use href="#icon-call"/></svg></a>`;
-  if(s.ig)html+=`<a class="icon-btn ig" href="${igLink}" target="_blank" title="Instagram"><svg viewBox="0 0 24 24"><use href="#icon-ig"/></svg></a>`;
-  html+='</div>';return html;
+  const msg = feeMessage(s);
+  const waNum = (s.wa || s.mobile || '').replace(/\D/g,'');
+  const waLink = waNum ? `https://wa.me/${waNum}?text=${encodeURIComponent(msg)}` : '#';
+  const smsLink = s.mobile ? `sms:${s.mobile}?body=${encodeURIComponent(msg)}` : '#';
+  const callLink = s.mobile ? `tel:${s.mobile}` : '#';
+  const igLink = s.ig ? `https://instagram.com/${s.ig}` : '#';
+  
+  let html = '<div class="action-row">';
+  if(waNum) html += `<a class="icon-btn wa" href="${waLink}" target="_blank" title="WhatsApp Alert"><svg viewBox="0 0 24 24"><use href="#icon-wa"/></svg></a>`;
+  if(s.mobile) html += `<a class="icon-btn sms" href="${smsLink}" title="SMS"><svg viewBox="0 0 24 24"><use href="#icon-sms"/></svg></a>`;
+  if(s.mobile) html += `<a class="icon-btn call" href="${callLink}" title="Call"><svg viewBox="0 0 24 24"><use href="#icon-call"/></svg></a>`;
+  if(s.ig) html += `<a class="icon-btn ig" href="${igLink}" target="_blank" title="Instagram"><svg viewBox="0 0 24 24"><use href="#icon-ig"/></svg></a>`;
+  html += `<button class="icon-btn qr-btn" onclick="sendQRViaWhatsApp('${s.id}')" title="Send QR Code"><svg viewBox="0 0 24 24"><use href="#icon-qr"/></svg></button>`;
+  html += '</div>';
+  return html;
+}
+  function sendQRViaWhatsApp(sid){
+  const s = DB.students.find(x => x.id === sid);
+  if(!s) return;
+  
+  const waNum = (s.wa || s.mobile || '').replace(/\D/g,'');
+  if(!waNum){
+    toast('⚠️ No WhatsApp/Mobile number saved!');
+    return;
+  }
+  
+  const ps = getPaymentStatus(s);
+  const upi = DB.settings.upi || {};
+  const upiId = upi.id || '';
+  
+  if(!upiId){
+    toast('⚠️ UPI ID not set in settings!');
+    return;
+  }
+  
+  const qrUrl = getUPIQRLink(ps.totalDue);
+  
+  let msg = `📱 *QR Code - Tuition Fee*\n\n`;
+  msg += `*ছাত্রের নাম:* ${s.name}\n`;
+  msg += `*Class:* ${s.class}\n`;
+  msg += `*Amount:* ₹${ps.totalDue}\n\n`;
+  msg += `👇 *QR Code Link:*\n`;
+  msg += qrUrl + `\n\n`;
+  msg += `━━━━━━━━━━━━━━━━━━\n`;
+  msg += `📱 *UPI ID:* ${upiId}\n`;
+  if(upi.phone) msg += `📞 *Phone:* ${upi.phone}\n`;
+  msg += `━━━━━━━━━━━━━━━━━━\n\n`;
+  msg += `(QR লিংকটি ক্লিক করে QR ছবি দেখুন, তারপর screenshot নিয়ে যেকোনো UPI অ্যাপে স্ক্যান করুন)`;
+  
+  const waLink = `https://wa.me/${waNum}?text=${encodeURIComponent(msg)}`;
+  window.open(waLink, '_blank');
+  toast('📱 QR মেসেজ পাঠানো হচ্ছে...');
 }
 function renderAll(){
   renderDashboard();renderStudents();renderAttClassGrid();renderFees();renderClasses();loadEmailSettings();loadSheetUrl();
