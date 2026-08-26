@@ -1194,31 +1194,34 @@ function feeMessage(s){
   const upiId = upi.id || '';
   
   let msg = "*নমস্কার।*\n\n";
-  msg += "আপনার সন্তানের টিউশন ফি বাকি আছে। অনুগ্রহ করে দ্রুত বাকি টাকা জমা দিয়ে দিন।:\n\n";
+  msg += "আপনার সন্তানের টিউশন ফি বাকি আছে। অনুগ্রহ করে দ্রুত বাকি টাকা জমা দিয়ে দিন।\n\n";
   msg += "*নাম:* " + s.name + "\n";
   msg += "*Class:* " + s.class + "\n";
-  msg += "*Monthly Fee:* ₹" + s.fee + "\n\n";
+  msg += "*নেট বাকি:* ₹" + total + "\n\n";
   
-  msg += "📊 *মাস-অনুযায়ী হিসাব:*\n";
+  msg += "📊 *মাস-অনুযায়ী হিসাব: (মাসিক ফি: ₹" + s.fee + ")*\n";
   msg += "━━━━━━━━━━━━━━━━━━\n";
   
-  ps.months.forEach(m => {
-    let statusIcon = '';
-    if(m.status === 'paid') statusIcon = '✅';
-    else if(m.status === 'partial') statusIcon = '⚠️';
-    else statusIcon = '❌';
-    
-    let line = `${statusIcon} *${m.label}*: `;
-    if(m.status === 'paid'){
-      const payDate = m.contributions.length > 0 ? formatDateShort(m.contributions[0].date) : '';
-      line += `Paid ${payDate ? '(' + payDate + ')' : ''} ✓`;
-    } else if(m.status === 'partial'){
-      line += `₹${m.paid} paid, *₹${m.due} বাকি*`;
-    } else {
-      line += `*₹${m.fee} বাকি*`;
-    }
-    msg += line + '\n';
-  });
+  // শুধু বাকি বা আংশিক পরিশোধিত মাস দেখাবে
+  const unpaidMonths = ps.months.filter(m => m.status !== 'paid');
+  
+  if(unpaidMonths.length === 0){
+    msg += "✅ সব মাস পরিশোধিত।\n";
+  } else {
+    unpaidMonths.forEach(m => {
+      let statusIcon = '';
+      if(m.status === 'partial') statusIcon = '⚠️';
+      else statusIcon = '❌';
+      
+      let line = `${statusIcon} *${m.label}*: `;
+      if(m.status === 'partial'){
+        line += `₹${m.paid} paid, *₹${m.due} বাকি*`;
+      } else {
+        line += `*₹${m.fee} বাকি*`;
+      }
+      msg += line + '\n';
+    });
+  }
   
   msg += "━━━━━━━━━━━━━━━━━━\n\n";
   
@@ -1231,12 +1234,13 @@ function feeMessage(s){
   
   if(ps.totalAdvance > 0){
     msg += `\n💰 *Advance Balance:* ₹${ps.totalAdvance}\n`;
-    msg += `(এই টাকা পরের মাসের fee-তে adjust হবে)\n`;
+    msg += `(এই টাকা পরের মাসের ফি-তে অ্যাডজাস্ট হবে)\n`;
   } else if(ps.feeDue > 0){
     msg += `\n❗ *Net Due:* ₹${ps.feeDue}`;
     if(ps.fine > 0) msg += ` + Fine ₹${ps.fine} = *₹${total}*`;
     msg += '\n';
   }
+  
   if(upiId && total > 0){
     msg += "\n-------------------------\n";
     msg += "*💳 পেমেন্ট করার জন্য:*\n\n";
