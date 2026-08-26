@@ -657,6 +657,27 @@ tr:hover td{background:rgba(255,255,255,.03)}
     <div class="profile-pane" id="pane-pay"></div>
   </div>
 </div>
+<!-- Delete Student Confirmation Modal -->
+<div class="modal-bg" id="deleteStuModal">
+  <div class="modal sm">
+    <button class="modal-close" onclick="closeModal('deleteStuModal')">×</button>
+    <h3>⚠️ Delete Student</h3>
+    <div style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);border-radius:12px;padding:14px;margin-bottom:16px">
+      <p style="font-size:13px;color:#fca5a5;line-height:1.6">
+        তুমি কি সত্যিই <b id="delStuName" style="color:#fff"></b> কে delete করতে চাও?<br>
+        <span style="font-size:11px;opacity:.8">এই কাজটা আর ফেরানো যাবে না!</span>
+      </p>
+    </div>
+    <p style="color:var(--muted);font-size:13px;margin-bottom:10px">Confirm করতে নিচে <b>"delete"</b> লেখো:</p>
+    <div class="code-box">delete</div>
+    <input type="hidden" id="delStuId"/>
+    <div class="field"><input id="delStuInput" placeholder='এখানে "delete" লেখো' autocomplete="off"/></div>
+    <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:18px">
+      <button class="btn btn-ghost" onclick="closeModal('deleteStuModal')">Cancel</button>
+      <button class="btn btn-danger" id="delStuConfirmBtn" onclick="confirmDeleteStudent()" disabled>🗑️ Delete</button>
+    </div>
+  </div>
+</div>
 <div class="modal-bg" id="wipeModal">
   <div class="modal sm">
     <button class="modal-close" onclick="closeModal('wipeModal')">×</button>
@@ -958,20 +979,39 @@ function saveStudent(e){
   if(photoInput.files[0]){const r=new FileReader();r.onload=ev=>finalize(ev.target.result);r.readAsDataURL(photoInput.files[0]);}
   else finalize(null);
 }
-function deleteStudent(id){if(!confirm('Delete this student?'))return;DB.students=DB.students.filter(x=>x.id!==id);saveToCloud();renderAll();toast('🗑️ Deleted');}
-let editingClassDays=[];let editingClassTimes={};let afterClassSaveCallback=null;
-function openClassModal(origName=null,callback=null){
-  document.getElementById('clsOrigName').value=origName||'';
-  document.getElementById('clsModalTitle').textContent=origName?'✏️ Edit Class':'➕ Add Class';
-  afterClassSaveCallback=callback;
-  if(origName){const c=DB.classes[origName];
-    document.getElementById('clsName').value=origName;
-    document.getElementById('clsFine').value=c.fineAmount||10;
-    document.getElementById('clsFineToggle').classList.toggle('on',!!c.fineEnabled);
-    editingClassDays=[...(c.days||[])];editingClassTimes={...(c.times||{})};
-    if(c.time&&(!c.times||Object.keys(c.times).length===0)){editingClassDays.forEach(d=>{editingClassTimes[String(d)]=c.time;});}
-  }else{document.getElementById('clsName').value='';document.getElementById('clsFine').value=10;document.getElementById('clsFineToggle').classList.remove('on');editingClassDays=[];editingClassTimes={};}
-  renderDayToggles();document.getElementById('classModal').classList.add('show');
+// ===== DELETE STUDENT - WITH CONFIRMATION =====
+function openDeleteConfirm(id){
+  const s = DB.students.find(x=>x.id===id);
+  if(!s) return;
+  document.getElementById('delStuId').value = id;
+  document.getElementById('delStuName').textContent = s.name;
+  document.getElementById('delStuInput').value = '';
+  document.getElementById('delStuConfirmBtn').disabled = true;
+  document.getElementById('deleteStuModal').classList.add('show');
+}
+
+// Enable delete button only when "delete" is typed
+document.getElementById('delStuInput').addEventListener('input', function(e){
+  document.getElementById('delStuConfirmBtn').disabled = e.target.value.trim().toLowerCase() !== 'delete';
+});
+
+function confirmDeleteStudent(){
+  const id = document.getElementById('delStuId').value;
+  const s = DB.students.find(x=>x.id===id);
+  if(!s) return;
+  const name = s.name;
+  DB.students = DB.students.filter(x=>x.id!==id);
+  saveToCloud();
+  closeModal('deleteStuModal');
+  closeModal('profileModal');
+  renderAll();
+  toast('🗑️ ' + name + ' deleted!');
+}
+
+// ===== EDIT STUDENT - FROM PROFILE =====
+function editStudentFromProfile(id){
+  closeModal('profileModal');
+  openStudentModal(id);
 }
 function renderDayToggles(){
   const wrap=document.getElementById('clsDays');
@@ -1253,12 +1293,10 @@ function renderStudents(){
     <td>${formatDateShort(s.admission)}</td>
     <td style="font-size:11px;color:var(--muted)">${s.mobile||'—'}</td>
     <td><div class="action-row">
-      <button class="icon-btn edit" onclick="openStudentModal('${s.id}')"><svg viewBox="0 0 24 24"><use href="#icon-edit"/></svg></button>
-      <button class="icon-btn del" onclick="deleteStudent('${s.id}')"><svg viewBox="0 0 24 24"><use href="#icon-del"/></svg></button>
-      ${alertButtons(s)}
-    </div></td></tr>`).join('');
+  ${alertButtons(s)}
+</div></td></tr>`).join('');
   const cards=document.getElementById('studentsCards');
-  cards.innerHTML=list.map(s=>`<div class="m-card">${photoHTML(s,false,true)}<div class="body"><div class="nm" onclick="openProfile('${s.id}')">${s.name}</div><div class="meta"><span class="badge badge-class">${s.class}</span><span>₹${s.fee}/mo</span><span>${formatDateShort(s.admission)}</span></div><div class="actions"><button class="icon-btn edit" onclick="openStudentModal('${s.id}')" title="Edit"><svg viewBox="0 0 24 24"><use href="#icon-edit"/></svg></button><button class="icon-btn del" onclick="deleteStudent('${s.id}')" title="Delete"><svg viewBox="0 0 24 24"><use href="#icon-del"/></svg></button>${alertButtons(s)}</div></div></div>`).join('');
+  cards.innerHTML=list.map(s=>`<div class="m-card">${photoHTML(s,false,true)}<div class="body"><div class="nm" onclick="openProfile('${s.id}')">${s.name}</div><div class="meta"><span class="badge badge-class">${s.class}</span><span>₹${s.fee}/mo</span><span>${formatDateShort(s.admission)}</span></div><div class="actions">${alertButtons(s)}</div></div></div>`).join('');
   document.getElementById('stuEmpty').style.display=list.length?'none':'block';
 }
 function renderAttClassGrid(){
@@ -1345,7 +1383,10 @@ function renderProfile(){
   document.getElementById('profileHeader').innerHTML=`
     ${photoHTML(s,true,true)}
     <div class="info"><h3>${s.name}</h3><div style="color:var(--muted);font-size:12px"><span class="badge badge-class">${s.class}</span> • ₹${s.fee}/mo</div></div>
-    <button class="btn btn-ghost btn-sm" onclick="closeModal('profileModal');openStudentModal('${s.id}')">✏️ Edit</button>`;
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+  <button class="btn btn-ghost btn-sm" onclick="editStudentFromProfile('${s.id}')">✏️ Edit</button>
+  <button class="btn btn-danger btn-sm" onclick="openDeleteConfirm('${s.id}')">🗑️ Delete</button>
+</div>`;
   renderProfileInfo();
 }
 function renderProfileInfo(){
