@@ -1194,7 +1194,7 @@ function feeMessage(s){
   const upiId = upi.id || '';
   
   let msg = "*নমস্কার।*\n\n";
-  msg += "আপনার সন্তানের টিউশন ফি-র হিসাব:\n\n";
+  msg += "আপনার সন্তানের টিউশন ফি বাকি আছে। অনুগ্রহ করে দ্রুত বাকি টাকা জমা দিয়ে দিন।:\n\n";
   msg += "*নাম:* " + s.name + "\n";
   msg += "*Class:* " + s.class + "\n";
   msg += "*Monthly Fee:* ₹" + s.fee + "\n\n";
@@ -1237,9 +1237,6 @@ function feeMessage(s){
     if(ps.fine > 0) msg += ` + Fine ₹${ps.fine} = *₹${total}*`;
     msg += '\n';
   }
-  
-  msg += "\nঅনুগ্রহ করে দ্রুত বাকি টাকা জমা দিয়ে দিন।\n";
-  
   if(upiId && total > 0){
     msg += "\n-------------------------\n";
     msg += "*💳 পেমেন্ট করার জন্য:*\n\n";
